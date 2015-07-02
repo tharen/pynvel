@@ -20,6 +20,7 @@ vollib/Mrules.f
 vollib/mrules_mod.f
 vollib/numlog.f
 vollib/pmtProfile.f
+vollib/PNWTARIF.F
 vollib/profile.f
 vollib/profile2.f
 vollib/R10d2h.f
@@ -46,6 +47,7 @@ vollib/R6vol.f
 vollib/R6vol1.f
 vollib/R6vol2.f
 vollib/R6vol3.f
+vollib/R8CLKDIB.F
 vollib/R8dib.f
 vollib/R8init.f
 vollib/R8vlist.f
@@ -83,4 +85,3 @@ vollib/vollib09.f
 vollib/vollibcs.f
 vollib/volumelib.f
 vollib/volumelibrary.f
-vollib/PNWTARIF.F
