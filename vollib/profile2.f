@@ -2,7 +2,8 @@
 
 !     Created ??? ??/??/??
 !     Revised TDH 06/18/09 - created profile2 for APSS
-
+!     YW 06/20/2014 Add logic to reset MINLEN for region 10 32 foot log equation
+C     YW 07/02/2014 Added errflag to call VOLINTRP routine
       SUBROUTINE PROFILE2 (REGN,FORST,VOLEQ,MTOPP,MTOPS,STUMP,DBHOB,
      >   HTTYPE,HTTOT,HTLOG,HT1PRD,HT2PRD,UPSHT1,UPSHT2,UPSD1,UPSD2,
      >   AVGZ1,AVGZ2,HTREF,DBTBH,BTR,LOGDIA,BOLHT,LOGLEN,LOGVOL,VOL,
@@ -41,7 +42,7 @@ c     MERCH VARIABLES
       CHARACTER*1 COR,HTTYPE,CTYPE
       CHARACTER*2 FORST,PROD
       CHARACTER*10 VOLEQ
-      INTEGER EVOD,OPT,REGN,HTFLG,FCLASS
+      INTEGER EVOD,OPT,REGN,HTFLG,FCLASS, N16SEG
       INTEGER CUTFLG,BFPFLG,CUPFLG,SPFLG,ERRFLAG,CDPFLG
       REAL LENGTH,DRCOB,MINBFD,MHT,slope,TOPD
       REAL MAXLEN,MINLEN,minlent,MERCHL,MTOPP,MTOPS,STUMP,TRIM,TRM
@@ -234,7 +235,8 @@ C--   Initialize Flewelling model for this tree
           IF(ERRFLAG .EQ. 11)THEN
 C         USE ITERPOLATION ROUTINE 11/02
 	      CALL VOLINTRP(REGN,VOLEQ,DBHOB,LHT,MHT,MTOPP,HTTYPE,DBTBH,
-     >             LOGVOL,LOGDIA,HTLOG,LOGLEN,LOGST,NOLOGP,VOL,CTYPE)
+     >           LOGVOL,LOGDIA,HTLOG,LOGLEN,LOGST,NOLOGP,VOL,CTYPE,PROD,
+     >           ERRFLAG)
             GO TO 1000  
           ENDIF
         ELSE
@@ -367,6 +369,15 @@ C--            CACULATE PRODUCT VOLUMES
            IF (LMERCH.LT.MERCHL) THEN
               GO TO 500
            ENDIF
+
+C--   For Region 10 32 foot log equation, it needs to reset MINLEN in some 
+C--   situation in order to NOT miss 18, 20, 22 foot logs. (YW 06/20/2014)
+          IF((voleq(4:5).eq.'f3' .or. voleq(4:5).eq.'F3' .or. 
+     >        voleq(2:3).eq.'61' .or. voleq(2:3).eq.'62'.OR. 
+     >        voleq(2:3).eq.'32') .AND. CTYPE.NE.'V') THEN
+              N16SEG = INT(LMERCH/(MAXLEN+TRIM))
+              IF(MOD(N16SEG,2).EQ.1) MINLEN = 2
+          ENDIF
 
 C--         SUBROUTINE "NUMLOG" WILL DETERMINE THE NUMBER OF
 C--         MERCHANTABLE SEGMENTS IN A GIVEN MERCHANTABLE LENGTH

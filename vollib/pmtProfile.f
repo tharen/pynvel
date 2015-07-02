@@ -88,6 +88,20 @@ C--   IF DBHOB OR HTTOT EQUALS ZERO THEN DON'T CALCULATE THE VOLUME
          IF(HTTOT.GT.0)ERRFLAG = 0
          GO TO 1000
       ENDIF 
+c test 1/29/14
+      IF (VOLEQ(4:6).EQ.'BEH' .OR. VOLEQ(4:6).EQ.'beh') THEN
+C     added DIB calculation for Behr equation
+         CALL BEHTAP(VOLEQ,DBHOB,HTTOT,LMERCH,DRCOB,FCLASS,MTOPP,DIBO)  
+         RETURN
+      ENDIF  
+c end test 1/29/14
+c test r8 Clark
+      IF (VOLEQ(1:1).EQ.'8'.AND.
+     &   (VOLEQ(4:6).EQ.'CLK' .OR. VOLEQ(4:6).EQ.'clk')) THEN
+         CALL R8CLKDIB(VOLEQ,FORST,DBHOB,HTTOT,UPSHT1,DRCOB,DIBO, 
+     &                    ERRFLAG)
+         RETURN
+      ENDIF  
 
       IF (VOLEQ(4:4).EQ.'F' .OR. VOLEQ(4:4).EQ.'f' .OR.
      >    VOLEQ(4:6).EQ.'DEM' .OR. VOLEQ(4:6).EQ.'dem' .OR.

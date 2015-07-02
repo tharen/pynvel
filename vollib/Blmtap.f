@@ -1,4 +1,5 @@
-!== last modified  9-18-2013
+!== last modified  1-6-2014
+! 1/6/2014 YW corrected coefficient for hemlock(48) B3=0.00000546
       SUBROUTINE BLMTAP(DBHOB,HTTOT,TLH,HTUP,D17,TOP,XLEN,D2,Profile)
 C###########################################################
       USE DEBUG_MOD
@@ -29,7 +30,7 @@ C  31 zone 1, 33
 C  32, 34, 35
      >        0.6014,   0.0,      0.0,       0.0, 
 C  48
-     >        0.54568,  0.0,      0.0,       0.0000546,
+     >        0.54568,  0.0,      0.0,       0.00000546,
 C  51, 54, 55 
      >        0.4606,   0.0,      0.0,       0.0, 
 C  ALL OTHER SPECIES

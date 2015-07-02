@@ -19,6 +19,8 @@
 !REV  YW 01/18/2013 modified stump and tip calculation logic. Here is the calculation from FIA.
 !     If volume equation does not calculate stump and tip, they will ba calculated here.
 !REV  YW 05/16/2013 set HTTYPE to F if total height is entered
+!REV  YW 02/27/2014 For region 6 Behre equation, if merch height is entered in feet, convert it to log ht
+!REV  YW 07/30/2014 For region 6 Behre equation, if merch height is entered in feet, use log rules to convert to log ht.
 
 !REV  Added manual debugging for use with pro vollib09 calls and
 !REV  code to check for forest = null which caused blm problems
@@ -41,9 +43,9 @@
       REAL         TIPDIB,TIPLEN
       
 !   Tree variables
-      REAL 					 HTTOT,HT1PRD,HT2PRD 
-      REAL 					 DBHOB,DRCOB,DBTBH,BTR,CR,TRIM
-      INTEGER        FCLASS,HTLOG,SPCODE
+      REAL 			HTTOT,HT1PRD,HT2PRD,LEFTOV 
+      REAL 			DBHOB,DRCOB,DBTBH,BTR,CR,TRIM
+      INTEGER        FCLASS,HTLOG,SPCODE, WHOLELOGS
     
 !	3RD POINT VARIABLES
       REAL           UPSD1,UPSD2,UPSHT1,UPSHT2,AVGZ1,AVGZ2    
@@ -211,7 +213,31 @@ C*******************************
           ELSEIF(HTTYPE.EQ.'L' .OR. HTTYPE.EQ.'l') THEN
               THT1 = HT1PRD
           ELSE  
-              THT1 = HT1PRD
+C Merch height is entered in feet. It need to convert to log height and set HTTYPE to L. (YW 02/27/14)
+            IF(VOLEQ(1:3).EQ.'632')THEN          
+              THT1 = INT(HT1PRD/32.6*10)
+            ELSE
+c              THT1 = INT(HT1PRD/16.3*10)
+C ADDED ON 07/30/2014 ROUND LOGS BASED ON JEFF PENMAN LOG RULES
+              IF(HT1PRD.GE.13.AND.HT1PRD.LE.20) THEN
+                WHOLELOGS=1
+                THT1=10
+              ELSE
+                WHOLELOGS = INT(HT1PRD/16.5)
+                THT1 = WHOLELOGS*10
+              ENDIF
+              IF(HT1PRD.GT.20)THEN
+                LEFTOV = HT1PRD-INT(WHOLELOGS*16.5)
+                IF(LEFTOV.GE.(12+MOD(WHOLELOGS,2))) THEN
+                  THT1=WHOLELOGS*10+10
+                ELSEIF(LEFTOV.GE.(4+MOD(WHOLELOGS,2))) THEN
+                  THT1=WHOLELOGS*10+5
+                ENDIF
+              ENDIF
+
+            ENDIF
+            HTTYPE = 'L'
+            IF(THT1.EQ.0) RETURN
           ENDIF
 
           NOLOGP=0.0

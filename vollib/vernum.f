@@ -29,7 +29,7 @@
    15    FORMAT (A)   
    		END IF
 
-      VERSION = 20130923
+      VERSION = 20140822
       RETURN
       END SUBROUTINE VERNUM
       
@@ -62,7 +62,7 @@
    15    FORMAT (A)   
    		END IF
 
-      VERSION = 20130923
+      VERSION = 20140822
       RETURN
       END SUBROUTINE VERNUM2
 
@@ -85,7 +85,7 @@
 
 !---------------------------------------------------------------------
      
-      VERSION = 20130923
+      VERSION = 20140822
       
       PRINT     '(I8)', VERSION
       RETURN

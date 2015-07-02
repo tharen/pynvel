@@ -5,6 +5,9 @@ C
 C  created TDH 04/01/09
 C
 c  revised YW 05/16/2013 For BEH equation, if total height is entered, the HTTYPE is set to F
+!REV  YW 02/27/2014 For region 6 Behre equation, if merch height is entered in feet, convert it to log ht
+!REV  YW 07/30/2014 For region 6 Behre equation, if merch height is entered in feet, use log rules to convert to log ht.
+
 C_______________________________________________________________________
 
       SUBROUTINE VOLINIT2(REGN,FORST,VOLEQ,MTOPP,MTOPS,STUMP,DBHOB,
@@ -42,9 +45,9 @@ C_______________________________________________________________________
       TYPE(MERCHRULES)::MERRULES
       
 !   Tree variables
-      REAL 		   HTTOT,HT1PRD,HT2PRD 
+      REAL 		   HTTOT,HT1PRD,HT2PRD,LEFTOV 
       REAL 		   DBHOB,DRCOB,DBTBH,BTR,CR,TRIM,VOLIB,VOLOB,HTUP
-      INTEGER      FCLASS,HTLOG,SPCODE
+      INTEGER      FCLASS,HTLOG,SPCODE, WHOLELOGS
     
 !	3RD POINT VARIABLES
       REAL         UPSD1,UPSD2,UPSHT1,UPSHT2,AVGZ1,AVGZ2    
@@ -104,6 +107,7 @@ c  save FCLASS value
      +   MDL.EQ.'CZ3' .OR. MDL.EQ.'cz3' .OR. MDL.EQ.'WO2' .OR.     
      +   MDL.EQ.'wo2' .OR. MDL.EQ.'F32' .OR. MDL.EQ.'f32' .OR.
      +   MDL.EQ.'F33' .OR. MDL.EQ.'f33' .OR. MDL.EQ.'JB2' .OR.
+c     +   MDL.EQ.'jb2') THEN     
      +   MDL.EQ.'jb2' .OR. MDL.EQ.'BEH') THEN
 !************************
 !    FLEWELLING MODELS  *
@@ -143,7 +147,32 @@ C*******************************
           ELSEIF(HTTYPE.EQ.'L' .OR. HTTYPE.EQ.'l') THEN
               THT1 = HT1PRD
           ELSE  
-              THT1 = HT1PRD
+C              THT1 = HT1PRD
+C Merch height is entered in feet. It need to convert to log height and set HTTYPE to L. (YW 02/27/14)
+            IF(VOLEQ(1:3).EQ.'632')THEN          
+              THT1 = INT(HT1PRD/32.6*10)
+            ELSE
+c              THT1 = INT(HT1PRD/16.3*10)
+C ADDED ON 07/30/2014 ROUND LOGS BASED ON JEFF PENMAN LOG RULES
+              IF(HT1PRD.GE.13.AND.HT1PRD.LE.20) THEN
+                WHOLELOGS=1
+                THT1=10
+              ELSE
+                WHOLELOGS = INT(HT1PRD/16.5)
+                THT1 = WHOLELOGS*10
+              ENDIF
+              IF(HT1PRD.GT.20)THEN
+                LEFTOV = HT1PRD-INT(WHOLELOGS*16.5)
+                IF(LEFTOV.GE.(12+MOD(WHOLELOGS,2))) THEN
+                  THT1=WHOLELOGS*10+10
+                ELSEIF(LEFTOV.GE.(4+MOD(WHOLELOGS,2))) THEN
+                  THT1=WHOLELOGS*10+5
+                ENDIF
+              ENDIF
+
+            ENDIF
+            HTTYPE = 'L'
+            IF(THT1.EQ.0) RETURN
           ENDIF
 
           NOLOGP=0.0

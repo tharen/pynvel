@@ -1,6 +1,8 @@
 !*******************************************************************************************
 !*******************************************************************************************
-!== last modified  7-22-2012
+!== last modified  6-4-2014
+! Added DIB calculation for region 8 Clark equation (6/4/14)
+! Added DIB calculation for Behr equation (1/28/2014)
 ! Added stump diameter (from ground to 4.5 ft) calculation for non profile model using Raile 1983 (YW)
 ! 
 !  CalcDia.f90 
@@ -16,7 +18,6 @@
   !DEC$ ATTRIBUTES STDCALL,REFERENCE, DLLEXPORT::CALCDIA
   !DEC$ ATTRIBUTES MIXED_STR_LEN_ARG :: CALCDIA
   !DEC$ ATTRIBUTES DECORATE, ALIAS:'CALCDIA'::CALCDIA
-
       CHARACTER*(*) FORST
       CHARACTER*(*) VOLEQ
       CHARACTER*3 MDL
@@ -41,6 +42,8 @@
       REAL mTopS,ht1Prd,ht2Prd
       CHARACTER prod*2
       INTEGER SPN
+      REAL TLH
+      TLH = 0.
 !     ARRAYS
 ! initialize profile model  
 !C  heck for a DBH of less than 1.  Drop out of volume if true.  10/97
@@ -120,7 +123,17 @@ c reset UPSHT1 to 0 (yw 09/24/2012)
           CALL r9clarkdib (VOLEQ,STUMP,mTopP,mTopS,DBHOB,
      &                    ht1Prd,ht2Prd,HTTOT,HTUP,DIB,prod,errFlag,
      &                    UPSHT1)
+        ELSE
+          CALL R8CLKDIB(VOLEQ, FORST, DBHOB, HTTOT, UPSHT1,HTUP,DIB, 
+     &                  ERRFLAG)
         ENDIF
+      ELSEIF (MDL.EQ.'BEH' .OR. MDL.EQ.'beh') THEN
+C     added DIB calculation for Behr equation
+         IF (FCLASS.LE.0) THEN
+           CALL GETFCLASS(VOLEQ,FORST,DBHOB,FCLASS)
+         ENDIF
+         CALL BEHTAP(VOLEQ,DBHOB,HTTOT,TLH,HTUP,FCLASS,MTOPP,DIB)    
+           
 C calculation for diameter from ground to 4.5 ft heigh for non profile model
 C added on 7/22/2012 YW
 C using Raile 1982
