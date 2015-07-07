@@ -1,0 +1,8 @@
+*.pyc
+*.pyo
+*.pyd
+*.bak
+*.o
+
+build/*
+cython_debug/*
