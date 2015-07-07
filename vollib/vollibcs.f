@@ -250,6 +250,21 @@ C**********************************************************************
       INTEGER        SPEC
       REAL           LOGVOL(I7,I20),LOGDIA(I21,I3),DIBO 
       
+!      write(*,*) 'cor    ',merrules%cor
+!      write(*,*) 'evod   ',merrules%evod
+!      write(*,*) 'opt    ',merrules%opt
+!      write(*,*) 'maxlen ',merrules%maxlen
+!      write(*,*) 'minlen ',merrules%minlen
+!      write(*,*) 'minlent',merrules%minlent
+!      write(*,*) 'merchl ',merrules%merchl
+!      write(*,*) 'mtopp  ',merrules%mtopp
+!      write(*,*) 'mtops  ',merrules%mtops
+!      write(*,*) 'stump  ',merrules%stump
+!      write(*,*) 'trim   ',merrules%trim
+!      write(*,*) 'btr    ',merrules%btr
+!      write(*,*) 'dbtbh  ',merrules%dbtbh
+!      write(*,*) 'minbfd ',merrules%minbfd
+
       IF (INDEB.eq.1) THEN
 	   OPEN (UNIT=LUDBG, FILE='Debug.txt', STATUS='UNKNOWN')
 	   WRITE (LUDBG,5)'Debugging VOLLIBCS2'
@@ -267,6 +282,9 @@ C**********************************************************************
 
 	   CLOSE(LUDBG)
       ENDIF
+
+!      write(*,*) '*****',VOLEQI
+
 c  PMTFLG = 2 will user defined rule. otherwise use default rule.
       IF (PMTFLG.NE.2) PMTFLG = 3
       CALL VOLLIBCS(REGN,FORSTI,VOLEQI,MTOPP,MTOPS,STUMP,

@@ -62,7 +62,8 @@
 C  variables for stump dia and vol
       INTEGER SPN
       REAL STUMPDIB, STUMPDOB, VOLIB, VOLOB    
-      REAL DIB,DOB,HTUP  
+      REAL DIB,DOB,HTUP
+
  !********************************************************************
 
 !=====================================================================
