@@ -226,11 +226,11 @@ def get_volume(
     
     forest = '{:>02d}'.format(forest)
     cdef char* forest_c = forest
-    cdef int forest_len = 2
+    cdef int fl = 2
     cdef char* volume_eq_c = volume_eq
-    cdef int volume_eq_len = 10     
+    cdef int vl = 10     
     cdef char* ht_type_c = 'F'
-    cdef int ht_type_len = 1
+    cdef int hl = 1
     
     # Array size variables
     cdef int i3 = 3
@@ -249,19 +249,19 @@ def get_volume(
     
     con_spp = '{:>4s}'.format(con_spp)
     cdef char* con_spp_c = con_spp
-    cdef int con_spp_len = 4
+    cdef int csl = 4
     
     prod_code = '{:>02d}'.format(prod_code)
     cdef char* prod_code_c = prod_code
-    cdef int prod_code_len = 2
+    cdef int pl = 2
      
     cdef int ht_1st_limb_c = ht_1st_limb
      
     cdef char* live_c = live 
-    cdef int live_len = 1
+    cdef int ll = 1
     
     cdef char* cruise_type_c = cruise_type
-    cdef int cruise_type_len = 1
+    cdef int ctl = 1
     
     cdef int user_merch_flag = 2    
     cdef int error_flag = 0
@@ -323,13 +323,13 @@ def get_volume(
             , &debug
             , &user_merch_flag
             , &merch_rule
-            , forest_len
-            , volume_eq_len
-            , ht_type_len
-            , con_spp_len
-            , prod_code_len
-            , live_len
-            , cruise_type_len
+            , fl
+            , vl
+            , hl
+            , csl
+            , pl
+            , ll
+            , ctl
             )
     
     if error_flag!=0:
@@ -409,12 +409,8 @@ cdef class VolumeCalculator:
     cdef int site_index
     cdef char* cruise_type
     cdef int error_flag
-    cdef int debug
-    cdef int user_merch_flag
     cdef merchrules_ merch_rule
     
-    cdef int vl
- 
     cdef public np.float32_t[:] volume_wk
     cdef public np.float32_t[:,:] log_vol_wk
     cdef public np.float32_t[:,:] log_diam_wk
@@ -498,7 +494,9 @@ cdef class VolumeCalculator:
             , float upper_ht1=0.0, float upper_ht2=0.0, float upper_diam1=0.0, float upper_diam2=0.0
             , int ht_ref=0, float avg_z1=0.0, float avg_z2=0.0, int form_class=0
             , float bark_thick=0.0, float bark_ratio=0.0, int ht_1st_limb=0, char* live='L'
-            , log_len=np.zeros((20,),np.float32), int num_logs=0):
+            , np.ndarray log_len=np.zeros((20,),np.float32)
+#             , int num_logs=0
+            ):
          
         self.dbh_ob = dbh_ob
         self.drc_ob = drc_ob
@@ -533,20 +531,14 @@ cdef class VolumeCalculator:
         self.num_logs_sec = 0.0
          
         cdef int error_flag = 0
-         
-        self.num_logs = log_len.shape[0]
-        cdef int i
-        for i in xrange(self.num_logs):
-            self.num_logs += 1
-            self.log_len_wk[i] = log_len[i]
-         
-        cdef int forest_len = 2
-        cdef int volume_eq_len = 10
-        cdef int ht_type_len = 1
-        cdef int con_spp_len = 4
-        cdef int prod_code_len = 2
-        cdef int live_len = 1
-        cdef int cruise_type_len = 1
+                  
+        cdef int fl = 2
+        cdef int vl = 10
+        cdef int hl = 1
+        cdef int csl = 4
+        cdef int pl = 2
+        cdef int ll = 1
+        cdef int ctl = 1
         
         # Ensure the result arrays are zero'd
         self.volume_wk[:] = 0.0
@@ -555,10 +547,19 @@ cdef class VolumeCalculator:
         self.log_diam_wk[:,:] = 0.0
         self.bole_ht_wk[:] = 0.0
         
-#         if self.num_logs>0:
-#             log_len[:self.num_logs] = log_len[:self.num_logs]
-#             cruise_type='V'
-
+        # Populate log_len_wk if log lengths are provided
+        self.num_logs = 0
+        cdef int i
+        if self.cruise_type==b'V':
+            if log_len.any():
+                for i in xrange(log_len.shape[0]):
+                    if log_len[i]<=0.0: break
+                    self.num_logs += 1
+                    self.log_len_wk[i] = log_len[i]
+            
+            else:
+                raise AttributeError('cruise_type==\'V\', but log_len is empty')
+        
         volinit2_(
                 &self.region
                 , self.forest
@@ -609,22 +610,17 @@ cdef class VolumeCalculator:
                 , &self.site_index
                 , self.cruise_type
                 , &error_flag
-#                 , &self.debug
-#                 , &self.user_merch_flag
                 , &self.merch_rule
                 
-#                 , 2,10,1,4,2,1,1
-                , forest_len
-                , volume_eq_len
-                , ht_type_len
-                , con_spp_len
-                , prod_code_len
-                , live_len
-                , cruise_type_len
+                # Lengths of char* arguments
+                # TODO: This is the gfortran way, but perhaps not Intel, etc. 
+                , fl, vl, hl, csl
+                , pl, ll, ctl
                 )
      
 #         if error_flag!=0:
 #             print 'Error Code {}: {}'.format(error_flag,error_codes[error_flag])
+        #TODO: raise an exception for critical error flags
         return error_flag
          
     def __cinit__(self, merchrules_ merch_rule=init_merchrule(), *args, **kargs):
@@ -642,7 +638,7 @@ cdef class VolumeCalculator:
             , int cord_prim_flag=1, int sec_vol_flag=1
             , char* con_spp='', char* prod_code='01'
             , int basal_area=0, int site_index=0
-            , char* cruise_type='C', int debug=0, *args, **kargs
+            , char* cruise_type='C', *args, **kargs
             ):
          
         self.region = region
@@ -663,9 +659,6 @@ cdef class VolumeCalculator:
         self.basal_area = basal_area
         self.site_index = site_index
         self.cruise_type = cruise_type
-        self.debug = debug
-        
-        self.user_merch_flag = 2
 # 
 # if __name__=='_main__':
 #     volcalc = VolumeCalculator(volume_eq='F01FW3W202')

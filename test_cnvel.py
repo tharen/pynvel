@@ -50,8 +50,10 @@ r = pynvel.get_volume(
 volcalc = pynvel.VolumeCalculator(
         volume_eq='F01FW3W202'
         , merch_rule=mrule
+        , cruise_type='V'
         )
-volcalc.calc(dbh_ob=20.0, total_ht=150.0, form_class=80)
+volcalc.calc(dbh_ob=20.0, total_ht=150.0, form_class=80
+        , log_len=np.array([40, 30, 20, 10]))
 
 r = volcalc.volume
 print r
@@ -99,6 +101,11 @@ def volsum(row):
             , 'form_class':volcalc.form_class
             , 'volume_eq':volcalc.volume_eq
             }, index=cols)
+
+volcalc = pynvel.VolumeCalculator(
+        volume_eq='F01FW3W202'
+        , merch_rule=mrule
+        )
 
 foo = df.apply(volsum, axis=1)
 
