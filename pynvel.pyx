@@ -6,8 +6,8 @@ include 'nvelcommon.pxi'
 cdef extern from *:    
     void vernum_(int *v)
     void getvoleq_(int *region, char* forest, char* district
-            , int *species, int *product, char* vol_eq, int *err_flag
-            , int fl, int dl, int vl)
+            , int *species, char* product, char* vol_eq, int *err_flag
+            , int fl, int dl, int pl, int vl)
     void getfiavoleq_(int *region, char* forest, char* district
             , int *species, char* vol_eq, int *err_flag
             , int fl, int dl, int vl)
@@ -29,6 +29,24 @@ cdef extern from *:
             , int forsti_len, int voleqi_len, int httypei_len, int conspeci_len
             , int prodi_len, int livei_len, int ctypei_len
             )
+    void volinit2_(
+            int *regn, char* forsti, char* voleqi, float *mtopp, float *mtops
+            , float *stump, float *dbhob, float *drcob, char* httypei
+            , float *httot, int *htlog, float *ht1prd, float *ht2prd
+            , float *upsht1, float *upsht2, float *upsd1, float *upsd2
+            , int *htref, float *avgz1, float *avgz2, int *fclass
+            , float *dbtbh, float *btr
+            , int *i3, int *i7, int *i15, int *i20, int *i21
+            , float *vol, float *logvoli, float *logdiai
+            , float *loglen, float *bolht, int *tlogs
+            , float *nologp, float *nologs
+            , int *cutflg, int *bfpflg, int *cupflg, int *cdpflg, int *spflg
+            , char* conspeci, char* prodi, int *httfll, char* livei
+            , int *ba, int *si, char* ctypei, int *errflag
+            , merchrules_ *merrules
+            , int forsti_len, int voleqi_len, int httypei_len, int conspeci_len
+            , int prodi_len, int livei_len, int ctypei_len
+            )
 
 cdef extern:
     ctypedef struct merchrules_:
@@ -47,15 +65,7 @@ cdef extern:
         float minbfd
         char cor #NOTE: single char, not pointer. Unsure how to pass a len arg in a struct
 
-cdef class FChar:
-    cdef char* rep
-    cdef int len
-    
-    def __cinit__(self,rep,len):
-        self.rep=rep
-        self.len=len
-        
-cpdef init_merchrule(
+cpdef merchrules_ init_merchrule(
         int evod=1, int opt=23, float maxlen=40.0, float minlen=12.0
         , float minlent=12.0, float merchl=12.0, float mtopp=5.0
         , float mtops=2.0, float stump=1.0, float trim=1.0
@@ -88,7 +98,7 @@ cpdef init_merchrule(
                  segment is = NLL.
     :param maxlen: Maximum segment length
     :param minlen: Minimum segment length
-    :param minlent: 
+    :param minlent: Minimum segment length, secondary product
     :param merchl: Minimum tree merch length
     :param mtopp: Minimum top diameter, primary product
     :param mtops: Minimum top diameter, secondary product
@@ -102,7 +112,6 @@ cpdef init_merchrule(
     Refs:
     segmnt.f  
     """
-#     cdef cor_c = FChar('Y',1)
     cdef merchrules_ mr = merchrules_(
             evod=evod, opt=opt, maxlen=maxlen, minlen=minlen, minlent=minlent
             , merchl=merchl, mtopp=mtopp, mtops=mtops, stump=stump
@@ -116,38 +125,37 @@ def vernum():
      
     return v
 
-def getvoleq(region, forest, district, species, product):
-    cdef int region_c = region
-    cdef char* forest_c = forest
-    cdef char* district_c = district
-    cdef int prod_c = product
-    cdef int species_c = species
-    cdef char* vol_eq_c = ''
-    cdef int err_flag_c = 0
+cpdef char* getvoleq(
+        int region, char* forest, char* district
+        , int species, char* product):
+    """
+    Return the default volume equation for a species
+    """
+    cdef char* vol_eq = ''
+    cdef int err_flag = 0
     
     getvoleq_(
-            &region_c, forest_c, district_c
-            , &species_c, &prod_c, vol_eq_c, &err_flag_c
-            , 2, 2, 10
+            &region, forest, district
+            , &species, product, vol_eq, &err_flag
+            , 2, 2, 2, 10
             )
     
-    return vol_eq_c[:10]
+    return vol_eq[:10]
 
-def getfiavoleq(region, forest, district, species):
-    cdef int region_c = region
-    cdef char* forest_c = forest
-    cdef char* district_c = district
-    cdef int species_c = species
-    cdef char* vol_eq_c = ''
-    cdef int err_flag_c = 0
+cpdef char* getfiavoleq(int region, char* forest, char* district, int species):
+    """
+    Return the default FIA volume equation for a species
+    """
+    cdef char* vol_eq = ''
+    cdef int err_flag = 0
     
     getfiavoleq_(
-            &region_c, forest_c, district_c
-            , &species_c, vol_eq_c, &err_flag_c
+            &region, forest, district
+            , &species, vol_eq, &err_flag
             , 2, 2, 10
             )
     
-    return vol_eq_c[:10]
+    return vol_eq[:10]
 
 DTYPE_float32 = np.float32
 ctypedef np.float32_t DTYPE_float32_t
@@ -331,17 +339,47 @@ def get_volume(
 #     print log_diam_c
     return dict(zip(vol_lbl,volume_c))
 
+cdef class Log:
+    cdef public int pos
+    cdef public float bole_ht
+    cdef public float len
+    cdef public float large_dib
+    cdef public float large_dob
+    cdef public float small_dib
+    cdef public float small_dob
+    cdef public float scale_diam
+    cdef public float cuft_gross
+    cdef public float scrib_gross
+    cdef public float intl_gross
+    
+    def __cinit__(self
+            , int pos, float bole_ht, float len
+            , float large_dib, float large_dob
+            , float small_dib, float small_dob, float scale_diam
+            , float cuft_gross, float scrib_gross, float intl_gross):
+        self.pos = pos
+        self.bole_ht = bole_ht
+        self.len = len
+        self.large_dib = large_dib
+        self.large_dob = large_dob
+        self.small_dib = small_dib
+        self.small_dob = small_dob
+        self.scale_diam = scale_diam
+        self.cuft_gross = cuft_gross
+        self.scrib_gross = scrib_gross
+        self.intl_gross = intl_gross
+    
 cdef class VolumeCalculator:
     cdef int region
     cdef char* forest
-    cdef char* volume_eq
+    cdef public char* volume_eq
     cdef float min_top_prim
     cdef float min_top_sec
     cdef float stump_ht
-    cdef float dbh_ob
-    cdef float drc_ob
+    cdef public float dbh_ob
+    cdef public float drc_ob
     cdef char* ht_type
-    cdef float total_ht
+    cdef public float total_ht
     cdef int ht_log
     cdef float ht_prim
     cdef float ht_sec
@@ -352,15 +390,10 @@ cdef class VolumeCalculator:
     cdef int ht_ref
     cdef float avg_z1
     cdef float avg_z2
-    cdef int form_class
+    cdef public int form_class
     cdef float bark_thick
     cdef float bark_ratio
-#     cdef np.ndarray[np.float32_t, ndim=1, mode='c'] volume = np.zeros((15, ), dtype=np.float32)
-#     cdef np.ndarray[np.float32_t, ndim=2, mode='c'] log_vol = np.zeros((7, 20), dtype=np.float32)
-#     cdef np.ndarray[np.float32_t, ndim=2, mode='c'] log_diam = np.zeros((21, 3), dtype=np.float32)
-#     cdef np.ndarray[np.float32_t, ndim=1, mode='c'] log_len = np.zeros((20, ), dtype=np.float32)
-#     cdef np.ndarray[np.float32_t, ndim=1, mode='c'] bole_ht = np.zeros((21, ), dtype=np.float32)
-    cdef int num_logs
+    cdef public int num_logs
     cdef float num_logs_prim
     cdef float num_logs_sec
     cdef int cubic_total_flag
@@ -379,26 +412,93 @@ cdef class VolumeCalculator:
     cdef int debug
     cdef int user_merch_flag
     cdef merchrules_ merch_rule
+    
     cdef int vl
  
-#     cdef public np.ndarray[np.float32_t, ndim=1, mode='c'] volume
-#     cdef public np.ndarray[np.float32_t, ndim=2, mode='c'] log_vol
-#     cdef public np.ndarray[np.float32_t, ndim=2, mode='c'] log_diam
-#     cdef public np.ndarray[np.float32_t, ndim=1, mode='c'] log_len
-#     cdef public np.ndarray[np.float32_t, ndim=1, mode='c'] bole_ht
-    cdef public np.float32_t[:] volume
-    cdef public np.float32_t[:,:] log_vol
-    cdef public np.float32_t[:,:] log_diam
-    cdef public np.float32_t[:] log_len
-    cdef public np.float32_t[:] bole_ht
-     
-    def calc(self
+    cdef public np.float32_t[:] volume_wk
+    cdef public np.float32_t[:,:] log_vol_wk
+    cdef public np.float32_t[:,:] log_diam_wk
+    cdef public np.float32_t[:] log_len_wk
+    cdef public np.float32_t[:] bole_ht_wk
+    
+    property volume:
+        """
+        Return a dict of calculated tree volume.
+        """
+        def __get__(self):
+            # zip vol_lbl from nvelcommon.pxi with the volume array
+            return dict(zip(vol_lbl, self.volume_wk))
+    
+    property log_vol:
+        """
+        Return a list log segment volumes.
+        """
+        def __get__(self):
+            # zip log_vol_lbl from nvelcommon.pxi with the log volume array
+            #return [dict(zip(log_vol_lbl, v)) for v in self.log_vol_wk[:self.num_logs]]
+            
+            cdef int i
+            
+            vols = []
+            for i in range(self.num_logs):
+                vols.append(dict(zip(log_vol_lbl, self.log_vol_wk[:,i])))
+            
+            return vols
+    
+    property log_diam:
+        """
+        Return a list predicted log diameters.
+        """
+        def __get__(self):
+            
+            cdef int i
+            
+            diams = []
+            for i in range(self.num_logs+1):
+                l = np.array(self.log_diam_wk[i])
+                s = np.array(self.log_diam_wk[i+1])
+                
+                d = {
+                        'large_ob':l[2]
+                        ,'small_ob':s[2]
+                        ,'large_ib':l[1]
+                        ,'small_ib':s[1]
+                        ,'scale':s[0]
+                        }
+                diams.append(d)
+            
+            return diams
+    
+    property logs:
+        """
+        Return an array of log objects.
+        """
+        def __get__(self):
+            cdef int i
+            logs = []
+            
+            for i in range(1,self.num_logs+1):
+                large = np.array(self.log_diam_wk[i-1])
+                small = np.array(self.log_diam_wk[i])
+                vol = np.array(self.log_vol_wk[:,i-1])
+                len = self.log_len_wk[i-1]
+                bole = self.bole_ht_wk[i]
+                
+                logs.append(Log(i,bole,len
+                        ,large[2],large[1]
+                        ,small[2],small[1],small[0]
+                        ,vol[3],vol[0],vol[6]
+                        ))
+            
+            return logs
+        
+    cpdef int calc(self
             , float dbh_ob=0.0, float drc_ob=0.0, float total_ht=0.0, int ht_log=0
             , char* ht_type='F', float ht_prim=0.0, float ht_sec=0.0
             , float upper_ht1=0.0, float upper_ht2=0.0, float upper_diam1=0.0, float upper_diam2=0.0
             , int ht_ref=0, float avg_z1=0.0, float avg_z2=0.0, int form_class=0
             , float bark_thick=0.0, float bark_ratio=0.0, int ht_1st_limb=0, char* live='L'
-            , np.ndarray[np.float32_t, ndim=1] log_len=np.zeros((20,),np.float32), int num_logs=0):
+            , log_len=np.zeros((20,),np.float32), int num_logs=0):
          
         self.dbh_ob = dbh_ob
         self.drc_ob = drc_ob
@@ -423,27 +523,11 @@ cdef class VolumeCalculator:
         self.ht_1st_limb = ht_1st_limb
         self.live = live
          
-#         cdef int *my_ints
-# 
-#         my_ints = <int *>malloc(len(a)*cython.sizeof(int))
-#         if my_ints is NULL:
-#             raise MemoryError()
-#     
-#         for i in xrange(len(a)):
-#             my_ints[i] = a[i]
-         
-#         self.volume = volume
-#         self.log_vol = log_vol
-#         self.log_diam = log_diam
-#         self.log_len = log_len
-#         self.bole_ht = bole_ht
         cdef int i3=3
         cdef int i7=7
         cdef int i15=15
         cdef int i20=20
         cdef int i21=21
-         
-#         cdef float [:] volume_mv = volume
          
         self.num_logs_prim = 0.0
         self.num_logs_sec = 0.0
@@ -454,7 +538,7 @@ cdef class VolumeCalculator:
         cdef int i
         for i in xrange(self.num_logs):
             self.num_logs += 1
-            self.log_len[i] = log_len[i]
+            self.log_len_wk[i] = log_len[i]
          
         cdef int forest_len = 2
         cdef int volume_eq_len = 10
@@ -463,29 +547,28 @@ cdef class VolumeCalculator:
         cdef int prod_code_len = 2
         cdef int live_len = 1
         cdef int cruise_type_len = 1
- 
+        
+        # Ensure the result arrays are zero'd
+        self.volume_wk[:] = 0.0
+        self.log_vol_wk[:,:] = 0.0
+        self.log_len_wk[:] = 0.0
+        self.log_diam_wk[:,:] = 0.0
+        self.bole_ht_wk[:] = 0.0
+        
 #         if self.num_logs>0:
 #             log_len[:self.num_logs] = log_len[:self.num_logs]
 #             cruise_type='V'
-        print 'call vollibc2'
-        print 'volume eq', self.volume_eq
-        cdef char* ve='F01FW3W202'
-        cdef char* ht='F'
-        cdef char* cs='    '
-        cdef char* pc='01'
-        cdef char* lv='L'
-        cdef char* ct='C'
-         
-        vollibc2_(
+
+        volinit2_(
                 &self.region
                 , self.forest
-                , ve
+                , self.volume_eq
                 , &self.min_top_prim
                 , &self.min_top_sec
                 , &self.stump_ht
                 , &self.dbh_ob
                 , &self.drc_ob
-                , ht
+                , self.ht_type
                 , &self.total_ht
                 , &self.ht_log
                 , &self.ht_prim
@@ -505,11 +588,11 @@ cdef class VolumeCalculator:
                 , &i15
                 , &i20
                 , &i21
-                , &self.volume[0]
-                , &self.log_vol[0,0]
-                , &self.log_diam[0,0]
-                , &self.log_len[0]
-                , &self.bole_ht[0]
+                , &self.volume_wk[0]
+                , &self.log_vol_wk[0,0]
+                , &self.log_diam_wk[0,0]
+                , &self.log_len_wk[0]
+                , &self.bole_ht_wk[0]
                 , &self.num_logs
                 , &self.num_logs_prim
                 , &self.num_logs_sec
@@ -518,17 +601,18 @@ cdef class VolumeCalculator:
                 , &self.cubic_prim_flag
                 , &self.cord_prim_flag
                 , &self.sec_vol_flag
-                , cs
-                , pc
+                , self.con_spp
+                , self.prod_code
                 , &self.ht_1st_limb
-                , lv
+                , self.live
                 , &self.basal_area
                 , &self.site_index
-                , ct
+                , self.cruise_type
                 , &error_flag
-                , &self.debug
-                , &self.user_merch_flag
+#                 , &self.debug
+#                 , &self.user_merch_flag
                 , &self.merch_rule
+                
 #                 , 2,10,1,4,2,1,1
                 , forest_len
                 , volume_eq_len
@@ -539,30 +623,30 @@ cdef class VolumeCalculator:
                 , cruise_type_len
                 )
      
-        if error_flag!=0:
-            print 'Error Code {}: {}'.format(error_flag,error_codes[error_flag])
+#         if error_flag!=0:
+#             print 'Error Code {}: {}'.format(error_flag,error_codes[error_flag])
+        return error_flag
          
     def __cinit__(self, merchrules_ merch_rule=init_merchrule(), *args, **kargs):
         self.merch_rule = merch_rule
         
-        self.volume = np.zeros((15, ), dtype=np.float32)
-        self.log_vol = np.zeros((7, 20), dtype=np.float32)
-        self.log_diam = np.zeros((21, 3), dtype=np.float32)
-        self.log_len = np.zeros((20, ), dtype=np.float32)
-        self.bole_ht = np.zeros((21, ), dtype=np.float32)
+        self.volume_wk = np.zeros((15, ), dtype=np.float32, order='F')
+        self.log_vol_wk = np.zeros((7, 20), dtype=np.float32, order='F')
+        self.log_diam_wk = np.zeros((21, 3), dtype=np.float32, order='F')
+        self.log_len_wk = np.zeros((20, ), dtype=np.float32, order='F')
+        self.bole_ht_wk = np.zeros((21, ), dtype=np.float32, order='F')
 
-    def __init__(self, int region=6, forest=12, volume_eq=''
-            , min_top_prim=5.0, min_top_sec=2.0, stump_ht=1.0
-            , cubic_total_flag=1, bdft_prim_flag=1, cubic_prim_flag=1
-            , cord_prim_flag=1, sec_vol_flag=1
-            , con_spp='', prod_code=1, basal_area=0.0, site_index=0.0
-            , cruise_type='C', debug=0, *args, **kargs
+    def __init__(self, int region=6, char* forest='12', char* volume_eq=''
+            , float min_top_prim=5.0, float min_top_sec=2.0, float stump_ht=1.0
+            , int cubic_total_flag=1, int bdft_prim_flag=1, int cubic_prim_flag=1
+            , int cord_prim_flag=1, int sec_vol_flag=1
+            , char* con_spp='', char* prod_code='01'
+            , int basal_area=0, int site_index=0
+            , char* cruise_type='C', int debug=0, *args, **kargs
             ):
          
         self.region = region
-        forest = '{:>02d}'.format(forest)
         self.forest = forest
-        volume_eq = '{:>10s}'.format(volume_eq)
         self.volume_eq = volume_eq
         self.min_top_prim = min_top_prim
         self.min_top_sec = min_top_sec
@@ -574,9 +658,7 @@ cdef class VolumeCalculator:
         self.cord_prim_flag = cord_prim_flag
         self.sec_vol_flag = sec_vol_flag
          
-        con_spp = '{:>4s}'.format(con_spp)
         self.con_spp = con_spp
-        prod_code = '{:>02d}'.format(prod_code)
         self.prod_code = prod_code
         self.basal_area = basal_area
         self.site_index = site_index
@@ -584,7 +666,6 @@ cdef class VolumeCalculator:
         self.debug = debug
         
         self.user_merch_flag = 2
-        
 # 
 # if __name__=='_main__':
 #     volcalc = VolumeCalculator(volume_eq='F01FW3W202')

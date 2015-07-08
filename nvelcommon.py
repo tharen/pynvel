@@ -9,7 +9,7 @@ def debug(msg): print(msg)
 def info(msg): print(msg)
 def warn(msg): print(msg)
 
-fvs_pn_spp_codes = {
+spp_codes = {
     'SF': (11, 'Pacific silver fir', 'Abies amabilis')
     , 'WF': (15, 'white fir', 'Abies concolor')
     , 'GF': (17, 'grand fir', 'Abies grandis')
@@ -51,6 +51,9 @@ fvs_pn_spp_codes = {
     , 'CX': (202, 'other conifer', 'conifer spp.')
     , 'HX': (351, 'other hardwood', 'hardwood spp.')
     }
+
+fia_spp = {v[0]:k for k, v in spp_codes.items()}
+print fia_spp[202]
 
 volumeCodes = {
         1:'Total Cubic Volume from ground to tip'

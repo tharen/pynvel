@@ -52,6 +52,8 @@ spp_codes = {
     , 'HX': (351, 'other hardwood', 'hardwood spp.')
     }
 
+fia_spp = {v[0]:k for k, v in spp_codes.items() if not k in ('OT','CX','HX')}
+
 volume_idx = {
         1:'Total Cubic Volume from ground to tip'
         , 2:'Gross Scribner board foot volume'
