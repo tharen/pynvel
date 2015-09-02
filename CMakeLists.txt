@@ -3,7 +3,7 @@ cmake_minimum_required (VERSION 2.8.8 FATAL_ERROR)
 enable_language(Fortran)
 project(VOLLIB Fortran)
 
-set(src_root "%~dp0/vollib")
+set(src_root "${CMAKE_CURRENT_LIST_DIR}/vollib")
 include_directories(BEFORE ${src_root})
 
 # Read the source file names as a list
@@ -16,6 +16,7 @@ set(CMAKE_C_FLAGS "${arch_flags} ${CMAKE_C_FLAGS}")
 set(CMAKE_CXX_FLAGS "${arch_flags} ${CMAKE_CXX_FLAGS}")
 set(CMAKE_Fortran_FLAGS "${arch_flags} ${CMAKE_Fortran_FLAGS}")
 set(CMAKE_SHARED_LINKER_FLAGS "${arch_flags} ${CMAKE_SHARED_LINKER_FLAGS}")
+set(CMAKE_SHARED_LINKER_FLAGS_RELEASE "${CMAKE_SHARED_LINKER_FLAGS} -s -Wl,--subsystem,windows")
 
 add_library(vollib SHARED ${vollib_sources})
 set_target_properties(vollib PROPERTIES
