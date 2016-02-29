@@ -311,20 +311,20 @@ body.cython { font-family: courier; font-size: 12; }
 <pre class="cython line score-0">&#xA0;<span class="">007</span>: </pre>
 <pre class="cython line score-18" onclick='toggleDiv(this)'>+<span class="">008</span>: def debug(msg): print(msg)</pre>
 <pre class='cython code score-18 '>/* Python wrapper */
-static PyObject *__pyx_pw_6pynvel_9_volinit2_1debug(PyObject *__pyx_self, PyObject *__pyx_v_msg); /*proto*/
-static PyMethodDef __pyx_mdef_6pynvel_9_volinit2_1debug = {"debug", (PyCFunction)__pyx_pw_6pynvel_9_volinit2_1debug, METH_O, 0};
-static PyObject *__pyx_pw_6pynvel_9_volinit2_1debug(PyObject *__pyx_self, PyObject *__pyx_v_msg) {
+static PyObject *__pyx_pw_6pynvel_7_pynvel_1debug(PyObject *__pyx_self, PyObject *__pyx_v_msg); /*proto*/
+static PyMethodDef __pyx_mdef_6pynvel_7_pynvel_1debug = {"debug", (PyCFunction)__pyx_pw_6pynvel_7_pynvel_1debug, METH_O, 0};
+static PyObject *__pyx_pw_6pynvel_7_pynvel_1debug(PyObject *__pyx_self, PyObject *__pyx_v_msg) {
   PyObject *__pyx_r = 0;
   <span class='refnanny'>__Pyx_RefNannyDeclarations</span>
   <span class='refnanny'>__Pyx_RefNannySetupContext</span>("debug (wrapper)", 0);
-  __pyx_r = __pyx_pf_6pynvel_9_volinit2_debug(__pyx_self, ((PyObject *)__pyx_v_msg));
+  __pyx_r = __pyx_pf_6pynvel_7_pynvel_debug(__pyx_self, ((PyObject *)__pyx_v_msg));
 
   /* function exit code */
   <span class='refnanny'>__Pyx_RefNannyFinishContext</span>();
   return __pyx_r;
 }
 
-static PyObject *__pyx_pf_6pynvel_9_volinit2_debug(CYTHON_UNUSED PyObject *__pyx_self, PyObject *__pyx_v_msg) {
+static PyObject *__pyx_pf_6pynvel_7_pynvel_debug(CYTHON_UNUSED PyObject *__pyx_self, PyObject *__pyx_v_msg) {
   PyObject *__pyx_r = NULL;
   <span class='refnanny'>__Pyx_RefNannyDeclarations</span>
   <span class='refnanny'>__Pyx_RefNannySetupContext</span>("debug", 0);
@@ -334,7 +334,7 @@ static PyObject *__pyx_pf_6pynvel_9_volinit2_debug(CYTHON_UNUSED PyObject *__pyx
   __pyx_r = Py_None; <span class='pyx_macro_api'>__Pyx_INCREF</span>(Py_None);
   goto __pyx_L0;
   __pyx_L1_error:;
-  <span class='pyx_c_api'>__Pyx_AddTraceback</span>("pynvel._volinit2.debug", __pyx_clineno, __pyx_lineno, __pyx_filename);
+  <span class='pyx_c_api'>__Pyx_AddTraceback</span>("pynvel._pynvel.debug", __pyx_clineno, __pyx_lineno, __pyx_filename);
   __pyx_r = NULL;
   __pyx_L0:;
   <span class='refnanny'>__Pyx_XGIVEREF</span>(__pyx_r);
@@ -342,31 +342,31 @@ static PyObject *__pyx_pf_6pynvel_9_volinit2_debug(CYTHON_UNUSED PyObject *__pyx
   return __pyx_r;
 }
 /* … */
-  __pyx_tuple__8 = <span class='py_c_api'>PyTuple_Pack</span>(1, __pyx_n_s_msg);<span class='error_goto'> if (unlikely(!__pyx_tuple__8)) {__pyx_filename = __pyx_f[0]; __pyx_lineno = 8; __pyx_clineno = __LINE__; goto __pyx_L1_error;}</span>
-  <span class='refnanny'>__Pyx_GOTREF</span>(__pyx_tuple__8);
-  <span class='refnanny'>__Pyx_GIVEREF</span>(__pyx_tuple__8);
+  __pyx_tuple__51 = <span class='py_c_api'>PyTuple_Pack</span>(1, __pyx_n_s_msg);<span class='error_goto'> if (unlikely(!__pyx_tuple__51)) {__pyx_filename = __pyx_f[0]; __pyx_lineno = 8; __pyx_clineno = __LINE__; goto __pyx_L1_error;}</span>
+  <span class='refnanny'>__Pyx_GOTREF</span>(__pyx_tuple__51);
+  <span class='refnanny'>__Pyx_GIVEREF</span>(__pyx_tuple__51);
 /* … */
-  __pyx_t_2 = PyCFunction_NewEx(&amp;__pyx_mdef_6pynvel_9_volinit2_1debug, NULL, __pyx_n_s_pynvel__volinit2);<span class='error_goto'> if (unlikely(!__pyx_t_2)) {__pyx_filename = __pyx_f[0]; __pyx_lineno = 8; __pyx_clineno = __LINE__; goto __pyx_L1_error;}</span>
+  __pyx_t_2 = PyCFunction_NewEx(&amp;__pyx_mdef_6pynvel_7_pynvel_1debug, NULL, __pyx_n_s_pynvel__pynvel);<span class='error_goto'> if (unlikely(!__pyx_t_2)) {__pyx_filename = __pyx_f[0]; __pyx_lineno = 8; __pyx_clineno = __LINE__; goto __pyx_L1_error;}</span>
   <span class='refnanny'>__Pyx_GOTREF</span>(__pyx_t_2);
   if (<span class='py_c_api'>PyDict_SetItem</span>(__pyx_d, __pyx_n_s_debug, __pyx_t_2) &lt; 0) <span class='error_goto'>{__pyx_filename = __pyx_f[0]; __pyx_lineno = 8; __pyx_clineno = __LINE__; goto __pyx_L1_error;}</span>
   <span class='pyx_macro_api'>__Pyx_DECREF</span>(__pyx_t_2); __pyx_t_2 = 0;
-  __pyx_codeobj__9 = (PyObject*)<span class='pyx_c_api'>__Pyx_PyCode_New</span>(1, 0, 1, 0, 0, __pyx_empty_bytes, __pyx_empty_tuple, __pyx_empty_tuple, __pyx_tuple__8, __pyx_empty_tuple, __pyx_empty_tuple, __pyx_kp_s_C_workspace_pyforestsim_pyforest, __pyx_n_s_debug, 8, __pyx_empty_bytes);<span class='error_goto'> if (unlikely(!__pyx_codeobj__9)) {__pyx_filename = __pyx_f[0]; __pyx_lineno = 8; __pyx_clineno = __LINE__; goto __pyx_L1_error;}</span>
+  __pyx_codeobj__52 = (PyObject*)<span class='pyx_c_api'>__Pyx_PyCode_New</span>(1, 0, 1, 0, 0, __pyx_empty_bytes, __pyx_empty_tuple, __pyx_empty_tuple, __pyx_tuple__51, __pyx_empty_tuple, __pyx_empty_tuple, __pyx_kp_s_C_workspace_pyforestsim_pyforest, __pyx_n_s_debug, 8, __pyx_empty_bytes);<span class='error_goto'> if (unlikely(!__pyx_codeobj__52)) {__pyx_filename = __pyx_f[0]; __pyx_lineno = 8; __pyx_clineno = __LINE__; goto __pyx_L1_error;}</span>
 </pre><pre class="cython line score-18" onclick='toggleDiv(this)'>+<span class="">009</span>: def info(msg): print(msg)</pre>
 <pre class='cython code score-18 '>/* Python wrapper */
-static PyObject *__pyx_pw_6pynvel_9_volinit2_3info(PyObject *__pyx_self, PyObject *__pyx_v_msg); /*proto*/
-static PyMethodDef __pyx_mdef_6pynvel_9_volinit2_3info = {"info", (PyCFunction)__pyx_pw_6pynvel_9_volinit2_3info, METH_O, 0};
-static PyObject *__pyx_pw_6pynvel_9_volinit2_3info(PyObject *__pyx_self, PyObject *__pyx_v_msg) {
+static PyObject *__pyx_pw_6pynvel_7_pynvel_3info(PyObject *__pyx_self, PyObject *__pyx_v_msg); /*proto*/
+static PyMethodDef __pyx_mdef_6pynvel_7_pynvel_3info = {"info", (PyCFunction)__pyx_pw_6pynvel_7_pynvel_3info, METH_O, 0};
+static PyObject *__pyx_pw_6pynvel_7_pynvel_3info(PyObject *__pyx_self, PyObject *__pyx_v_msg) {
   PyObject *__pyx_r = 0;
   <span class='refnanny'>__Pyx_RefNannyDeclarations</span>
   <span class='refnanny'>__Pyx_RefNannySetupContext</span>("info (wrapper)", 0);
-  __pyx_r = __pyx_pf_6pynvel_9_volinit2_2info(__pyx_self, ((PyObject *)__pyx_v_msg));
+  __pyx_r = __pyx_pf_6pynvel_7_pynvel_2info(__pyx_self, ((PyObject *)__pyx_v_msg));
 
   /* function exit code */
   <span class='refnanny'>__Pyx_RefNannyFinishContext</span>();
   return __pyx_r;
 }
 
-static PyObject *__pyx_pf_6pynvel_9_volinit2_2info(CYTHON_UNUSED PyObject *__pyx_self, PyObject *__pyx_v_msg) {
+static PyObject *__pyx_pf_6pynvel_7_pynvel_2info(CYTHON_UNUSED PyObject *__pyx_self, PyObject *__pyx_v_msg) {
   PyObject *__pyx_r = NULL;
   <span class='refnanny'>__Pyx_RefNannyDeclarations</span>
   <span class='refnanny'>__Pyx_RefNannySetupContext</span>("info", 0);
@@ -376,7 +376,7 @@ static PyObject *__pyx_pf_6pynvel_9_volinit2_2info(CYTHON_UNUSED PyObject *__pyx
   __pyx_r = Py_None; <span class='pyx_macro_api'>__Pyx_INCREF</span>(Py_None);
   goto __pyx_L0;
   __pyx_L1_error:;
-  <span class='pyx_c_api'>__Pyx_AddTraceback</span>("pynvel._volinit2.info", __pyx_clineno, __pyx_lineno, __pyx_filename);
+  <span class='pyx_c_api'>__Pyx_AddTraceback</span>("pynvel._pynvel.info", __pyx_clineno, __pyx_lineno, __pyx_filename);
   __pyx_r = NULL;
   __pyx_L0:;
   <span class='refnanny'>__Pyx_XGIVEREF</span>(__pyx_r);
@@ -384,31 +384,31 @@ static PyObject *__pyx_pf_6pynvel_9_volinit2_2info(CYTHON_UNUSED PyObject *__pyx
   return __pyx_r;
 }
 /* … */
-  __pyx_tuple__10 = <span class='py_c_api'>PyTuple_Pack</span>(1, __pyx_n_s_msg);<span class='error_goto'> if (unlikely(!__pyx_tuple__10)) {__pyx_filename = __pyx_f[0]; __pyx_lineno = 9; __pyx_clineno = __LINE__; goto __pyx_L1_error;}</span>
-  <span class='refnanny'>__Pyx_GOTREF</span>(__pyx_tuple__10);
-  <span class='refnanny'>__Pyx_GIVEREF</span>(__pyx_tuple__10);
+  __pyx_tuple__53 = <span class='py_c_api'>PyTuple_Pack</span>(1, __pyx_n_s_msg);<span class='error_goto'> if (unlikely(!__pyx_tuple__53)) {__pyx_filename = __pyx_f[0]; __pyx_lineno = 9; __pyx_clineno = __LINE__; goto __pyx_L1_error;}</span>
+  <span class='refnanny'>__Pyx_GOTREF</span>(__pyx_tuple__53);
+  <span class='refnanny'>__Pyx_GIVEREF</span>(__pyx_tuple__53);
 /* … */
-  __pyx_t_2 = PyCFunction_NewEx(&amp;__pyx_mdef_6pynvel_9_volinit2_3info, NULL, __pyx_n_s_pynvel__volinit2);<span class='error_goto'> if (unlikely(!__pyx_t_2)) {__pyx_filename = __pyx_f[0]; __pyx_lineno = 9; __pyx_clineno = __LINE__; goto __pyx_L1_error;}</span>
+  __pyx_t_2 = PyCFunction_NewEx(&amp;__pyx_mdef_6pynvel_7_pynvel_3info, NULL, __pyx_n_s_pynvel__pynvel);<span class='error_goto'> if (unlikely(!__pyx_t_2)) {__pyx_filename = __pyx_f[0]; __pyx_lineno = 9; __pyx_clineno = __LINE__; goto __pyx_L1_error;}</span>
   <span class='refnanny'>__Pyx_GOTREF</span>(__pyx_t_2);
   if (<span class='py_c_api'>PyDict_SetItem</span>(__pyx_d, __pyx_n_s_info, __pyx_t_2) &lt; 0) <span class='error_goto'>{__pyx_filename = __pyx_f[0]; __pyx_lineno = 9; __pyx_clineno = __LINE__; goto __pyx_L1_error;}</span>
   <span class='pyx_macro_api'>__Pyx_DECREF</span>(__pyx_t_2); __pyx_t_2 = 0;
-  __pyx_codeobj__11 = (PyObject*)<span class='pyx_c_api'>__Pyx_PyCode_New</span>(1, 0, 1, 0, 0, __pyx_empty_bytes, __pyx_empty_tuple, __pyx_empty_tuple, __pyx_tuple__10, __pyx_empty_tuple, __pyx_empty_tuple, __pyx_kp_s_C_workspace_pyforestsim_pyforest, __pyx_n_s_info, 9, __pyx_empty_bytes);<span class='error_goto'> if (unlikely(!__pyx_codeobj__11)) {__pyx_filename = __pyx_f[0]; __pyx_lineno = 9; __pyx_clineno = __LINE__; goto __pyx_L1_error;}</span>
+  __pyx_codeobj__54 = (PyObject*)<span class='pyx_c_api'>__Pyx_PyCode_New</span>(1, 0, 1, 0, 0, __pyx_empty_bytes, __pyx_empty_tuple, __pyx_empty_tuple, __pyx_tuple__53, __pyx_empty_tuple, __pyx_empty_tuple, __pyx_kp_s_C_workspace_pyforestsim_pyforest, __pyx_n_s_info, 9, __pyx_empty_bytes);<span class='error_goto'> if (unlikely(!__pyx_codeobj__54)) {__pyx_filename = __pyx_f[0]; __pyx_lineno = 9; __pyx_clineno = __LINE__; goto __pyx_L1_error;}</span>
 </pre><pre class="cython line score-18" onclick='toggleDiv(this)'>+<span class="">010</span>: def warn(msg): print(msg)</pre>
 <pre class='cython code score-18 '>/* Python wrapper */
-static PyObject *__pyx_pw_6pynvel_9_volinit2_5warn(PyObject *__pyx_self, PyObject *__pyx_v_msg); /*proto*/
-static PyMethodDef __pyx_mdef_6pynvel_9_volinit2_5warn = {"warn", (PyCFunction)__pyx_pw_6pynvel_9_volinit2_5warn, METH_O, 0};
-static PyObject *__pyx_pw_6pynvel_9_volinit2_5warn(PyObject *__pyx_self, PyObject *__pyx_v_msg) {
+static PyObject *__pyx_pw_6pynvel_7_pynvel_5warn(PyObject *__pyx_self, PyObject *__pyx_v_msg); /*proto*/
+static PyMethodDef __pyx_mdef_6pynvel_7_pynvel_5warn = {"warn", (PyCFunction)__pyx_pw_6pynvel_7_pynvel_5warn, METH_O, 0};
+static PyObject *__pyx_pw_6pynvel_7_pynvel_5warn(PyObject *__pyx_self, PyObject *__pyx_v_msg) {
   PyObject *__pyx_r = 0;
   <span class='refnanny'>__Pyx_RefNannyDeclarations</span>
   <span class='refnanny'>__Pyx_RefNannySetupContext</span>("warn (wrapper)", 0);
-  __pyx_r = __pyx_pf_6pynvel_9_volinit2_4warn(__pyx_self, ((PyObject *)__pyx_v_msg));
+  __pyx_r = __pyx_pf_6pynvel_7_pynvel_4warn(__pyx_self, ((PyObject *)__pyx_v_msg));
 
   /* function exit code */
   <span class='refnanny'>__Pyx_RefNannyFinishContext</span>();
   return __pyx_r;
 }
 
-static PyObject *__pyx_pf_6pynvel_9_volinit2_4warn(CYTHON_UNUSED PyObject *__pyx_self, PyObject *__pyx_v_msg) {
+static PyObject *__pyx_pf_6pynvel_7_pynvel_4warn(CYTHON_UNUSED PyObject *__pyx_self, PyObject *__pyx_v_msg) {
   PyObject *__pyx_r = NULL;
   <span class='refnanny'>__Pyx_RefNannyDeclarations</span>
   <span class='refnanny'>__Pyx_RefNannySetupContext</span>("warn", 0);
@@ -418,7 +418,7 @@ static PyObject *__pyx_pf_6pynvel_9_volinit2_4warn(CYTHON_UNUSED PyObject *__pyx
   __pyx_r = Py_None; <span class='pyx_macro_api'>__Pyx_INCREF</span>(Py_None);
   goto __pyx_L0;
   __pyx_L1_error:;
-  <span class='pyx_c_api'>__Pyx_AddTraceback</span>("pynvel._volinit2.warn", __pyx_clineno, __pyx_lineno, __pyx_filename);
+  <span class='pyx_c_api'>__Pyx_AddTraceback</span>("pynvel._pynvel.warn", __pyx_clineno, __pyx_lineno, __pyx_filename);
   __pyx_r = NULL;
   __pyx_L0:;
   <span class='refnanny'>__Pyx_XGIVEREF</span>(__pyx_r);
@@ -426,267 +426,267 @@ static PyObject *__pyx_pf_6pynvel_9_volinit2_4warn(CYTHON_UNUSED PyObject *__pyx
   return __pyx_r;
 }
 /* … */
-  __pyx_tuple__12 = <span class='py_c_api'>PyTuple_Pack</span>(1, __pyx_n_s_msg);<span class='error_goto'> if (unlikely(!__pyx_tuple__12)) {__pyx_filename = __pyx_f[0]; __pyx_lineno = 10; __pyx_clineno = __LINE__; goto __pyx_L1_error;}</span>
-  <span class='refnanny'>__Pyx_GOTREF</span>(__pyx_tuple__12);
-  <span class='refnanny'>__Pyx_GIVEREF</span>(__pyx_tuple__12);
+  __pyx_tuple__55 = <span class='py_c_api'>PyTuple_Pack</span>(1, __pyx_n_s_msg);<span class='error_goto'> if (unlikely(!__pyx_tuple__55)) {__pyx_filename = __pyx_f[0]; __pyx_lineno = 10; __pyx_clineno = __LINE__; goto __pyx_L1_error;}</span>
+  <span class='refnanny'>__Pyx_GOTREF</span>(__pyx_tuple__55);
+  <span class='refnanny'>__Pyx_GIVEREF</span>(__pyx_tuple__55);
 /* … */
-  __pyx_t_2 = PyCFunction_NewEx(&amp;__pyx_mdef_6pynvel_9_volinit2_5warn, NULL, __pyx_n_s_pynvel__volinit2);<span class='error_goto'> if (unlikely(!__pyx_t_2)) {__pyx_filename = __pyx_f[0]; __pyx_lineno = 10; __pyx_clineno = __LINE__; goto __pyx_L1_error;}</span>
+  __pyx_t_2 = PyCFunction_NewEx(&amp;__pyx_mdef_6pynvel_7_pynvel_5warn, NULL, __pyx_n_s_pynvel__pynvel);<span class='error_goto'> if (unlikely(!__pyx_t_2)) {__pyx_filename = __pyx_f[0]; __pyx_lineno = 10; __pyx_clineno = __LINE__; goto __pyx_L1_error;}</span>
   <span class='refnanny'>__Pyx_GOTREF</span>(__pyx_t_2);
   if (<span class='py_c_api'>PyDict_SetItem</span>(__pyx_d, __pyx_n_s_warn, __pyx_t_2) &lt; 0) <span class='error_goto'>{__pyx_filename = __pyx_f[0]; __pyx_lineno = 10; __pyx_clineno = __LINE__; goto __pyx_L1_error;}</span>
   <span class='pyx_macro_api'>__Pyx_DECREF</span>(__pyx_t_2); __pyx_t_2 = 0;
-  __pyx_codeobj__13 = (PyObject*)<span class='pyx_c_api'>__Pyx_PyCode_New</span>(1, 0, 1, 0, 0, __pyx_empty_bytes, __pyx_empty_tuple, __pyx_empty_tuple, __pyx_tuple__12, __pyx_empty_tuple, __pyx_empty_tuple, __pyx_kp_s_C_workspace_pyforestsim_pyforest, __pyx_n_s_warn, 10, __pyx_empty_bytes);<span class='error_goto'> if (unlikely(!__pyx_codeobj__13)) {__pyx_filename = __pyx_f[0]; __pyx_lineno = 10; __pyx_clineno = __LINE__; goto __pyx_L1_error;}</span>
+  __pyx_codeobj__56 = (PyObject*)<span class='pyx_c_api'>__Pyx_PyCode_New</span>(1, 0, 1, 0, 0, __pyx_empty_bytes, __pyx_empty_tuple, __pyx_empty_tuple, __pyx_tuple__55, __pyx_empty_tuple, __pyx_empty_tuple, __pyx_kp_s_C_workspace_pyforestsim_pyforest, __pyx_n_s_warn, 10, __pyx_empty_bytes);<span class='error_goto'> if (unlikely(!__pyx_codeobj__56)) {__pyx_filename = __pyx_f[0]; __pyx_lineno = 10; __pyx_clineno = __LINE__; goto __pyx_L1_error;}</span>
 </pre><pre class="cython line score-0">&#xA0;<span class="">011</span>: </pre>
 <pre class="cython line score-0">&#xA0;<span class="">012</span>: spp_codes = {</pre>
 <pre class="cython line score-15" onclick='toggleDiv(this)'>+<span class="">013</span>:     'SF': (11, 'Pacific silver fir', 'Abies amabilis')</pre>
 <pre class='cython code score-15 '>  __pyx_t_2 = <span class='py_c_api'>PyDict_New</span>();<span class='error_goto'> if (unlikely(!__pyx_t_2)) {__pyx_filename = __pyx_f[0]; __pyx_lineno = 13; __pyx_clineno = __LINE__; goto __pyx_L1_error;}</span>
   <span class='refnanny'>__Pyx_GOTREF</span>(__pyx_t_2);
-  if (<span class='py_c_api'>PyDict_SetItem</span>(__pyx_t_2, __pyx_n_s_SF, __pyx_tuple__14) &lt; 0) <span class='error_goto'>{__pyx_filename = __pyx_f[0]; __pyx_lineno = 13; __pyx_clineno = __LINE__; goto __pyx_L1_error;}</span>
+  if (<span class='py_c_api'>PyDict_SetItem</span>(__pyx_t_2, __pyx_n_s_SF, __pyx_tuple__57) &lt; 0) <span class='error_goto'>{__pyx_filename = __pyx_f[0]; __pyx_lineno = 13; __pyx_clineno = __LINE__; goto __pyx_L1_error;}</span>
 /* … */
-  __pyx_tuple__14 = <span class='py_c_api'>PyTuple_Pack</span>(3, __pyx_int_11, __pyx_kp_s_Pacific_silver_fir, __pyx_kp_s_Abies_amabilis);<span class='error_goto'> if (unlikely(!__pyx_tuple__14)) {__pyx_filename = __pyx_f[0]; __pyx_lineno = 13; __pyx_clineno = __LINE__; goto __pyx_L1_error;}</span>
-  <span class='refnanny'>__Pyx_GOTREF</span>(__pyx_tuple__14);
-  <span class='refnanny'>__Pyx_GIVEREF</span>(__pyx_tuple__14);
+  __pyx_tuple__57 = <span class='py_c_api'>PyTuple_Pack</span>(3, __pyx_int_11, __pyx_kp_s_Pacific_silver_fir, __pyx_kp_s_Abies_amabilis);<span class='error_goto'> if (unlikely(!__pyx_tuple__57)) {__pyx_filename = __pyx_f[0]; __pyx_lineno = 13; __pyx_clineno = __LINE__; goto __pyx_L1_error;}</span>
+  <span class='refnanny'>__Pyx_GOTREF</span>(__pyx_tuple__57);
+  <span class='refnanny'>__Pyx_GIVEREF</span>(__pyx_tuple__57);
 </pre><pre class="cython line score-10" onclick='toggleDiv(this)'>+<span class="">014</span>:     , 'WF': (15, 'white fir', 'Abies concolor')</pre>
-<pre class='cython code score-10 '>  if (<span class='py_c_api'>PyDict_SetItem</span>(__pyx_t_2, __pyx_n_s_WF, __pyx_tuple__15) &lt; 0) <span class='error_goto'>{__pyx_filename = __pyx_f[0]; __pyx_lineno = 13; __pyx_clineno = __LINE__; goto __pyx_L1_error;}</span>
+<pre class='cython code score-10 '>  if (<span class='py_c_api'>PyDict_SetItem</span>(__pyx_t_2, __pyx_n_s_WF, __pyx_tuple__58) &lt; 0) <span class='error_goto'>{__pyx_filename = __pyx_f[0]; __pyx_lineno = 13; __pyx_clineno = __LINE__; goto __pyx_L1_error;}</span>
 /* … */
-  __pyx_tuple__15 = <span class='py_c_api'>PyTuple_Pack</span>(3, __pyx_int_15, __pyx_kp_s_white_fir, __pyx_kp_s_Abies_concolor);<span class='error_goto'> if (unlikely(!__pyx_tuple__15)) {__pyx_filename = __pyx_f[0]; __pyx_lineno = 14; __pyx_clineno = __LINE__; goto __pyx_L1_error;}</span>
-  <span class='refnanny'>__Pyx_GOTREF</span>(__pyx_tuple__15);
-  <span class='refnanny'>__Pyx_GIVEREF</span>(__pyx_tuple__15);
+  __pyx_tuple__58 = <span class='py_c_api'>PyTuple_Pack</span>(3, __pyx_int_15, __pyx_kp_s_white_fir, __pyx_kp_s_Abies_concolor);<span class='error_goto'> if (unlikely(!__pyx_tuple__58)) {__pyx_filename = __pyx_f[0]; __pyx_lineno = 14; __pyx_clineno = __LINE__; goto __pyx_L1_error;}</span>
+  <span class='refnanny'>__Pyx_GOTREF</span>(__pyx_tuple__58);
+  <span class='refnanny'>__Pyx_GIVEREF</span>(__pyx_tuple__58);
 </pre><pre class="cython line score-10" onclick='toggleDiv(this)'>+<span class="">015</span>:     , 'GF': (17, 'grand fir', 'Abies grandis')</pre>
-<pre class='cython code score-10 '>  if (<span class='py_c_api'>PyDict_SetItem</span>(__pyx_t_2, __pyx_n_s_GF, __pyx_tuple__16) &lt; 0) <span class='error_goto'>{__pyx_filename = __pyx_f[0]; __pyx_lineno = 13; __pyx_clineno = __LINE__; goto __pyx_L1_error;}</span>
+<pre class='cython code score-10 '>  if (<span class='py_c_api'>PyDict_SetItem</span>(__pyx_t_2, __pyx_n_s_GF, __pyx_tuple__59) &lt; 0) <span class='error_goto'>{__pyx_filename = __pyx_f[0]; __pyx_lineno = 13; __pyx_clineno = __LINE__; goto __pyx_L1_error;}</span>
 /* … */
-  __pyx_tuple__16 = <span class='py_c_api'>PyTuple_Pack</span>(3, __pyx_int_17, __pyx_kp_s_grand_fir, __pyx_kp_s_Abies_grandis);<span class='error_goto'> if (unlikely(!__pyx_tuple__16)) {__pyx_filename = __pyx_f[0]; __pyx_lineno = 15; __pyx_clineno = __LINE__; goto __pyx_L1_error;}</span>
-  <span class='refnanny'>__Pyx_GOTREF</span>(__pyx_tuple__16);
-  <span class='refnanny'>__Pyx_GIVEREF</span>(__pyx_tuple__16);
+  __pyx_tuple__59 = <span class='py_c_api'>PyTuple_Pack</span>(3, __pyx_int_17, __pyx_kp_s_grand_fir, __pyx_kp_s_Abies_grandis);<span class='error_goto'> if (unlikely(!__pyx_tuple__59)) {__pyx_filename = __pyx_f[0]; __pyx_lineno = 15; __pyx_clineno = __LINE__; goto __pyx_L1_error;}</span>
+  <span class='refnanny'>__Pyx_GOTREF</span>(__pyx_tuple__59);
+  <span class='refnanny'>__Pyx_GIVEREF</span>(__pyx_tuple__59);
 </pre><pre class="cython line score-10" onclick='toggleDiv(this)'>+<span class="">016</span>:     , 'AF': (19, 'subalpine fir', 'Abies lasiocarpa')</pre>
-<pre class='cython code score-10 '>  if (<span class='py_c_api'>PyDict_SetItem</span>(__pyx_t_2, __pyx_n_s_AF, __pyx_tuple__17) &lt; 0) <span class='error_goto'>{__pyx_filename = __pyx_f[0]; __pyx_lineno = 13; __pyx_clineno = __LINE__; goto __pyx_L1_error;}</span>
+<pre class='cython code score-10 '>  if (<span class='py_c_api'>PyDict_SetItem</span>(__pyx_t_2, __pyx_n_s_AF, __pyx_tuple__60) &lt; 0) <span class='error_goto'>{__pyx_filename = __pyx_f[0]; __pyx_lineno = 13; __pyx_clineno = __LINE__; goto __pyx_L1_error;}</span>
 /* … */
-  __pyx_tuple__17 = <span class='py_c_api'>PyTuple_Pack</span>(3, __pyx_int_19, __pyx_kp_s_subalpine_fir, __pyx_kp_s_Abies_lasiocarpa);<span class='error_goto'> if (unlikely(!__pyx_tuple__17)) {__pyx_filename = __pyx_f[0]; __pyx_lineno = 16; __pyx_clineno = __LINE__; goto __pyx_L1_error;}</span>
-  <span class='refnanny'>__Pyx_GOTREF</span>(__pyx_tuple__17);
-  <span class='refnanny'>__Pyx_GIVEREF</span>(__pyx_tuple__17);
+  __pyx_tuple__60 = <span class='py_c_api'>PyTuple_Pack</span>(3, __pyx_int_19, __pyx_kp_s_subalpine_fir, __pyx_kp_s_Abies_lasiocarpa);<span class='error_goto'> if (unlikely(!__pyx_tuple__60)) {__pyx_filename = __pyx_f[0]; __pyx_lineno = 16; __pyx_clineno = __LINE__; goto __pyx_L1_error;}</span>
+  <span class='refnanny'>__Pyx_GOTREF</span>(__pyx_tuple__60);
+  <span class='refnanny'>__Pyx_GIVEREF</span>(__pyx_tuple__60);
 </pre><pre class="cython line score-10" onclick='toggleDiv(this)'>+<span class="">017</span>:     , 'RF': (20, 'California red fir / Shasta red fir', 'Abies magnifica')</pre>
-<pre class='cython code score-10 '>  if (<span class='py_c_api'>PyDict_SetItem</span>(__pyx_t_2, __pyx_n_s_RF, __pyx_tuple__18) &lt; 0) <span class='error_goto'>{__pyx_filename = __pyx_f[0]; __pyx_lineno = 13; __pyx_clineno = __LINE__; goto __pyx_L1_error;}</span>
+<pre class='cython code score-10 '>  if (<span class='py_c_api'>PyDict_SetItem</span>(__pyx_t_2, __pyx_n_s_RF, __pyx_tuple__61) &lt; 0) <span class='error_goto'>{__pyx_filename = __pyx_f[0]; __pyx_lineno = 13; __pyx_clineno = __LINE__; goto __pyx_L1_error;}</span>
 /* … */
-  __pyx_tuple__18 = <span class='py_c_api'>PyTuple_Pack</span>(3, __pyx_int_20, __pyx_kp_s_California_red_fir_Shasta_red_fi, __pyx_kp_s_Abies_magnifica);<span class='error_goto'> if (unlikely(!__pyx_tuple__18)) {__pyx_filename = __pyx_f[0]; __pyx_lineno = 17; __pyx_clineno = __LINE__; goto __pyx_L1_error;}</span>
-  <span class='refnanny'>__Pyx_GOTREF</span>(__pyx_tuple__18);
-  <span class='refnanny'>__Pyx_GIVEREF</span>(__pyx_tuple__18);
+  __pyx_tuple__61 = <span class='py_c_api'>PyTuple_Pack</span>(3, __pyx_int_20, __pyx_kp_s_California_red_fir_Shasta_red_fi, __pyx_kp_s_Abies_magnifica);<span class='error_goto'> if (unlikely(!__pyx_tuple__61)) {__pyx_filename = __pyx_f[0]; __pyx_lineno = 17; __pyx_clineno = __LINE__; goto __pyx_L1_error;}</span>
+  <span class='refnanny'>__Pyx_GOTREF</span>(__pyx_tuple__61);
+  <span class='refnanny'>__Pyx_GIVEREF</span>(__pyx_tuple__61);
 </pre><pre class="cython line score-10" onclick='toggleDiv(this)'>+<span class="">018</span>:     , 'SS': (98, 'Sitka spruce', 'Picea sitchensis')</pre>
-<pre class='cython code score-10 '>  if (<span class='py_c_api'>PyDict_SetItem</span>(__pyx_t_2, __pyx_n_s_SS, __pyx_tuple__19) &lt; 0) <span class='error_goto'>{__pyx_filename = __pyx_f[0]; __pyx_lineno = 13; __pyx_clineno = __LINE__; goto __pyx_L1_error;}</span>
+<pre class='cython code score-10 '>  if (<span class='py_c_api'>PyDict_SetItem</span>(__pyx_t_2, __pyx_n_s_SS, __pyx_tuple__62) &lt; 0) <span class='error_goto'>{__pyx_filename = __pyx_f[0]; __pyx_lineno = 13; __pyx_clineno = __LINE__; goto __pyx_L1_error;}</span>
 /* … */
-  __pyx_tuple__19 = <span class='py_c_api'>PyTuple_Pack</span>(3, __pyx_int_98, __pyx_kp_s_Sitka_spruce, __pyx_kp_s_Picea_sitchensis);<span class='error_goto'> if (unlikely(!__pyx_tuple__19)) {__pyx_filename = __pyx_f[0]; __pyx_lineno = 18; __pyx_clineno = __LINE__; goto __pyx_L1_error;}</span>
-  <span class='refnanny'>__Pyx_GOTREF</span>(__pyx_tuple__19);
-  <span class='refnanny'>__Pyx_GIVEREF</span>(__pyx_tuple__19);
+  __pyx_tuple__62 = <span class='py_c_api'>PyTuple_Pack</span>(3, __pyx_int_98, __pyx_kp_s_Sitka_spruce, __pyx_kp_s_Picea_sitchensis);<span class='error_goto'> if (unlikely(!__pyx_tuple__62)) {__pyx_filename = __pyx_f[0]; __pyx_lineno = 18; __pyx_clineno = __LINE__; goto __pyx_L1_error;}</span>
+  <span class='refnanny'>__Pyx_GOTREF</span>(__pyx_tuple__62);
+  <span class='refnanny'>__Pyx_GIVEREF</span>(__pyx_tuple__62);
 </pre><pre class="cython line score-10" onclick='toggleDiv(this)'>+<span class="">019</span>:     , 'NF': (22, 'noble fir', 'Abies procera')</pre>
-<pre class='cython code score-10 '>  if (<span class='py_c_api'>PyDict_SetItem</span>(__pyx_t_2, __pyx_n_s_NF, __pyx_tuple__20) &lt; 0) <span class='error_goto'>{__pyx_filename = __pyx_f[0]; __pyx_lineno = 13; __pyx_clineno = __LINE__; goto __pyx_L1_error;}</span>
+<pre class='cython code score-10 '>  if (<span class='py_c_api'>PyDict_SetItem</span>(__pyx_t_2, __pyx_n_s_NF, __pyx_tuple__63) &lt; 0) <span class='error_goto'>{__pyx_filename = __pyx_f[0]; __pyx_lineno = 13; __pyx_clineno = __LINE__; goto __pyx_L1_error;}</span>
 /* … */
-  __pyx_tuple__20 = <span class='py_c_api'>PyTuple_Pack</span>(3, __pyx_int_22, __pyx_kp_s_noble_fir, __pyx_kp_s_Abies_procera);<span class='error_goto'> if (unlikely(!__pyx_tuple__20)) {__pyx_filename = __pyx_f[0]; __pyx_lineno = 19; __pyx_clineno = __LINE__; goto __pyx_L1_error;}</span>
-  <span class='refnanny'>__Pyx_GOTREF</span>(__pyx_tuple__20);
-  <span class='refnanny'>__Pyx_GIVEREF</span>(__pyx_tuple__20);
+  __pyx_tuple__63 = <span class='py_c_api'>PyTuple_Pack</span>(3, __pyx_int_22, __pyx_kp_s_noble_fir, __pyx_kp_s_Abies_procera);<span class='error_goto'> if (unlikely(!__pyx_tuple__63)) {__pyx_filename = __pyx_f[0]; __pyx_lineno = 19; __pyx_clineno = __LINE__; goto __pyx_L1_error;}</span>
+  <span class='refnanny'>__Pyx_GOTREF</span>(__pyx_tuple__63);
+  <span class='refnanny'>__Pyx_GIVEREF</span>(__pyx_tuple__63);
 </pre><pre class="cython line score-10" onclick='toggleDiv(this)'>+<span class="">020</span>:     , 'YC': (42, 'Alaska cedar / western larch', 'Chamaecyparis nootkatensis')</pre>
-<pre class='cython code score-10 '>  if (<span class='py_c_api'>PyDict_SetItem</span>(__pyx_t_2, __pyx_n_s_YC, __pyx_tuple__21) &lt; 0) <span class='error_goto'>{__pyx_filename = __pyx_f[0]; __pyx_lineno = 13; __pyx_clineno = __LINE__; goto __pyx_L1_error;}</span>
+<pre class='cython code score-10 '>  if (<span class='py_c_api'>PyDict_SetItem</span>(__pyx_t_2, __pyx_n_s_YC, __pyx_tuple__64) &lt; 0) <span class='error_goto'>{__pyx_filename = __pyx_f[0]; __pyx_lineno = 13; __pyx_clineno = __LINE__; goto __pyx_L1_error;}</span>
 /* … */
-  __pyx_tuple__21 = <span class='py_c_api'>PyTuple_Pack</span>(3, __pyx_int_42, __pyx_kp_s_Alaska_cedar_western_larch, __pyx_kp_s_Chamaecyparis_nootkatensis);<span class='error_goto'> if (unlikely(!__pyx_tuple__21)) {__pyx_filename = __pyx_f[0]; __pyx_lineno = 20; __pyx_clineno = __LINE__; goto __pyx_L1_error;}</span>
-  <span class='refnanny'>__Pyx_GOTREF</span>(__pyx_tuple__21);
-  <span class='refnanny'>__Pyx_GIVEREF</span>(__pyx_tuple__21);
+  __pyx_tuple__64 = <span class='py_c_api'>PyTuple_Pack</span>(3, __pyx_int_42, __pyx_kp_s_Alaska_cedar_western_larch, __pyx_kp_s_Chamaecyparis_nootkatensis);<span class='error_goto'> if (unlikely(!__pyx_tuple__64)) {__pyx_filename = __pyx_f[0]; __pyx_lineno = 20; __pyx_clineno = __LINE__; goto __pyx_L1_error;}</span>
+  <span class='refnanny'>__Pyx_GOTREF</span>(__pyx_tuple__64);
+  <span class='refnanny'>__Pyx_GIVEREF</span>(__pyx_tuple__64);
 </pre><pre class="cython line score-10" onclick='toggleDiv(this)'>+<span class="">021</span>:     , 'IC': (81, 'incense-cedar', 'Libocedrus decurrens')</pre>
-<pre class='cython code score-10 '>  if (<span class='py_c_api'>PyDict_SetItem</span>(__pyx_t_2, __pyx_n_s_IC, __pyx_tuple__22) &lt; 0) <span class='error_goto'>{__pyx_filename = __pyx_f[0]; __pyx_lineno = 13; __pyx_clineno = __LINE__; goto __pyx_L1_error;}</span>
+<pre class='cython code score-10 '>  if (<span class='py_c_api'>PyDict_SetItem</span>(__pyx_t_2, __pyx_n_s_IC, __pyx_tuple__65) &lt; 0) <span class='error_goto'>{__pyx_filename = __pyx_f[0]; __pyx_lineno = 13; __pyx_clineno = __LINE__; goto __pyx_L1_error;}</span>
 /* … */
-  __pyx_tuple__22 = <span class='py_c_api'>PyTuple_Pack</span>(3, __pyx_int_81, __pyx_kp_s_incense_cedar, __pyx_kp_s_Libocedrus_decurrens);<span class='error_goto'> if (unlikely(!__pyx_tuple__22)) {__pyx_filename = __pyx_f[0]; __pyx_lineno = 21; __pyx_clineno = __LINE__; goto __pyx_L1_error;}</span>
-  <span class='refnanny'>__Pyx_GOTREF</span>(__pyx_tuple__22);
-  <span class='refnanny'>__Pyx_GIVEREF</span>(__pyx_tuple__22);
+  __pyx_tuple__65 = <span class='py_c_api'>PyTuple_Pack</span>(3, __pyx_int_81, __pyx_kp_s_incense_cedar, __pyx_kp_s_Libocedrus_decurrens);<span class='error_goto'> if (unlikely(!__pyx_tuple__65)) {__pyx_filename = __pyx_f[0]; __pyx_lineno = 21; __pyx_clineno = __LINE__; goto __pyx_L1_error;}</span>
+  <span class='refnanny'>__Pyx_GOTREF</span>(__pyx_tuple__65);
+  <span class='refnanny'>__Pyx_GIVEREF</span>(__pyx_tuple__65);
 </pre><pre class="cython line score-10" onclick='toggleDiv(this)'>+<span class="">022</span>:     , 'ES': (93, 'Engelmann spruce', 'Picea engelmannii')</pre>
-<pre class='cython code score-10 '>  if (<span class='py_c_api'>PyDict_SetItem</span>(__pyx_t_2, __pyx_n_s_ES, __pyx_tuple__23) &lt; 0) <span class='error_goto'>{__pyx_filename = __pyx_f[0]; __pyx_lineno = 13; __pyx_clineno = __LINE__; goto __pyx_L1_error;}</span>
+<pre class='cython code score-10 '>  if (<span class='py_c_api'>PyDict_SetItem</span>(__pyx_t_2, __pyx_n_s_ES, __pyx_tuple__66) &lt; 0) <span class='error_goto'>{__pyx_filename = __pyx_f[0]; __pyx_lineno = 13; __pyx_clineno = __LINE__; goto __pyx_L1_error;}</span>
 /* … */
-  __pyx_tuple__23 = <span class='py_c_api'>PyTuple_Pack</span>(3, __pyx_int_93, __pyx_kp_s_Engelmann_spruce, __pyx_kp_s_Picea_engelmannii);<span class='error_goto'> if (unlikely(!__pyx_tuple__23)) {__pyx_filename = __pyx_f[0]; __pyx_lineno = 22; __pyx_clineno = __LINE__; goto __pyx_L1_error;}</span>
-  <span class='refnanny'>__Pyx_GOTREF</span>(__pyx_tuple__23);
-  <span class='refnanny'>__Pyx_GIVEREF</span>(__pyx_tuple__23);
+  __pyx_tuple__66 = <span class='py_c_api'>PyTuple_Pack</span>(3, __pyx_int_93, __pyx_kp_s_Engelmann_spruce, __pyx_kp_s_Picea_engelmannii);<span class='error_goto'> if (unlikely(!__pyx_tuple__66)) {__pyx_filename = __pyx_f[0]; __pyx_lineno = 22; __pyx_clineno = __LINE__; goto __pyx_L1_error;}</span>
+  <span class='refnanny'>__Pyx_GOTREF</span>(__pyx_tuple__66);
+  <span class='refnanny'>__Pyx_GIVEREF</span>(__pyx_tuple__66);
 </pre><pre class="cython line score-10" onclick='toggleDiv(this)'>+<span class="">023</span>:     , 'LP': (108, 'lodgepole pine', 'Pinus contorta')</pre>
-<pre class='cython code score-10 '>  if (<span class='py_c_api'>PyDict_SetItem</span>(__pyx_t_2, __pyx_n_s_LP, __pyx_tuple__24) &lt; 0) <span class='error_goto'>{__pyx_filename = __pyx_f[0]; __pyx_lineno = 13; __pyx_clineno = __LINE__; goto __pyx_L1_error;}</span>
+<pre class='cython code score-10 '>  if (<span class='py_c_api'>PyDict_SetItem</span>(__pyx_t_2, __pyx_n_s_LP, __pyx_tuple__67) &lt; 0) <span class='error_goto'>{__pyx_filename = __pyx_f[0]; __pyx_lineno = 13; __pyx_clineno = __LINE__; goto __pyx_L1_error;}</span>
 /* … */
-  __pyx_tuple__24 = <span class='py_c_api'>PyTuple_Pack</span>(3, __pyx_int_108, __pyx_kp_s_lodgepole_pine, __pyx_kp_s_Pinus_contorta);<span class='error_goto'> if (unlikely(!__pyx_tuple__24)) {__pyx_filename = __pyx_f[0]; __pyx_lineno = 23; __pyx_clineno = __LINE__; goto __pyx_L1_error;}</span>
-  <span class='refnanny'>__Pyx_GOTREF</span>(__pyx_tuple__24);
-  <span class='refnanny'>__Pyx_GIVEREF</span>(__pyx_tuple__24);
+  __pyx_tuple__67 = <span class='py_c_api'>PyTuple_Pack</span>(3, __pyx_int_108, __pyx_kp_s_lodgepole_pine, __pyx_kp_s_Pinus_contorta);<span class='error_goto'> if (unlikely(!__pyx_tuple__67)) {__pyx_filename = __pyx_f[0]; __pyx_lineno = 23; __pyx_clineno = __LINE__; goto __pyx_L1_error;}</span>
+  <span class='refnanny'>__Pyx_GOTREF</span>(__pyx_tuple__67);
+  <span class='refnanny'>__Pyx_GIVEREF</span>(__pyx_tuple__67);
 </pre><pre class="cython line score-10" onclick='toggleDiv(this)'>+<span class="">024</span>:     , 'JP': (116, 'Jeffrey pine', 'Pinus jeffreyi')</pre>
-<pre class='cython code score-10 '>  if (<span class='py_c_api'>PyDict_SetItem</span>(__pyx_t_2, __pyx_n_s_JP, __pyx_tuple__25) &lt; 0) <span class='error_goto'>{__pyx_filename = __pyx_f[0]; __pyx_lineno = 13; __pyx_clineno = __LINE__; goto __pyx_L1_error;}</span>
+<pre class='cython code score-10 '>  if (<span class='py_c_api'>PyDict_SetItem</span>(__pyx_t_2, __pyx_n_s_JP, __pyx_tuple__68) &lt; 0) <span class='error_goto'>{__pyx_filename = __pyx_f[0]; __pyx_lineno = 13; __pyx_clineno = __LINE__; goto __pyx_L1_error;}</span>
 /* … */
-  __pyx_tuple__25 = <span class='py_c_api'>PyTuple_Pack</span>(3, __pyx_int_116, __pyx_kp_s_Jeffrey_pine, __pyx_kp_s_Pinus_jeffreyi);<span class='error_goto'> if (unlikely(!__pyx_tuple__25)) {__pyx_filename = __pyx_f[0]; __pyx_lineno = 24; __pyx_clineno = __LINE__; goto __pyx_L1_error;}</span>
-  <span class='refnanny'>__Pyx_GOTREF</span>(__pyx_tuple__25);
-  <span class='refnanny'>__Pyx_GIVEREF</span>(__pyx_tuple__25);
+  __pyx_tuple__68 = <span class='py_c_api'>PyTuple_Pack</span>(3, __pyx_int_116, __pyx_kp_s_Jeffrey_pine, __pyx_kp_s_Pinus_jeffreyi);<span class='error_goto'> if (unlikely(!__pyx_tuple__68)) {__pyx_filename = __pyx_f[0]; __pyx_lineno = 24; __pyx_clineno = __LINE__; goto __pyx_L1_error;}</span>
+  <span class='refnanny'>__Pyx_GOTREF</span>(__pyx_tuple__68);
+  <span class='refnanny'>__Pyx_GIVEREF</span>(__pyx_tuple__68);
 </pre><pre class="cython line score-10" onclick='toggleDiv(this)'>+<span class="">025</span>:     , 'SP': (117, 'sugar pine', 'Pinus lambertiana')</pre>
-<pre class='cython code score-10 '>  if (<span class='py_c_api'>PyDict_SetItem</span>(__pyx_t_2, __pyx_n_s_SP, __pyx_tuple__26) &lt; 0) <span class='error_goto'>{__pyx_filename = __pyx_f[0]; __pyx_lineno = 13; __pyx_clineno = __LINE__; goto __pyx_L1_error;}</span>
+<pre class='cython code score-10 '>  if (<span class='py_c_api'>PyDict_SetItem</span>(__pyx_t_2, __pyx_n_s_SP, __pyx_tuple__69) &lt; 0) <span class='error_goto'>{__pyx_filename = __pyx_f[0]; __pyx_lineno = 13; __pyx_clineno = __LINE__; goto __pyx_L1_error;}</span>
 /* … */
-  __pyx_tuple__26 = <span class='py_c_api'>PyTuple_Pack</span>(3, __pyx_int_117, __pyx_kp_s_sugar_pine, __pyx_kp_s_Pinus_lambertiana);<span class='error_goto'> if (unlikely(!__pyx_tuple__26)) {__pyx_filename = __pyx_f[0]; __pyx_lineno = 25; __pyx_clineno = __LINE__; goto __pyx_L1_error;}</span>
-  <span class='refnanny'>__Pyx_GOTREF</span>(__pyx_tuple__26);
-  <span class='refnanny'>__Pyx_GIVEREF</span>(__pyx_tuple__26);
+  __pyx_tuple__69 = <span class='py_c_api'>PyTuple_Pack</span>(3, __pyx_int_117, __pyx_kp_s_sugar_pine, __pyx_kp_s_Pinus_lambertiana);<span class='error_goto'> if (unlikely(!__pyx_tuple__69)) {__pyx_filename = __pyx_f[0]; __pyx_lineno = 25; __pyx_clineno = __LINE__; goto __pyx_L1_error;}</span>
+  <span class='refnanny'>__Pyx_GOTREF</span>(__pyx_tuple__69);
+  <span class='refnanny'>__Pyx_GIVEREF</span>(__pyx_tuple__69);
 </pre><pre class="cython line score-10" onclick='toggleDiv(this)'>+<span class="">026</span>:     , 'WP': (119, 'western white pine', 'Pinus monticola')</pre>
-<pre class='cython code score-10 '>  if (<span class='py_c_api'>PyDict_SetItem</span>(__pyx_t_2, __pyx_n_s_WP, __pyx_tuple__27) &lt; 0) <span class='error_goto'>{__pyx_filename = __pyx_f[0]; __pyx_lineno = 13; __pyx_clineno = __LINE__; goto __pyx_L1_error;}</span>
+<pre class='cython code score-10 '>  if (<span class='py_c_api'>PyDict_SetItem</span>(__pyx_t_2, __pyx_n_s_WP, __pyx_tuple__70) &lt; 0) <span class='error_goto'>{__pyx_filename = __pyx_f[0]; __pyx_lineno = 13; __pyx_clineno = __LINE__; goto __pyx_L1_error;}</span>
 /* … */
-  __pyx_tuple__27 = <span class='py_c_api'>PyTuple_Pack</span>(3, __pyx_int_119, __pyx_kp_s_western_white_pine, __pyx_kp_s_Pinus_monticola);<span class='error_goto'> if (unlikely(!__pyx_tuple__27)) {__pyx_filename = __pyx_f[0]; __pyx_lineno = 26; __pyx_clineno = __LINE__; goto __pyx_L1_error;}</span>
-  <span class='refnanny'>__Pyx_GOTREF</span>(__pyx_tuple__27);
-  <span class='refnanny'>__Pyx_GIVEREF</span>(__pyx_tuple__27);
+  __pyx_tuple__70 = <span class='py_c_api'>PyTuple_Pack</span>(3, __pyx_int_119, __pyx_kp_s_western_white_pine, __pyx_kp_s_Pinus_monticola);<span class='error_goto'> if (unlikely(!__pyx_tuple__70)) {__pyx_filename = __pyx_f[0]; __pyx_lineno = 26; __pyx_clineno = __LINE__; goto __pyx_L1_error;}</span>
+  <span class='refnanny'>__Pyx_GOTREF</span>(__pyx_tuple__70);
+  <span class='refnanny'>__Pyx_GIVEREF</span>(__pyx_tuple__70);
 </pre><pre class="cython line score-10" onclick='toggleDiv(this)'>+<span class="">027</span>:     , 'PP': (122, 'ponderosa pine', 'Pinus ponderosa')</pre>
-<pre class='cython code score-10 '>  if (<span class='py_c_api'>PyDict_SetItem</span>(__pyx_t_2, __pyx_n_s_PP, __pyx_tuple__28) &lt; 0) <span class='error_goto'>{__pyx_filename = __pyx_f[0]; __pyx_lineno = 13; __pyx_clineno = __LINE__; goto __pyx_L1_error;}</span>
+<pre class='cython code score-10 '>  if (<span class='py_c_api'>PyDict_SetItem</span>(__pyx_t_2, __pyx_n_s_PP, __pyx_tuple__71) &lt; 0) <span class='error_goto'>{__pyx_filename = __pyx_f[0]; __pyx_lineno = 13; __pyx_clineno = __LINE__; goto __pyx_L1_error;}</span>
 /* … */
-  __pyx_tuple__28 = <span class='py_c_api'>PyTuple_Pack</span>(3, __pyx_int_122, __pyx_kp_s_ponderosa_pine, __pyx_kp_s_Pinus_ponderosa);<span class='error_goto'> if (unlikely(!__pyx_tuple__28)) {__pyx_filename = __pyx_f[0]; __pyx_lineno = 27; __pyx_clineno = __LINE__; goto __pyx_L1_error;}</span>
-  <span class='refnanny'>__Pyx_GOTREF</span>(__pyx_tuple__28);
-  <span class='refnanny'>__Pyx_GIVEREF</span>(__pyx_tuple__28);
+  __pyx_tuple__71 = <span class='py_c_api'>PyTuple_Pack</span>(3, __pyx_int_122, __pyx_kp_s_ponderosa_pine, __pyx_kp_s_Pinus_ponderosa);<span class='error_goto'> if (unlikely(!__pyx_tuple__71)) {__pyx_filename = __pyx_f[0]; __pyx_lineno = 27; __pyx_clineno = __LINE__; goto __pyx_L1_error;}</span>
+  <span class='refnanny'>__Pyx_GOTREF</span>(__pyx_tuple__71);
+  <span class='refnanny'>__Pyx_GIVEREF</span>(__pyx_tuple__71);
 </pre><pre class="cython line score-10" onclick='toggleDiv(this)'>+<span class="">028</span>:     , 'DF': (202, 'Douglas-fir', 'Pseudotsuga menziesii')</pre>
-<pre class='cython code score-10 '>  if (<span class='py_c_api'>PyDict_SetItem</span>(__pyx_t_2, __pyx_n_s_DF, __pyx_tuple__29) &lt; 0) <span class='error_goto'>{__pyx_filename = __pyx_f[0]; __pyx_lineno = 13; __pyx_clineno = __LINE__; goto __pyx_L1_error;}</span>
+<pre class='cython code score-10 '>  if (<span class='py_c_api'>PyDict_SetItem</span>(__pyx_t_2, __pyx_n_s_DF, __pyx_tuple__72) &lt; 0) <span class='error_goto'>{__pyx_filename = __pyx_f[0]; __pyx_lineno = 13; __pyx_clineno = __LINE__; goto __pyx_L1_error;}</span>
 /* … */
-  __pyx_tuple__29 = <span class='py_c_api'>PyTuple_Pack</span>(3, __pyx_int_202, __pyx_kp_s_Douglas_fir, __pyx_kp_s_Pseudotsuga_menziesii);<span class='error_goto'> if (unlikely(!__pyx_tuple__29)) {__pyx_filename = __pyx_f[0]; __pyx_lineno = 28; __pyx_clineno = __LINE__; goto __pyx_L1_error;}</span>
-  <span class='refnanny'>__Pyx_GOTREF</span>(__pyx_tuple__29);
-  <span class='refnanny'>__Pyx_GIVEREF</span>(__pyx_tuple__29);
+  __pyx_tuple__72 = <span class='py_c_api'>PyTuple_Pack</span>(3, __pyx_int_202, __pyx_kp_s_Douglas_fir, __pyx_kp_s_Pseudotsuga_menziesii);<span class='error_goto'> if (unlikely(!__pyx_tuple__72)) {__pyx_filename = __pyx_f[0]; __pyx_lineno = 28; __pyx_clineno = __LINE__; goto __pyx_L1_error;}</span>
+  <span class='refnanny'>__Pyx_GOTREF</span>(__pyx_tuple__72);
+  <span class='refnanny'>__Pyx_GIVEREF</span>(__pyx_tuple__72);
 </pre><pre class="cython line score-10" onclick='toggleDiv(this)'>+<span class="">029</span>:     , 'RW': (211, 'coast redwood', 'Sequoia sempervirens')</pre>
-<pre class='cython code score-10 '>  if (<span class='py_c_api'>PyDict_SetItem</span>(__pyx_t_2, __pyx_n_s_RW, __pyx_tuple__30) &lt; 0) <span class='error_goto'>{__pyx_filename = __pyx_f[0]; __pyx_lineno = 13; __pyx_clineno = __LINE__; goto __pyx_L1_error;}</span>
+<pre class='cython code score-10 '>  if (<span class='py_c_api'>PyDict_SetItem</span>(__pyx_t_2, __pyx_n_s_RW, __pyx_tuple__73) &lt; 0) <span class='error_goto'>{__pyx_filename = __pyx_f[0]; __pyx_lineno = 13; __pyx_clineno = __LINE__; goto __pyx_L1_error;}</span>
 /* … */
-  __pyx_tuple__30 = <span class='py_c_api'>PyTuple_Pack</span>(3, __pyx_int_211, __pyx_kp_s_coast_redwood, __pyx_kp_s_Sequoia_sempervirens);<span class='error_goto'> if (unlikely(!__pyx_tuple__30)) {__pyx_filename = __pyx_f[0]; __pyx_lineno = 29; __pyx_clineno = __LINE__; goto __pyx_L1_error;}</span>
-  <span class='refnanny'>__Pyx_GOTREF</span>(__pyx_tuple__30);
-  <span class='refnanny'>__Pyx_GIVEREF</span>(__pyx_tuple__30);
+  __pyx_tuple__73 = <span class='py_c_api'>PyTuple_Pack</span>(3, __pyx_int_211, __pyx_kp_s_coast_redwood, __pyx_kp_s_Sequoia_sempervirens);<span class='error_goto'> if (unlikely(!__pyx_tuple__73)) {__pyx_filename = __pyx_f[0]; __pyx_lineno = 29; __pyx_clineno = __LINE__; goto __pyx_L1_error;}</span>
+  <span class='refnanny'>__Pyx_GOTREF</span>(__pyx_tuple__73);
+  <span class='refnanny'>__Pyx_GIVEREF</span>(__pyx_tuple__73);
 </pre><pre class="cython line score-10" onclick='toggleDiv(this)'>+<span class="">030</span>:     , 'RC': (242, 'western redcedar', 'Thuja plicata')</pre>
-<pre class='cython code score-10 '>  if (<span class='py_c_api'>PyDict_SetItem</span>(__pyx_t_2, __pyx_n_s_RC, __pyx_tuple__31) &lt; 0) <span class='error_goto'>{__pyx_filename = __pyx_f[0]; __pyx_lineno = 13; __pyx_clineno = __LINE__; goto __pyx_L1_error;}</span>
+<pre class='cython code score-10 '>  if (<span class='py_c_api'>PyDict_SetItem</span>(__pyx_t_2, __pyx_n_s_RC, __pyx_tuple__74) &lt; 0) <span class='error_goto'>{__pyx_filename = __pyx_f[0]; __pyx_lineno = 13; __pyx_clineno = __LINE__; goto __pyx_L1_error;}</span>
 /* … */
-  __pyx_tuple__31 = <span class='py_c_api'>PyTuple_Pack</span>(3, __pyx_int_242, __pyx_kp_s_western_redcedar, __pyx_kp_s_Thuja_plicata);<span class='error_goto'> if (unlikely(!__pyx_tuple__31)) {__pyx_filename = __pyx_f[0]; __pyx_lineno = 30; __pyx_clineno = __LINE__; goto __pyx_L1_error;}</span>
-  <span class='refnanny'>__Pyx_GOTREF</span>(__pyx_tuple__31);
-  <span class='refnanny'>__Pyx_GIVEREF</span>(__pyx_tuple__31);
+  __pyx_tuple__74 = <span class='py_c_api'>PyTuple_Pack</span>(3, __pyx_int_242, __pyx_kp_s_western_redcedar, __pyx_kp_s_Thuja_plicata);<span class='error_goto'> if (unlikely(!__pyx_tuple__74)) {__pyx_filename = __pyx_f[0]; __pyx_lineno = 30; __pyx_clineno = __LINE__; goto __pyx_L1_error;}</span>
+  <span class='refnanny'>__Pyx_GOTREF</span>(__pyx_tuple__74);
+  <span class='refnanny'>__Pyx_GIVEREF</span>(__pyx_tuple__74);
 </pre><pre class="cython line score-10" onclick='toggleDiv(this)'>+<span class="">031</span>:     , 'WH': (263, 'western hemlock', 'Tsuga heterophylla')</pre>
-<pre class='cython code score-10 '>  if (<span class='py_c_api'>PyDict_SetItem</span>(__pyx_t_2, __pyx_n_s_WH, __pyx_tuple__32) &lt; 0) <span class='error_goto'>{__pyx_filename = __pyx_f[0]; __pyx_lineno = 13; __pyx_clineno = __LINE__; goto __pyx_L1_error;}</span>
+<pre class='cython code score-10 '>  if (<span class='py_c_api'>PyDict_SetItem</span>(__pyx_t_2, __pyx_n_s_WH, __pyx_tuple__75) &lt; 0) <span class='error_goto'>{__pyx_filename = __pyx_f[0]; __pyx_lineno = 13; __pyx_clineno = __LINE__; goto __pyx_L1_error;}</span>
 /* … */
-  __pyx_tuple__32 = <span class='py_c_api'>PyTuple_Pack</span>(3, __pyx_int_263, __pyx_kp_s_western_hemlock, __pyx_kp_s_Tsuga_heterophylla);<span class='error_goto'> if (unlikely(!__pyx_tuple__32)) {__pyx_filename = __pyx_f[0]; __pyx_lineno = 31; __pyx_clineno = __LINE__; goto __pyx_L1_error;}</span>
-  <span class='refnanny'>__Pyx_GOTREF</span>(__pyx_tuple__32);
-  <span class='refnanny'>__Pyx_GIVEREF</span>(__pyx_tuple__32);
+  __pyx_tuple__75 = <span class='py_c_api'>PyTuple_Pack</span>(3, __pyx_int_263, __pyx_kp_s_western_hemlock, __pyx_kp_s_Tsuga_heterophylla);<span class='error_goto'> if (unlikely(!__pyx_tuple__75)) {__pyx_filename = __pyx_f[0]; __pyx_lineno = 31; __pyx_clineno = __LINE__; goto __pyx_L1_error;}</span>
+  <span class='refnanny'>__Pyx_GOTREF</span>(__pyx_tuple__75);
+  <span class='refnanny'>__Pyx_GIVEREF</span>(__pyx_tuple__75);
 </pre><pre class="cython line score-10" onclick='toggleDiv(this)'>+<span class="">032</span>:     , 'MH': (264, 'mountain hemlock', 'Tsuga mertensiana')</pre>
-<pre class='cython code score-10 '>  if (<span class='py_c_api'>PyDict_SetItem</span>(__pyx_t_2, __pyx_n_s_MH, __pyx_tuple__33) &lt; 0) <span class='error_goto'>{__pyx_filename = __pyx_f[0]; __pyx_lineno = 13; __pyx_clineno = __LINE__; goto __pyx_L1_error;}</span>
+<pre class='cython code score-10 '>  if (<span class='py_c_api'>PyDict_SetItem</span>(__pyx_t_2, __pyx_n_s_MH, __pyx_tuple__76) &lt; 0) <span class='error_goto'>{__pyx_filename = __pyx_f[0]; __pyx_lineno = 13; __pyx_clineno = __LINE__; goto __pyx_L1_error;}</span>
 /* … */
-  __pyx_tuple__33 = <span class='py_c_api'>PyTuple_Pack</span>(3, __pyx_int_264, __pyx_kp_s_mountain_hemlock, __pyx_kp_s_Tsuga_mertensiana);<span class='error_goto'> if (unlikely(!__pyx_tuple__33)) {__pyx_filename = __pyx_f[0]; __pyx_lineno = 32; __pyx_clineno = __LINE__; goto __pyx_L1_error;}</span>
-  <span class='refnanny'>__Pyx_GOTREF</span>(__pyx_tuple__33);
-  <span class='refnanny'>__Pyx_GIVEREF</span>(__pyx_tuple__33);
+  __pyx_tuple__76 = <span class='py_c_api'>PyTuple_Pack</span>(3, __pyx_int_264, __pyx_kp_s_mountain_hemlock, __pyx_kp_s_Tsuga_mertensiana);<span class='error_goto'> if (unlikely(!__pyx_tuple__76)) {__pyx_filename = __pyx_f[0]; __pyx_lineno = 32; __pyx_clineno = __LINE__; goto __pyx_L1_error;}</span>
+  <span class='refnanny'>__Pyx_GOTREF</span>(__pyx_tuple__76);
+  <span class='refnanny'>__Pyx_GIVEREF</span>(__pyx_tuple__76);
 </pre><pre class="cython line score-10" onclick='toggleDiv(this)'>+<span class="">033</span>:     , 'BM': (312, 'bigleaf maple', 'Acer macrophyllum')</pre>
-<pre class='cython code score-10 '>  if (<span class='py_c_api'>PyDict_SetItem</span>(__pyx_t_2, __pyx_n_s_BM, __pyx_tuple__34) &lt; 0) <span class='error_goto'>{__pyx_filename = __pyx_f[0]; __pyx_lineno = 13; __pyx_clineno = __LINE__; goto __pyx_L1_error;}</span>
+<pre class='cython code score-10 '>  if (<span class='py_c_api'>PyDict_SetItem</span>(__pyx_t_2, __pyx_n_s_BM, __pyx_tuple__77) &lt; 0) <span class='error_goto'>{__pyx_filename = __pyx_f[0]; __pyx_lineno = 13; __pyx_clineno = __LINE__; goto __pyx_L1_error;}</span>
 /* … */
-  __pyx_tuple__34 = <span class='py_c_api'>PyTuple_Pack</span>(3, __pyx_int_312, __pyx_kp_s_bigleaf_maple, __pyx_kp_s_Acer_macrophyllum);<span class='error_goto'> if (unlikely(!__pyx_tuple__34)) {__pyx_filename = __pyx_f[0]; __pyx_lineno = 33; __pyx_clineno = __LINE__; goto __pyx_L1_error;}</span>
-  <span class='refnanny'>__Pyx_GOTREF</span>(__pyx_tuple__34);
-  <span class='refnanny'>__Pyx_GIVEREF</span>(__pyx_tuple__34);
+  __pyx_tuple__77 = <span class='py_c_api'>PyTuple_Pack</span>(3, __pyx_int_312, __pyx_kp_s_bigleaf_maple, __pyx_kp_s_Acer_macrophyllum);<span class='error_goto'> if (unlikely(!__pyx_tuple__77)) {__pyx_filename = __pyx_f[0]; __pyx_lineno = 33; __pyx_clineno = __LINE__; goto __pyx_L1_error;}</span>
+  <span class='refnanny'>__Pyx_GOTREF</span>(__pyx_tuple__77);
+  <span class='refnanny'>__Pyx_GIVEREF</span>(__pyx_tuple__77);
 </pre><pre class="cython line score-10" onclick='toggleDiv(this)'>+<span class="">034</span>:     , 'RA': (351, 'red alder', 'Alnus rubra')</pre>
-<pre class='cython code score-10 '>  if (<span class='py_c_api'>PyDict_SetItem</span>(__pyx_t_2, __pyx_n_s_RA, __pyx_tuple__35) &lt; 0) <span class='error_goto'>{__pyx_filename = __pyx_f[0]; __pyx_lineno = 13; __pyx_clineno = __LINE__; goto __pyx_L1_error;}</span>
+<pre class='cython code score-10 '>  if (<span class='py_c_api'>PyDict_SetItem</span>(__pyx_t_2, __pyx_n_s_RA, __pyx_tuple__78) &lt; 0) <span class='error_goto'>{__pyx_filename = __pyx_f[0]; __pyx_lineno = 13; __pyx_clineno = __LINE__; goto __pyx_L1_error;}</span>
 /* … */
-  __pyx_tuple__35 = <span class='py_c_api'>PyTuple_Pack</span>(3, __pyx_int_351, __pyx_kp_s_red_alder, __pyx_kp_s_Alnus_rubra);<span class='error_goto'> if (unlikely(!__pyx_tuple__35)) {__pyx_filename = __pyx_f[0]; __pyx_lineno = 34; __pyx_clineno = __LINE__; goto __pyx_L1_error;}</span>
-  <span class='refnanny'>__Pyx_GOTREF</span>(__pyx_tuple__35);
-  <span class='refnanny'>__Pyx_GIVEREF</span>(__pyx_tuple__35);
+  __pyx_tuple__78 = <span class='py_c_api'>PyTuple_Pack</span>(3, __pyx_int_351, __pyx_kp_s_red_alder, __pyx_kp_s_Alnus_rubra);<span class='error_goto'> if (unlikely(!__pyx_tuple__78)) {__pyx_filename = __pyx_f[0]; __pyx_lineno = 34; __pyx_clineno = __LINE__; goto __pyx_L1_error;}</span>
+  <span class='refnanny'>__Pyx_GOTREF</span>(__pyx_tuple__78);
+  <span class='refnanny'>__Pyx_GIVEREF</span>(__pyx_tuple__78);
 </pre><pre class="cython line score-10" onclick='toggleDiv(this)'>+<span class="">035</span>:     , 'WA': (352, 'white alder / Pacific madrone', 'Alnus rhombifolia')</pre>
-<pre class='cython code score-10 '>  if (<span class='py_c_api'>PyDict_SetItem</span>(__pyx_t_2, __pyx_n_s_WA, __pyx_tuple__36) &lt; 0) <span class='error_goto'>{__pyx_filename = __pyx_f[0]; __pyx_lineno = 13; __pyx_clineno = __LINE__; goto __pyx_L1_error;}</span>
+<pre class='cython code score-10 '>  if (<span class='py_c_api'>PyDict_SetItem</span>(__pyx_t_2, __pyx_n_s_WA, __pyx_tuple__79) &lt; 0) <span class='error_goto'>{__pyx_filename = __pyx_f[0]; __pyx_lineno = 13; __pyx_clineno = __LINE__; goto __pyx_L1_error;}</span>
 /* … */
-  __pyx_tuple__36 = <span class='py_c_api'>PyTuple_Pack</span>(3, __pyx_int_352, __pyx_kp_s_white_alder_Pacific_madrone, __pyx_kp_s_Alnus_rhombifolia);<span class='error_goto'> if (unlikely(!__pyx_tuple__36)) {__pyx_filename = __pyx_f[0]; __pyx_lineno = 35; __pyx_clineno = __LINE__; goto __pyx_L1_error;}</span>
-  <span class='refnanny'>__Pyx_GOTREF</span>(__pyx_tuple__36);
-  <span class='refnanny'>__Pyx_GIVEREF</span>(__pyx_tuple__36);
+  __pyx_tuple__79 = <span class='py_c_api'>PyTuple_Pack</span>(3, __pyx_int_352, __pyx_kp_s_white_alder_Pacific_madrone, __pyx_kp_s_Alnus_rhombifolia);<span class='error_goto'> if (unlikely(!__pyx_tuple__79)) {__pyx_filename = __pyx_f[0]; __pyx_lineno = 35; __pyx_clineno = __LINE__; goto __pyx_L1_error;}</span>
+  <span class='refnanny'>__Pyx_GOTREF</span>(__pyx_tuple__79);
+  <span class='refnanny'>__Pyx_GIVEREF</span>(__pyx_tuple__79);
 </pre><pre class="cython line score-10" onclick='toggleDiv(this)'>+<span class="">036</span>:     , 'PB': (375, 'paper birch', 'Betula papyrifera var. commutata')</pre>
-<pre class='cython code score-10 '>  if (<span class='py_c_api'>PyDict_SetItem</span>(__pyx_t_2, __pyx_n_s_PB, __pyx_tuple__37) &lt; 0) <span class='error_goto'>{__pyx_filename = __pyx_f[0]; __pyx_lineno = 13; __pyx_clineno = __LINE__; goto __pyx_L1_error;}</span>
+<pre class='cython code score-10 '>  if (<span class='py_c_api'>PyDict_SetItem</span>(__pyx_t_2, __pyx_n_s_PB, __pyx_tuple__80) &lt; 0) <span class='error_goto'>{__pyx_filename = __pyx_f[0]; __pyx_lineno = 13; __pyx_clineno = __LINE__; goto __pyx_L1_error;}</span>
 /* … */
-  __pyx_tuple__37 = <span class='py_c_api'>PyTuple_Pack</span>(3, __pyx_int_375, __pyx_kp_s_paper_birch, __pyx_kp_s_Betula_papyrifera_var_commutata);<span class='error_goto'> if (unlikely(!__pyx_tuple__37)) {__pyx_filename = __pyx_f[0]; __pyx_lineno = 36; __pyx_clineno = __LINE__; goto __pyx_L1_error;}</span>
-  <span class='refnanny'>__Pyx_GOTREF</span>(__pyx_tuple__37);
-  <span class='refnanny'>__Pyx_GIVEREF</span>(__pyx_tuple__37);
+  __pyx_tuple__80 = <span class='py_c_api'>PyTuple_Pack</span>(3, __pyx_int_375, __pyx_kp_s_paper_birch, __pyx_kp_s_Betula_papyrifera_var_commutata);<span class='error_goto'> if (unlikely(!__pyx_tuple__80)) {__pyx_filename = __pyx_f[0]; __pyx_lineno = 36; __pyx_clineno = __LINE__; goto __pyx_L1_error;}</span>
+  <span class='refnanny'>__Pyx_GOTREF</span>(__pyx_tuple__80);
+  <span class='refnanny'>__Pyx_GIVEREF</span>(__pyx_tuple__80);
 </pre><pre class="cython line score-10" onclick='toggleDiv(this)'>+<span class="">037</span>:     , 'GC': (431, 'giant chinkapin / tanoak', 'Castanopsis chrysophylla')</pre>
-<pre class='cython code score-10 '>  if (<span class='py_c_api'>PyDict_SetItem</span>(__pyx_t_2, __pyx_n_s_GC, __pyx_tuple__38) &lt; 0) <span class='error_goto'>{__pyx_filename = __pyx_f[0]; __pyx_lineno = 13; __pyx_clineno = __LINE__; goto __pyx_L1_error;}</span>
+<pre class='cython code score-10 '>  if (<span class='py_c_api'>PyDict_SetItem</span>(__pyx_t_2, __pyx_n_s_GC, __pyx_tuple__81) &lt; 0) <span class='error_goto'>{__pyx_filename = __pyx_f[0]; __pyx_lineno = 13; __pyx_clineno = __LINE__; goto __pyx_L1_error;}</span>
 /* … */
-  __pyx_tuple__38 = <span class='py_c_api'>PyTuple_Pack</span>(3, __pyx_int_431, __pyx_kp_s_giant_chinkapin_tanoak, __pyx_kp_s_Castanopsis_chrysophylla);<span class='error_goto'> if (unlikely(!__pyx_tuple__38)) {__pyx_filename = __pyx_f[0]; __pyx_lineno = 37; __pyx_clineno = __LINE__; goto __pyx_L1_error;}</span>
-  <span class='refnanny'>__Pyx_GOTREF</span>(__pyx_tuple__38);
-  <span class='refnanny'>__Pyx_GIVEREF</span>(__pyx_tuple__38);
+  __pyx_tuple__81 = <span class='py_c_api'>PyTuple_Pack</span>(3, __pyx_int_431, __pyx_kp_s_giant_chinkapin_tanoak, __pyx_kp_s_Castanopsis_chrysophylla);<span class='error_goto'> if (unlikely(!__pyx_tuple__81)) {__pyx_filename = __pyx_f[0]; __pyx_lineno = 37; __pyx_clineno = __LINE__; goto __pyx_L1_error;}</span>
+  <span class='refnanny'>__Pyx_GOTREF</span>(__pyx_tuple__81);
+  <span class='refnanny'>__Pyx_GIVEREF</span>(__pyx_tuple__81);
 </pre><pre class="cython line score-10" onclick='toggleDiv(this)'>+<span class="">038</span>:     , 'AS': (746, 'quaking aspen', 'Populus tremuloides')</pre>
-<pre class='cython code score-10 '>  if (<span class='py_c_api'>PyDict_SetItem</span>(__pyx_t_2, __pyx_n_s_AS, __pyx_tuple__39) &lt; 0) <span class='error_goto'>{__pyx_filename = __pyx_f[0]; __pyx_lineno = 13; __pyx_clineno = __LINE__; goto __pyx_L1_error;}</span>
+<pre class='cython code score-10 '>  if (<span class='py_c_api'>PyDict_SetItem</span>(__pyx_t_2, __pyx_n_s_AS, __pyx_tuple__82) &lt; 0) <span class='error_goto'>{__pyx_filename = __pyx_f[0]; __pyx_lineno = 13; __pyx_clineno = __LINE__; goto __pyx_L1_error;}</span>
 /* … */
-  __pyx_tuple__39 = <span class='py_c_api'>PyTuple_Pack</span>(3, __pyx_int_746, __pyx_kp_s_quaking_aspen, __pyx_kp_s_Populus_tremuloides);<span class='error_goto'> if (unlikely(!__pyx_tuple__39)) {__pyx_filename = __pyx_f[0]; __pyx_lineno = 38; __pyx_clineno = __LINE__; goto __pyx_L1_error;}</span>
-  <span class='refnanny'>__Pyx_GOTREF</span>(__pyx_tuple__39);
-  <span class='refnanny'>__Pyx_GIVEREF</span>(__pyx_tuple__39);
+  __pyx_tuple__82 = <span class='py_c_api'>PyTuple_Pack</span>(3, __pyx_int_746, __pyx_kp_s_quaking_aspen, __pyx_kp_s_Populus_tremuloides);<span class='error_goto'> if (unlikely(!__pyx_tuple__82)) {__pyx_filename = __pyx_f[0]; __pyx_lineno = 38; __pyx_clineno = __LINE__; goto __pyx_L1_error;}</span>
+  <span class='refnanny'>__Pyx_GOTREF</span>(__pyx_tuple__82);
+  <span class='refnanny'>__Pyx_GIVEREF</span>(__pyx_tuple__82);
 </pre><pre class="cython line score-10" onclick='toggleDiv(this)'>+<span class="">039</span>:     , 'CW': (747, 'black cottonwood', 'Populus trichocarpa')</pre>
-<pre class='cython code score-10 '>  if (<span class='py_c_api'>PyDict_SetItem</span>(__pyx_t_2, __pyx_n_s_CW, __pyx_tuple__40) &lt; 0) <span class='error_goto'>{__pyx_filename = __pyx_f[0]; __pyx_lineno = 13; __pyx_clineno = __LINE__; goto __pyx_L1_error;}</span>
+<pre class='cython code score-10 '>  if (<span class='py_c_api'>PyDict_SetItem</span>(__pyx_t_2, __pyx_n_s_CW, __pyx_tuple__83) &lt; 0) <span class='error_goto'>{__pyx_filename = __pyx_f[0]; __pyx_lineno = 13; __pyx_clineno = __LINE__; goto __pyx_L1_error;}</span>
 /* … */
-  __pyx_tuple__40 = <span class='py_c_api'>PyTuple_Pack</span>(3, __pyx_int_747, __pyx_kp_s_black_cottonwood, __pyx_kp_s_Populus_trichocarpa);<span class='error_goto'> if (unlikely(!__pyx_tuple__40)) {__pyx_filename = __pyx_f[0]; __pyx_lineno = 39; __pyx_clineno = __LINE__; goto __pyx_L1_error;}</span>
-  <span class='refnanny'>__Pyx_GOTREF</span>(__pyx_tuple__40);
-  <span class='refnanny'>__Pyx_GIVEREF</span>(__pyx_tuple__40);
+  __pyx_tuple__83 = <span class='py_c_api'>PyTuple_Pack</span>(3, __pyx_int_747, __pyx_kp_s_black_cottonwood, __pyx_kp_s_Populus_trichocarpa);<span class='error_goto'> if (unlikely(!__pyx_tuple__83)) {__pyx_filename = __pyx_f[0]; __pyx_lineno = 39; __pyx_clineno = __LINE__; goto __pyx_L1_error;}</span>
+  <span class='refnanny'>__Pyx_GOTREF</span>(__pyx_tuple__83);
+  <span class='refnanny'>__Pyx_GIVEREF</span>(__pyx_tuple__83);
 </pre><pre class="cython line score-10" onclick='toggleDiv(this)'>+<span class="">040</span>:     , 'WO': (815, 'Oregon white oak / California black oak', 'Quercus garryana')</pre>
-<pre class='cython code score-10 '>  if (<span class='py_c_api'>PyDict_SetItem</span>(__pyx_t_2, __pyx_n_s_WO, __pyx_tuple__41) &lt; 0) <span class='error_goto'>{__pyx_filename = __pyx_f[0]; __pyx_lineno = 13; __pyx_clineno = __LINE__; goto __pyx_L1_error;}</span>
+<pre class='cython code score-10 '>  if (<span class='py_c_api'>PyDict_SetItem</span>(__pyx_t_2, __pyx_n_s_WO, __pyx_tuple__84) &lt; 0) <span class='error_goto'>{__pyx_filename = __pyx_f[0]; __pyx_lineno = 13; __pyx_clineno = __LINE__; goto __pyx_L1_error;}</span>
 /* … */
-  __pyx_tuple__41 = <span class='py_c_api'>PyTuple_Pack</span>(3, __pyx_int_815, __pyx_kp_s_Oregon_white_oak_California_blac, __pyx_kp_s_Quercus_garryana);<span class='error_goto'> if (unlikely(!__pyx_tuple__41)) {__pyx_filename = __pyx_f[0]; __pyx_lineno = 40; __pyx_clineno = __LINE__; goto __pyx_L1_error;}</span>
-  <span class='refnanny'>__Pyx_GOTREF</span>(__pyx_tuple__41);
-  <span class='refnanny'>__Pyx_GIVEREF</span>(__pyx_tuple__41);
+  __pyx_tuple__84 = <span class='py_c_api'>PyTuple_Pack</span>(3, __pyx_int_815, __pyx_kp_s_Oregon_white_oak_California_blac, __pyx_kp_s_Quercus_garryana);<span class='error_goto'> if (unlikely(!__pyx_tuple__84)) {__pyx_filename = __pyx_f[0]; __pyx_lineno = 40; __pyx_clineno = __LINE__; goto __pyx_L1_error;}</span>
+  <span class='refnanny'>__Pyx_GOTREF</span>(__pyx_tuple__84);
+  <span class='refnanny'>__Pyx_GIVEREF</span>(__pyx_tuple__84);
 </pre><pre class="cython line score-10" onclick='toggleDiv(this)'>+<span class="">041</span>:     , 'WJ': (064, 'western juniper', 'Juniperus occidentalis')</pre>
-<pre class='cython code score-10 '>  if (<span class='py_c_api'>PyDict_SetItem</span>(__pyx_t_2, __pyx_n_s_WJ, __pyx_tuple__42) &lt; 0) <span class='error_goto'>{__pyx_filename = __pyx_f[0]; __pyx_lineno = 13; __pyx_clineno = __LINE__; goto __pyx_L1_error;}</span>
+<pre class='cython code score-10 '>  if (<span class='py_c_api'>PyDict_SetItem</span>(__pyx_t_2, __pyx_n_s_WJ, __pyx_tuple__85) &lt; 0) <span class='error_goto'>{__pyx_filename = __pyx_f[0]; __pyx_lineno = 13; __pyx_clineno = __LINE__; goto __pyx_L1_error;}</span>
 /* … */
-  __pyx_tuple__42 = <span class='py_c_api'>PyTuple_Pack</span>(3, __pyx_int_52, __pyx_kp_s_western_juniper, __pyx_kp_s_Juniperus_occidentalis);<span class='error_goto'> if (unlikely(!__pyx_tuple__42)) {__pyx_filename = __pyx_f[0]; __pyx_lineno = 41; __pyx_clineno = __LINE__; goto __pyx_L1_error;}</span>
-  <span class='refnanny'>__Pyx_GOTREF</span>(__pyx_tuple__42);
-  <span class='refnanny'>__Pyx_GIVEREF</span>(__pyx_tuple__42);
+  __pyx_tuple__85 = <span class='py_c_api'>PyTuple_Pack</span>(3, __pyx_int_52, __pyx_kp_s_western_juniper, __pyx_kp_s_Juniperus_occidentalis);<span class='error_goto'> if (unlikely(!__pyx_tuple__85)) {__pyx_filename = __pyx_f[0]; __pyx_lineno = 41; __pyx_clineno = __LINE__; goto __pyx_L1_error;}</span>
+  <span class='refnanny'>__Pyx_GOTREF</span>(__pyx_tuple__85);
+  <span class='refnanny'>__Pyx_GIVEREF</span>(__pyx_tuple__85);
 </pre><pre class="cython line score-10" onclick='toggleDiv(this)'>+<span class="">042</span>:     , 'LL': (072, 'subalpine larch', 'Larix lyallii')</pre>
-<pre class='cython code score-10 '>  if (<span class='py_c_api'>PyDict_SetItem</span>(__pyx_t_2, __pyx_n_s_LL, __pyx_tuple__43) &lt; 0) <span class='error_goto'>{__pyx_filename = __pyx_f[0]; __pyx_lineno = 13; __pyx_clineno = __LINE__; goto __pyx_L1_error;}</span>
+<pre class='cython code score-10 '>  if (<span class='py_c_api'>PyDict_SetItem</span>(__pyx_t_2, __pyx_n_s_LL, __pyx_tuple__86) &lt; 0) <span class='error_goto'>{__pyx_filename = __pyx_f[0]; __pyx_lineno = 13; __pyx_clineno = __LINE__; goto __pyx_L1_error;}</span>
 /* … */
-  __pyx_tuple__43 = <span class='py_c_api'>PyTuple_Pack</span>(3, __pyx_int_58, __pyx_kp_s_subalpine_larch, __pyx_kp_s_Larix_lyallii);<span class='error_goto'> if (unlikely(!__pyx_tuple__43)) {__pyx_filename = __pyx_f[0]; __pyx_lineno = 42; __pyx_clineno = __LINE__; goto __pyx_L1_error;}</span>
-  <span class='refnanny'>__Pyx_GOTREF</span>(__pyx_tuple__43);
-  <span class='refnanny'>__Pyx_GIVEREF</span>(__pyx_tuple__43);
+  __pyx_tuple__86 = <span class='py_c_api'>PyTuple_Pack</span>(3, __pyx_int_58, __pyx_kp_s_subalpine_larch, __pyx_kp_s_Larix_lyallii);<span class='error_goto'> if (unlikely(!__pyx_tuple__86)) {__pyx_filename = __pyx_f[0]; __pyx_lineno = 42; __pyx_clineno = __LINE__; goto __pyx_L1_error;}</span>
+  <span class='refnanny'>__Pyx_GOTREF</span>(__pyx_tuple__86);
+  <span class='refnanny'>__Pyx_GIVEREF</span>(__pyx_tuple__86);
 </pre><pre class="cython line score-10" onclick='toggleDiv(this)'>+<span class="">043</span>:     , 'WB': (101, 'whitebark pine', 'Pinus albicaulis')</pre>
-<pre class='cython code score-10 '>  if (<span class='py_c_api'>PyDict_SetItem</span>(__pyx_t_2, __pyx_n_s_WB, __pyx_tuple__44) &lt; 0) <span class='error_goto'>{__pyx_filename = __pyx_f[0]; __pyx_lineno = 13; __pyx_clineno = __LINE__; goto __pyx_L1_error;}</span>
+<pre class='cython code score-10 '>  if (<span class='py_c_api'>PyDict_SetItem</span>(__pyx_t_2, __pyx_n_s_WB, __pyx_tuple__87) &lt; 0) <span class='error_goto'>{__pyx_filename = __pyx_f[0]; __pyx_lineno = 13; __pyx_clineno = __LINE__; goto __pyx_L1_error;}</span>
 /* … */
-  __pyx_tuple__44 = <span class='py_c_api'>PyTuple_Pack</span>(3, __pyx_int_101, __pyx_kp_s_whitebark_pine, __pyx_kp_s_Pinus_albicaulis);<span class='error_goto'> if (unlikely(!__pyx_tuple__44)) {__pyx_filename = __pyx_f[0]; __pyx_lineno = 43; __pyx_clineno = __LINE__; goto __pyx_L1_error;}</span>
-  <span class='refnanny'>__Pyx_GOTREF</span>(__pyx_tuple__44);
-  <span class='refnanny'>__Pyx_GIVEREF</span>(__pyx_tuple__44);
+  __pyx_tuple__87 = <span class='py_c_api'>PyTuple_Pack</span>(3, __pyx_int_101, __pyx_kp_s_whitebark_pine, __pyx_kp_s_Pinus_albicaulis);<span class='error_goto'> if (unlikely(!__pyx_tuple__87)) {__pyx_filename = __pyx_f[0]; __pyx_lineno = 43; __pyx_clineno = __LINE__; goto __pyx_L1_error;}</span>
+  <span class='refnanny'>__Pyx_GOTREF</span>(__pyx_tuple__87);
+  <span class='refnanny'>__Pyx_GIVEREF</span>(__pyx_tuple__87);
 </pre><pre class="cython line score-10" onclick='toggleDiv(this)'>+<span class="">044</span>:     , 'KP': (103, 'knobcone pine', 'Pinus attenuata')</pre>
-<pre class='cython code score-10 '>  if (<span class='py_c_api'>PyDict_SetItem</span>(__pyx_t_2, __pyx_n_s_KP, __pyx_tuple__45) &lt; 0) <span class='error_goto'>{__pyx_filename = __pyx_f[0]; __pyx_lineno = 13; __pyx_clineno = __LINE__; goto __pyx_L1_error;}</span>
+<pre class='cython code score-10 '>  if (<span class='py_c_api'>PyDict_SetItem</span>(__pyx_t_2, __pyx_n_s_KP, __pyx_tuple__88) &lt; 0) <span class='error_goto'>{__pyx_filename = __pyx_f[0]; __pyx_lineno = 13; __pyx_clineno = __LINE__; goto __pyx_L1_error;}</span>
 /* … */
-  __pyx_tuple__45 = <span class='py_c_api'>PyTuple_Pack</span>(3, __pyx_int_103, __pyx_kp_s_knobcone_pine, __pyx_kp_s_Pinus_attenuata);<span class='error_goto'> if (unlikely(!__pyx_tuple__45)) {__pyx_filename = __pyx_f[0]; __pyx_lineno = 44; __pyx_clineno = __LINE__; goto __pyx_L1_error;}</span>
-  <span class='refnanny'>__Pyx_GOTREF</span>(__pyx_tuple__45);
-  <span class='refnanny'>__Pyx_GIVEREF</span>(__pyx_tuple__45);
+  __pyx_tuple__88 = <span class='py_c_api'>PyTuple_Pack</span>(3, __pyx_int_103, __pyx_kp_s_knobcone_pine, __pyx_kp_s_Pinus_attenuata);<span class='error_goto'> if (unlikely(!__pyx_tuple__88)) {__pyx_filename = __pyx_f[0]; __pyx_lineno = 44; __pyx_clineno = __LINE__; goto __pyx_L1_error;}</span>
+  <span class='refnanny'>__Pyx_GOTREF</span>(__pyx_tuple__88);
+  <span class='refnanny'>__Pyx_GIVEREF</span>(__pyx_tuple__88);
 </pre><pre class="cython line score-10" onclick='toggleDiv(this)'>+<span class="">045</span>:     , 'PY': (231, 'Pacific yew', 'Taxus brevifolia')</pre>
-<pre class='cython code score-10 '>  if (<span class='py_c_api'>PyDict_SetItem</span>(__pyx_t_2, __pyx_n_s_PY, __pyx_tuple__46) &lt; 0) <span class='error_goto'>{__pyx_filename = __pyx_f[0]; __pyx_lineno = 13; __pyx_clineno = __LINE__; goto __pyx_L1_error;}</span>
+<pre class='cython code score-10 '>  if (<span class='py_c_api'>PyDict_SetItem</span>(__pyx_t_2, __pyx_n_s_PY, __pyx_tuple__89) &lt; 0) <span class='error_goto'>{__pyx_filename = __pyx_f[0]; __pyx_lineno = 13; __pyx_clineno = __LINE__; goto __pyx_L1_error;}</span>
 /* … */
-  __pyx_tuple__46 = <span class='py_c_api'>PyTuple_Pack</span>(3, __pyx_int_231, __pyx_kp_s_Pacific_yew, __pyx_kp_s_Taxus_brevifolia);<span class='error_goto'> if (unlikely(!__pyx_tuple__46)) {__pyx_filename = __pyx_f[0]; __pyx_lineno = 45; __pyx_clineno = __LINE__; goto __pyx_L1_error;}</span>
-  <span class='refnanny'>__Pyx_GOTREF</span>(__pyx_tuple__46);
-  <span class='refnanny'>__Pyx_GIVEREF</span>(__pyx_tuple__46);
+  __pyx_tuple__89 = <span class='py_c_api'>PyTuple_Pack</span>(3, __pyx_int_231, __pyx_kp_s_Pacific_yew, __pyx_kp_s_Taxus_brevifolia);<span class='error_goto'> if (unlikely(!__pyx_tuple__89)) {__pyx_filename = __pyx_f[0]; __pyx_lineno = 45; __pyx_clineno = __LINE__; goto __pyx_L1_error;}</span>
+  <span class='refnanny'>__Pyx_GOTREF</span>(__pyx_tuple__89);
+  <span class='refnanny'>__Pyx_GIVEREF</span>(__pyx_tuple__89);
 </pre><pre class="cython line score-10" onclick='toggleDiv(this)'>+<span class="">046</span>:     , 'DG': (492, 'Pacific dogwood', 'Cornus nuttallii')</pre>
-<pre class='cython code score-10 '>  if (<span class='py_c_api'>PyDict_SetItem</span>(__pyx_t_2, __pyx_n_s_DG, __pyx_tuple__47) &lt; 0) <span class='error_goto'>{__pyx_filename = __pyx_f[0]; __pyx_lineno = 13; __pyx_clineno = __LINE__; goto __pyx_L1_error;}</span>
+<pre class='cython code score-10 '>  if (<span class='py_c_api'>PyDict_SetItem</span>(__pyx_t_2, __pyx_n_s_DG, __pyx_tuple__90) &lt; 0) <span class='error_goto'>{__pyx_filename = __pyx_f[0]; __pyx_lineno = 13; __pyx_clineno = __LINE__; goto __pyx_L1_error;}</span>
 /* … */
-  __pyx_tuple__47 = <span class='py_c_api'>PyTuple_Pack</span>(3, __pyx_int_492, __pyx_kp_s_Pacific_dogwood, __pyx_kp_s_Cornus_nuttallii);<span class='error_goto'> if (unlikely(!__pyx_tuple__47)) {__pyx_filename = __pyx_f[0]; __pyx_lineno = 46; __pyx_clineno = __LINE__; goto __pyx_L1_error;}</span>
-  <span class='refnanny'>__Pyx_GOTREF</span>(__pyx_tuple__47);
-  <span class='refnanny'>__Pyx_GIVEREF</span>(__pyx_tuple__47);
+  __pyx_tuple__90 = <span class='py_c_api'>PyTuple_Pack</span>(3, __pyx_int_492, __pyx_kp_s_Pacific_dogwood, __pyx_kp_s_Cornus_nuttallii);<span class='error_goto'> if (unlikely(!__pyx_tuple__90)) {__pyx_filename = __pyx_f[0]; __pyx_lineno = 46; __pyx_clineno = __LINE__; goto __pyx_L1_error;}</span>
+  <span class='refnanny'>__Pyx_GOTREF</span>(__pyx_tuple__90);
+  <span class='refnanny'>__Pyx_GIVEREF</span>(__pyx_tuple__90);
 </pre><pre class="cython line score-10" onclick='toggleDiv(this)'>+<span class="">047</span>:     , 'HT': (500, 'hawthorn species', 'Crataegus spp.')</pre>
-<pre class='cython code score-10 '>  if (<span class='py_c_api'>PyDict_SetItem</span>(__pyx_t_2, __pyx_n_s_HT, __pyx_tuple__48) &lt; 0) <span class='error_goto'>{__pyx_filename = __pyx_f[0]; __pyx_lineno = 13; __pyx_clineno = __LINE__; goto __pyx_L1_error;}</span>
+<pre class='cython code score-10 '>  if (<span class='py_c_api'>PyDict_SetItem</span>(__pyx_t_2, __pyx_n_s_HT, __pyx_tuple__91) &lt; 0) <span class='error_goto'>{__pyx_filename = __pyx_f[0]; __pyx_lineno = 13; __pyx_clineno = __LINE__; goto __pyx_L1_error;}</span>
 /* … */
-  __pyx_tuple__48 = <span class='py_c_api'>PyTuple_Pack</span>(3, __pyx_int_500, __pyx_kp_s_hawthorn_species, __pyx_kp_s_Crataegus_spp);<span class='error_goto'> if (unlikely(!__pyx_tuple__48)) {__pyx_filename = __pyx_f[0]; __pyx_lineno = 47; __pyx_clineno = __LINE__; goto __pyx_L1_error;}</span>
-  <span class='refnanny'>__Pyx_GOTREF</span>(__pyx_tuple__48);
-  <span class='refnanny'>__Pyx_GIVEREF</span>(__pyx_tuple__48);
+  __pyx_tuple__91 = <span class='py_c_api'>PyTuple_Pack</span>(3, __pyx_int_500, __pyx_kp_s_hawthorn_species, __pyx_kp_s_Crataegus_spp);<span class='error_goto'> if (unlikely(!__pyx_tuple__91)) {__pyx_filename = __pyx_f[0]; __pyx_lineno = 47; __pyx_clineno = __LINE__; goto __pyx_L1_error;}</span>
+  <span class='refnanny'>__Pyx_GOTREF</span>(__pyx_tuple__91);
+  <span class='refnanny'>__Pyx_GIVEREF</span>(__pyx_tuple__91);
 </pre><pre class="cython line score-10" onclick='toggleDiv(this)'>+<span class="">048</span>:     , 'CH': (768, 'bitter cherry', 'Prunus emarginata')</pre>
-<pre class='cython code score-10 '>  if (<span class='py_c_api'>PyDict_SetItem</span>(__pyx_t_2, __pyx_n_s_CH, __pyx_tuple__49) &lt; 0) <span class='error_goto'>{__pyx_filename = __pyx_f[0]; __pyx_lineno = 13; __pyx_clineno = __LINE__; goto __pyx_L1_error;}</span>
+<pre class='cython code score-10 '>  if (<span class='py_c_api'>PyDict_SetItem</span>(__pyx_t_2, __pyx_n_s_CH, __pyx_tuple__92) &lt; 0) <span class='error_goto'>{__pyx_filename = __pyx_f[0]; __pyx_lineno = 13; __pyx_clineno = __LINE__; goto __pyx_L1_error;}</span>
 /* … */
-  __pyx_tuple__49 = <span class='py_c_api'>PyTuple_Pack</span>(3, __pyx_int_768, __pyx_kp_s_bitter_cherry, __pyx_kp_s_Prunus_emarginata);<span class='error_goto'> if (unlikely(!__pyx_tuple__49)) {__pyx_filename = __pyx_f[0]; __pyx_lineno = 48; __pyx_clineno = __LINE__; goto __pyx_L1_error;}</span>
-  <span class='refnanny'>__Pyx_GOTREF</span>(__pyx_tuple__49);
-  <span class='refnanny'>__Pyx_GIVEREF</span>(__pyx_tuple__49);
+  __pyx_tuple__92 = <span class='py_c_api'>PyTuple_Pack</span>(3, __pyx_int_768, __pyx_kp_s_bitter_cherry, __pyx_kp_s_Prunus_emarginata);<span class='error_goto'> if (unlikely(!__pyx_tuple__92)) {__pyx_filename = __pyx_f[0]; __pyx_lineno = 48; __pyx_clineno = __LINE__; goto __pyx_L1_error;}</span>
+  <span class='refnanny'>__Pyx_GOTREF</span>(__pyx_tuple__92);
+  <span class='refnanny'>__Pyx_GIVEREF</span>(__pyx_tuple__92);
 </pre><pre class="cython line score-10" onclick='toggleDiv(this)'>+<span class="">049</span>:     , 'WI': (920, 'willow species', 'Salix spp.')</pre>
-<pre class='cython code score-10 '>  if (<span class='py_c_api'>PyDict_SetItem</span>(__pyx_t_2, __pyx_n_s_WI, __pyx_tuple__50) &lt; 0) <span class='error_goto'>{__pyx_filename = __pyx_f[0]; __pyx_lineno = 13; __pyx_clineno = __LINE__; goto __pyx_L1_error;}</span>
+<pre class='cython code score-10 '>  if (<span class='py_c_api'>PyDict_SetItem</span>(__pyx_t_2, __pyx_n_s_WI, __pyx_tuple__93) &lt; 0) <span class='error_goto'>{__pyx_filename = __pyx_f[0]; __pyx_lineno = 13; __pyx_clineno = __LINE__; goto __pyx_L1_error;}</span>
 /* … */
-  __pyx_tuple__50 = <span class='py_c_api'>PyTuple_Pack</span>(3, __pyx_int_920, __pyx_kp_s_willow_species, __pyx_kp_s_Salix_spp);<span class='error_goto'> if (unlikely(!__pyx_tuple__50)) {__pyx_filename = __pyx_f[0]; __pyx_lineno = 49; __pyx_clineno = __LINE__; goto __pyx_L1_error;}</span>
-  <span class='refnanny'>__Pyx_GOTREF</span>(__pyx_tuple__50);
-  <span class='refnanny'>__Pyx_GIVEREF</span>(__pyx_tuple__50);
+  __pyx_tuple__93 = <span class='py_c_api'>PyTuple_Pack</span>(3, __pyx_int_920, __pyx_kp_s_willow_species, __pyx_kp_s_Salix_spp);<span class='error_goto'> if (unlikely(!__pyx_tuple__93)) {__pyx_filename = __pyx_f[0]; __pyx_lineno = 49; __pyx_clineno = __LINE__; goto __pyx_L1_error;}</span>
+  <span class='refnanny'>__Pyx_GOTREF</span>(__pyx_tuple__93);
+  <span class='refnanny'>__Pyx_GIVEREF</span>(__pyx_tuple__93);
 </pre><pre class="cython line score-10" onclick='toggleDiv(this)'>+<span class="">050</span>:     , 'OT': (999, 'other species', 'other spp.')</pre>
-<pre class='cython code score-10 '>  if (<span class='py_c_api'>PyDict_SetItem</span>(__pyx_t_2, __pyx_n_s_OT, __pyx_tuple__51) &lt; 0) <span class='error_goto'>{__pyx_filename = __pyx_f[0]; __pyx_lineno = 13; __pyx_clineno = __LINE__; goto __pyx_L1_error;}</span>
+<pre class='cython code score-10 '>  if (<span class='py_c_api'>PyDict_SetItem</span>(__pyx_t_2, __pyx_n_s_OT, __pyx_tuple__94) &lt; 0) <span class='error_goto'>{__pyx_filename = __pyx_f[0]; __pyx_lineno = 13; __pyx_clineno = __LINE__; goto __pyx_L1_error;}</span>
 /* … */
-  __pyx_tuple__51 = <span class='py_c_api'>PyTuple_Pack</span>(3, __pyx_int_999, __pyx_kp_s_other_species, __pyx_kp_s_other_spp);<span class='error_goto'> if (unlikely(!__pyx_tuple__51)) {__pyx_filename = __pyx_f[0]; __pyx_lineno = 50; __pyx_clineno = __LINE__; goto __pyx_L1_error;}</span>
-  <span class='refnanny'>__Pyx_GOTREF</span>(__pyx_tuple__51);
-  <span class='refnanny'>__Pyx_GIVEREF</span>(__pyx_tuple__51);
+  __pyx_tuple__94 = <span class='py_c_api'>PyTuple_Pack</span>(3, __pyx_int_999, __pyx_kp_s_other_species, __pyx_kp_s_other_spp);<span class='error_goto'> if (unlikely(!__pyx_tuple__94)) {__pyx_filename = __pyx_f[0]; __pyx_lineno = 50; __pyx_clineno = __LINE__; goto __pyx_L1_error;}</span>
+  <span class='refnanny'>__Pyx_GOTREF</span>(__pyx_tuple__94);
+  <span class='refnanny'>__Pyx_GIVEREF</span>(__pyx_tuple__94);
 </pre><pre class="cython line score-10" onclick='toggleDiv(this)'>+<span class="">051</span>:     , 'CX': (202, 'other conifer', 'conifer spp.')</pre>
-<pre class='cython code score-10 '>  if (<span class='py_c_api'>PyDict_SetItem</span>(__pyx_t_2, __pyx_n_s_CX, __pyx_tuple__52) &lt; 0) <span class='error_goto'>{__pyx_filename = __pyx_f[0]; __pyx_lineno = 13; __pyx_clineno = __LINE__; goto __pyx_L1_error;}</span>
+<pre class='cython code score-10 '>  if (<span class='py_c_api'>PyDict_SetItem</span>(__pyx_t_2, __pyx_n_s_CX, __pyx_tuple__95) &lt; 0) <span class='error_goto'>{__pyx_filename = __pyx_f[0]; __pyx_lineno = 13; __pyx_clineno = __LINE__; goto __pyx_L1_error;}</span>
 /* … */
-  __pyx_tuple__52 = <span class='py_c_api'>PyTuple_Pack</span>(3, __pyx_int_202, __pyx_kp_s_other_conifer, __pyx_kp_s_conifer_spp);<span class='error_goto'> if (unlikely(!__pyx_tuple__52)) {__pyx_filename = __pyx_f[0]; __pyx_lineno = 51; __pyx_clineno = __LINE__; goto __pyx_L1_error;}</span>
-  <span class='refnanny'>__Pyx_GOTREF</span>(__pyx_tuple__52);
-  <span class='refnanny'>__Pyx_GIVEREF</span>(__pyx_tuple__52);
+  __pyx_tuple__95 = <span class='py_c_api'>PyTuple_Pack</span>(3, __pyx_int_202, __pyx_kp_s_other_conifer, __pyx_kp_s_conifer_spp);<span class='error_goto'> if (unlikely(!__pyx_tuple__95)) {__pyx_filename = __pyx_f[0]; __pyx_lineno = 51; __pyx_clineno = __LINE__; goto __pyx_L1_error;}</span>
+  <span class='refnanny'>__Pyx_GOTREF</span>(__pyx_tuple__95);
+  <span class='refnanny'>__Pyx_GIVEREF</span>(__pyx_tuple__95);
 </pre><pre class="cython line score-16" onclick='toggleDiv(this)'>+<span class="">052</span>:     , 'HX': (351, 'other hardwood', 'hardwood spp.')</pre>
-<pre class='cython code score-16 '>  if (<span class='py_c_api'>PyDict_SetItem</span>(__pyx_t_2, __pyx_n_s_HX, __pyx_tuple__53) &lt; 0) <span class='error_goto'>{__pyx_filename = __pyx_f[0]; __pyx_lineno = 13; __pyx_clineno = __LINE__; goto __pyx_L1_error;}</span>
+<pre class='cython code score-16 '>  if (<span class='py_c_api'>PyDict_SetItem</span>(__pyx_t_2, __pyx_n_s_HX, __pyx_tuple__96) &lt; 0) <span class='error_goto'>{__pyx_filename = __pyx_f[0]; __pyx_lineno = 13; __pyx_clineno = __LINE__; goto __pyx_L1_error;}</span>
   if (<span class='py_c_api'>PyDict_SetItem</span>(__pyx_d, __pyx_n_s_spp_codes, __pyx_t_2) &lt; 0) <span class='error_goto'>{__pyx_filename = __pyx_f[0]; __pyx_lineno = 12; __pyx_clineno = __LINE__; goto __pyx_L1_error;}</span>
   <span class='pyx_macro_api'>__Pyx_DECREF</span>(__pyx_t_2); __pyx_t_2 = 0;
 /* … */
-  __pyx_tuple__53 = <span class='py_c_api'>PyTuple_Pack</span>(3, __pyx_int_351, __pyx_kp_s_other_hardwood, __pyx_kp_s_hardwood_spp);<span class='error_goto'> if (unlikely(!__pyx_tuple__53)) {__pyx_filename = __pyx_f[0]; __pyx_lineno = 52; __pyx_clineno = __LINE__; goto __pyx_L1_error;}</span>
-  <span class='refnanny'>__Pyx_GOTREF</span>(__pyx_tuple__53);
-  <span class='refnanny'>__Pyx_GIVEREF</span>(__pyx_tuple__53);
+  __pyx_tuple__96 = <span class='py_c_api'>PyTuple_Pack</span>(3, __pyx_int_351, __pyx_kp_s_other_hardwood, __pyx_kp_s_hardwood_spp);<span class='error_goto'> if (unlikely(!__pyx_tuple__96)) {__pyx_filename = __pyx_f[0]; __pyx_lineno = 52; __pyx_clineno = __LINE__; goto __pyx_L1_error;}</span>
+  <span class='refnanny'>__Pyx_GOTREF</span>(__pyx_tuple__96);
+  <span class='refnanny'>__Pyx_GIVEREF</span>(__pyx_tuple__96);
 </pre><pre class="cython line score-0">&#xA0;<span class="">053</span>:     }</pre>
 <pre class="cython line score-0">&#xA0;<span class="">054</span>: </pre>
 <pre class="cython line score-147" onclick='toggleDiv(this)'>+<span class="">055</span>: fia_spp = {v[0]:k for k, v in spp_codes.items() if not k in ('OT','CX','HX')}</pre>
 <pre class='cython code score-147 '>  { /* enter inner scope */
-    PyObject *__pyx_7genexpr__pyx_v_6pynvel_9_volinit2_k = NULL;
-    PyObject *__pyx_7genexpr__pyx_v_6pynvel_9_volinit2_v = NULL;
+    PyObject *__pyx_7genexpr__pyx_v_6pynvel_7_pynvel_k = NULL;
+    PyObject *__pyx_7genexpr__pyx_v_6pynvel_7_pynvel_v = NULL;
     __pyx_t_2 = <span class='py_c_api'>PyDict_New</span>();<span class='error_goto'> if (unlikely(!__pyx_t_2)) {__pyx_filename = __pyx_f[0]; __pyx_lineno = 55; __pyx_clineno = __LINE__; goto __pyx_L4_error;}</span>
     <span class='refnanny'>__Pyx_GOTREF</span>(__pyx_t_2);
     __pyx_t_3 = <span class='pyx_c_api'>__Pyx_GetModuleGlobalName</span>(__pyx_n_s_spp_codes);<span class='error_goto'> if (unlikely(!__pyx_t_3)) {__pyx_filename = __pyx_f[0]; __pyx_lineno = 55; __pyx_clineno = __LINE__; goto __pyx_L4_error;}</span>
@@ -802,12 +802,12 @@ static PyObject *__pyx_pf_6pynvel_9_volinit2_4warn(CYTHON_UNUSED PyObject *__pyx
         <span class='error_goto'>{__pyx_filename = __pyx_f[0]; __pyx_lineno = 55; __pyx_clineno = __LINE__; goto __pyx_L4_error;}</span>
         __pyx_L8_unpacking_done:;
       }
-      <span class='pyx_macro_api'>__Pyx_XDECREF_SET</span>(__pyx_7genexpr__pyx_v_6pynvel_9_volinit2_k, __pyx_t_3);
+      <span class='pyx_macro_api'>__Pyx_XDECREF_SET</span>(__pyx_7genexpr__pyx_v_6pynvel_7_pynvel_k, __pyx_t_3);
       __pyx_t_3 = 0;
-      <span class='pyx_macro_api'>__Pyx_XDECREF_SET</span>(__pyx_7genexpr__pyx_v_6pynvel_9_volinit2_v, __pyx_t_7);
+      <span class='pyx_macro_api'>__Pyx_XDECREF_SET</span>(__pyx_7genexpr__pyx_v_6pynvel_7_pynvel_v, __pyx_t_7);
       __pyx_t_7 = 0;
-      <span class='pyx_macro_api'>__Pyx_INCREF</span>(__pyx_7genexpr__pyx_v_6pynvel_9_volinit2_k);
-      __pyx_t_1 = __pyx_7genexpr__pyx_v_6pynvel_9_volinit2_k;
+      <span class='pyx_macro_api'>__Pyx_INCREF</span>(__pyx_7genexpr__pyx_v_6pynvel_7_pynvel_k);
+      __pyx_t_1 = __pyx_7genexpr__pyx_v_6pynvel_7_pynvel_k;
       __pyx_t_11 = (<span class='pyx_c_api'>__Pyx_PyString_Equals</span>(__pyx_t_1, __pyx_n_s_OT, Py_NE));<span class='error_goto'> if (unlikely(__pyx_t_11 &lt; 0)) {__pyx_filename = __pyx_f[0]; __pyx_lineno = 55; __pyx_clineno = __LINE__; goto __pyx_L4_error;}</span>
       if (__pyx_t_11) {
       } else {
@@ -826,19 +826,19 @@ static PyObject *__pyx_pf_6pynvel_9_volinit2_4warn(CYTHON_UNUSED PyObject *__pyx
       <span class='pyx_macro_api'>__Pyx_DECREF</span>(__pyx_t_1); __pyx_t_1 = 0;
       __pyx_t_11 = (__pyx_t_10 != 0);
       if (__pyx_t_11) {
-        __pyx_t_1 = <span class='pyx_c_api'>__Pyx_GetItemInt</span>(__pyx_7genexpr__pyx_v_6pynvel_9_volinit2_v, 0, long, 1, __Pyx_PyInt_From_long, 0, 0, 1);<span class='error_goto'> if (unlikely(__pyx_t_1 == NULL)) {__pyx_filename = __pyx_f[0]; __pyx_lineno = 55; __pyx_clineno = __LINE__; goto __pyx_L4_error;}</span>;
+        __pyx_t_1 = <span class='pyx_c_api'>__Pyx_GetItemInt</span>(__pyx_7genexpr__pyx_v_6pynvel_7_pynvel_v, 0, long, 1, __Pyx_PyInt_From_long, 0, 0, 1);<span class='error_goto'> if (unlikely(__pyx_t_1 == NULL)) {__pyx_filename = __pyx_f[0]; __pyx_lineno = 55; __pyx_clineno = __LINE__; goto __pyx_L4_error;}</span>;
         <span class='refnanny'>__Pyx_GOTREF</span>(__pyx_t_1);
-        if (unlikely(<span class='py_c_api'>PyDict_SetItem</span>(__pyx_t_2, (PyObject*)__pyx_t_1, (PyObject*)__pyx_7genexpr__pyx_v_6pynvel_9_volinit2_k))) <span class='error_goto'>{__pyx_filename = __pyx_f[0]; __pyx_lineno = 55; __pyx_clineno = __LINE__; goto __pyx_L4_error;}</span>
+        if (unlikely(<span class='py_c_api'>PyDict_SetItem</span>(__pyx_t_2, (PyObject*)__pyx_t_1, (PyObject*)__pyx_7genexpr__pyx_v_6pynvel_7_pynvel_k))) <span class='error_goto'>{__pyx_filename = __pyx_f[0]; __pyx_lineno = 55; __pyx_clineno = __LINE__; goto __pyx_L4_error;}</span>
         <span class='pyx_macro_api'>__Pyx_DECREF</span>(__pyx_t_1); __pyx_t_1 = 0;
       }
     }
     <span class='pyx_macro_api'>__Pyx_DECREF</span>(__pyx_t_4); __pyx_t_4 = 0;
-    <span class='pyx_macro_api'>__Pyx_XDECREF</span>(__pyx_7genexpr__pyx_v_6pynvel_9_volinit2_k);
-    <span class='pyx_macro_api'>__Pyx_XDECREF</span>(__pyx_7genexpr__pyx_v_6pynvel_9_volinit2_v);
+    <span class='pyx_macro_api'>__Pyx_XDECREF</span>(__pyx_7genexpr__pyx_v_6pynvel_7_pynvel_k);
+    <span class='pyx_macro_api'>__Pyx_XDECREF</span>(__pyx_7genexpr__pyx_v_6pynvel_7_pynvel_v);
     goto __pyx_L13_exit_scope;
     __pyx_L4_error:;
-    <span class='pyx_macro_api'>__Pyx_XDECREF</span>(__pyx_7genexpr__pyx_v_6pynvel_9_volinit2_k);
-    <span class='pyx_macro_api'>__Pyx_XDECREF</span>(__pyx_7genexpr__pyx_v_6pynvel_9_volinit2_v);
+    <span class='pyx_macro_api'>__Pyx_XDECREF</span>(__pyx_7genexpr__pyx_v_6pynvel_7_pynvel_k);
+    <span class='pyx_macro_api'>__Pyx_XDECREF</span>(__pyx_7genexpr__pyx_v_6pynvel_7_pynvel_v);
     goto __pyx_L1_error;
     __pyx_L13_exit_scope:;
   } /* exit inner scope */
@@ -884,11 +884,11 @@ static PyObject *__pyx_pf_6pynvel_9_volinit2_4warn(CYTHON_UNUSED PyObject *__pyx
 <pre class="cython line score-0">&#xA0;<span class="">074</span>: </pre>
 <pre class="cython line score-0">&#xA0;<span class="">075</span>: vol_lbl = (</pre>
 <pre class="cython line score-10" onclick='toggleDiv(this)'>+<span class="">076</span>:         'cuft_total'</pre>
-<pre class='cython code score-10 '>  if (<span class='py_c_api'>PyDict_SetItem</span>(__pyx_d, __pyx_n_s_vol_lbl, __pyx_tuple__54) &lt; 0) <span class='error_goto'>{__pyx_filename = __pyx_f[0]; __pyx_lineno = 75; __pyx_clineno = __LINE__; goto __pyx_L1_error;}</span>
+<pre class='cython code score-10 '>  if (<span class='py_c_api'>PyDict_SetItem</span>(__pyx_d, __pyx_n_s_vol_lbl, __pyx_tuple__97) &lt; 0) <span class='error_goto'>{__pyx_filename = __pyx_f[0]; __pyx_lineno = 75; __pyx_clineno = __LINE__; goto __pyx_L1_error;}</span>
 /* … */
-  __pyx_tuple__54 = <span class='py_c_api'>PyTuple_Pack</span>(15, __pyx_n_s_cuft_total, __pyx_n_s_bdft_gross_prim, __pyx_n_s_bdft_net_prim, __pyx_n_s_cuft_gross_prim, __pyx_n_s_cuft_net_prim, __pyx_n_s_cords_prim, __pyx_n_s_cuft_gross_sec, __pyx_n_s_cuft_net_sec, __pyx_n_s_cords_sec, __pyx_n_s_intl_gross, __pyx_n_s_intl_net, __pyx_n_s_bdft_gross_sec, __pyx_n_s_bdft_net_sec, __pyx_n_s_cuft_stump, __pyx_n_s_cuft_tip);<span class='error_goto'> if (unlikely(!__pyx_tuple__54)) {__pyx_filename = __pyx_f[0]; __pyx_lineno = 76; __pyx_clineno = __LINE__; goto __pyx_L1_error;}</span>
-  <span class='refnanny'>__Pyx_GOTREF</span>(__pyx_tuple__54);
-  <span class='refnanny'>__Pyx_GIVEREF</span>(__pyx_tuple__54);
+  __pyx_tuple__97 = <span class='py_c_api'>PyTuple_Pack</span>(15, __pyx_n_s_cuft_total, __pyx_n_s_bdft_gross_prim, __pyx_n_s_bdft_net_prim, __pyx_n_s_cuft_gross_prim, __pyx_n_s_cuft_net_prim, __pyx_n_s_cords_prim, __pyx_n_s_cuft_gross_sec, __pyx_n_s_cuft_net_sec, __pyx_n_s_cords_sec, __pyx_n_s_intl_gross, __pyx_n_s_intl_net, __pyx_n_s_bdft_gross_sec, __pyx_n_s_bdft_net_sec, __pyx_n_s_cuft_stump, __pyx_n_s_cuft_tip);<span class='error_goto'> if (unlikely(!__pyx_tuple__97)) {__pyx_filename = __pyx_f[0]; __pyx_lineno = 76; __pyx_clineno = __LINE__; goto __pyx_L1_error;}</span>
+  <span class='refnanny'>__Pyx_GOTREF</span>(__pyx_tuple__97);
+  <span class='refnanny'>__Pyx_GIVEREF</span>(__pyx_tuple__97);
 </pre><pre class="cython line score-0">&#xA0;<span class="">077</span>:         ,'bdft_gross_prim','bdft_net_prim'</pre>
 <pre class="cython line score-0">&#xA0;<span class="">078</span>:         ,'cuft_gross_prim','cuft_net_prim','cords_prim'</pre>
 <pre class="cython line score-0">&#xA0;<span class="">079</span>:         ,'cuft_gross_sec','cuft_net_sec','cords_sec'</pre>
@@ -901,49 +901,49 @@ static PyObject *__pyx_pf_6pynvel_9_volinit2_4warn(CYTHON_UNUSED PyObject *__pyx
 <pre class="cython line score-15" onclick='toggleDiv(this)'>+<span class="">086</span>:         1:('bdft_gross','Gross Scribner board foot log volume (20 logs)')</pre>
 <pre class='cython code score-15 '>  __pyx_t_2 = <span class='py_c_api'>PyDict_New</span>();<span class='error_goto'> if (unlikely(!__pyx_t_2)) {__pyx_filename = __pyx_f[0]; __pyx_lineno = 86; __pyx_clineno = __LINE__; goto __pyx_L1_error;}</span>
   <span class='refnanny'>__Pyx_GOTREF</span>(__pyx_t_2);
-  if (<span class='py_c_api'>PyDict_SetItem</span>(__pyx_t_2, __pyx_int_1, __pyx_tuple__55) &lt; 0) <span class='error_goto'>{__pyx_filename = __pyx_f[0]; __pyx_lineno = 86; __pyx_clineno = __LINE__; goto __pyx_L1_error;}</span>
+  if (<span class='py_c_api'>PyDict_SetItem</span>(__pyx_t_2, __pyx_int_1, __pyx_tuple__98) &lt; 0) <span class='error_goto'>{__pyx_filename = __pyx_f[0]; __pyx_lineno = 86; __pyx_clineno = __LINE__; goto __pyx_L1_error;}</span>
 /* … */
-  __pyx_tuple__55 = <span class='py_c_api'>PyTuple_Pack</span>(2, __pyx_n_s_bdft_gross, __pyx_kp_s_Gross_Scribner_board_foot_log_vo);<span class='error_goto'> if (unlikely(!__pyx_tuple__55)) {__pyx_filename = __pyx_f[0]; __pyx_lineno = 86; __pyx_clineno = __LINE__; goto __pyx_L1_error;}</span>
-  <span class='refnanny'>__Pyx_GOTREF</span>(__pyx_tuple__55);
-  <span class='refnanny'>__Pyx_GIVEREF</span>(__pyx_tuple__55);
+  __pyx_tuple__98 = <span class='py_c_api'>PyTuple_Pack</span>(2, __pyx_n_s_bdft_gross, __pyx_kp_s_Gross_Scribner_board_foot_log_vo);<span class='error_goto'> if (unlikely(!__pyx_tuple__98)) {__pyx_filename = __pyx_f[0]; __pyx_lineno = 86; __pyx_clineno = __LINE__; goto __pyx_L1_error;}</span>
+  <span class='refnanny'>__Pyx_GOTREF</span>(__pyx_tuple__98);
+  <span class='refnanny'>__Pyx_GIVEREF</span>(__pyx_tuple__98);
 </pre><pre class="cython line score-10" onclick='toggleDiv(this)'>+<span class="">087</span>:         , 2:('bdft_gross_rmvd','Gross removed Scribner board foot log volume (20 logs)')</pre>
-<pre class='cython code score-10 '>  if (<span class='py_c_api'>PyDict_SetItem</span>(__pyx_t_2, __pyx_int_2, __pyx_tuple__56) &lt; 0) <span class='error_goto'>{__pyx_filename = __pyx_f[0]; __pyx_lineno = 86; __pyx_clineno = __LINE__; goto __pyx_L1_error;}</span>
+<pre class='cython code score-10 '>  if (<span class='py_c_api'>PyDict_SetItem</span>(__pyx_t_2, __pyx_int_2, __pyx_tuple__99) &lt; 0) <span class='error_goto'>{__pyx_filename = __pyx_f[0]; __pyx_lineno = 86; __pyx_clineno = __LINE__; goto __pyx_L1_error;}</span>
 /* … */
-  __pyx_tuple__56 = <span class='py_c_api'>PyTuple_Pack</span>(2, __pyx_n_s_bdft_gross_rmvd, __pyx_kp_s_Gross_removed_Scribner_board_foo);<span class='error_goto'> if (unlikely(!__pyx_tuple__56)) {__pyx_filename = __pyx_f[0]; __pyx_lineno = 87; __pyx_clineno = __LINE__; goto __pyx_L1_error;}</span>
-  <span class='refnanny'>__Pyx_GOTREF</span>(__pyx_tuple__56);
-  <span class='refnanny'>__Pyx_GIVEREF</span>(__pyx_tuple__56);
+  __pyx_tuple__99 = <span class='py_c_api'>PyTuple_Pack</span>(2, __pyx_n_s_bdft_gross_rmvd, __pyx_kp_s_Gross_removed_Scribner_board_foo);<span class='error_goto'> if (unlikely(!__pyx_tuple__99)) {__pyx_filename = __pyx_f[0]; __pyx_lineno = 87; __pyx_clineno = __LINE__; goto __pyx_L1_error;}</span>
+  <span class='refnanny'>__Pyx_GOTREF</span>(__pyx_tuple__99);
+  <span class='refnanny'>__Pyx_GIVEREF</span>(__pyx_tuple__99);
 </pre><pre class="cython line score-10" onclick='toggleDiv(this)'>+<span class="">088</span>:         , 3:('bdft_net','Net Scribner board foot log volume (20 logs)')</pre>
-<pre class='cython code score-10 '>  if (<span class='py_c_api'>PyDict_SetItem</span>(__pyx_t_2, __pyx_int_3, __pyx_tuple__57) &lt; 0) <span class='error_goto'>{__pyx_filename = __pyx_f[0]; __pyx_lineno = 86; __pyx_clineno = __LINE__; goto __pyx_L1_error;}</span>
+<pre class='cython code score-10 '>  if (<span class='py_c_api'>PyDict_SetItem</span>(__pyx_t_2, __pyx_int_3, __pyx_tuple__100) &lt; 0) <span class='error_goto'>{__pyx_filename = __pyx_f[0]; __pyx_lineno = 86; __pyx_clineno = __LINE__; goto __pyx_L1_error;}</span>
 /* … */
-  __pyx_tuple__57 = <span class='py_c_api'>PyTuple_Pack</span>(2, __pyx_n_s_bdft_net, __pyx_kp_s_Net_Scribner_board_foot_log_volu);<span class='error_goto'> if (unlikely(!__pyx_tuple__57)) {__pyx_filename = __pyx_f[0]; __pyx_lineno = 88; __pyx_clineno = __LINE__; goto __pyx_L1_error;}</span>
-  <span class='refnanny'>__Pyx_GOTREF</span>(__pyx_tuple__57);
-  <span class='refnanny'>__Pyx_GIVEREF</span>(__pyx_tuple__57);
+  __pyx_tuple__100 = <span class='py_c_api'>PyTuple_Pack</span>(2, __pyx_n_s_bdft_net, __pyx_kp_s_Net_Scribner_board_foot_log_volu);<span class='error_goto'> if (unlikely(!__pyx_tuple__100)) {__pyx_filename = __pyx_f[0]; __pyx_lineno = 88; __pyx_clineno = __LINE__; goto __pyx_L1_error;}</span>
+  <span class='refnanny'>__Pyx_GOTREF</span>(__pyx_tuple__100);
+  <span class='refnanny'>__Pyx_GIVEREF</span>(__pyx_tuple__100);
 </pre><pre class="cython line score-10" onclick='toggleDiv(this)'>+<span class="">089</span>:         , 4:('cuft_gross','Gross cubic foot log volume (20 logs)')</pre>
-<pre class='cython code score-10 '>  if (<span class='py_c_api'>PyDict_SetItem</span>(__pyx_t_2, __pyx_int_4, __pyx_tuple__58) &lt; 0) <span class='error_goto'>{__pyx_filename = __pyx_f[0]; __pyx_lineno = 86; __pyx_clineno = __LINE__; goto __pyx_L1_error;}</span>
+<pre class='cython code score-10 '>  if (<span class='py_c_api'>PyDict_SetItem</span>(__pyx_t_2, __pyx_int_4, __pyx_tuple__101) &lt; 0) <span class='error_goto'>{__pyx_filename = __pyx_f[0]; __pyx_lineno = 86; __pyx_clineno = __LINE__; goto __pyx_L1_error;}</span>
 /* … */
-  __pyx_tuple__58 = <span class='py_c_api'>PyTuple_Pack</span>(2, __pyx_n_s_cuft_gross, __pyx_kp_s_Gross_cubic_foot_log_volume_20_l);<span class='error_goto'> if (unlikely(!__pyx_tuple__58)) {__pyx_filename = __pyx_f[0]; __pyx_lineno = 89; __pyx_clineno = __LINE__; goto __pyx_L1_error;}</span>
-  <span class='refnanny'>__Pyx_GOTREF</span>(__pyx_tuple__58);
-  <span class='refnanny'>__Pyx_GIVEREF</span>(__pyx_tuple__58);
+  __pyx_tuple__101 = <span class='py_c_api'>PyTuple_Pack</span>(2, __pyx_n_s_cuft_gross, __pyx_kp_s_Gross_cubic_foot_log_volume_20_l);<span class='error_goto'> if (unlikely(!__pyx_tuple__101)) {__pyx_filename = __pyx_f[0]; __pyx_lineno = 89; __pyx_clineno = __LINE__; goto __pyx_L1_error;}</span>
+  <span class='refnanny'>__Pyx_GOTREF</span>(__pyx_tuple__101);
+  <span class='refnanny'>__Pyx_GIVEREF</span>(__pyx_tuple__101);
 </pre><pre class="cython line score-10" onclick='toggleDiv(this)'>+<span class="">090</span>:         , 5:('cuft_gross_rmvd','Gross removed cubic foot log volume (20 logs)')</pre>
-<pre class='cython code score-10 '>  if (<span class='py_c_api'>PyDict_SetItem</span>(__pyx_t_2, __pyx_int_5, __pyx_tuple__59) &lt; 0) <span class='error_goto'>{__pyx_filename = __pyx_f[0]; __pyx_lineno = 86; __pyx_clineno = __LINE__; goto __pyx_L1_error;}</span>
+<pre class='cython code score-10 '>  if (<span class='py_c_api'>PyDict_SetItem</span>(__pyx_t_2, __pyx_int_5, __pyx_tuple__102) &lt; 0) <span class='error_goto'>{__pyx_filename = __pyx_f[0]; __pyx_lineno = 86; __pyx_clineno = __LINE__; goto __pyx_L1_error;}</span>
 /* … */
-  __pyx_tuple__59 = <span class='py_c_api'>PyTuple_Pack</span>(2, __pyx_n_s_cuft_gross_rmvd, __pyx_kp_s_Gross_removed_cubic_foot_log_vol);<span class='error_goto'> if (unlikely(!__pyx_tuple__59)) {__pyx_filename = __pyx_f[0]; __pyx_lineno = 90; __pyx_clineno = __LINE__; goto __pyx_L1_error;}</span>
-  <span class='refnanny'>__Pyx_GOTREF</span>(__pyx_tuple__59);
-  <span class='refnanny'>__Pyx_GIVEREF</span>(__pyx_tuple__59);
+  __pyx_tuple__102 = <span class='py_c_api'>PyTuple_Pack</span>(2, __pyx_n_s_cuft_gross_rmvd, __pyx_kp_s_Gross_removed_cubic_foot_log_vol);<span class='error_goto'> if (unlikely(!__pyx_tuple__102)) {__pyx_filename = __pyx_f[0]; __pyx_lineno = 90; __pyx_clineno = __LINE__; goto __pyx_L1_error;}</span>
+  <span class='refnanny'>__Pyx_GOTREF</span>(__pyx_tuple__102);
+  <span class='refnanny'>__Pyx_GIVEREF</span>(__pyx_tuple__102);
 </pre><pre class="cython line score-10" onclick='toggleDiv(this)'>+<span class="">091</span>:         , 6:('cuft_net','Net cubic foot log volume (20 logs)')</pre>
-<pre class='cython code score-10 '>  if (<span class='py_c_api'>PyDict_SetItem</span>(__pyx_t_2, __pyx_int_6, __pyx_tuple__60) &lt; 0) <span class='error_goto'>{__pyx_filename = __pyx_f[0]; __pyx_lineno = 86; __pyx_clineno = __LINE__; goto __pyx_L1_error;}</span>
+<pre class='cython code score-10 '>  if (<span class='py_c_api'>PyDict_SetItem</span>(__pyx_t_2, __pyx_int_6, __pyx_tuple__103) &lt; 0) <span class='error_goto'>{__pyx_filename = __pyx_f[0]; __pyx_lineno = 86; __pyx_clineno = __LINE__; goto __pyx_L1_error;}</span>
 /* … */
-  __pyx_tuple__60 = <span class='py_c_api'>PyTuple_Pack</span>(2, __pyx_n_s_cuft_net, __pyx_kp_s_Net_cubic_foot_log_volume_20_log);<span class='error_goto'> if (unlikely(!__pyx_tuple__60)) {__pyx_filename = __pyx_f[0]; __pyx_lineno = 91; __pyx_clineno = __LINE__; goto __pyx_L1_error;}</span>
-  <span class='refnanny'>__Pyx_GOTREF</span>(__pyx_tuple__60);
-  <span class='refnanny'>__Pyx_GIVEREF</span>(__pyx_tuple__60);
+  __pyx_tuple__103 = <span class='py_c_api'>PyTuple_Pack</span>(2, __pyx_n_s_cuft_net, __pyx_kp_s_Net_cubic_foot_log_volume_20_log);<span class='error_goto'> if (unlikely(!__pyx_tuple__103)) {__pyx_filename = __pyx_f[0]; __pyx_lineno = 91; __pyx_clineno = __LINE__; goto __pyx_L1_error;}</span>
+  <span class='refnanny'>__Pyx_GOTREF</span>(__pyx_tuple__103);
+  <span class='refnanny'>__Pyx_GIVEREF</span>(__pyx_tuple__103);
 </pre><pre class="cython line score-16" onclick='toggleDiv(this)'>+<span class="">092</span>:         , 7:('intl_gross','Gross International 1/4 board foot log volume (20 logs)')</pre>
-<pre class='cython code score-16 '>  if (<span class='py_c_api'>PyDict_SetItem</span>(__pyx_t_2, __pyx_int_7, __pyx_tuple__61) &lt; 0) <span class='error_goto'>{__pyx_filename = __pyx_f[0]; __pyx_lineno = 86; __pyx_clineno = __LINE__; goto __pyx_L1_error;}</span>
+<pre class='cython code score-16 '>  if (<span class='py_c_api'>PyDict_SetItem</span>(__pyx_t_2, __pyx_int_7, __pyx_tuple__104) &lt; 0) <span class='error_goto'>{__pyx_filename = __pyx_f[0]; __pyx_lineno = 86; __pyx_clineno = __LINE__; goto __pyx_L1_error;}</span>
   if (<span class='py_c_api'>PyDict_SetItem</span>(__pyx_d, __pyx_n_s_log_volume_idx, __pyx_t_2) &lt; 0) <span class='error_goto'>{__pyx_filename = __pyx_f[0]; __pyx_lineno = 85; __pyx_clineno = __LINE__; goto __pyx_L1_error;}</span>
   <span class='pyx_macro_api'>__Pyx_DECREF</span>(__pyx_t_2); __pyx_t_2 = 0;
 /* … */
-  __pyx_tuple__61 = <span class='py_c_api'>PyTuple_Pack</span>(2, __pyx_n_s_intl_gross, __pyx_kp_s_Gross_International_1_4_board_fo);<span class='error_goto'> if (unlikely(!__pyx_tuple__61)) {__pyx_filename = __pyx_f[0]; __pyx_lineno = 92; __pyx_clineno = __LINE__; goto __pyx_L1_error;}</span>
-  <span class='refnanny'>__Pyx_GOTREF</span>(__pyx_tuple__61);
-  <span class='refnanny'>__Pyx_GIVEREF</span>(__pyx_tuple__61);
+  __pyx_tuple__104 = <span class='py_c_api'>PyTuple_Pack</span>(2, __pyx_n_s_intl_gross, __pyx_kp_s_Gross_International_1_4_board_fo);<span class='error_goto'> if (unlikely(!__pyx_tuple__104)) {__pyx_filename = __pyx_f[0]; __pyx_lineno = 92; __pyx_clineno = __LINE__; goto __pyx_L1_error;}</span>
+  <span class='refnanny'>__Pyx_GOTREF</span>(__pyx_tuple__104);
+  <span class='refnanny'>__Pyx_GIVEREF</span>(__pyx_tuple__104);
 </pre><pre class="cython line score-0">&#xA0;<span class="">093</span>:         }</pre>
 <pre class="cython line score-0">&#xA0;<span class="">094</span>: </pre>
 <pre class="cython line score-0">&#xA0;<span class="">095</span>: log_diameter_idx = {</pre>
@@ -992,21 +992,21 @@ static PyObject *__pyx_pf_6pynvel_9_volinit2_4warn(CYTHON_UNUSED PyObject *__pyx
 <pre class="cython line score-0">&#xA0;<span class="">115</span>: </pre>
 <pre class="cython line score-20" onclick='toggleDiv(this)'>+<span class="">116</span>: def get_volume_eq(spp):</pre>
 <pre class='cython code score-20 '>/* Python wrapper */
-static PyObject *__pyx_pw_6pynvel_9_volinit2_7get_volume_eq(PyObject *__pyx_self, PyObject *__pyx_v_spp); /*proto*/
-static char __pyx_doc_6pynvel_9_volinit2_6get_volume_eq[] = "\n    Return a volume equation to use for a given species\n    ";
-static PyMethodDef __pyx_mdef_6pynvel_9_volinit2_7get_volume_eq = {"get_volume_eq", (PyCFunction)__pyx_pw_6pynvel_9_volinit2_7get_volume_eq, METH_O, __pyx_doc_6pynvel_9_volinit2_6get_volume_eq};
-static PyObject *__pyx_pw_6pynvel_9_volinit2_7get_volume_eq(PyObject *__pyx_self, PyObject *__pyx_v_spp) {
+static PyObject *__pyx_pw_6pynvel_7_pynvel_7get_volume_eq(PyObject *__pyx_self, PyObject *__pyx_v_spp); /*proto*/
+static char __pyx_doc_6pynvel_7_pynvel_6get_volume_eq[] = "\n    Return a volume equation to use for a given species\n    ";
+static PyMethodDef __pyx_mdef_6pynvel_7_pynvel_7get_volume_eq = {"get_volume_eq", (PyCFunction)__pyx_pw_6pynvel_7_pynvel_7get_volume_eq, METH_O, __pyx_doc_6pynvel_7_pynvel_6get_volume_eq};
+static PyObject *__pyx_pw_6pynvel_7_pynvel_7get_volume_eq(PyObject *__pyx_self, PyObject *__pyx_v_spp) {
   PyObject *__pyx_r = 0;
   <span class='refnanny'>__Pyx_RefNannyDeclarations</span>
   <span class='refnanny'>__Pyx_RefNannySetupContext</span>("get_volume_eq (wrapper)", 0);
-  __pyx_r = __pyx_pf_6pynvel_9_volinit2_6get_volume_eq(__pyx_self, ((PyObject *)__pyx_v_spp));
+  __pyx_r = __pyx_pf_6pynvel_7_pynvel_6get_volume_eq(__pyx_self, ((PyObject *)__pyx_v_spp));
 
   /* function exit code */
   <span class='refnanny'>__Pyx_RefNannyFinishContext</span>();
   return __pyx_r;
 }
 
-static PyObject *__pyx_pf_6pynvel_9_volinit2_6get_volume_eq(CYTHON_UNUSED PyObject *__pyx_self, PyObject *__pyx_v_spp) {
+static PyObject *__pyx_pf_6pynvel_7_pynvel_6get_volume_eq(CYTHON_UNUSED PyObject *__pyx_self, PyObject *__pyx_v_spp) {
   PyObject *__pyx_v_eqs = NULL;
   PyObject *__pyx_v_eq = NULL;
   PyObject *__pyx_r = NULL;
@@ -1018,7 +1018,7 @@ static PyObject *__pyx_pf_6pynvel_9_volinit2_6get_volume_eq(CYTHON_UNUSED PyObje
   <span class='pyx_macro_api'>__Pyx_XDECREF</span>(__pyx_t_1);
   <span class='pyx_macro_api'>__Pyx_XDECREF</span>(__pyx_t_5);
   <span class='pyx_macro_api'>__Pyx_XDECREF</span>(__pyx_t_6);
-  <span class='pyx_c_api'>__Pyx_AddTraceback</span>("pynvel._volinit2.get_volume_eq", __pyx_clineno, __pyx_lineno, __pyx_filename);
+  <span class='pyx_c_api'>__Pyx_AddTraceback</span>("pynvel._pynvel.get_volume_eq", __pyx_clineno, __pyx_lineno, __pyx_filename);
   __pyx_r = NULL;
   __pyx_L0:;
   <span class='pyx_macro_api'>__Pyx_XDECREF</span>(__pyx_v_eqs);
@@ -1028,15 +1028,15 @@ static PyObject *__pyx_pf_6pynvel_9_volinit2_6get_volume_eq(CYTHON_UNUSED PyObje
   return __pyx_r;
 }
 /* … */
-  __pyx_tuple__62 = <span class='py_c_api'>PyTuple_Pack</span>(3, __pyx_n_s_spp, __pyx_n_s_eqs, __pyx_n_s_eq);<span class='error_goto'> if (unlikely(!__pyx_tuple__62)) {__pyx_filename = __pyx_f[0]; __pyx_lineno = 116; __pyx_clineno = __LINE__; goto __pyx_L1_error;}</span>
-  <span class='refnanny'>__Pyx_GOTREF</span>(__pyx_tuple__62);
-  <span class='refnanny'>__Pyx_GIVEREF</span>(__pyx_tuple__62);
+  __pyx_tuple__105 = <span class='py_c_api'>PyTuple_Pack</span>(3, __pyx_n_s_spp, __pyx_n_s_eqs, __pyx_n_s_eq);<span class='error_goto'> if (unlikely(!__pyx_tuple__105)) {__pyx_filename = __pyx_f[0]; __pyx_lineno = 116; __pyx_clineno = __LINE__; goto __pyx_L1_error;}</span>
+  <span class='refnanny'>__Pyx_GOTREF</span>(__pyx_tuple__105);
+  <span class='refnanny'>__Pyx_GIVEREF</span>(__pyx_tuple__105);
 /* … */
-  __pyx_t_2 = PyCFunction_NewEx(&amp;__pyx_mdef_6pynvel_9_volinit2_7get_volume_eq, NULL, __pyx_n_s_pynvel__volinit2);<span class='error_goto'> if (unlikely(!__pyx_t_2)) {__pyx_filename = __pyx_f[0]; __pyx_lineno = 116; __pyx_clineno = __LINE__; goto __pyx_L1_error;}</span>
+  __pyx_t_2 = PyCFunction_NewEx(&amp;__pyx_mdef_6pynvel_7_pynvel_7get_volume_eq, NULL, __pyx_n_s_pynvel__pynvel);<span class='error_goto'> if (unlikely(!__pyx_t_2)) {__pyx_filename = __pyx_f[0]; __pyx_lineno = 116; __pyx_clineno = __LINE__; goto __pyx_L1_error;}</span>
   <span class='refnanny'>__Pyx_GOTREF</span>(__pyx_t_2);
   if (<span class='py_c_api'>PyDict_SetItem</span>(__pyx_d, __pyx_n_s_get_volume_eq, __pyx_t_2) &lt; 0) <span class='error_goto'>{__pyx_filename = __pyx_f[0]; __pyx_lineno = 116; __pyx_clineno = __LINE__; goto __pyx_L1_error;}</span>
   <span class='pyx_macro_api'>__Pyx_DECREF</span>(__pyx_t_2); __pyx_t_2 = 0;
-  __pyx_codeobj__63 = (PyObject*)<span class='pyx_c_api'>__Pyx_PyCode_New</span>(1, 0, 3, 0, 0, __pyx_empty_bytes, __pyx_empty_tuple, __pyx_empty_tuple, __pyx_tuple__62, __pyx_empty_tuple, __pyx_empty_tuple, __pyx_kp_s_C_workspace_pyforestsim_pyforest, __pyx_n_s_get_volume_eq, 116, __pyx_empty_bytes);<span class='error_goto'> if (unlikely(!__pyx_codeobj__63)) {__pyx_filename = __pyx_f[0]; __pyx_lineno = 116; __pyx_clineno = __LINE__; goto __pyx_L1_error;}</span>
+  __pyx_codeobj__106 = (PyObject*)<span class='pyx_c_api'>__Pyx_PyCode_New</span>(1, 0, 3, 0, 0, __pyx_empty_bytes, __pyx_empty_tuple, __pyx_empty_tuple, __pyx_tuple__105, __pyx_empty_tuple, __pyx_empty_tuple, __pyx_kp_s_C_workspace_pyforestsim_pyforest, __pyx_n_s_get_volume_eq, 116, __pyx_empty_bytes);<span class='error_goto'> if (unlikely(!__pyx_codeobj__106)) {__pyx_filename = __pyx_f[0]; __pyx_lineno = 116; __pyx_clineno = __LINE__; goto __pyx_L1_error;}</span>
 </pre><pre class="cython line score-0">&#xA0;<span class="">117</span>:     """</pre>
 <pre class="cython line score-0">&#xA0;<span class="">118</span>:     Return a volume equation to use for a given species</pre>
 <pre class="cython line score-0">&#xA0;<span class="">119</span>:     """</pre>
@@ -1186,7 +1186,7 @@ static PyObject *__pyx_pf_6pynvel_9_volinit2_6get_volume_eq(CYTHON_UNUSED PyObje
 <pre class="cython line score-9" onclick='toggleDiv(this)'>+<span class="">183</span>:     except KeyError:</pre>
 <pre class='cython code score-9 '>    __pyx_t_7 = <span class='py_c_api'>PyErr_ExceptionMatches</span>(__pyx_builtin_KeyError);
     if (__pyx_t_7) {
-      <span class='pyx_c_api'>__Pyx_AddTraceback</span>("pynvel._volinit2.get_volume_eq", __pyx_clineno, __pyx_lineno, __pyx_filename);
+      <span class='pyx_c_api'>__Pyx_AddTraceback</span>("pynvel._pynvel.get_volume_eq", __pyx_clineno, __pyx_lineno, __pyx_filename);
       if (<span class='pyx_c_api'>__Pyx_GetException</span>(&amp;__pyx_t_5, &amp;__pyx_t_1, &amp;__pyx_t_6) &lt; 0) <span class='error_goto'>{__pyx_filename = __pyx_f[0]; __pyx_lineno = 183; __pyx_clineno = __LINE__; goto __pyx_L5_except_error;}</span>
       <span class='refnanny'>__Pyx_GOTREF</span>(__pyx_t_5);
       <span class='refnanny'>__Pyx_GOTREF</span>(__pyx_t_1);

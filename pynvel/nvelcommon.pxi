@@ -54,6 +54,24 @@ spp_codes = {
 
 fia_spp = {v[0]:k for k, v in spp_codes.items() if not k in ('OT','CX','HX')}
 
+def get_spp_code(spp):
+    """Return an FIA species number given a species abbreviation.
+    
+    :param spp: Two character species abbreviation.
+    """
+    if isinstance(spp, str):
+        try:
+            spp_code = spp_codes[spp][0]
+        except (KeyError):
+            warn('Species {} is not known.'.format(spp))
+            spp_code=999
+    
+    else:
+        warn('Species {} is not known.'.format(spp))
+        spp_code=999
+        
+    return spp_code
+
 volume_idx = {
         1:'Total cubic volume from ground to tip'
         , 2:'Gross Scribner board foot volume'

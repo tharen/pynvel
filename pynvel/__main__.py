@@ -7,11 +7,72 @@ import argparse
 
 import pynvel
 
+# TODO: Read/write config file for defaults
+region = 6
+forest = '04'
+district = '12'
+product = '01'
+mrule = pynvel.init_merchrule(
+        evod=1, opt=23, maxlen=40, minlen=12
+        , cor='Y')
+
 def main():
     args = handle_args()
-
-
     print(args)
+
+    # Convert the species code
+    try:
+        spp_code = int(args.species)
+    except:
+        spp_code = pynvel.get_spp_code(args.species)
+
+    # Get a default eqution if none provided
+    if not args.equation:
+        vol_eq = pynvel.getvoleq(
+                region, forest, district
+                , spp_code, product
+                )
+
+    elif args.equation.lower() == 'fia':
+        vol_eq = pynvel.getfiavoleq(
+                region, forest, district
+                , spp_code)
+
+    else:
+        vol_eq = args.equation
+
+    # TODO: Implement height curves
+    if not args.height:
+        raise NotImplementedError('Height must be supplied.')
+        tot_ht = 0.0
+
+    else:
+        tot_ht = args.height
+
+    volcalc = pynvel.VolumeCalculator(
+            volume_eq=vol_eq
+            , merch_rule=mrule
+            , cruise_type='C'
+            )
+    volcalc.calc(
+            dbh_ob=args.dbh
+            , total_ht=tot_ht
+            , form_class=args.fclass
+#             , log_len=np.array([40, 30, 20, 10])
+            )
+
+    r = volcalc.volume
+
+    print('Volume Report')
+    print('-------------')
+    print('Species: {species}, DBH: {dbh}, Ht: {height}'.format(**vars(args)))
+    print('Equation: {}, Form: {}'.format(vol_eq, args.fclass))
+    print('CuFt Tot.:   {:>8.2f}'.format(r['cuft_total']))
+    print('CuFt Merch.: {:>8.2f}'.format(r['cuft_gross_prim']))
+    print('BdFt Merch.: {:>8.2f}'.format(r['bdft_gross_prim']))
+    print('CuFt Top:    {:>8.2f}'.format(r['cuft_gross_sec']))
+    print('CuFt Stump:  {:>8.2f}'.format(r['cuft_stump']))
+    print('CuFt Tip:    {:>8.2f}'.format(r['cuft_tip']))
 
 def install_arcgis():
     # TODO: Install ArcGIS tbx and pyt
@@ -54,7 +115,11 @@ def handle_args():
             , help='Tree total height in feet.')
 
     parser.add_argument(
-            '-e', '--equation', metavar='', type=float
+            '-f', '--fclass', metavar='', type=float, default=80
+            , help='Girard Form Class.')
+
+    parser.add_argument(
+            '-e', '--equation', metavar='', type=str
             , help='NVEL volume equation identifier.')
 
     parser.add_argument(
