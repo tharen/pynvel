@@ -1,28 +1,93 @@
 """
-Distutils configuration to build the NVEL cython model.
+Setuptools configuration to build the NVEL cython module.
 
 Created on Jun 24, 2015
 
 @author: THAREN
 """
 
-from distutils.core import setup
+import sys
+import shutil
+from glob import glob
+
+from setuptools import setup
 from Cython.Distutils.extension import Extension
 from Cython.Build import cythonize
 import numpy
 # import numpy.distutils.misc_util
 
-# include_dirs = numpy.distutils.misc_util.get_numpy_include_dirs()
+version = '0.1'
 
-libs = ['vollib', ]
-lib_dirs = [r'C:\Python27\libs', '.' ]
+description = open('./readme.rst').readline().strip()
+long_desc = open('./readme.rst').read().strip()
+shutil.copyfile('./readme.rst', 'pynvel/readme.rst')
+shutil.copyfile('./readme.rst', 'pynvel/docs/readme.rst')
+
+static = True
+_is_64bit = (getattr(sys, 'maxsize', None) or getattr(sys, 'maxint')) > 2 ** 32
+
+lib_dirs = ['./pynvel', ]
+if _is_64bit:
+    vollib = 'vollib64'
+else:
+    vollib = 'vollib'
+
 inc_dirs = [numpy.get_include()]
-extensions = [Extension(
-                    'pynvel'
-                    , sources=['pynvel.pyx', ]
-                    , libraries=libs
-                    , library_dirs=lib_dirs
-                    , include_dirs=inc_dirs
-                    ), ]
 
-setup(ext_modules=cythonize(extensions,))
+if static:
+    vollib = vollib + '_static'
+    libs = [vollib, ]
+    libs.extend(['gfortran', 'quadmath'])
+    link_args = ['-static', ]
+    compile_args = ['-static', ]
+
+else:
+    libs = [vollib, ]
+    link_args = []
+    compile_args = []
+
+extensions = [
+        Extension(
+                'pynvel._pynvel'
+                , sources=['pynvel/_pynvel.pyx', ]
+                , libraries=libs
+                , library_dirs=lib_dirs
+                , include_dirs=inc_dirs
+                , extra_link_args=link_args
+                , extra_compile_args=compile_args
+                ),
+#         Extension(
+#                 'pynvel._volinit2'
+#                 , sources=['pynvel/_volinit2.pyx', ]
+#                 , libraries=libs
+#                 , library_dirs=lib_dirs
+#                 , include_dirs=inc_dirs
+#                 ),
+        ]
+
+setup(
+    name='pynvel'
+    , version=version
+    , description=description
+    , long_description=long_desc
+    , url=''
+    , author="Tod Haren"
+    , author_email="tod.haren@gmail.com"
+    , setup_requires=['cython', 'numpy>=1.9', ]
+    , tests_require=['nose2', ]
+    , install_requires=['numpy>=1.9', ]
+    , ext_modules=cythonize(extensions,)
+    , packages=['pynvel', ]
+    , include_package_data=True  # package the files listed in MANIFEST.in
+    # , data_files=[('arcgis',glob('arcgis/*.pyt')),]
+    # , package_data={'pynvel':glob('arcgis/*.pyt')}
+    , entry_points={
+            'console_scripts': [
+            'pynvel=pynvel.__main__:main'
+            ]
+        }
+    , test_suite='nose2.collector.collector'
+    )
+
+# Build Command
+# >python setup.py build_ext; cp build/lib.win32-2.7/*.pyd .

@@ -1,0 +1,11 @@
+include pynvel/*.pyd
+include pynvel/*.so
+include pynvel/*.cfg
+include pynvel/readme.*
+include pynvel/test/*.py
+include pynvel/examples/*.py
+include pynvel/examples/*.key
+include pynvel/examples/*.tre
+include pynvel/docs/*.*
+include pynvel/arcgis/*.pyt
+include pynvel/arcgis/*.tbx
