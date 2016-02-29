@@ -7,7 +7,7 @@ from ._pynvel import *
 
 class version:
     api = __version__
-    vollib = vernum()
+    vollib = vollib_version()
 
     def __str__(self):
         vs = str({'api':self.api, 'vollib':self.vollib})

@@ -15,18 +15,19 @@ import pynvel
 # print(sys.path)
 # print(os.environ['path'])
 
-print('Version:'.format(pynvel.vernum()))
+print('Version:'.format(pynvel.version()))
 
+variant = ''
 region = 6
-forest = '04'
-district = '12'
+forest = '12'
+district = '01'
 species = 202
 product = '01'
 
 print(pynvel.fia_spp[202])
 
-print(pynvel.getvoleq(region, forest, district, species, product))
-print(pynvel.getfiavoleq(region, forest, district, species))
+print(pynvel.get_equation(species, variant, region, forest, district, product))
+print(pynvel.get_equation(species, variant, region, forest, district, fia=True))
 
 # mrule = pynvel.merchrules_(evod=1)
 mrule = pynvel.init_merchrule(

@@ -8,13 +8,22 @@ import argparse
 import pynvel
 
 # TODO: Read/write config file for defaults
-region = 6
-forest = '04'
-district = '12'
-product = '01'
-mrule = pynvel.init_merchrule(
-        evod=1, opt=23, maxlen=40, minlen=12
-        , cor='Y')
+variant = 'PN'
+region = 6  # PNW
+forest = '12'  # Siuslaw
+district = '01'  # Unknown
+product = '01'  # Sawtimber tree
+# mrule = pynvel.init_merchrule(
+#         evod=1, opt=23, maxlen=40, minlen=12
+#         , cor='Y')
+
+mrule_dict = {
+        'evod':1, 'opt':23, 'maxlen':40.0, 'minlen':12.0, 'minlent':12.0,
+        'mtopp':5.0, 'mtops':2.0, 'stump':1.0, 'trim':1.0,
+        'btr':0.0, 'dbtbh':0.0, 'minbfd':8.0, 'cor':'Y'
+        }
+
+mrule = pynvel.init_merchrule(**mrule_dict)
 
 def main():
     args = handle_args()
@@ -28,15 +37,15 @@ def main():
 
     # Get a default eqution if none provided
     if not args.equation:
-        vol_eq = pynvel.getvoleq(
+        vol_eq = pynvel.get_equation(spp_code, variant,
                 region, forest, district
-                , spp_code, product
+                , product
                 )
 
     elif args.equation.lower() == 'fia':
-        vol_eq = pynvel.getfiavoleq(
+        vol_eq = pynvel.get_equation(spp_code, variant,
                 region, forest, district
-                , spp_code)
+                , fia=True)
 
     else:
         vol_eq = args.equation

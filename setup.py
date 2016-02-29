@@ -38,8 +38,8 @@ if static:
     vollib = vollib + '_static'
     libs = [vollib, ]
     libs.extend(['gfortran', 'quadmath'])
-    link_args = ['-static', ]
-    compile_args = ['-static', ]
+    link_args = ['-static', '-Wno-format']
+    compile_args = ['-static', '-Wno-format']
 
 else:
     libs = [vollib, ]

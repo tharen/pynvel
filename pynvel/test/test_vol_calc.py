@@ -19,7 +19,7 @@ v = pynvel.get_volume(
         , bdft_prim_flag=0
         , cubic_prim_flag=0)
 
-# print(v['bdft_gross_prim'])
+print(v['bdft_gross_prim'])
 
 # vc = pynvel.VolumeCalculator(volume_eq=vol_eq)
 #

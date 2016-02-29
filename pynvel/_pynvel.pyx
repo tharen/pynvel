@@ -2,80 +2,8 @@ import numpy as np
 from collections import OrderedDict
 cimport numpy as np
 
+from _vollib cimport *
 include 'nvelcommon.pxi'
-
-cdef extern from *:    
-    void vernum_(int *v)
-    void getvoleq_(int *region, char* forest, char* district
-            , int *species, char* product, char* vol_eq, int *err_flag
-            , int fl, int dl, int pl, int vl)
-    void getfiavoleq_(int *region, char* forest, char* district
-            , int *species, char* vol_eq, int *err_flag
-            , int fl, int dl, int vl)
-    void vollibc2_(
-            int *regn, char* forsti, char* voleqi, float *mtopp, float *mtops
-            , float *stump, float *dbhob, float *drcob, char* httypei
-            , float *httot, int *htlog, float *ht1prd, float *ht2prd
-            , float *upsht1, float *upsht2, float *upsd1, float *upsd2
-            , int *htref, float *avgz1, float *avgz2, int *fclass
-            , float *dbtbh, float *btr
-            , int *i3, int *i7, int *i15, int *i20, int *i21
-            , float *vol, float *logvoli, float *logdiai
-            , float *loglen, float *bolht, int *tlogs
-            , float *nologp, float *nologs
-            , int *cutflg, int *bfpflg, int *cupflg, int *cdpflg, int *spflg
-            , char* conspeci, char* prodi, int *httfll, char* livei
-            , int *ba, int *si, char* ctypei, int *errflag, int *indeb
-            , int *pmtflg, merchrules_ *merrules
-            , int forsti_len, int voleqi_len, int httypei_len, int conspeci_len
-            , int prodi_len, int livei_len, int ctypei_len
-            )
-    void volinit2_(
-            int *regn, char* forsti, char* voleqi, float *mtopp, float *mtops
-            , float *stump, float *dbhob, float *drcob, char* httypei
-            , float *httot, int *htlog, float *ht1prd, float *ht2prd
-            , float *upsht1, float *upsht2, float *upsd1, float *upsd2
-            , int *htref, float *avgz1, float *avgz2, int *fclass
-            , float *dbtbh, float *btr
-            , int *i3, int *i7, int *i15, int *i20, int *i21
-            , float *vol, float *logvoli, float *logdiai
-            , float *loglen, float *bolht, int *tlogs
-            , float *nologp
-            , float *nologs
-            , int *cutflg
-            , int *bfpflg
-            , int *cupflg
-            , int *cdpflg
-            , int *spflg
-            , char* conspeci
-            , char* prodi
-            , int *httfll
-            , char* livei
-            , int *ba
-            , int *si
-            , char* ctypei
-            , int *errflag
-            , merchrules_ *merrules
-            , int forsti_len, int voleqi_len, int httypei_len, int conspeci_len
-            , int prodi_len, int livei_len, int ctypei_len
-            )
-
-cdef extern:
-    ctypedef struct merchrules_:
-        int evod
-        int opt
-        float maxlen
-        float minlen
-        float minlent
-        float merchl
-        float mtopp
-        float mtops
-        float stump
-        float trim
-        float btr
-        float dbtbh
-        float minbfd
-        char cor #NOTE: **Must be single char, not pointer. Unsure how to pass a len arg in a struct
 
 cpdef merchrules_ init_merchrule(
         int evod=1, int opt=23, float maxlen=40.0, float minlen=12.0
@@ -84,7 +12,7 @@ cpdef merchrules_ init_merchrule(
         , float btr=0.0, float dbtbh=0.0, float minbfd=8.0, str cor='Y'
         ):
     """
-    Return a structure that defines log merchandization rules.
+    Return a structure defining log merchandizing rules.
     
     Args
     ----
@@ -126,6 +54,8 @@ cpdef merchrules_ init_merchrule(
     segmnt.f  
     """
     
+    # FIXME: This is a hack because I couldn't figure out how to initialize a
+    #        compatible character variable as a parameter.
     cdef char cor_
     if cor == 'Y':
         cor_ = 'Y'
@@ -140,41 +70,46 @@ cpdef merchrules_ init_merchrule(
     
     return mr
 
-def vernum():
+def vollib_version():
+    """Return the VOLLIB version identifier."""
     cdef int v = 0
     vernum_(&v)
      
     return v
 
-cpdef char* getvoleq(
-        int region, char* forest, char* district
-        , int species, char* product):
+cpdef char* get_equation(
+        int species, char* fvs_variant='', int region=0, char* forest=''
+        , char* district='01', char* product='01', bint fia=False):
     """
-    Return the default volume equation for a species
+    Return the default volume equation for a species.
+    
+    If fvs_variant is not provided the region and forest codes are used to
+    lookup a default. See "volume_equation_table.doc", section 9, for region 
+    and forest codes.
+    
+    Args
+    ----
+    :param fvs_variant: FVS variant abbreviation, eg. PN for Pacific Northcoast
+    :param region: USFS region number, eg. 6 for PNW.
+    :param forest: USFS forest number, 
+    :param district: USFS district number. (default='01')
+    :param species: FIA species number
+    :param product: Product type code
+    :param fia: If True, return the default FIA equation. (default=False)
     """
-    cdef char* vol_eq = ''
-    cdef int err_flag = 0
-    
-    getvoleq_(
-            &region, forest, district
-            , &species, product, vol_eq, &err_flag
-            , 2, 2, 2, 10
-            )
-    
-    return vol_eq[:10]
 
-cpdef char* getfiavoleq(int region, char* forest, char* district, int species):
-    """
-    Return the default FIA volume equation for a species
-    """
     cdef char* vol_eq = ''
     cdef int err_flag = 0
     
-    getfiavoleq_(
-            &region, forest, district
-            , &species, vol_eq, &err_flag
-            , 2, 2, 10
-            )
+    if not fia:
+        voleqdef_(fvs_variant, &region, forest, district
+                , &species, product, vol_eq, &err_flag
+                ,2,2,2,2,10)
+    
+    else:
+        fiavoleqdef_(fvs_variant, &region, forest, district
+                , &species, vol_eq, &err_flag
+                ,2,2,2,10)
     
     return vol_eq[:10]
 
@@ -353,65 +288,66 @@ def get_volume(
             , ctl
             )
     
-    print('region -', region)
-    print('forest_c -', forest_c)
-    print('volume_eq_c -', volume_eq_c)
-    print('min_top_prim -', min_top_prim)
-    print('min_top_sec -', min_top_sec)
-    print('stump_ht -', stump_ht)
-    print('dbh_ob -', dbh_ob)
-    print('drc_ob -', drc_ob)
-    print('ht_type_c -', ht_type_c)
-    print('total_ht -', total_ht)
-    print('ht_log -', ht_log)
-    print('ht_prim -', ht_prim)
-    print('ht_sec -', ht_sec)
-    print('upper_ht1 -', upper_ht1)
-    print('upper_ht2 -', upper_ht2)
-    print('upper_diam1 -', upper_diam1)
-    print('upper_diam2 -', upper_diam2)
-    print('ht_ref -', ht_ref)
-    print('avg_z1 -', avg_z1)
-    print('avg_z2 -', avg_z2)
-    print('form_class -', form_class)
-    print('bark_thick -', bark_thick)
-    print('bark_ratio -', bark_ratio)
-    print('i3 -', i3)
-    print('i7 -', i7)
-    print('i15 -', i15)
-    print('i20 -', i20)
-    print('i21 -', i21)
-    print('volume_c[0] -', volume_c[0:5])
-    print('log_vol_c[0,0] -', log_vol_c[0,0])
-    print('log_diam_c[0,0] -', log_diam_c[0,0])
-    print('log_len_c[0] -', log_len_c[0])
-    print('bole_ht_c[0] -', bole_ht_c[0])
-    print('num_logs -', num_logs)
-    print('num_logs_prim -', num_logs_prim)
-    print('num_logs_sec -', num_logs_sec)
-    print('cubic_total_flag -', cubic_total_flag)
-    print('bdft_prim_flag -', bdft_prim_flag)
-    print('cubic_prim_flag -', cubic_prim_flag)
-    print('cord_prim_flag -', cord_prim_flag)
-    print('sec_vol_flag -', sec_vol_flag)
-    print('con_spp_c -', con_spp_c)
-    print('prod_code_c -', prod_code_c)
-    print('ht_1st_limb -', ht_1st_limb)
-    print('live_c -', live_c)
-    print('basal_area -', basal_area)
-    print('site_index -', site_index)
-    print('cruise_type_c -', cruise_type_c)
-    print('error_flag -', error_flag)
-    print('debug -', debug)
-    print('user_merch_flag -', user_merch_flag)
-    print('merch_rule -', merch_rule)
-    print('fl -', fl)
-    print('vl -', vl)
-    print('hl -', hl)
-    print('csl -', csl)
-    print('pl -', pl)
-    print('ll -', ll)
-    print('ctl -', ctl)
+    if debug:
+        print('region -', region)
+        print('forest_c -', forest_c)
+        print('volume_eq_c -', volume_eq_c)
+        print('min_top_prim -', min_top_prim)
+        print('min_top_sec -', min_top_sec)
+        print('stump_ht -', stump_ht)
+        print('dbh_ob -', dbh_ob)
+        print('drc_ob -', drc_ob)
+        print('ht_type_c -', ht_type_c)
+        print('total_ht -', total_ht)
+        print('ht_log -', ht_log)
+        print('ht_prim -', ht_prim)
+        print('ht_sec -', ht_sec)
+        print('upper_ht1 -', upper_ht1)
+        print('upper_ht2 -', upper_ht2)
+        print('upper_diam1 -', upper_diam1)
+        print('upper_diam2 -', upper_diam2)
+        print('ht_ref -', ht_ref)
+        print('avg_z1 -', avg_z1)
+        print('avg_z2 -', avg_z2)
+        print('form_class -', form_class)
+        print('bark_thick -', bark_thick)
+        print('bark_ratio -', bark_ratio)
+        print('i3 -', i3)
+        print('i7 -', i7)
+        print('i15 -', i15)
+        print('i20 -', i20)
+        print('i21 -', i21)
+        print('volume_c[0] -', volume_c[0:5])
+        print('log_vol_c[0,0] -', log_vol_c[0,0])
+        print('log_diam_c[0,0] -', log_diam_c[0,0])
+        print('log_len_c[0] -', log_len_c[0])
+        print('bole_ht_c[0] -', bole_ht_c[0])
+        print('num_logs -', num_logs)
+        print('num_logs_prim -', num_logs_prim)
+        print('num_logs_sec -', num_logs_sec)
+        print('cubic_total_flag -', cubic_total_flag)
+        print('bdft_prim_flag -', bdft_prim_flag)
+        print('cubic_prim_flag -', cubic_prim_flag)
+        print('cord_prim_flag -', cord_prim_flag)
+        print('sec_vol_flag -', sec_vol_flag)
+        print('con_spp_c -', con_spp_c)
+        print('prod_code_c -', prod_code_c)
+        print('ht_1st_limb -', ht_1st_limb)
+        print('live_c -', live_c)
+        print('basal_area -', basal_area)
+        print('site_index -', site_index)
+        print('cruise_type_c -', cruise_type_c)
+        print('error_flag -', error_flag)
+        print('debug -', debug)
+        print('user_merch_flag -', user_merch_flag)
+        print('merch_rule -', merch_rule)
+        print('fl -', fl)
+        print('vl -', vl)
+        print('hl -', hl)
+        print('csl -', csl)
+        print('pl -', pl)
+        print('ll -', ll)
+        print('ctl -', ctl)
 
     if error_flag!=0:
         print('Error Code {}: {}'.format(error_flag,error_codes[error_flag]))
