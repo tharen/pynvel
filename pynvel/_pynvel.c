@@ -6143,9 +6143,9 @@ static PyObject *__pyx_pf_6pynvel_7_pynvel_18get_volume(CYTHON_UNUSED PyObject *
   /* "pynvel\_pynvel.pyx":356
  *             )
  * 
- *     print 'region -', region             # <<<<<<<<<<<<<<
- *     print 'forest_c -', forest_c
- *     print 'volume_eq_c -', volume_eq_c
+ *     print('region -', region)             # <<<<<<<<<<<<<<
+ *     print('forest_c -', forest_c)
+ *     print('volume_eq_c -', volume_eq_c)
  */
   __pyx_t_2 = __Pyx_PyInt_From_int(__pyx_v_region); if (unlikely(!__pyx_t_2)) {__pyx_filename = __pyx_f[1]; __pyx_lineno = 356; __pyx_clineno = __LINE__; goto __pyx_L1_error;}
   __Pyx_GOTREF(__pyx_t_2);
@@ -6157,15 +6157,15 @@ static PyObject *__pyx_pf_6pynvel_7_pynvel_18get_volume(CYTHON_UNUSED PyObject *
   __Pyx_GIVEREF(__pyx_t_2);
   PyTuple_SET_ITEM(__pyx_t_3, 1, __pyx_t_2);
   __pyx_t_2 = 0;
-  if (__Pyx_Print(0, __pyx_t_3, 1) < 0) {__pyx_filename = __pyx_f[1]; __pyx_lineno = 356; __pyx_clineno = __LINE__; goto __pyx_L1_error;}
+  if (__Pyx_PrintOne(0, __pyx_t_3) < 0) {__pyx_filename = __pyx_f[1]; __pyx_lineno = 356; __pyx_clineno = __LINE__; goto __pyx_L1_error;}
   __Pyx_DECREF(__pyx_t_3); __pyx_t_3 = 0;
 
   /* "pynvel\_pynvel.pyx":357
  * 
- *     print 'region -', region
- *     print 'forest_c -', forest_c             # <<<<<<<<<<<<<<
- *     print 'volume_eq_c -', volume_eq_c
- *     print 'min_top_prim -', min_top_prim
+ *     print('region -', region)
+ *     print('forest_c -', forest_c)             # <<<<<<<<<<<<<<
+ *     print('volume_eq_c -', volume_eq_c)
+ *     print('min_top_prim -', min_top_prim)
  */
   __pyx_t_3 = __Pyx_PyBytes_FromString(__pyx_v_forest_c); if (unlikely(!__pyx_t_3)) {__pyx_filename = __pyx_f[1]; __pyx_lineno = 357; __pyx_clineno = __LINE__; goto __pyx_L1_error;}
   __Pyx_GOTREF(__pyx_t_3);
@@ -6177,15 +6177,15 @@ static PyObject *__pyx_pf_6pynvel_7_pynvel_18get_volume(CYTHON_UNUSED PyObject *
   __Pyx_GIVEREF(__pyx_t_3);
   PyTuple_SET_ITEM(__pyx_t_2, 1, __pyx_t_3);
   __pyx_t_3 = 0;
-  if (__Pyx_Print(0, __pyx_t_2, 1) < 0) {__pyx_filename = __pyx_f[1]; __pyx_lineno = 357; __pyx_clineno = __LINE__; goto __pyx_L1_error;}
+  if (__Pyx_PrintOne(0, __pyx_t_2) < 0) {__pyx_filename = __pyx_f[1]; __pyx_lineno = 357; __pyx_clineno = __LINE__; goto __pyx_L1_error;}
   __Pyx_DECREF(__pyx_t_2); __pyx_t_2 = 0;
 
   /* "pynvel\_pynvel.pyx":358
- *     print 'region -', region
- *     print 'forest_c -', forest_c
- *     print 'volume_eq_c -', volume_eq_c             # <<<<<<<<<<<<<<
- *     print 'min_top_prim -', min_top_prim
- *     print 'min_top_sec -', min_top_sec
+ *     print('region -', region)
+ *     print('forest_c -', forest_c)
+ *     print('volume_eq_c -', volume_eq_c)             # <<<<<<<<<<<<<<
+ *     print('min_top_prim -', min_top_prim)
+ *     print('min_top_sec -', min_top_sec)
  */
   __pyx_t_2 = __Pyx_PyBytes_FromString(__pyx_v_volume_eq_c); if (unlikely(!__pyx_t_2)) {__pyx_filename = __pyx_f[1]; __pyx_lineno = 358; __pyx_clineno = __LINE__; goto __pyx_L1_error;}
   __Pyx_GOTREF(__pyx_t_2);
@@ -6197,15 +6197,15 @@ static PyObject *__pyx_pf_6pynvel_7_pynvel_18get_volume(CYTHON_UNUSED PyObject *
   __Pyx_GIVEREF(__pyx_t_2);
   PyTuple_SET_ITEM(__pyx_t_3, 1, __pyx_t_2);
   __pyx_t_2 = 0;
-  if (__Pyx_Print(0, __pyx_t_3, 1) < 0) {__pyx_filename = __pyx_f[1]; __pyx_lineno = 358; __pyx_clineno = __LINE__; goto __pyx_L1_error;}
+  if (__Pyx_PrintOne(0, __pyx_t_3) < 0) {__pyx_filename = __pyx_f[1]; __pyx_lineno = 358; __pyx_clineno = __LINE__; goto __pyx_L1_error;}
   __Pyx_DECREF(__pyx_t_3); __pyx_t_3 = 0;
 
   /* "pynvel\_pynvel.pyx":359
- *     print 'forest_c -', forest_c
- *     print 'volume_eq_c -', volume_eq_c
- *     print 'min_top_prim -', min_top_prim             # <<<<<<<<<<<<<<
- *     print 'min_top_sec -', min_top_sec
- *     print 'stump_ht -', stump_ht
+ *     print('forest_c -', forest_c)
+ *     print('volume_eq_c -', volume_eq_c)
+ *     print('min_top_prim -', min_top_prim)             # <<<<<<<<<<<<<<
+ *     print('min_top_sec -', min_top_sec)
+ *     print('stump_ht -', stump_ht)
  */
   __pyx_t_3 = PyFloat_FromDouble(__pyx_v_min_top_prim); if (unlikely(!__pyx_t_3)) {__pyx_filename = __pyx_f[1]; __pyx_lineno = 359; __pyx_clineno = __LINE__; goto __pyx_L1_error;}
   __Pyx_GOTREF(__pyx_t_3);
@@ -6217,15 +6217,15 @@ static PyObject *__pyx_pf_6pynvel_7_pynvel_18get_volume(CYTHON_UNUSED PyObject *
   __Pyx_GIVEREF(__pyx_t_3);
   PyTuple_SET_ITEM(__pyx_t_2, 1, __pyx_t_3);
   __pyx_t_3 = 0;
-  if (__Pyx_Print(0, __pyx_t_2, 1) < 0) {__pyx_filename = __pyx_f[1]; __pyx_lineno = 359; __pyx_clineno = __LINE__; goto __pyx_L1_error;}
+  if (__Pyx_PrintOne(0, __pyx_t_2) < 0) {__pyx_filename = __pyx_f[1]; __pyx_lineno = 359; __pyx_clineno = __LINE__; goto __pyx_L1_error;}
   __Pyx_DECREF(__pyx_t_2); __pyx_t_2 = 0;
 
   /* "pynvel\_pynvel.pyx":360
- *     print 'volume_eq_c -', volume_eq_c
- *     print 'min_top_prim -', min_top_prim
- *     print 'min_top_sec -', min_top_sec             # <<<<<<<<<<<<<<
- *     print 'stump_ht -', stump_ht
- *     print 'dbh_ob -', dbh_ob
+ *     print('volume_eq_c -', volume_eq_c)
+ *     print('min_top_prim -', min_top_prim)
+ *     print('min_top_sec -', min_top_sec)             # <<<<<<<<<<<<<<
+ *     print('stump_ht -', stump_ht)
+ *     print('dbh_ob -', dbh_ob)
  */
   __pyx_t_2 = PyFloat_FromDouble(__pyx_v_min_top_sec); if (unlikely(!__pyx_t_2)) {__pyx_filename = __pyx_f[1]; __pyx_lineno = 360; __pyx_clineno = __LINE__; goto __pyx_L1_error;}
   __Pyx_GOTREF(__pyx_t_2);
@@ -6237,15 +6237,15 @@ static PyObject *__pyx_pf_6pynvel_7_pynvel_18get_volume(CYTHON_UNUSED PyObject *
   __Pyx_GIVEREF(__pyx_t_2);
   PyTuple_SET_ITEM(__pyx_t_3, 1, __pyx_t_2);
   __pyx_t_2 = 0;
-  if (__Pyx_Print(0, __pyx_t_3, 1) < 0) {__pyx_filename = __pyx_f[1]; __pyx_lineno = 360; __pyx_clineno = __LINE__; goto __pyx_L1_error;}
+  if (__Pyx_PrintOne(0, __pyx_t_3) < 0) {__pyx_filename = __pyx_f[1]; __pyx_lineno = 360; __pyx_clineno = __LINE__; goto __pyx_L1_error;}
   __Pyx_DECREF(__pyx_t_3); __pyx_t_3 = 0;
 
   /* "pynvel\_pynvel.pyx":361
- *     print 'min_top_prim -', min_top_prim
- *     print 'min_top_sec -', min_top_sec
- *     print 'stump_ht -', stump_ht             # <<<<<<<<<<<<<<
- *     print 'dbh_ob -', dbh_ob
- *     print 'drc_ob -', drc_ob
+ *     print('min_top_prim -', min_top_prim)
+ *     print('min_top_sec -', min_top_sec)
+ *     print('stump_ht -', stump_ht)             # <<<<<<<<<<<<<<
+ *     print('dbh_ob -', dbh_ob)
+ *     print('drc_ob -', drc_ob)
  */
   __pyx_t_3 = PyFloat_FromDouble(__pyx_v_stump_ht); if (unlikely(!__pyx_t_3)) {__pyx_filename = __pyx_f[1]; __pyx_lineno = 361; __pyx_clineno = __LINE__; goto __pyx_L1_error;}
   __Pyx_GOTREF(__pyx_t_3);
@@ -6257,15 +6257,15 @@ static PyObject *__pyx_pf_6pynvel_7_pynvel_18get_volume(CYTHON_UNUSED PyObject *
   __Pyx_GIVEREF(__pyx_t_3);
   PyTuple_SET_ITEM(__pyx_t_2, 1, __pyx_t_3);
   __pyx_t_3 = 0;
-  if (__Pyx_Print(0, __pyx_t_2, 1) < 0) {__pyx_filename = __pyx_f[1]; __pyx_lineno = 361; __pyx_clineno = __LINE__; goto __pyx_L1_error;}
+  if (__Pyx_PrintOne(0, __pyx_t_2) < 0) {__pyx_filename = __pyx_f[1]; __pyx_lineno = 361; __pyx_clineno = __LINE__; goto __pyx_L1_error;}
   __Pyx_DECREF(__pyx_t_2); __pyx_t_2 = 0;
 
   /* "pynvel\_pynvel.pyx":362
- *     print 'min_top_sec -', min_top_sec
- *     print 'stump_ht -', stump_ht
- *     print 'dbh_ob -', dbh_ob             # <<<<<<<<<<<<<<
- *     print 'drc_ob -', drc_ob
- *     print 'ht_type_c -', ht_type_c
+ *     print('min_top_sec -', min_top_sec)
+ *     print('stump_ht -', stump_ht)
+ *     print('dbh_ob -', dbh_ob)             # <<<<<<<<<<<<<<
+ *     print('drc_ob -', drc_ob)
+ *     print('ht_type_c -', ht_type_c)
  */
   __pyx_t_2 = PyFloat_FromDouble(__pyx_v_dbh_ob); if (unlikely(!__pyx_t_2)) {__pyx_filename = __pyx_f[1]; __pyx_lineno = 362; __pyx_clineno = __LINE__; goto __pyx_L1_error;}
   __Pyx_GOTREF(__pyx_t_2);
@@ -6277,15 +6277,15 @@ static PyObject *__pyx_pf_6pynvel_7_pynvel_18get_volume(CYTHON_UNUSED PyObject *
   __Pyx_GIVEREF(__pyx_t_2);
   PyTuple_SET_ITEM(__pyx_t_3, 1, __pyx_t_2);
   __pyx_t_2 = 0;
-  if (__Pyx_Print(0, __pyx_t_3, 1) < 0) {__pyx_filename = __pyx_f[1]; __pyx_lineno = 362; __pyx_clineno = __LINE__; goto __pyx_L1_error;}
+  if (__Pyx_PrintOne(0, __pyx_t_3) < 0) {__pyx_filename = __pyx_f[1]; __pyx_lineno = 362; __pyx_clineno = __LINE__; goto __pyx_L1_error;}
   __Pyx_DECREF(__pyx_t_3); __pyx_t_3 = 0;
 
   /* "pynvel\_pynvel.pyx":363
- *     print 'stump_ht -', stump_ht
- *     print 'dbh_ob -', dbh_ob
- *     print 'drc_ob -', drc_ob             # <<<<<<<<<<<<<<
- *     print 'ht_type_c -', ht_type_c
- *     print 'total_ht -', total_ht
+ *     print('stump_ht -', stump_ht)
+ *     print('dbh_ob -', dbh_ob)
+ *     print('drc_ob -', drc_ob)             # <<<<<<<<<<<<<<
+ *     print('ht_type_c -', ht_type_c)
+ *     print('total_ht -', total_ht)
  */
   __pyx_t_3 = PyFloat_FromDouble(__pyx_v_drc_ob); if (unlikely(!__pyx_t_3)) {__pyx_filename = __pyx_f[1]; __pyx_lineno = 363; __pyx_clineno = __LINE__; goto __pyx_L1_error;}
   __Pyx_GOTREF(__pyx_t_3);
@@ -6297,15 +6297,15 @@ static PyObject *__pyx_pf_6pynvel_7_pynvel_18get_volume(CYTHON_UNUSED PyObject *
   __Pyx_GIVEREF(__pyx_t_3);
   PyTuple_SET_ITEM(__pyx_t_2, 1, __pyx_t_3);
   __pyx_t_3 = 0;
-  if (__Pyx_Print(0, __pyx_t_2, 1) < 0) {__pyx_filename = __pyx_f[1]; __pyx_lineno = 363; __pyx_clineno = __LINE__; goto __pyx_L1_error;}
+  if (__Pyx_PrintOne(0, __pyx_t_2) < 0) {__pyx_filename = __pyx_f[1]; __pyx_lineno = 363; __pyx_clineno = __LINE__; goto __pyx_L1_error;}
   __Pyx_DECREF(__pyx_t_2); __pyx_t_2 = 0;
 
   /* "pynvel\_pynvel.pyx":364
- *     print 'dbh_ob -', dbh_ob
- *     print 'drc_ob -', drc_ob
- *     print 'ht_type_c -', ht_type_c             # <<<<<<<<<<<<<<
- *     print 'total_ht -', total_ht
- *     print 'ht_log -', ht_log
+ *     print('dbh_ob -', dbh_ob)
+ *     print('drc_ob -', drc_ob)
+ *     print('ht_type_c -', ht_type_c)             # <<<<<<<<<<<<<<
+ *     print('total_ht -', total_ht)
+ *     print('ht_log -', ht_log)
  */
   __pyx_t_2 = __Pyx_PyBytes_FromString(__pyx_v_ht_type_c); if (unlikely(!__pyx_t_2)) {__pyx_filename = __pyx_f[1]; __pyx_lineno = 364; __pyx_clineno = __LINE__; goto __pyx_L1_error;}
   __Pyx_GOTREF(__pyx_t_2);
@@ -6317,15 +6317,15 @@ static PyObject *__pyx_pf_6pynvel_7_pynvel_18get_volume(CYTHON_UNUSED PyObject *
   __Pyx_GIVEREF(__pyx_t_2);
   PyTuple_SET_ITEM(__pyx_t_3, 1, __pyx_t_2);
   __pyx_t_2 = 0;
-  if (__Pyx_Print(0, __pyx_t_3, 1) < 0) {__pyx_filename = __pyx_f[1]; __pyx_lineno = 364; __pyx_clineno = __LINE__; goto __pyx_L1_error;}
+  if (__Pyx_PrintOne(0, __pyx_t_3) < 0) {__pyx_filename = __pyx_f[1]; __pyx_lineno = 364; __pyx_clineno = __LINE__; goto __pyx_L1_error;}
   __Pyx_DECREF(__pyx_t_3); __pyx_t_3 = 0;
 
   /* "pynvel\_pynvel.pyx":365
- *     print 'drc_ob -', drc_ob
- *     print 'ht_type_c -', ht_type_c
- *     print 'total_ht -', total_ht             # <<<<<<<<<<<<<<
- *     print 'ht_log -', ht_log
- *     print 'ht_prim -', ht_prim
+ *     print('drc_ob -', drc_ob)
+ *     print('ht_type_c -', ht_type_c)
+ *     print('total_ht -', total_ht)             # <<<<<<<<<<<<<<
+ *     print('ht_log -', ht_log)
+ *     print('ht_prim -', ht_prim)
  */
   __pyx_t_3 = PyFloat_FromDouble(__pyx_v_total_ht); if (unlikely(!__pyx_t_3)) {__pyx_filename = __pyx_f[1]; __pyx_lineno = 365; __pyx_clineno = __LINE__; goto __pyx_L1_error;}
   __Pyx_GOTREF(__pyx_t_3);
@@ -6337,15 +6337,15 @@ static PyObject *__pyx_pf_6pynvel_7_pynvel_18get_volume(CYTHON_UNUSED PyObject *
   __Pyx_GIVEREF(__pyx_t_3);
   PyTuple_SET_ITEM(__pyx_t_2, 1, __pyx_t_3);
   __pyx_t_3 = 0;
-  if (__Pyx_Print(0, __pyx_t_2, 1) < 0) {__pyx_filename = __pyx_f[1]; __pyx_lineno = 365; __pyx_clineno = __LINE__; goto __pyx_L1_error;}
+  if (__Pyx_PrintOne(0, __pyx_t_2) < 0) {__pyx_filename = __pyx_f[1]; __pyx_lineno = 365; __pyx_clineno = __LINE__; goto __pyx_L1_error;}
   __Pyx_DECREF(__pyx_t_2); __pyx_t_2 = 0;
 
   /* "pynvel\_pynvel.pyx":366
- *     print 'ht_type_c -', ht_type_c
- *     print 'total_ht -', total_ht
- *     print 'ht_log -', ht_log             # <<<<<<<<<<<<<<
- *     print 'ht_prim -', ht_prim
- *     print 'ht_sec -', ht_sec
+ *     print('ht_type_c -', ht_type_c)
+ *     print('total_ht -', total_ht)
+ *     print('ht_log -', ht_log)             # <<<<<<<<<<<<<<
+ *     print('ht_prim -', ht_prim)
+ *     print('ht_sec -', ht_sec)
  */
   __pyx_t_2 = __Pyx_PyInt_From_int(__pyx_v_ht_log); if (unlikely(!__pyx_t_2)) {__pyx_filename = __pyx_f[1]; __pyx_lineno = 366; __pyx_clineno = __LINE__; goto __pyx_L1_error;}
   __Pyx_GOTREF(__pyx_t_2);
@@ -6357,15 +6357,15 @@ static PyObject *__pyx_pf_6pynvel_7_pynvel_18get_volume(CYTHON_UNUSED PyObject *
   __Pyx_GIVEREF(__pyx_t_2);
   PyTuple_SET_ITEM(__pyx_t_3, 1, __pyx_t_2);
   __pyx_t_2 = 0;
-  if (__Pyx_Print(0, __pyx_t_3, 1) < 0) {__pyx_filename = __pyx_f[1]; __pyx_lineno = 366; __pyx_clineno = __LINE__; goto __pyx_L1_error;}
+  if (__Pyx_PrintOne(0, __pyx_t_3) < 0) {__pyx_filename = __pyx_f[1]; __pyx_lineno = 366; __pyx_clineno = __LINE__; goto __pyx_L1_error;}
   __Pyx_DECREF(__pyx_t_3); __pyx_t_3 = 0;
 
   /* "pynvel\_pynvel.pyx":367
- *     print 'total_ht -', total_ht
- *     print 'ht_log -', ht_log
- *     print 'ht_prim -', ht_prim             # <<<<<<<<<<<<<<
- *     print 'ht_sec -', ht_sec
- *     print 'upper_ht1 -', upper_ht1
+ *     print('total_ht -', total_ht)
+ *     print('ht_log -', ht_log)
+ *     print('ht_prim -', ht_prim)             # <<<<<<<<<<<<<<
+ *     print('ht_sec -', ht_sec)
+ *     print('upper_ht1 -', upper_ht1)
  */
   __pyx_t_3 = PyFloat_FromDouble(__pyx_v_ht_prim); if (unlikely(!__pyx_t_3)) {__pyx_filename = __pyx_f[1]; __pyx_lineno = 367; __pyx_clineno = __LINE__; goto __pyx_L1_error;}
   __Pyx_GOTREF(__pyx_t_3);
@@ -6377,15 +6377,15 @@ static PyObject *__pyx_pf_6pynvel_7_pynvel_18get_volume(CYTHON_UNUSED PyObject *
   __Pyx_GIVEREF(__pyx_t_3);
   PyTuple_SET_ITEM(__pyx_t_2, 1, __pyx_t_3);
   __pyx_t_3 = 0;
-  if (__Pyx_Print(0, __pyx_t_2, 1) < 0) {__pyx_filename = __pyx_f[1]; __pyx_lineno = 367; __pyx_clineno = __LINE__; goto __pyx_L1_error;}
+  if (__Pyx_PrintOne(0, __pyx_t_2) < 0) {__pyx_filename = __pyx_f[1]; __pyx_lineno = 367; __pyx_clineno = __LINE__; goto __pyx_L1_error;}
   __Pyx_DECREF(__pyx_t_2); __pyx_t_2 = 0;
 
   /* "pynvel\_pynvel.pyx":368
- *     print 'ht_log -', ht_log
- *     print 'ht_prim -', ht_prim
- *     print 'ht_sec -', ht_sec             # <<<<<<<<<<<<<<
- *     print 'upper_ht1 -', upper_ht1
- *     print 'upper_ht2 -', upper_ht2
+ *     print('ht_log -', ht_log)
+ *     print('ht_prim -', ht_prim)
+ *     print('ht_sec -', ht_sec)             # <<<<<<<<<<<<<<
+ *     print('upper_ht1 -', upper_ht1)
+ *     print('upper_ht2 -', upper_ht2)
  */
   __pyx_t_2 = PyFloat_FromDouble(__pyx_v_ht_sec); if (unlikely(!__pyx_t_2)) {__pyx_filename = __pyx_f[1]; __pyx_lineno = 368; __pyx_clineno = __LINE__; goto __pyx_L1_error;}
   __Pyx_GOTREF(__pyx_t_2);
@@ -6397,15 +6397,15 @@ static PyObject *__pyx_pf_6pynvel_7_pynvel_18get_volume(CYTHON_UNUSED PyObject *
   __Pyx_GIVEREF(__pyx_t_2);
   PyTuple_SET_ITEM(__pyx_t_3, 1, __pyx_t_2);
   __pyx_t_2 = 0;
-  if (__Pyx_Print(0, __pyx_t_3, 1) < 0) {__pyx_filename = __pyx_f[1]; __pyx_lineno = 368; __pyx_clineno = __LINE__; goto __pyx_L1_error;}
+  if (__Pyx_PrintOne(0, __pyx_t_3) < 0) {__pyx_filename = __pyx_f[1]; __pyx_lineno = 368; __pyx_clineno = __LINE__; goto __pyx_L1_error;}
   __Pyx_DECREF(__pyx_t_3); __pyx_t_3 = 0;
 
   /* "pynvel\_pynvel.pyx":369
- *     print 'ht_prim -', ht_prim
- *     print 'ht_sec -', ht_sec
- *     print 'upper_ht1 -', upper_ht1             # <<<<<<<<<<<<<<
- *     print 'upper_ht2 -', upper_ht2
- *     print 'upper_diam1 -', upper_diam1
+ *     print('ht_prim -', ht_prim)
+ *     print('ht_sec -', ht_sec)
+ *     print('upper_ht1 -', upper_ht1)             # <<<<<<<<<<<<<<
+ *     print('upper_ht2 -', upper_ht2)
+ *     print('upper_diam1 -', upper_diam1)
  */
   __pyx_t_3 = PyFloat_FromDouble(__pyx_v_upper_ht1); if (unlikely(!__pyx_t_3)) {__pyx_filename = __pyx_f[1]; __pyx_lineno = 369; __pyx_clineno = __LINE__; goto __pyx_L1_error;}
   __Pyx_GOTREF(__pyx_t_3);
@@ -6417,15 +6417,15 @@ static PyObject *__pyx_pf_6pynvel_7_pynvel_18get_volume(CYTHON_UNUSED PyObject *
   __Pyx_GIVEREF(__pyx_t_3);
   PyTuple_SET_ITEM(__pyx_t_2, 1, __pyx_t_3);
   __pyx_t_3 = 0;
-  if (__Pyx_Print(0, __pyx_t_2, 1) < 0) {__pyx_filename = __pyx_f[1]; __pyx_lineno = 369; __pyx_clineno = __LINE__; goto __pyx_L1_error;}
+  if (__Pyx_PrintOne(0, __pyx_t_2) < 0) {__pyx_filename = __pyx_f[1]; __pyx_lineno = 369; __pyx_clineno = __LINE__; goto __pyx_L1_error;}
   __Pyx_DECREF(__pyx_t_2); __pyx_t_2 = 0;
 
   /* "pynvel\_pynvel.pyx":370
- *     print 'ht_sec -', ht_sec
- *     print 'upper_ht1 -', upper_ht1
- *     print 'upper_ht2 -', upper_ht2             # <<<<<<<<<<<<<<
- *     print 'upper_diam1 -', upper_diam1
- *     print 'upper_diam2 -', upper_diam2
+ *     print('ht_sec -', ht_sec)
+ *     print('upper_ht1 -', upper_ht1)
+ *     print('upper_ht2 -', upper_ht2)             # <<<<<<<<<<<<<<
+ *     print('upper_diam1 -', upper_diam1)
+ *     print('upper_diam2 -', upper_diam2)
  */
   __pyx_t_2 = PyFloat_FromDouble(__pyx_v_upper_ht2); if (unlikely(!__pyx_t_2)) {__pyx_filename = __pyx_f[1]; __pyx_lineno = 370; __pyx_clineno = __LINE__; goto __pyx_L1_error;}
   __Pyx_GOTREF(__pyx_t_2);
@@ -6437,15 +6437,15 @@ static PyObject *__pyx_pf_6pynvel_7_pynvel_18get_volume(CYTHON_UNUSED PyObject *
   __Pyx_GIVEREF(__pyx_t_2);
   PyTuple_SET_ITEM(__pyx_t_3, 1, __pyx_t_2);
   __pyx_t_2 = 0;
-  if (__Pyx_Print(0, __pyx_t_3, 1) < 0) {__pyx_filename = __pyx_f[1]; __pyx_lineno = 370; __pyx_clineno = __LINE__; goto __pyx_L1_error;}
+  if (__Pyx_PrintOne(0, __pyx_t_3) < 0) {__pyx_filename = __pyx_f[1]; __pyx_lineno = 370; __pyx_clineno = __LINE__; goto __pyx_L1_error;}
   __Pyx_DECREF(__pyx_t_3); __pyx_t_3 = 0;
 
   /* "pynvel\_pynvel.pyx":371
- *     print 'upper_ht1 -', upper_ht1
- *     print 'upper_ht2 -', upper_ht2
- *     print 'upper_diam1 -', upper_diam1             # <<<<<<<<<<<<<<
- *     print 'upper_diam2 -', upper_diam2
- *     print 'ht_ref -', ht_ref
+ *     print('upper_ht1 -', upper_ht1)
+ *     print('upper_ht2 -', upper_ht2)
+ *     print('upper_diam1 -', upper_diam1)             # <<<<<<<<<<<<<<
+ *     print('upper_diam2 -', upper_diam2)
+ *     print('ht_ref -', ht_ref)
  */
   __pyx_t_3 = PyFloat_FromDouble(__pyx_v_upper_diam1); if (unlikely(!__pyx_t_3)) {__pyx_filename = __pyx_f[1]; __pyx_lineno = 371; __pyx_clineno = __LINE__; goto __pyx_L1_error;}
   __Pyx_GOTREF(__pyx_t_3);
@@ -6457,15 +6457,15 @@ static PyObject *__pyx_pf_6pynvel_7_pynvel_18get_volume(CYTHON_UNUSED PyObject *
   __Pyx_GIVEREF(__pyx_t_3);
   PyTuple_SET_ITEM(__pyx_t_2, 1, __pyx_t_3);
   __pyx_t_3 = 0;
-  if (__Pyx_Print(0, __pyx_t_2, 1) < 0) {__pyx_filename = __pyx_f[1]; __pyx_lineno = 371; __pyx_clineno = __LINE__; goto __pyx_L1_error;}
+  if (__Pyx_PrintOne(0, __pyx_t_2) < 0) {__pyx_filename = __pyx_f[1]; __pyx_lineno = 371; __pyx_clineno = __LINE__; goto __pyx_L1_error;}
   __Pyx_DECREF(__pyx_t_2); __pyx_t_2 = 0;
 
   /* "pynvel\_pynvel.pyx":372
- *     print 'upper_ht2 -', upper_ht2
- *     print 'upper_diam1 -', upper_diam1
- *     print 'upper_diam2 -', upper_diam2             # <<<<<<<<<<<<<<
- *     print 'ht_ref -', ht_ref
- *     print 'avg_z1 -', avg_z1
+ *     print('upper_ht2 -', upper_ht2)
+ *     print('upper_diam1 -', upper_diam1)
+ *     print('upper_diam2 -', upper_diam2)             # <<<<<<<<<<<<<<
+ *     print('ht_ref -', ht_ref)
+ *     print('avg_z1 -', avg_z1)
  */
   __pyx_t_2 = PyFloat_FromDouble(__pyx_v_upper_diam2); if (unlikely(!__pyx_t_2)) {__pyx_filename = __pyx_f[1]; __pyx_lineno = 372; __pyx_clineno = __LINE__; goto __pyx_L1_error;}
   __Pyx_GOTREF(__pyx_t_2);
@@ -6477,15 +6477,15 @@ static PyObject *__pyx_pf_6pynvel_7_pynvel_18get_volume(CYTHON_UNUSED PyObject *
   __Pyx_GIVEREF(__pyx_t_2);
   PyTuple_SET_ITEM(__pyx_t_3, 1, __pyx_t_2);
   __pyx_t_2 = 0;
-  if (__Pyx_Print(0, __pyx_t_3, 1) < 0) {__pyx_filename = __pyx_f[1]; __pyx_lineno = 372; __pyx_clineno = __LINE__; goto __pyx_L1_error;}
+  if (__Pyx_PrintOne(0, __pyx_t_3) < 0) {__pyx_filename = __pyx_f[1]; __pyx_lineno = 372; __pyx_clineno = __LINE__; goto __pyx_L1_error;}
   __Pyx_DECREF(__pyx_t_3); __pyx_t_3 = 0;
 
   /* "pynvel\_pynvel.pyx":373
- *     print 'upper_diam1 -', upper_diam1
- *     print 'upper_diam2 -', upper_diam2
- *     print 'ht_ref -', ht_ref             # <<<<<<<<<<<<<<
- *     print 'avg_z1 -', avg_z1
- *     print 'avg_z2 -', avg_z2
+ *     print('upper_diam1 -', upper_diam1)
+ *     print('upper_diam2 -', upper_diam2)
+ *     print('ht_ref -', ht_ref)             # <<<<<<<<<<<<<<
+ *     print('avg_z1 -', avg_z1)
+ *     print('avg_z2 -', avg_z2)
  */
   __pyx_t_3 = __Pyx_PyInt_From_int(__pyx_v_ht_ref); if (unlikely(!__pyx_t_3)) {__pyx_filename = __pyx_f[1]; __pyx_lineno = 373; __pyx_clineno = __LINE__; goto __pyx_L1_error;}
   __Pyx_GOTREF(__pyx_t_3);
@@ -6497,15 +6497,15 @@ static PyObject *__pyx_pf_6pynvel_7_pynvel_18get_volume(CYTHON_UNUSED PyObject *
   __Pyx_GIVEREF(__pyx_t_3);
   PyTuple_SET_ITEM(__pyx_t_2, 1, __pyx_t_3);
   __pyx_t_3 = 0;
-  if (__Pyx_Print(0, __pyx_t_2, 1) < 0) {__pyx_filename = __pyx_f[1]; __pyx_lineno = 373; __pyx_clineno = __LINE__; goto __pyx_L1_error;}
+  if (__Pyx_PrintOne(0, __pyx_t_2) < 0) {__pyx_filename = __pyx_f[1]; __pyx_lineno = 373; __pyx_clineno = __LINE__; goto __pyx_L1_error;}
   __Pyx_DECREF(__pyx_t_2); __pyx_t_2 = 0;
 
   /* "pynvel\_pynvel.pyx":374
- *     print 'upper_diam2 -', upper_diam2
- *     print 'ht_ref -', ht_ref
- *     print 'avg_z1 -', avg_z1             # <<<<<<<<<<<<<<
- *     print 'avg_z2 -', avg_z2
- *     print 'form_class -', form_class
+ *     print('upper_diam2 -', upper_diam2)
+ *     print('ht_ref -', ht_ref)
+ *     print('avg_z1 -', avg_z1)             # <<<<<<<<<<<<<<
+ *     print('avg_z2 -', avg_z2)
+ *     print('form_class -', form_class)
  */
   __pyx_t_2 = PyFloat_FromDouble(__pyx_v_avg_z1); if (unlikely(!__pyx_t_2)) {__pyx_filename = __pyx_f[1]; __pyx_lineno = 374; __pyx_clineno = __LINE__; goto __pyx_L1_error;}
   __Pyx_GOTREF(__pyx_t_2);
@@ -6517,15 +6517,15 @@ static PyObject *__pyx_pf_6pynvel_7_pynvel_18get_volume(CYTHON_UNUSED PyObject *
   __Pyx_GIVEREF(__pyx_t_2);
   PyTuple_SET_ITEM(__pyx_t_3, 1, __pyx_t_2);
   __pyx_t_2 = 0;
-  if (__Pyx_Print(0, __pyx_t_3, 1) < 0) {__pyx_filename = __pyx_f[1]; __pyx_lineno = 374; __pyx_clineno = __LINE__; goto __pyx_L1_error;}
+  if (__Pyx_PrintOne(0, __pyx_t_3) < 0) {__pyx_filename = __pyx_f[1]; __pyx_lineno = 374; __pyx_clineno = __LINE__; goto __pyx_L1_error;}
   __Pyx_DECREF(__pyx_t_3); __pyx_t_3 = 0;
 
   /* "pynvel\_pynvel.pyx":375
- *     print 'ht_ref -', ht_ref
- *     print 'avg_z1 -', avg_z1
- *     print 'avg_z2 -', avg_z2             # <<<<<<<<<<<<<<
- *     print 'form_class -', form_class
- *     print 'bark_thick -', bark_thick
+ *     print('ht_ref -', ht_ref)
+ *     print('avg_z1 -', avg_z1)
+ *     print('avg_z2 -', avg_z2)             # <<<<<<<<<<<<<<
+ *     print('form_class -', form_class)
+ *     print('bark_thick -', bark_thick)
  */
   __pyx_t_3 = PyFloat_FromDouble(__pyx_v_avg_z2); if (unlikely(!__pyx_t_3)) {__pyx_filename = __pyx_f[1]; __pyx_lineno = 375; __pyx_clineno = __LINE__; goto __pyx_L1_error;}
   __Pyx_GOTREF(__pyx_t_3);
@@ -6537,15 +6537,15 @@ static PyObject *__pyx_pf_6pynvel_7_pynvel_18get_volume(CYTHON_UNUSED PyObject *
   __Pyx_GIVEREF(__pyx_t_3);
   PyTuple_SET_ITEM(__pyx_t_2, 1, __pyx_t_3);
   __pyx_t_3 = 0;
-  if (__Pyx_Print(0, __pyx_t_2, 1) < 0) {__pyx_filename = __pyx_f[1]; __pyx_lineno = 375; __pyx_clineno = __LINE__; goto __pyx_L1_error;}
+  if (__Pyx_PrintOne(0, __pyx_t_2) < 0) {__pyx_filename = __pyx_f[1]; __pyx_lineno = 375; __pyx_clineno = __LINE__; goto __pyx_L1_error;}
   __Pyx_DECREF(__pyx_t_2); __pyx_t_2 = 0;
 
   /* "pynvel\_pynvel.pyx":376
- *     print 'avg_z1 -', avg_z1
- *     print 'avg_z2 -', avg_z2
- *     print 'form_class -', form_class             # <<<<<<<<<<<<<<
- *     print 'bark_thick -', bark_thick
- *     print 'bark_ratio -', bark_ratio
+ *     print('avg_z1 -', avg_z1)
+ *     print('avg_z2 -', avg_z2)
+ *     print('form_class -', form_class)             # <<<<<<<<<<<<<<
+ *     print('bark_thick -', bark_thick)
+ *     print('bark_ratio -', bark_ratio)
  */
   __pyx_t_2 = __Pyx_PyInt_From_int(__pyx_v_form_class); if (unlikely(!__pyx_t_2)) {__pyx_filename = __pyx_f[1]; __pyx_lineno = 376; __pyx_clineno = __LINE__; goto __pyx_L1_error;}
   __Pyx_GOTREF(__pyx_t_2);
@@ -6557,15 +6557,15 @@ static PyObject *__pyx_pf_6pynvel_7_pynvel_18get_volume(CYTHON_UNUSED PyObject *
   __Pyx_GIVEREF(__pyx_t_2);
   PyTuple_SET_ITEM(__pyx_t_3, 1, __pyx_t_2);
   __pyx_t_2 = 0;
-  if (__Pyx_Print(0, __pyx_t_3, 1) < 0) {__pyx_filename = __pyx_f[1]; __pyx_lineno = 376; __pyx_clineno = __LINE__; goto __pyx_L1_error;}
+  if (__Pyx_PrintOne(0, __pyx_t_3) < 0) {__pyx_filename = __pyx_f[1]; __pyx_lineno = 376; __pyx_clineno = __LINE__; goto __pyx_L1_error;}
   __Pyx_DECREF(__pyx_t_3); __pyx_t_3 = 0;
 
   /* "pynvel\_pynvel.pyx":377
- *     print 'avg_z2 -', avg_z2
- *     print 'form_class -', form_class
- *     print 'bark_thick -', bark_thick             # <<<<<<<<<<<<<<
- *     print 'bark_ratio -', bark_ratio
- *     print 'i3 -', i3
+ *     print('avg_z2 -', avg_z2)
+ *     print('form_class -', form_class)
+ *     print('bark_thick -', bark_thick)             # <<<<<<<<<<<<<<
+ *     print('bark_ratio -', bark_ratio)
+ *     print('i3 -', i3)
  */
   __pyx_t_3 = PyFloat_FromDouble(__pyx_v_bark_thick); if (unlikely(!__pyx_t_3)) {__pyx_filename = __pyx_f[1]; __pyx_lineno = 377; __pyx_clineno = __LINE__; goto __pyx_L1_error;}
   __Pyx_GOTREF(__pyx_t_3);
@@ -6577,15 +6577,15 @@ static PyObject *__pyx_pf_6pynvel_7_pynvel_18get_volume(CYTHON_UNUSED PyObject *
   __Pyx_GIVEREF(__pyx_t_3);
   PyTuple_SET_ITEM(__pyx_t_2, 1, __pyx_t_3);
   __pyx_t_3 = 0;
-  if (__Pyx_Print(0, __pyx_t_2, 1) < 0) {__pyx_filename = __pyx_f[1]; __pyx_lineno = 377; __pyx_clineno = __LINE__; goto __pyx_L1_error;}
+  if (__Pyx_PrintOne(0, __pyx_t_2) < 0) {__pyx_filename = __pyx_f[1]; __pyx_lineno = 377; __pyx_clineno = __LINE__; goto __pyx_L1_error;}
   __Pyx_DECREF(__pyx_t_2); __pyx_t_2 = 0;
 
   /* "pynvel\_pynvel.pyx":378
- *     print 'form_class -', form_class
- *     print 'bark_thick -', bark_thick
- *     print 'bark_ratio -', bark_ratio             # <<<<<<<<<<<<<<
- *     print 'i3 -', i3
- *     print 'i7 -', i7
+ *     print('form_class -', form_class)
+ *     print('bark_thick -', bark_thick)
+ *     print('bark_ratio -', bark_ratio)             # <<<<<<<<<<<<<<
+ *     print('i3 -', i3)
+ *     print('i7 -', i7)
  */
   __pyx_t_2 = PyFloat_FromDouble(__pyx_v_bark_ratio); if (unlikely(!__pyx_t_2)) {__pyx_filename = __pyx_f[1]; __pyx_lineno = 378; __pyx_clineno = __LINE__; goto __pyx_L1_error;}
   __Pyx_GOTREF(__pyx_t_2);
@@ -6597,15 +6597,15 @@ static PyObject *__pyx_pf_6pynvel_7_pynvel_18get_volume(CYTHON_UNUSED PyObject *
   __Pyx_GIVEREF(__pyx_t_2);
   PyTuple_SET_ITEM(__pyx_t_3, 1, __pyx_t_2);
   __pyx_t_2 = 0;
-  if (__Pyx_Print(0, __pyx_t_3, 1) < 0) {__pyx_filename = __pyx_f[1]; __pyx_lineno = 378; __pyx_clineno = __LINE__; goto __pyx_L1_error;}
+  if (__Pyx_PrintOne(0, __pyx_t_3) < 0) {__pyx_filename = __pyx_f[1]; __pyx_lineno = 378; __pyx_clineno = __LINE__; goto __pyx_L1_error;}
   __Pyx_DECREF(__pyx_t_3); __pyx_t_3 = 0;
 
   /* "pynvel\_pynvel.pyx":379
- *     print 'bark_thick -', bark_thick
- *     print 'bark_ratio -', bark_ratio
- *     print 'i3 -', i3             # <<<<<<<<<<<<<<
- *     print 'i7 -', i7
- *     print 'i15 -', i15
+ *     print('bark_thick -', bark_thick)
+ *     print('bark_ratio -', bark_ratio)
+ *     print('i3 -', i3)             # <<<<<<<<<<<<<<
+ *     print('i7 -', i7)
+ *     print('i15 -', i15)
  */
   __pyx_t_3 = __Pyx_PyInt_From_int(__pyx_v_i3); if (unlikely(!__pyx_t_3)) {__pyx_filename = __pyx_f[1]; __pyx_lineno = 379; __pyx_clineno = __LINE__; goto __pyx_L1_error;}
   __Pyx_GOTREF(__pyx_t_3);
@@ -6617,15 +6617,15 @@ static PyObject *__pyx_pf_6pynvel_7_pynvel_18get_volume(CYTHON_UNUSED PyObject *
   __Pyx_GIVEREF(__pyx_t_3);
   PyTuple_SET_ITEM(__pyx_t_2, 1, __pyx_t_3);
   __pyx_t_3 = 0;
-  if (__Pyx_Print(0, __pyx_t_2, 1) < 0) {__pyx_filename = __pyx_f[1]; __pyx_lineno = 379; __pyx_clineno = __LINE__; goto __pyx_L1_error;}
+  if (__Pyx_PrintOne(0, __pyx_t_2) < 0) {__pyx_filename = __pyx_f[1]; __pyx_lineno = 379; __pyx_clineno = __LINE__; goto __pyx_L1_error;}
   __Pyx_DECREF(__pyx_t_2); __pyx_t_2 = 0;
 
   /* "pynvel\_pynvel.pyx":380
- *     print 'bark_ratio -', bark_ratio
- *     print 'i3 -', i3
- *     print 'i7 -', i7             # <<<<<<<<<<<<<<
- *     print 'i15 -', i15
- *     print 'i20 -', i20
+ *     print('bark_ratio -', bark_ratio)
+ *     print('i3 -', i3)
+ *     print('i7 -', i7)             # <<<<<<<<<<<<<<
+ *     print('i15 -', i15)
+ *     print('i20 -', i20)
  */
   __pyx_t_2 = __Pyx_PyInt_From_int(__pyx_v_i7); if (unlikely(!__pyx_t_2)) {__pyx_filename = __pyx_f[1]; __pyx_lineno = 380; __pyx_clineno = __LINE__; goto __pyx_L1_error;}
   __Pyx_GOTREF(__pyx_t_2);
@@ -6637,15 +6637,15 @@ static PyObject *__pyx_pf_6pynvel_7_pynvel_18get_volume(CYTHON_UNUSED PyObject *
   __Pyx_GIVEREF(__pyx_t_2);
   PyTuple_SET_ITEM(__pyx_t_3, 1, __pyx_t_2);
   __pyx_t_2 = 0;
-  if (__Pyx_Print(0, __pyx_t_3, 1) < 0) {__pyx_filename = __pyx_f[1]; __pyx_lineno = 380; __pyx_clineno = __LINE__; goto __pyx_L1_error;}
+  if (__Pyx_PrintOne(0, __pyx_t_3) < 0) {__pyx_filename = __pyx_f[1]; __pyx_lineno = 380; __pyx_clineno = __LINE__; goto __pyx_L1_error;}
   __Pyx_DECREF(__pyx_t_3); __pyx_t_3 = 0;
 
   /* "pynvel\_pynvel.pyx":381
- *     print 'i3 -', i3
- *     print 'i7 -', i7
- *     print 'i15 -', i15             # <<<<<<<<<<<<<<
- *     print 'i20 -', i20
- *     print 'i21 -', i21
+ *     print('i3 -', i3)
+ *     print('i7 -', i7)
+ *     print('i15 -', i15)             # <<<<<<<<<<<<<<
+ *     print('i20 -', i20)
+ *     print('i21 -', i21)
  */
   __pyx_t_3 = __Pyx_PyInt_From_int(__pyx_v_i15); if (unlikely(!__pyx_t_3)) {__pyx_filename = __pyx_f[1]; __pyx_lineno = 381; __pyx_clineno = __LINE__; goto __pyx_L1_error;}
   __Pyx_GOTREF(__pyx_t_3);
@@ -6657,15 +6657,15 @@ static PyObject *__pyx_pf_6pynvel_7_pynvel_18get_volume(CYTHON_UNUSED PyObject *
   __Pyx_GIVEREF(__pyx_t_3);
   PyTuple_SET_ITEM(__pyx_t_2, 1, __pyx_t_3);
   __pyx_t_3 = 0;
-  if (__Pyx_Print(0, __pyx_t_2, 1) < 0) {__pyx_filename = __pyx_f[1]; __pyx_lineno = 381; __pyx_clineno = __LINE__; goto __pyx_L1_error;}
+  if (__Pyx_PrintOne(0, __pyx_t_2) < 0) {__pyx_filename = __pyx_f[1]; __pyx_lineno = 381; __pyx_clineno = __LINE__; goto __pyx_L1_error;}
   __Pyx_DECREF(__pyx_t_2); __pyx_t_2 = 0;
 
   /* "pynvel\_pynvel.pyx":382
- *     print 'i7 -', i7
- *     print 'i15 -', i15
- *     print 'i20 -', i20             # <<<<<<<<<<<<<<
- *     print 'i21 -', i21
- *     print 'volume_c[0] -', volume_c[0:5]
+ *     print('i7 -', i7)
+ *     print('i15 -', i15)
+ *     print('i20 -', i20)             # <<<<<<<<<<<<<<
+ *     print('i21 -', i21)
+ *     print('volume_c[0] -', volume_c[0:5])
  */
   __pyx_t_2 = __Pyx_PyInt_From_int(__pyx_v_i20); if (unlikely(!__pyx_t_2)) {__pyx_filename = __pyx_f[1]; __pyx_lineno = 382; __pyx_clineno = __LINE__; goto __pyx_L1_error;}
   __Pyx_GOTREF(__pyx_t_2);
@@ -6677,15 +6677,15 @@ static PyObject *__pyx_pf_6pynvel_7_pynvel_18get_volume(CYTHON_UNUSED PyObject *
   __Pyx_GIVEREF(__pyx_t_2);
   PyTuple_SET_ITEM(__pyx_t_3, 1, __pyx_t_2);
   __pyx_t_2 = 0;
-  if (__Pyx_Print(0, __pyx_t_3, 1) < 0) {__pyx_filename = __pyx_f[1]; __pyx_lineno = 382; __pyx_clineno = __LINE__; goto __pyx_L1_error;}
+  if (__Pyx_PrintOne(0, __pyx_t_3) < 0) {__pyx_filename = __pyx_f[1]; __pyx_lineno = 382; __pyx_clineno = __LINE__; goto __pyx_L1_error;}
   __Pyx_DECREF(__pyx_t_3); __pyx_t_3 = 0;
 
   /* "pynvel\_pynvel.pyx":383
- *     print 'i15 -', i15
- *     print 'i20 -', i20
- *     print 'i21 -', i21             # <<<<<<<<<<<<<<
- *     print 'volume_c[0] -', volume_c[0:5]
- *     print 'log_vol_c[0,0] -', log_vol_c[0,0]
+ *     print('i15 -', i15)
+ *     print('i20 -', i20)
+ *     print('i21 -', i21)             # <<<<<<<<<<<<<<
+ *     print('volume_c[0] -', volume_c[0:5])
+ *     print('log_vol_c[0,0] -', log_vol_c[0,0])
  */
   __pyx_t_3 = __Pyx_PyInt_From_int(__pyx_v_i21); if (unlikely(!__pyx_t_3)) {__pyx_filename = __pyx_f[1]; __pyx_lineno = 383; __pyx_clineno = __LINE__; goto __pyx_L1_error;}
   __Pyx_GOTREF(__pyx_t_3);
@@ -6697,15 +6697,15 @@ static PyObject *__pyx_pf_6pynvel_7_pynvel_18get_volume(CYTHON_UNUSED PyObject *
   __Pyx_GIVEREF(__pyx_t_3);
   PyTuple_SET_ITEM(__pyx_t_2, 1, __pyx_t_3);
   __pyx_t_3 = 0;
-  if (__Pyx_Print(0, __pyx_t_2, 1) < 0) {__pyx_filename = __pyx_f[1]; __pyx_lineno = 383; __pyx_clineno = __LINE__; goto __pyx_L1_error;}
+  if (__Pyx_PrintOne(0, __pyx_t_2) < 0) {__pyx_filename = __pyx_f[1]; __pyx_lineno = 383; __pyx_clineno = __LINE__; goto __pyx_L1_error;}
   __Pyx_DECREF(__pyx_t_2); __pyx_t_2 = 0;
 
   /* "pynvel\_pynvel.pyx":384
- *     print 'i20 -', i20
- *     print 'i21 -', i21
- *     print 'volume_c[0] -', volume_c[0:5]             # <<<<<<<<<<<<<<
- *     print 'log_vol_c[0,0] -', log_vol_c[0,0]
- *     print 'log_diam_c[0,0] -', log_diam_c[0,0]
+ *     print('i20 -', i20)
+ *     print('i21 -', i21)
+ *     print('volume_c[0] -', volume_c[0:5])             # <<<<<<<<<<<<<<
+ *     print('log_vol_c[0,0] -', log_vol_c[0,0])
+ *     print('log_diam_c[0,0] -', log_diam_c[0,0])
  */
   __pyx_t_2 = __Pyx_PyObject_GetSlice(((PyObject *)__pyx_v_volume_c), 0, 5, NULL, NULL, &__pyx_slice__4, 1, 1, 1); if (unlikely(!__pyx_t_2)) {__pyx_filename = __pyx_f[1]; __pyx_lineno = 384; __pyx_clineno = __LINE__; goto __pyx_L1_error;}
   __Pyx_GOTREF(__pyx_t_2);
@@ -6717,15 +6717,15 @@ static PyObject *__pyx_pf_6pynvel_7_pynvel_18get_volume(CYTHON_UNUSED PyObject *
   __Pyx_GIVEREF(__pyx_t_2);
   PyTuple_SET_ITEM(__pyx_t_3, 1, __pyx_t_2);
   __pyx_t_2 = 0;
-  if (__Pyx_Print(0, __pyx_t_3, 1) < 0) {__pyx_filename = __pyx_f[1]; __pyx_lineno = 384; __pyx_clineno = __LINE__; goto __pyx_L1_error;}
+  if (__Pyx_PrintOne(0, __pyx_t_3) < 0) {__pyx_filename = __pyx_f[1]; __pyx_lineno = 384; __pyx_clineno = __LINE__; goto __pyx_L1_error;}
   __Pyx_DECREF(__pyx_t_3); __pyx_t_3 = 0;
 
   /* "pynvel\_pynvel.pyx":385
- *     print 'i21 -', i21
- *     print 'volume_c[0] -', volume_c[0:5]
- *     print 'log_vol_c[0,0] -', log_vol_c[0,0]             # <<<<<<<<<<<<<<
- *     print 'log_diam_c[0,0] -', log_diam_c[0,0]
- *     print 'log_len_c[0] -', log_len_c[0]
+ *     print('i21 -', i21)
+ *     print('volume_c[0] -', volume_c[0:5])
+ *     print('log_vol_c[0,0] -', log_vol_c[0,0])             # <<<<<<<<<<<<<<
+ *     print('log_diam_c[0,0] -', log_diam_c[0,0])
+ *     print('log_len_c[0] -', log_len_c[0])
  */
   __pyx_t_21 = 0;
   __pyx_t_22 = 0;
@@ -6752,15 +6752,15 @@ static PyObject *__pyx_pf_6pynvel_7_pynvel_18get_volume(CYTHON_UNUSED PyObject *
   __Pyx_GIVEREF(__pyx_t_3);
   PyTuple_SET_ITEM(__pyx_t_2, 1, __pyx_t_3);
   __pyx_t_3 = 0;
-  if (__Pyx_Print(0, __pyx_t_2, 1) < 0) {__pyx_filename = __pyx_f[1]; __pyx_lineno = 385; __pyx_clineno = __LINE__; goto __pyx_L1_error;}
+  if (__Pyx_PrintOne(0, __pyx_t_2) < 0) {__pyx_filename = __pyx_f[1]; __pyx_lineno = 385; __pyx_clineno = __LINE__; goto __pyx_L1_error;}
   __Pyx_DECREF(__pyx_t_2); __pyx_t_2 = 0;
 
   /* "pynvel\_pynvel.pyx":386
- *     print 'volume_c[0] -', volume_c[0:5]
- *     print 'log_vol_c[0,0] -', log_vol_c[0,0]
- *     print 'log_diam_c[0,0] -', log_diam_c[0,0]             # <<<<<<<<<<<<<<
- *     print 'log_len_c[0] -', log_len_c[0]
- *     print 'bole_ht_c[0] -', bole_ht_c[0]
+ *     print('volume_c[0] -', volume_c[0:5])
+ *     print('log_vol_c[0,0] -', log_vol_c[0,0])
+ *     print('log_diam_c[0,0] -', log_diam_c[0,0])             # <<<<<<<<<<<<<<
+ *     print('log_len_c[0] -', log_len_c[0])
+ *     print('bole_ht_c[0] -', bole_ht_c[0])
  */
   __pyx_t_23 = 0;
   __pyx_t_24 = 0;
@@ -6787,15 +6787,15 @@ static PyObject *__pyx_pf_6pynvel_7_pynvel_18get_volume(CYTHON_UNUSED PyObject *
   __Pyx_GIVEREF(__pyx_t_2);
   PyTuple_SET_ITEM(__pyx_t_3, 1, __pyx_t_2);
   __pyx_t_2 = 0;
-  if (__Pyx_Print(0, __pyx_t_3, 1) < 0) {__pyx_filename = __pyx_f[1]; __pyx_lineno = 386; __pyx_clineno = __LINE__; goto __pyx_L1_error;}
+  if (__Pyx_PrintOne(0, __pyx_t_3) < 0) {__pyx_filename = __pyx_f[1]; __pyx_lineno = 386; __pyx_clineno = __LINE__; goto __pyx_L1_error;}
   __Pyx_DECREF(__pyx_t_3); __pyx_t_3 = 0;
 
   /* "pynvel\_pynvel.pyx":387
- *     print 'log_vol_c[0,0] -', log_vol_c[0,0]
- *     print 'log_diam_c[0,0] -', log_diam_c[0,0]
- *     print 'log_len_c[0] -', log_len_c[0]             # <<<<<<<<<<<<<<
- *     print 'bole_ht_c[0] -', bole_ht_c[0]
- *     print 'num_logs -', num_logs
+ *     print('log_vol_c[0,0] -', log_vol_c[0,0])
+ *     print('log_diam_c[0,0] -', log_diam_c[0,0])
+ *     print('log_len_c[0] -', log_len_c[0])             # <<<<<<<<<<<<<<
+ *     print('bole_ht_c[0] -', bole_ht_c[0])
+ *     print('num_logs -', num_logs)
  */
   __pyx_t_25 = 0;
   __pyx_t_14 = -1;
@@ -6817,15 +6817,15 @@ static PyObject *__pyx_pf_6pynvel_7_pynvel_18get_volume(CYTHON_UNUSED PyObject *
   __Pyx_GIVEREF(__pyx_t_3);
   PyTuple_SET_ITEM(__pyx_t_2, 1, __pyx_t_3);
   __pyx_t_3 = 0;
-  if (__Pyx_Print(0, __pyx_t_2, 1) < 0) {__pyx_filename = __pyx_f[1]; __pyx_lineno = 387; __pyx_clineno = __LINE__; goto __pyx_L1_error;}
+  if (__Pyx_PrintOne(0, __pyx_t_2) < 0) {__pyx_filename = __pyx_f[1]; __pyx_lineno = 387; __pyx_clineno = __LINE__; goto __pyx_L1_error;}
   __Pyx_DECREF(__pyx_t_2); __pyx_t_2 = 0;
 
   /* "pynvel\_pynvel.pyx":388
- *     print 'log_diam_c[0,0] -', log_diam_c[0,0]
- *     print 'log_len_c[0] -', log_len_c[0]
- *     print 'bole_ht_c[0] -', bole_ht_c[0]             # <<<<<<<<<<<<<<
- *     print 'num_logs -', num_logs
- *     print 'num_logs_prim -', num_logs_prim
+ *     print('log_diam_c[0,0] -', log_diam_c[0,0])
+ *     print('log_len_c[0] -', log_len_c[0])
+ *     print('bole_ht_c[0] -', bole_ht_c[0])             # <<<<<<<<<<<<<<
+ *     print('num_logs -', num_logs)
+ *     print('num_logs_prim -', num_logs_prim)
  */
   __pyx_t_26 = 0;
   __pyx_t_14 = -1;
@@ -6847,15 +6847,15 @@ static PyObject *__pyx_pf_6pynvel_7_pynvel_18get_volume(CYTHON_UNUSED PyObject *
   __Pyx_GIVEREF(__pyx_t_2);
   PyTuple_SET_ITEM(__pyx_t_3, 1, __pyx_t_2);
   __pyx_t_2 = 0;
-  if (__Pyx_Print(0, __pyx_t_3, 1) < 0) {__pyx_filename = __pyx_f[1]; __pyx_lineno = 388; __pyx_clineno = __LINE__; goto __pyx_L1_error;}
+  if (__Pyx_PrintOne(0, __pyx_t_3) < 0) {__pyx_filename = __pyx_f[1]; __pyx_lineno = 388; __pyx_clineno = __LINE__; goto __pyx_L1_error;}
   __Pyx_DECREF(__pyx_t_3); __pyx_t_3 = 0;
 
   /* "pynvel\_pynvel.pyx":389
- *     print 'log_len_c[0] -', log_len_c[0]
- *     print 'bole_ht_c[0] -', bole_ht_c[0]
- *     print 'num_logs -', num_logs             # <<<<<<<<<<<<<<
- *     print 'num_logs_prim -', num_logs_prim
- *     print 'num_logs_sec -', num_logs_sec
+ *     print('log_len_c[0] -', log_len_c[0])
+ *     print('bole_ht_c[0] -', bole_ht_c[0])
+ *     print('num_logs -', num_logs)             # <<<<<<<<<<<<<<
+ *     print('num_logs_prim -', num_logs_prim)
+ *     print('num_logs_sec -', num_logs_sec)
  */
   __pyx_t_3 = __Pyx_PyInt_From_int(__pyx_v_num_logs); if (unlikely(!__pyx_t_3)) {__pyx_filename = __pyx_f[1]; __pyx_lineno = 389; __pyx_clineno = __LINE__; goto __pyx_L1_error;}
   __Pyx_GOTREF(__pyx_t_3);
@@ -6867,15 +6867,15 @@ static PyObject *__pyx_pf_6pynvel_7_pynvel_18get_volume(CYTHON_UNUSED PyObject *
   __Pyx_GIVEREF(__pyx_t_3);
   PyTuple_SET_ITEM(__pyx_t_2, 1, __pyx_t_3);
   __pyx_t_3 = 0;
-  if (__Pyx_Print(0, __pyx_t_2, 1) < 0) {__pyx_filename = __pyx_f[1]; __pyx_lineno = 389; __pyx_clineno = __LINE__; goto __pyx_L1_error;}
+  if (__Pyx_PrintOne(0, __pyx_t_2) < 0) {__pyx_filename = __pyx_f[1]; __pyx_lineno = 389; __pyx_clineno = __LINE__; goto __pyx_L1_error;}
   __Pyx_DECREF(__pyx_t_2); __pyx_t_2 = 0;
 
   /* "pynvel\_pynvel.pyx":390
- *     print 'bole_ht_c[0] -', bole_ht_c[0]
- *     print 'num_logs -', num_logs
- *     print 'num_logs_prim -', num_logs_prim             # <<<<<<<<<<<<<<
- *     print 'num_logs_sec -', num_logs_sec
- *     print 'cubic_total_flag -', cubic_total_flag
+ *     print('bole_ht_c[0] -', bole_ht_c[0])
+ *     print('num_logs -', num_logs)
+ *     print('num_logs_prim -', num_logs_prim)             # <<<<<<<<<<<<<<
+ *     print('num_logs_sec -', num_logs_sec)
+ *     print('cubic_total_flag -', cubic_total_flag)
  */
   __pyx_t_2 = PyFloat_FromDouble(__pyx_v_num_logs_prim); if (unlikely(!__pyx_t_2)) {__pyx_filename = __pyx_f[1]; __pyx_lineno = 390; __pyx_clineno = __LINE__; goto __pyx_L1_error;}
   __Pyx_GOTREF(__pyx_t_2);
@@ -6887,15 +6887,15 @@ static PyObject *__pyx_pf_6pynvel_7_pynvel_18get_volume(CYTHON_UNUSED PyObject *
   __Pyx_GIVEREF(__pyx_t_2);
   PyTuple_SET_ITEM(__pyx_t_3, 1, __pyx_t_2);
   __pyx_t_2 = 0;
-  if (__Pyx_Print(0, __pyx_t_3, 1) < 0) {__pyx_filename = __pyx_f[1]; __pyx_lineno = 390; __pyx_clineno = __LINE__; goto __pyx_L1_error;}
+  if (__Pyx_PrintOne(0, __pyx_t_3) < 0) {__pyx_filename = __pyx_f[1]; __pyx_lineno = 390; __pyx_clineno = __LINE__; goto __pyx_L1_error;}
   __Pyx_DECREF(__pyx_t_3); __pyx_t_3 = 0;
 
   /* "pynvel\_pynvel.pyx":391
- *     print 'num_logs -', num_logs
- *     print 'num_logs_prim -', num_logs_prim
- *     print 'num_logs_sec -', num_logs_sec             # <<<<<<<<<<<<<<
- *     print 'cubic_total_flag -', cubic_total_flag
- *     print 'bdft_prim_flag -', bdft_prim_flag
+ *     print('num_logs -', num_logs)
+ *     print('num_logs_prim -', num_logs_prim)
+ *     print('num_logs_sec -', num_logs_sec)             # <<<<<<<<<<<<<<
+ *     print('cubic_total_flag -', cubic_total_flag)
+ *     print('bdft_prim_flag -', bdft_prim_flag)
  */
   __pyx_t_3 = PyFloat_FromDouble(__pyx_v_num_logs_sec); if (unlikely(!__pyx_t_3)) {__pyx_filename = __pyx_f[1]; __pyx_lineno = 391; __pyx_clineno = __LINE__; goto __pyx_L1_error;}
   __Pyx_GOTREF(__pyx_t_3);
@@ -6907,15 +6907,15 @@ static PyObject *__pyx_pf_6pynvel_7_pynvel_18get_volume(CYTHON_UNUSED PyObject *
   __Pyx_GIVEREF(__pyx_t_3);
   PyTuple_SET_ITEM(__pyx_t_2, 1, __pyx_t_3);
   __pyx_t_3 = 0;
-  if (__Pyx_Print(0, __pyx_t_2, 1) < 0) {__pyx_filename = __pyx_f[1]; __pyx_lineno = 391; __pyx_clineno = __LINE__; goto __pyx_L1_error;}
+  if (__Pyx_PrintOne(0, __pyx_t_2) < 0) {__pyx_filename = __pyx_f[1]; __pyx_lineno = 391; __pyx_clineno = __LINE__; goto __pyx_L1_error;}
   __Pyx_DECREF(__pyx_t_2); __pyx_t_2 = 0;
 
   /* "pynvel\_pynvel.pyx":392
- *     print 'num_logs_prim -', num_logs_prim
- *     print 'num_logs_sec -', num_logs_sec
- *     print 'cubic_total_flag -', cubic_total_flag             # <<<<<<<<<<<<<<
- *     print 'bdft_prim_flag -', bdft_prim_flag
- *     print 'cubic_prim_flag -', cubic_prim_flag
+ *     print('num_logs_prim -', num_logs_prim)
+ *     print('num_logs_sec -', num_logs_sec)
+ *     print('cubic_total_flag -', cubic_total_flag)             # <<<<<<<<<<<<<<
+ *     print('bdft_prim_flag -', bdft_prim_flag)
+ *     print('cubic_prim_flag -', cubic_prim_flag)
  */
   __pyx_t_2 = __Pyx_PyInt_From_int(__pyx_v_cubic_total_flag); if (unlikely(!__pyx_t_2)) {__pyx_filename = __pyx_f[1]; __pyx_lineno = 392; __pyx_clineno = __LINE__; goto __pyx_L1_error;}
   __Pyx_GOTREF(__pyx_t_2);
@@ -6927,15 +6927,15 @@ static PyObject *__pyx_pf_6pynvel_7_pynvel_18get_volume(CYTHON_UNUSED PyObject *
   __Pyx_GIVEREF(__pyx_t_2);
   PyTuple_SET_ITEM(__pyx_t_3, 1, __pyx_t_2);
   __pyx_t_2 = 0;
-  if (__Pyx_Print(0, __pyx_t_3, 1) < 0) {__pyx_filename = __pyx_f[1]; __pyx_lineno = 392; __pyx_clineno = __LINE__; goto __pyx_L1_error;}
+  if (__Pyx_PrintOne(0, __pyx_t_3) < 0) {__pyx_filename = __pyx_f[1]; __pyx_lineno = 392; __pyx_clineno = __LINE__; goto __pyx_L1_error;}
   __Pyx_DECREF(__pyx_t_3); __pyx_t_3 = 0;
 
   /* "pynvel\_pynvel.pyx":393
- *     print 'num_logs_sec -', num_logs_sec
- *     print 'cubic_total_flag -', cubic_total_flag
- *     print 'bdft_prim_flag -', bdft_prim_flag             # <<<<<<<<<<<<<<
- *     print 'cubic_prim_flag -', cubic_prim_flag
- *     print 'cord_prim_flag -', cord_prim_flag
+ *     print('num_logs_sec -', num_logs_sec)
+ *     print('cubic_total_flag -', cubic_total_flag)
+ *     print('bdft_prim_flag -', bdft_prim_flag)             # <<<<<<<<<<<<<<
+ *     print('cubic_prim_flag -', cubic_prim_flag)
+ *     print('cord_prim_flag -', cord_prim_flag)
  */
   __pyx_t_3 = __Pyx_PyInt_From_int(__pyx_v_bdft_prim_flag); if (unlikely(!__pyx_t_3)) {__pyx_filename = __pyx_f[1]; __pyx_lineno = 393; __pyx_clineno = __LINE__; goto __pyx_L1_error;}
   __Pyx_GOTREF(__pyx_t_3);
@@ -6947,15 +6947,15 @@ static PyObject *__pyx_pf_6pynvel_7_pynvel_18get_volume(CYTHON_UNUSED PyObject *
   __Pyx_GIVEREF(__pyx_t_3);
   PyTuple_SET_ITEM(__pyx_t_2, 1, __pyx_t_3);
   __pyx_t_3 = 0;
-  if (__Pyx_Print(0, __pyx_t_2, 1) < 0) {__pyx_filename = __pyx_f[1]; __pyx_lineno = 393; __pyx_clineno = __LINE__; goto __pyx_L1_error;}
+  if (__Pyx_PrintOne(0, __pyx_t_2) < 0) {__pyx_filename = __pyx_f[1]; __pyx_lineno = 393; __pyx_clineno = __LINE__; goto __pyx_L1_error;}
   __Pyx_DECREF(__pyx_t_2); __pyx_t_2 = 0;
 
   /* "pynvel\_pynvel.pyx":394
- *     print 'cubic_total_flag -', cubic_total_flag
- *     print 'bdft_prim_flag -', bdft_prim_flag
- *     print 'cubic_prim_flag -', cubic_prim_flag             # <<<<<<<<<<<<<<
- *     print 'cord_prim_flag -', cord_prim_flag
- *     print 'sec_vol_flag -', sec_vol_flag
+ *     print('cubic_total_flag -', cubic_total_flag)
+ *     print('bdft_prim_flag -', bdft_prim_flag)
+ *     print('cubic_prim_flag -', cubic_prim_flag)             # <<<<<<<<<<<<<<
+ *     print('cord_prim_flag -', cord_prim_flag)
+ *     print('sec_vol_flag -', sec_vol_flag)
  */
   __pyx_t_2 = __Pyx_PyInt_From_int(__pyx_v_cubic_prim_flag); if (unlikely(!__pyx_t_2)) {__pyx_filename = __pyx_f[1]; __pyx_lineno = 394; __pyx_clineno = __LINE__; goto __pyx_L1_error;}
   __Pyx_GOTREF(__pyx_t_2);
@@ -6967,15 +6967,15 @@ static PyObject *__pyx_pf_6pynvel_7_pynvel_18get_volume(CYTHON_UNUSED PyObject *
   __Pyx_GIVEREF(__pyx_t_2);
   PyTuple_SET_ITEM(__pyx_t_3, 1, __pyx_t_2);
   __pyx_t_2 = 0;
-  if (__Pyx_Print(0, __pyx_t_3, 1) < 0) {__pyx_filename = __pyx_f[1]; __pyx_lineno = 394; __pyx_clineno = __LINE__; goto __pyx_L1_error;}
+  if (__Pyx_PrintOne(0, __pyx_t_3) < 0) {__pyx_filename = __pyx_f[1]; __pyx_lineno = 394; __pyx_clineno = __LINE__; goto __pyx_L1_error;}
   __Pyx_DECREF(__pyx_t_3); __pyx_t_3 = 0;
 
   /* "pynvel\_pynvel.pyx":395
- *     print 'bdft_prim_flag -', bdft_prim_flag
- *     print 'cubic_prim_flag -', cubic_prim_flag
- *     print 'cord_prim_flag -', cord_prim_flag             # <<<<<<<<<<<<<<
- *     print 'sec_vol_flag -', sec_vol_flag
- *     print 'con_spp_c -', con_spp_c
+ *     print('bdft_prim_flag -', bdft_prim_flag)
+ *     print('cubic_prim_flag -', cubic_prim_flag)
+ *     print('cord_prim_flag -', cord_prim_flag)             # <<<<<<<<<<<<<<
+ *     print('sec_vol_flag -', sec_vol_flag)
+ *     print('con_spp_c -', con_spp_c)
  */
   __pyx_t_3 = __Pyx_PyInt_From_int(__pyx_v_cord_prim_flag); if (unlikely(!__pyx_t_3)) {__pyx_filename = __pyx_f[1]; __pyx_lineno = 395; __pyx_clineno = __LINE__; goto __pyx_L1_error;}
   __Pyx_GOTREF(__pyx_t_3);
@@ -6987,15 +6987,15 @@ static PyObject *__pyx_pf_6pynvel_7_pynvel_18get_volume(CYTHON_UNUSED PyObject *
   __Pyx_GIVEREF(__pyx_t_3);
   PyTuple_SET_ITEM(__pyx_t_2, 1, __pyx_t_3);
   __pyx_t_3 = 0;
-  if (__Pyx_Print(0, __pyx_t_2, 1) < 0) {__pyx_filename = __pyx_f[1]; __pyx_lineno = 395; __pyx_clineno = __LINE__; goto __pyx_L1_error;}
+  if (__Pyx_PrintOne(0, __pyx_t_2) < 0) {__pyx_filename = __pyx_f[1]; __pyx_lineno = 395; __pyx_clineno = __LINE__; goto __pyx_L1_error;}
   __Pyx_DECREF(__pyx_t_2); __pyx_t_2 = 0;
 
   /* "pynvel\_pynvel.pyx":396
- *     print 'cubic_prim_flag -', cubic_prim_flag
- *     print 'cord_prim_flag -', cord_prim_flag
- *     print 'sec_vol_flag -', sec_vol_flag             # <<<<<<<<<<<<<<
- *     print 'con_spp_c -', con_spp_c
- *     print 'prod_code_c -', prod_code_c
+ *     print('cubic_prim_flag -', cubic_prim_flag)
+ *     print('cord_prim_flag -', cord_prim_flag)
+ *     print('sec_vol_flag -', sec_vol_flag)             # <<<<<<<<<<<<<<
+ *     print('con_spp_c -', con_spp_c)
+ *     print('prod_code_c -', prod_code_c)
  */
   __pyx_t_2 = __Pyx_PyInt_From_int(__pyx_v_sec_vol_flag); if (unlikely(!__pyx_t_2)) {__pyx_filename = __pyx_f[1]; __pyx_lineno = 396; __pyx_clineno = __LINE__; goto __pyx_L1_error;}
   __Pyx_GOTREF(__pyx_t_2);
@@ -7007,15 +7007,15 @@ static PyObject *__pyx_pf_6pynvel_7_pynvel_18get_volume(CYTHON_UNUSED PyObject *
   __Pyx_GIVEREF(__pyx_t_2);
   PyTuple_SET_ITEM(__pyx_t_3, 1, __pyx_t_2);
   __pyx_t_2 = 0;
-  if (__Pyx_Print(0, __pyx_t_3, 1) < 0) {__pyx_filename = __pyx_f[1]; __pyx_lineno = 396; __pyx_clineno = __LINE__; goto __pyx_L1_error;}
+  if (__Pyx_PrintOne(0, __pyx_t_3) < 0) {__pyx_filename = __pyx_f[1]; __pyx_lineno = 396; __pyx_clineno = __LINE__; goto __pyx_L1_error;}
   __Pyx_DECREF(__pyx_t_3); __pyx_t_3 = 0;
 
   /* "pynvel\_pynvel.pyx":397
- *     print 'cord_prim_flag -', cord_prim_flag
- *     print 'sec_vol_flag -', sec_vol_flag
- *     print 'con_spp_c -', con_spp_c             # <<<<<<<<<<<<<<
- *     print 'prod_code_c -', prod_code_c
- *     print 'ht_1st_limb -', ht_1st_limb
+ *     print('cord_prim_flag -', cord_prim_flag)
+ *     print('sec_vol_flag -', sec_vol_flag)
+ *     print('con_spp_c -', con_spp_c)             # <<<<<<<<<<<<<<
+ *     print('prod_code_c -', prod_code_c)
+ *     print('ht_1st_limb -', ht_1st_limb)
  */
   __pyx_t_3 = __Pyx_PyBytes_FromString(__pyx_v_con_spp_c); if (unlikely(!__pyx_t_3)) {__pyx_filename = __pyx_f[1]; __pyx_lineno = 397; __pyx_clineno = __LINE__; goto __pyx_L1_error;}
   __Pyx_GOTREF(__pyx_t_3);
@@ -7027,15 +7027,15 @@ static PyObject *__pyx_pf_6pynvel_7_pynvel_18get_volume(CYTHON_UNUSED PyObject *
   __Pyx_GIVEREF(__pyx_t_3);
   PyTuple_SET_ITEM(__pyx_t_2, 1, __pyx_t_3);
   __pyx_t_3 = 0;
-  if (__Pyx_Print(0, __pyx_t_2, 1) < 0) {__pyx_filename = __pyx_f[1]; __pyx_lineno = 397; __pyx_clineno = __LINE__; goto __pyx_L1_error;}
+  if (__Pyx_PrintOne(0, __pyx_t_2) < 0) {__pyx_filename = __pyx_f[1]; __pyx_lineno = 397; __pyx_clineno = __LINE__; goto __pyx_L1_error;}
   __Pyx_DECREF(__pyx_t_2); __pyx_t_2 = 0;
 
   /* "pynvel\_pynvel.pyx":398
- *     print 'sec_vol_flag -', sec_vol_flag
- *     print 'con_spp_c -', con_spp_c
- *     print 'prod_code_c -', prod_code_c             # <<<<<<<<<<<<<<
- *     print 'ht_1st_limb -', ht_1st_limb
- *     print 'live_c -', live_c
+ *     print('sec_vol_flag -', sec_vol_flag)
+ *     print('con_spp_c -', con_spp_c)
+ *     print('prod_code_c -', prod_code_c)             # <<<<<<<<<<<<<<
+ *     print('ht_1st_limb -', ht_1st_limb)
+ *     print('live_c -', live_c)
  */
   __pyx_t_2 = __Pyx_PyBytes_FromString(__pyx_v_prod_code_c); if (unlikely(!__pyx_t_2)) {__pyx_filename = __pyx_f[1]; __pyx_lineno = 398; __pyx_clineno = __LINE__; goto __pyx_L1_error;}
   __Pyx_GOTREF(__pyx_t_2);
@@ -7047,15 +7047,15 @@ static PyObject *__pyx_pf_6pynvel_7_pynvel_18get_volume(CYTHON_UNUSED PyObject *
   __Pyx_GIVEREF(__pyx_t_2);
   PyTuple_SET_ITEM(__pyx_t_3, 1, __pyx_t_2);
   __pyx_t_2 = 0;
-  if (__Pyx_Print(0, __pyx_t_3, 1) < 0) {__pyx_filename = __pyx_f[1]; __pyx_lineno = 398; __pyx_clineno = __LINE__; goto __pyx_L1_error;}
+  if (__Pyx_PrintOne(0, __pyx_t_3) < 0) {__pyx_filename = __pyx_f[1]; __pyx_lineno = 398; __pyx_clineno = __LINE__; goto __pyx_L1_error;}
   __Pyx_DECREF(__pyx_t_3); __pyx_t_3 = 0;
 
   /* "pynvel\_pynvel.pyx":399
- *     print 'con_spp_c -', con_spp_c
- *     print 'prod_code_c -', prod_code_c
- *     print 'ht_1st_limb -', ht_1st_limb             # <<<<<<<<<<<<<<
- *     print 'live_c -', live_c
- *     print 'basal_area -', basal_area
+ *     print('con_spp_c -', con_spp_c)
+ *     print('prod_code_c -', prod_code_c)
+ *     print('ht_1st_limb -', ht_1st_limb)             # <<<<<<<<<<<<<<
+ *     print('live_c -', live_c)
+ *     print('basal_area -', basal_area)
  */
   __pyx_t_3 = __Pyx_PyInt_From_int(__pyx_v_ht_1st_limb); if (unlikely(!__pyx_t_3)) {__pyx_filename = __pyx_f[1]; __pyx_lineno = 399; __pyx_clineno = __LINE__; goto __pyx_L1_error;}
   __Pyx_GOTREF(__pyx_t_3);
@@ -7067,15 +7067,15 @@ static PyObject *__pyx_pf_6pynvel_7_pynvel_18get_volume(CYTHON_UNUSED PyObject *
   __Pyx_GIVEREF(__pyx_t_3);
   PyTuple_SET_ITEM(__pyx_t_2, 1, __pyx_t_3);
   __pyx_t_3 = 0;
-  if (__Pyx_Print(0, __pyx_t_2, 1) < 0) {__pyx_filename = __pyx_f[1]; __pyx_lineno = 399; __pyx_clineno = __LINE__; goto __pyx_L1_error;}
+  if (__Pyx_PrintOne(0, __pyx_t_2) < 0) {__pyx_filename = __pyx_f[1]; __pyx_lineno = 399; __pyx_clineno = __LINE__; goto __pyx_L1_error;}
   __Pyx_DECREF(__pyx_t_2); __pyx_t_2 = 0;
 
   /* "pynvel\_pynvel.pyx":400
- *     print 'prod_code_c -', prod_code_c
- *     print 'ht_1st_limb -', ht_1st_limb
- *     print 'live_c -', live_c             # <<<<<<<<<<<<<<
- *     print 'basal_area -', basal_area
- *     print 'site_index -', site_index
+ *     print('prod_code_c -', prod_code_c)
+ *     print('ht_1st_limb -', ht_1st_limb)
+ *     print('live_c -', live_c)             # <<<<<<<<<<<<<<
+ *     print('basal_area -', basal_area)
+ *     print('site_index -', site_index)
  */
   __pyx_t_2 = __Pyx_PyBytes_FromString(__pyx_v_live_c); if (unlikely(!__pyx_t_2)) {__pyx_filename = __pyx_f[1]; __pyx_lineno = 400; __pyx_clineno = __LINE__; goto __pyx_L1_error;}
   __Pyx_GOTREF(__pyx_t_2);
@@ -7087,15 +7087,15 @@ static PyObject *__pyx_pf_6pynvel_7_pynvel_18get_volume(CYTHON_UNUSED PyObject *
   __Pyx_GIVEREF(__pyx_t_2);
   PyTuple_SET_ITEM(__pyx_t_3, 1, __pyx_t_2);
   __pyx_t_2 = 0;
-  if (__Pyx_Print(0, __pyx_t_3, 1) < 0) {__pyx_filename = __pyx_f[1]; __pyx_lineno = 400; __pyx_clineno = __LINE__; goto __pyx_L1_error;}
+  if (__Pyx_PrintOne(0, __pyx_t_3) < 0) {__pyx_filename = __pyx_f[1]; __pyx_lineno = 400; __pyx_clineno = __LINE__; goto __pyx_L1_error;}
   __Pyx_DECREF(__pyx_t_3); __pyx_t_3 = 0;
 
   /* "pynvel\_pynvel.pyx":401
- *     print 'ht_1st_limb -', ht_1st_limb
- *     print 'live_c -', live_c
- *     print 'basal_area -', basal_area             # <<<<<<<<<<<<<<
- *     print 'site_index -', site_index
- *     print 'cruise_type_c -', cruise_type_c
+ *     print('ht_1st_limb -', ht_1st_limb)
+ *     print('live_c -', live_c)
+ *     print('basal_area -', basal_area)             # <<<<<<<<<<<<<<
+ *     print('site_index -', site_index)
+ *     print('cruise_type_c -', cruise_type_c)
  */
   __pyx_t_3 = __Pyx_PyInt_From_int(__pyx_v_basal_area); if (unlikely(!__pyx_t_3)) {__pyx_filename = __pyx_f[1]; __pyx_lineno = 401; __pyx_clineno = __LINE__; goto __pyx_L1_error;}
   __Pyx_GOTREF(__pyx_t_3);
@@ -7107,15 +7107,15 @@ static PyObject *__pyx_pf_6pynvel_7_pynvel_18get_volume(CYTHON_UNUSED PyObject *
   __Pyx_GIVEREF(__pyx_t_3);
   PyTuple_SET_ITEM(__pyx_t_2, 1, __pyx_t_3);
   __pyx_t_3 = 0;
-  if (__Pyx_Print(0, __pyx_t_2, 1) < 0) {__pyx_filename = __pyx_f[1]; __pyx_lineno = 401; __pyx_clineno = __LINE__; goto __pyx_L1_error;}
+  if (__Pyx_PrintOne(0, __pyx_t_2) < 0) {__pyx_filename = __pyx_f[1]; __pyx_lineno = 401; __pyx_clineno = __LINE__; goto __pyx_L1_error;}
   __Pyx_DECREF(__pyx_t_2); __pyx_t_2 = 0;
 
   /* "pynvel\_pynvel.pyx":402
- *     print 'live_c -', live_c
- *     print 'basal_area -', basal_area
- *     print 'site_index -', site_index             # <<<<<<<<<<<<<<
- *     print 'cruise_type_c -', cruise_type_c
- *     print 'error_flag -', error_flag
+ *     print('live_c -', live_c)
+ *     print('basal_area -', basal_area)
+ *     print('site_index -', site_index)             # <<<<<<<<<<<<<<
+ *     print('cruise_type_c -', cruise_type_c)
+ *     print('error_flag -', error_flag)
  */
   __pyx_t_2 = __Pyx_PyInt_From_int(__pyx_v_site_index); if (unlikely(!__pyx_t_2)) {__pyx_filename = __pyx_f[1]; __pyx_lineno = 402; __pyx_clineno = __LINE__; goto __pyx_L1_error;}
   __Pyx_GOTREF(__pyx_t_2);
@@ -7127,15 +7127,15 @@ static PyObject *__pyx_pf_6pynvel_7_pynvel_18get_volume(CYTHON_UNUSED PyObject *
   __Pyx_GIVEREF(__pyx_t_2);
   PyTuple_SET_ITEM(__pyx_t_3, 1, __pyx_t_2);
   __pyx_t_2 = 0;
-  if (__Pyx_Print(0, __pyx_t_3, 1) < 0) {__pyx_filename = __pyx_f[1]; __pyx_lineno = 402; __pyx_clineno = __LINE__; goto __pyx_L1_error;}
+  if (__Pyx_PrintOne(0, __pyx_t_3) < 0) {__pyx_filename = __pyx_f[1]; __pyx_lineno = 402; __pyx_clineno = __LINE__; goto __pyx_L1_error;}
   __Pyx_DECREF(__pyx_t_3); __pyx_t_3 = 0;
 
   /* "pynvel\_pynvel.pyx":403
- *     print 'basal_area -', basal_area
- *     print 'site_index -', site_index
- *     print 'cruise_type_c -', cruise_type_c             # <<<<<<<<<<<<<<
- *     print 'error_flag -', error_flag
- *     print 'debug -', debug
+ *     print('basal_area -', basal_area)
+ *     print('site_index -', site_index)
+ *     print('cruise_type_c -', cruise_type_c)             # <<<<<<<<<<<<<<
+ *     print('error_flag -', error_flag)
+ *     print('debug -', debug)
  */
   __pyx_t_3 = __Pyx_PyBytes_FromString(__pyx_v_cruise_type_c); if (unlikely(!__pyx_t_3)) {__pyx_filename = __pyx_f[1]; __pyx_lineno = 403; __pyx_clineno = __LINE__; goto __pyx_L1_error;}
   __Pyx_GOTREF(__pyx_t_3);
@@ -7147,15 +7147,15 @@ static PyObject *__pyx_pf_6pynvel_7_pynvel_18get_volume(CYTHON_UNUSED PyObject *
   __Pyx_GIVEREF(__pyx_t_3);
   PyTuple_SET_ITEM(__pyx_t_2, 1, __pyx_t_3);
   __pyx_t_3 = 0;
-  if (__Pyx_Print(0, __pyx_t_2, 1) < 0) {__pyx_filename = __pyx_f[1]; __pyx_lineno = 403; __pyx_clineno = __LINE__; goto __pyx_L1_error;}
+  if (__Pyx_PrintOne(0, __pyx_t_2) < 0) {__pyx_filename = __pyx_f[1]; __pyx_lineno = 403; __pyx_clineno = __LINE__; goto __pyx_L1_error;}
   __Pyx_DECREF(__pyx_t_2); __pyx_t_2 = 0;
 
   /* "pynvel\_pynvel.pyx":404
- *     print 'site_index -', site_index
- *     print 'cruise_type_c -', cruise_type_c
- *     print 'error_flag -', error_flag             # <<<<<<<<<<<<<<
- *     print 'debug -', debug
- *     print 'user_merch_flag -', user_merch_flag
+ *     print('site_index -', site_index)
+ *     print('cruise_type_c -', cruise_type_c)
+ *     print('error_flag -', error_flag)             # <<<<<<<<<<<<<<
+ *     print('debug -', debug)
+ *     print('user_merch_flag -', user_merch_flag)
  */
   __pyx_t_2 = __Pyx_PyInt_From_int(__pyx_v_error_flag); if (unlikely(!__pyx_t_2)) {__pyx_filename = __pyx_f[1]; __pyx_lineno = 404; __pyx_clineno = __LINE__; goto __pyx_L1_error;}
   __Pyx_GOTREF(__pyx_t_2);
@@ -7167,15 +7167,15 @@ static PyObject *__pyx_pf_6pynvel_7_pynvel_18get_volume(CYTHON_UNUSED PyObject *
   __Pyx_GIVEREF(__pyx_t_2);
   PyTuple_SET_ITEM(__pyx_t_3, 1, __pyx_t_2);
   __pyx_t_2 = 0;
-  if (__Pyx_Print(0, __pyx_t_3, 1) < 0) {__pyx_filename = __pyx_f[1]; __pyx_lineno = 404; __pyx_clineno = __LINE__; goto __pyx_L1_error;}
+  if (__Pyx_PrintOne(0, __pyx_t_3) < 0) {__pyx_filename = __pyx_f[1]; __pyx_lineno = 404; __pyx_clineno = __LINE__; goto __pyx_L1_error;}
   __Pyx_DECREF(__pyx_t_3); __pyx_t_3 = 0;
 
   /* "pynvel\_pynvel.pyx":405
- *     print 'cruise_type_c -', cruise_type_c
- *     print 'error_flag -', error_flag
- *     print 'debug -', debug             # <<<<<<<<<<<<<<
- *     print 'user_merch_flag -', user_merch_flag
- *     print 'merch_rule -', merch_rule
+ *     print('cruise_type_c -', cruise_type_c)
+ *     print('error_flag -', error_flag)
+ *     print('debug -', debug)             # <<<<<<<<<<<<<<
+ *     print('user_merch_flag -', user_merch_flag)
+ *     print('merch_rule -', merch_rule)
  */
   __pyx_t_3 = __Pyx_PyInt_From_int(__pyx_v_debug); if (unlikely(!__pyx_t_3)) {__pyx_filename = __pyx_f[1]; __pyx_lineno = 405; __pyx_clineno = __LINE__; goto __pyx_L1_error;}
   __Pyx_GOTREF(__pyx_t_3);
@@ -7187,15 +7187,15 @@ static PyObject *__pyx_pf_6pynvel_7_pynvel_18get_volume(CYTHON_UNUSED PyObject *
   __Pyx_GIVEREF(__pyx_t_3);
   PyTuple_SET_ITEM(__pyx_t_2, 1, __pyx_t_3);
   __pyx_t_3 = 0;
-  if (__Pyx_Print(0, __pyx_t_2, 1) < 0) {__pyx_filename = __pyx_f[1]; __pyx_lineno = 405; __pyx_clineno = __LINE__; goto __pyx_L1_error;}
+  if (__Pyx_PrintOne(0, __pyx_t_2) < 0) {__pyx_filename = __pyx_f[1]; __pyx_lineno = 405; __pyx_clineno = __LINE__; goto __pyx_L1_error;}
   __Pyx_DECREF(__pyx_t_2); __pyx_t_2 = 0;
 
   /* "pynvel\_pynvel.pyx":406
- *     print 'error_flag -', error_flag
- *     print 'debug -', debug
- *     print 'user_merch_flag -', user_merch_flag             # <<<<<<<<<<<<<<
- *     print 'merch_rule -', merch_rule
- *     print 'fl -', fl
+ *     print('error_flag -', error_flag)
+ *     print('debug -', debug)
+ *     print('user_merch_flag -', user_merch_flag)             # <<<<<<<<<<<<<<
+ *     print('merch_rule -', merch_rule)
+ *     print('fl -', fl)
  */
   __pyx_t_2 = __Pyx_PyInt_From_int(__pyx_v_user_merch_flag); if (unlikely(!__pyx_t_2)) {__pyx_filename = __pyx_f[1]; __pyx_lineno = 406; __pyx_clineno = __LINE__; goto __pyx_L1_error;}
   __Pyx_GOTREF(__pyx_t_2);
@@ -7207,15 +7207,15 @@ static PyObject *__pyx_pf_6pynvel_7_pynvel_18get_volume(CYTHON_UNUSED PyObject *
   __Pyx_GIVEREF(__pyx_t_2);
   PyTuple_SET_ITEM(__pyx_t_3, 1, __pyx_t_2);
   __pyx_t_2 = 0;
-  if (__Pyx_Print(0, __pyx_t_3, 1) < 0) {__pyx_filename = __pyx_f[1]; __pyx_lineno = 406; __pyx_clineno = __LINE__; goto __pyx_L1_error;}
+  if (__Pyx_PrintOne(0, __pyx_t_3) < 0) {__pyx_filename = __pyx_f[1]; __pyx_lineno = 406; __pyx_clineno = __LINE__; goto __pyx_L1_error;}
   __Pyx_DECREF(__pyx_t_3); __pyx_t_3 = 0;
 
   /* "pynvel\_pynvel.pyx":407
- *     print 'debug -', debug
- *     print 'user_merch_flag -', user_merch_flag
- *     print 'merch_rule -', merch_rule             # <<<<<<<<<<<<<<
- *     print 'fl -', fl
- *     print 'vl -', vl
+ *     print('debug -', debug)
+ *     print('user_merch_flag -', user_merch_flag)
+ *     print('merch_rule -', merch_rule)             # <<<<<<<<<<<<<<
+ *     print('fl -', fl)
+ *     print('vl -', vl)
  */
   __pyx_t_3 = __pyx_convert__to_py___pyx_t_6pynvel_7_pynvel_merchrules_(__pyx_v_merch_rule); if (unlikely(!__pyx_t_3)) {__pyx_filename = __pyx_f[1]; __pyx_lineno = 407; __pyx_clineno = __LINE__; goto __pyx_L1_error;}
   __Pyx_GOTREF(__pyx_t_3);
@@ -7227,15 +7227,15 @@ static PyObject *__pyx_pf_6pynvel_7_pynvel_18get_volume(CYTHON_UNUSED PyObject *
   __Pyx_GIVEREF(__pyx_t_3);
   PyTuple_SET_ITEM(__pyx_t_2, 1, __pyx_t_3);
   __pyx_t_3 = 0;
-  if (__Pyx_Print(0, __pyx_t_2, 1) < 0) {__pyx_filename = __pyx_f[1]; __pyx_lineno = 407; __pyx_clineno = __LINE__; goto __pyx_L1_error;}
+  if (__Pyx_PrintOne(0, __pyx_t_2) < 0) {__pyx_filename = __pyx_f[1]; __pyx_lineno = 407; __pyx_clineno = __LINE__; goto __pyx_L1_error;}
   __Pyx_DECREF(__pyx_t_2); __pyx_t_2 = 0;
 
   /* "pynvel\_pynvel.pyx":408
- *     print 'user_merch_flag -', user_merch_flag
- *     print 'merch_rule -', merch_rule
- *     print 'fl -', fl             # <<<<<<<<<<<<<<
- *     print 'vl -', vl
- *     print 'hl -', hl
+ *     print('user_merch_flag -', user_merch_flag)
+ *     print('merch_rule -', merch_rule)
+ *     print('fl -', fl)             # <<<<<<<<<<<<<<
+ *     print('vl -', vl)
+ *     print('hl -', hl)
  */
   __pyx_t_2 = __Pyx_PyInt_From_int(__pyx_v_fl); if (unlikely(!__pyx_t_2)) {__pyx_filename = __pyx_f[1]; __pyx_lineno = 408; __pyx_clineno = __LINE__; goto __pyx_L1_error;}
   __Pyx_GOTREF(__pyx_t_2);
@@ -7247,15 +7247,15 @@ static PyObject *__pyx_pf_6pynvel_7_pynvel_18get_volume(CYTHON_UNUSED PyObject *
   __Pyx_GIVEREF(__pyx_t_2);
   PyTuple_SET_ITEM(__pyx_t_3, 1, __pyx_t_2);
   __pyx_t_2 = 0;
-  if (__Pyx_Print(0, __pyx_t_3, 1) < 0) {__pyx_filename = __pyx_f[1]; __pyx_lineno = 408; __pyx_clineno = __LINE__; goto __pyx_L1_error;}
+  if (__Pyx_PrintOne(0, __pyx_t_3) < 0) {__pyx_filename = __pyx_f[1]; __pyx_lineno = 408; __pyx_clineno = __LINE__; goto __pyx_L1_error;}
   __Pyx_DECREF(__pyx_t_3); __pyx_t_3 = 0;
 
   /* "pynvel\_pynvel.pyx":409
- *     print 'merch_rule -', merch_rule
- *     print 'fl -', fl
- *     print 'vl -', vl             # <<<<<<<<<<<<<<
- *     print 'hl -', hl
- *     print 'csl -', csl
+ *     print('merch_rule -', merch_rule)
+ *     print('fl -', fl)
+ *     print('vl -', vl)             # <<<<<<<<<<<<<<
+ *     print('hl -', hl)
+ *     print('csl -', csl)
  */
   __pyx_t_3 = __Pyx_PyInt_From_int(__pyx_v_vl); if (unlikely(!__pyx_t_3)) {__pyx_filename = __pyx_f[1]; __pyx_lineno = 409; __pyx_clineno = __LINE__; goto __pyx_L1_error;}
   __Pyx_GOTREF(__pyx_t_3);
@@ -7267,15 +7267,15 @@ static PyObject *__pyx_pf_6pynvel_7_pynvel_18get_volume(CYTHON_UNUSED PyObject *
   __Pyx_GIVEREF(__pyx_t_3);
   PyTuple_SET_ITEM(__pyx_t_2, 1, __pyx_t_3);
   __pyx_t_3 = 0;
-  if (__Pyx_Print(0, __pyx_t_2, 1) < 0) {__pyx_filename = __pyx_f[1]; __pyx_lineno = 409; __pyx_clineno = __LINE__; goto __pyx_L1_error;}
+  if (__Pyx_PrintOne(0, __pyx_t_2) < 0) {__pyx_filename = __pyx_f[1]; __pyx_lineno = 409; __pyx_clineno = __LINE__; goto __pyx_L1_error;}
   __Pyx_DECREF(__pyx_t_2); __pyx_t_2 = 0;
 
   /* "pynvel\_pynvel.pyx":410
- *     print 'fl -', fl
- *     print 'vl -', vl
- *     print 'hl -', hl             # <<<<<<<<<<<<<<
- *     print 'csl -', csl
- *     print 'pl -', pl
+ *     print('fl -', fl)
+ *     print('vl -', vl)
+ *     print('hl -', hl)             # <<<<<<<<<<<<<<
+ *     print('csl -', csl)
+ *     print('pl -', pl)
  */
   __pyx_t_2 = __Pyx_PyInt_From_int(__pyx_v_hl); if (unlikely(!__pyx_t_2)) {__pyx_filename = __pyx_f[1]; __pyx_lineno = 410; __pyx_clineno = __LINE__; goto __pyx_L1_error;}
   __Pyx_GOTREF(__pyx_t_2);
@@ -7287,15 +7287,15 @@ static PyObject *__pyx_pf_6pynvel_7_pynvel_18get_volume(CYTHON_UNUSED PyObject *
   __Pyx_GIVEREF(__pyx_t_2);
   PyTuple_SET_ITEM(__pyx_t_3, 1, __pyx_t_2);
   __pyx_t_2 = 0;
-  if (__Pyx_Print(0, __pyx_t_3, 1) < 0) {__pyx_filename = __pyx_f[1]; __pyx_lineno = 410; __pyx_clineno = __LINE__; goto __pyx_L1_error;}
+  if (__Pyx_PrintOne(0, __pyx_t_3) < 0) {__pyx_filename = __pyx_f[1]; __pyx_lineno = 410; __pyx_clineno = __LINE__; goto __pyx_L1_error;}
   __Pyx_DECREF(__pyx_t_3); __pyx_t_3 = 0;
 
   /* "pynvel\_pynvel.pyx":411
- *     print 'vl -', vl
- *     print 'hl -', hl
- *     print 'csl -', csl             # <<<<<<<<<<<<<<
- *     print 'pl -', pl
- *     print 'll -', ll
+ *     print('vl -', vl)
+ *     print('hl -', hl)
+ *     print('csl -', csl)             # <<<<<<<<<<<<<<
+ *     print('pl -', pl)
+ *     print('ll -', ll)
  */
   __pyx_t_3 = __Pyx_PyInt_From_int(__pyx_v_csl); if (unlikely(!__pyx_t_3)) {__pyx_filename = __pyx_f[1]; __pyx_lineno = 411; __pyx_clineno = __LINE__; goto __pyx_L1_error;}
   __Pyx_GOTREF(__pyx_t_3);
@@ -7307,15 +7307,15 @@ static PyObject *__pyx_pf_6pynvel_7_pynvel_18get_volume(CYTHON_UNUSED PyObject *
   __Pyx_GIVEREF(__pyx_t_3);
   PyTuple_SET_ITEM(__pyx_t_2, 1, __pyx_t_3);
   __pyx_t_3 = 0;
-  if (__Pyx_Print(0, __pyx_t_2, 1) < 0) {__pyx_filename = __pyx_f[1]; __pyx_lineno = 411; __pyx_clineno = __LINE__; goto __pyx_L1_error;}
+  if (__Pyx_PrintOne(0, __pyx_t_2) < 0) {__pyx_filename = __pyx_f[1]; __pyx_lineno = 411; __pyx_clineno = __LINE__; goto __pyx_L1_error;}
   __Pyx_DECREF(__pyx_t_2); __pyx_t_2 = 0;
 
   /* "pynvel\_pynvel.pyx":412
- *     print 'hl -', hl
- *     print 'csl -', csl
- *     print 'pl -', pl             # <<<<<<<<<<<<<<
- *     print 'll -', ll
- *     print 'ctl -', ctl
+ *     print('hl -', hl)
+ *     print('csl -', csl)
+ *     print('pl -', pl)             # <<<<<<<<<<<<<<
+ *     print('ll -', ll)
+ *     print('ctl -', ctl)
  */
   __pyx_t_2 = __Pyx_PyInt_From_int(__pyx_v_pl); if (unlikely(!__pyx_t_2)) {__pyx_filename = __pyx_f[1]; __pyx_lineno = 412; __pyx_clineno = __LINE__; goto __pyx_L1_error;}
   __Pyx_GOTREF(__pyx_t_2);
@@ -7327,14 +7327,14 @@ static PyObject *__pyx_pf_6pynvel_7_pynvel_18get_volume(CYTHON_UNUSED PyObject *
   __Pyx_GIVEREF(__pyx_t_2);
   PyTuple_SET_ITEM(__pyx_t_3, 1, __pyx_t_2);
   __pyx_t_2 = 0;
-  if (__Pyx_Print(0, __pyx_t_3, 1) < 0) {__pyx_filename = __pyx_f[1]; __pyx_lineno = 412; __pyx_clineno = __LINE__; goto __pyx_L1_error;}
+  if (__Pyx_PrintOne(0, __pyx_t_3) < 0) {__pyx_filename = __pyx_f[1]; __pyx_lineno = 412; __pyx_clineno = __LINE__; goto __pyx_L1_error;}
   __Pyx_DECREF(__pyx_t_3); __pyx_t_3 = 0;
 
   /* "pynvel\_pynvel.pyx":413
- *     print 'csl -', csl
- *     print 'pl -', pl
- *     print 'll -', ll             # <<<<<<<<<<<<<<
- *     print 'ctl -', ctl
+ *     print('csl -', csl)
+ *     print('pl -', pl)
+ *     print('ll -', ll)             # <<<<<<<<<<<<<<
+ *     print('ctl -', ctl)
  * 
  */
   __pyx_t_3 = __Pyx_PyInt_From_int(__pyx_v_ll); if (unlikely(!__pyx_t_3)) {__pyx_filename = __pyx_f[1]; __pyx_lineno = 413; __pyx_clineno = __LINE__; goto __pyx_L1_error;}
@@ -7347,13 +7347,13 @@ static PyObject *__pyx_pf_6pynvel_7_pynvel_18get_volume(CYTHON_UNUSED PyObject *
   __Pyx_GIVEREF(__pyx_t_3);
   PyTuple_SET_ITEM(__pyx_t_2, 1, __pyx_t_3);
   __pyx_t_3 = 0;
-  if (__Pyx_Print(0, __pyx_t_2, 1) < 0) {__pyx_filename = __pyx_f[1]; __pyx_lineno = 413; __pyx_clineno = __LINE__; goto __pyx_L1_error;}
+  if (__Pyx_PrintOne(0, __pyx_t_2) < 0) {__pyx_filename = __pyx_f[1]; __pyx_lineno = 413; __pyx_clineno = __LINE__; goto __pyx_L1_error;}
   __Pyx_DECREF(__pyx_t_2); __pyx_t_2 = 0;
 
   /* "pynvel\_pynvel.pyx":414
- *     print 'pl -', pl
- *     print 'll -', ll
- *     print 'ctl -', ctl             # <<<<<<<<<<<<<<
+ *     print('pl -', pl)
+ *     print('ll -', ll)
+ *     print('ctl -', ctl)             # <<<<<<<<<<<<<<
  * 
  *     if error_flag!=0:
  */
@@ -7367,14 +7367,14 @@ static PyObject *__pyx_pf_6pynvel_7_pynvel_18get_volume(CYTHON_UNUSED PyObject *
   __Pyx_GIVEREF(__pyx_t_2);
   PyTuple_SET_ITEM(__pyx_t_3, 1, __pyx_t_2);
   __pyx_t_2 = 0;
-  if (__Pyx_Print(0, __pyx_t_3, 1) < 0) {__pyx_filename = __pyx_f[1]; __pyx_lineno = 414; __pyx_clineno = __LINE__; goto __pyx_L1_error;}
+  if (__Pyx_PrintOne(0, __pyx_t_3) < 0) {__pyx_filename = __pyx_f[1]; __pyx_lineno = 414; __pyx_clineno = __LINE__; goto __pyx_L1_error;}
   __Pyx_DECREF(__pyx_t_3); __pyx_t_3 = 0;
 
   /* "pynvel\_pynvel.pyx":416
- *     print 'ctl -', ctl
+ *     print('ctl -', ctl)
  * 
  *     if error_flag!=0:             # <<<<<<<<<<<<<<
- *         print 'Error Code {}: {}'.format(error_flag,error_codes[error_flag])
+ *         print('Error Code {}: {}'.format(error_flag,error_codes[error_flag]))
  * 
  */
   __pyx_t_12 = ((__pyx_v_error_flag != 0) != 0);
@@ -7383,9 +7383,9 @@ static PyObject *__pyx_pf_6pynvel_7_pynvel_18get_volume(CYTHON_UNUSED PyObject *
     /* "pynvel\_pynvel.pyx":417
  * 
  *     if error_flag!=0:
- *         print 'Error Code {}: {}'.format(error_flag,error_codes[error_flag])             # <<<<<<<<<<<<<<
+ *         print('Error Code {}: {}'.format(error_flag,error_codes[error_flag]))             # <<<<<<<<<<<<<<
  * 
- * #     print log_len_c
+ * #     print(log_len_c)
  */
     __pyx_t_2 = __Pyx_PyObject_GetAttrStr(__pyx_kp_s_Error_Code, __pyx_n_s_format); if (unlikely(!__pyx_t_2)) {__pyx_filename = __pyx_f[1]; __pyx_lineno = 417; __pyx_clineno = __LINE__; goto __pyx_L1_error;}
     __Pyx_GOTREF(__pyx_t_2);
@@ -7427,17 +7427,17 @@ static PyObject *__pyx_pf_6pynvel_7_pynvel_18get_volume(CYTHON_UNUSED PyObject *
     __Pyx_DECREF(__pyx_t_3); __pyx_t_3 = 0;
 
     /* "pynvel\_pynvel.pyx":416
- *     print 'ctl -', ctl
+ *     print('ctl -', ctl)
  * 
  *     if error_flag!=0:             # <<<<<<<<<<<<<<
- *         print 'Error Code {}: {}'.format(error_flag,error_codes[error_flag])
+ *         print('Error Code {}: {}'.format(error_flag,error_codes[error_flag]))
  * 
  */
   }
 
   /* "pynvel\_pynvel.pyx":421
- * #     print log_len_c
- * #     print log_diam_c
+ * #     print(log_len_c)
+ * #     print(log_diam_c)
  *     return dict(zip(vol_lbl,volume_c))             # <<<<<<<<<<<<<<
  * 
  * # def get_merch_ht(spp, dbh, dib, total_ht=None, stump_ht=1.0, vol_eq=None, *args, **kargs):
@@ -11340,7 +11340,7 @@ __PYX_XDEC_MEMVIEW(&__pyx_t_27, 1);
   volinit2_((&__pyx_v_self->region), __pyx_v_self->forest, __pyx_v_self->volume_eq, (&__pyx_v_self->min_top_prim), (&__pyx_v_self->min_top_sec), (&__pyx_v_self->stump_ht), (&__pyx_v_self->dbh_ob), (&__pyx_v_self->drc_ob), __pyx_v_self->ht_type, (&__pyx_v_self->total_ht), (&__pyx_v_self->ht_log), (&__pyx_v_self->ht_prim), (&__pyx_v_self->ht_sec), (&__pyx_v_self->upper_ht1), (&__pyx_v_self->upper_ht2), (&__pyx_v_self->upper_diam1), (&__pyx_v_self->upper_diam2), (&__pyx_v_self->ht_ref), (&__pyx_v_self->avg_z1), (&__pyx_v_self->avg_z2), (&__pyx_v_self->form_class), (&__pyx_v_self->bark_thick), (&__pyx_v_self->bark_ratio), (&__pyx_v_i3), (&__pyx_v_i7), (&__pyx_v_i15), (&__pyx_v_i20), (&__pyx_v_i21), (&(*((__pyx_t_5numpy_float32_t *) ( /* dim=0 */ (__pyx_v_self->volume_wk.data + __pyx_t_39 * __pyx_v_self->volume_wk.strides[0]) )))), (&(*((__pyx_t_5numpy_float32_t *) ( /* dim=1 */ (( /* dim=0 */ (__pyx_v_self->log_vol_wk.data + __pyx_t_40 * __pyx_v_self->log_vol_wk.strides[0]) ) + __pyx_t_41 * __pyx_v_self->log_vol_wk.strides[1]) )))), (&(*((__pyx_t_5numpy_float32_t *) ( /* dim=1 */ (( /* dim=0 */ (__pyx_v_self->log_diam_wk.data + __pyx_t_42 * __pyx_v_self->log_diam_wk.strides[0]) ) + __pyx_t_43 * __pyx_v_self->log_diam_wk.strides[1]) )))), (&(*((__pyx_t_5numpy_float32_t *) ( /* dim=0 */ (__pyx_v_self->log_len_wk.data + __pyx_t_44 * __pyx_v_self->log_len_wk.strides[0]) )))), (&(*((__pyx_t_5numpy_float32_t *) ( /* dim=0 */ (__pyx_v_self->bole_ht_wk.data + __pyx_t_45 * __pyx_v_self->bole_ht_wk.strides[0]) )))), (&__pyx_v_self->num_logs), (&__pyx_v_self->num_logs_prim), (&__pyx_v_self->num_logs_sec), (&__pyx_v_self->cubic_total_flag), (&__pyx_v_self->bdft_prim_flag), (&__pyx_v_self->cubic_prim_flag), (&__pyx_v_self->cord_prim_flag), (&__pyx_v_self->sec_vol_flag), __pyx_v_self->con_spp, __pyx_v_self->prod_code, (&__pyx_v_self->ht_1st_limb), __pyx_v_self->live, (&__pyx_v_self->basal_area), (&__pyx_v_self->site_index), __pyx_v_self->cruise_type, (&__pyx_v_error_flag), (&__pyx_v_self->merch_rule), __pyx_v_fl, __pyx_v_vl, __pyx_v_hl, __pyx_v_csl, __pyx_v_pl, __pyx_v_ll, __pyx_v_ctl);
 
   /* "pynvel\_pynvel.pyx":760
- * #             print 'Error Code {}: {}'.format(error_flag,error_codes[error_flag])
+ * #             print('Error Code {}: {}'.format(error_flag,error_codes[error_flag]))
  *         #TODO: raise an exception for critical error flags
  *         return error_flag             # <<<<<<<<<<<<<<
  * 
@@ -30482,11 +30482,11 @@ static int __Pyx_InitCachedConstants(void) {
   __Pyx_RefNannySetupContext("__Pyx_InitCachedConstants", 0);
 
   /* "pynvel\_pynvel.pyx":384
- *     print 'i20 -', i20
- *     print 'i21 -', i21
- *     print 'volume_c[0] -', volume_c[0:5]             # <<<<<<<<<<<<<<
- *     print 'log_vol_c[0,0] -', log_vol_c[0,0]
- *     print 'log_diam_c[0,0] -', log_diam_c[0,0]
+ *     print('i20 -', i20)
+ *     print('i21 -', i21)
+ *     print('volume_c[0] -', volume_c[0:5])             # <<<<<<<<<<<<<<
+ *     print('log_vol_c[0,0] -', log_vol_c[0,0])
+ *     print('log_diam_c[0,0] -', log_diam_c[0,0])
  */
   __pyx_slice__4 = PySlice_New(__pyx_int_0, __pyx_int_5, Py_None); if (unlikely(!__pyx_slice__4)) {__pyx_filename = __pyx_f[1]; __pyx_lineno = 384; __pyx_clineno = __LINE__; goto __pyx_L1_error;}
   __Pyx_GOTREF(__pyx_slice__4);

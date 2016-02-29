@@ -353,71 +353,71 @@ def get_volume(
             , ctl
             )
     
-    print 'region -', region
-    print 'forest_c -', forest_c
-    print 'volume_eq_c -', volume_eq_c
-    print 'min_top_prim -', min_top_prim
-    print 'min_top_sec -', min_top_sec
-    print 'stump_ht -', stump_ht
-    print 'dbh_ob -', dbh_ob
-    print 'drc_ob -', drc_ob
-    print 'ht_type_c -', ht_type_c
-    print 'total_ht -', total_ht
-    print 'ht_log -', ht_log
-    print 'ht_prim -', ht_prim
-    print 'ht_sec -', ht_sec
-    print 'upper_ht1 -', upper_ht1
-    print 'upper_ht2 -', upper_ht2
-    print 'upper_diam1 -', upper_diam1
-    print 'upper_diam2 -', upper_diam2
-    print 'ht_ref -', ht_ref
-    print 'avg_z1 -', avg_z1
-    print 'avg_z2 -', avg_z2
-    print 'form_class -', form_class
-    print 'bark_thick -', bark_thick
-    print 'bark_ratio -', bark_ratio
-    print 'i3 -', i3
-    print 'i7 -', i7
-    print 'i15 -', i15
-    print 'i20 -', i20
-    print 'i21 -', i21
-    print 'volume_c[0] -', volume_c[0:5]
-    print 'log_vol_c[0,0] -', log_vol_c[0,0]
-    print 'log_diam_c[0,0] -', log_diam_c[0,0]
-    print 'log_len_c[0] -', log_len_c[0]
-    print 'bole_ht_c[0] -', bole_ht_c[0]
-    print 'num_logs -', num_logs
-    print 'num_logs_prim -', num_logs_prim
-    print 'num_logs_sec -', num_logs_sec
-    print 'cubic_total_flag -', cubic_total_flag
-    print 'bdft_prim_flag -', bdft_prim_flag
-    print 'cubic_prim_flag -', cubic_prim_flag
-    print 'cord_prim_flag -', cord_prim_flag
-    print 'sec_vol_flag -', sec_vol_flag
-    print 'con_spp_c -', con_spp_c
-    print 'prod_code_c -', prod_code_c
-    print 'ht_1st_limb -', ht_1st_limb
-    print 'live_c -', live_c
-    print 'basal_area -', basal_area
-    print 'site_index -', site_index
-    print 'cruise_type_c -', cruise_type_c
-    print 'error_flag -', error_flag
-    print 'debug -', debug
-    print 'user_merch_flag -', user_merch_flag
-    print 'merch_rule -', merch_rule
-    print 'fl -', fl
-    print 'vl -', vl
-    print 'hl -', hl
-    print 'csl -', csl
-    print 'pl -', pl
-    print 'll -', ll
-    print 'ctl -', ctl
+    print('region -', region)
+    print('forest_c -', forest_c)
+    print('volume_eq_c -', volume_eq_c)
+    print('min_top_prim -', min_top_prim)
+    print('min_top_sec -', min_top_sec)
+    print('stump_ht -', stump_ht)
+    print('dbh_ob -', dbh_ob)
+    print('drc_ob -', drc_ob)
+    print('ht_type_c -', ht_type_c)
+    print('total_ht -', total_ht)
+    print('ht_log -', ht_log)
+    print('ht_prim -', ht_prim)
+    print('ht_sec -', ht_sec)
+    print('upper_ht1 -', upper_ht1)
+    print('upper_ht2 -', upper_ht2)
+    print('upper_diam1 -', upper_diam1)
+    print('upper_diam2 -', upper_diam2)
+    print('ht_ref -', ht_ref)
+    print('avg_z1 -', avg_z1)
+    print('avg_z2 -', avg_z2)
+    print('form_class -', form_class)
+    print('bark_thick -', bark_thick)
+    print('bark_ratio -', bark_ratio)
+    print('i3 -', i3)
+    print('i7 -', i7)
+    print('i15 -', i15)
+    print('i20 -', i20)
+    print('i21 -', i21)
+    print('volume_c[0] -', volume_c[0:5])
+    print('log_vol_c[0,0] -', log_vol_c[0,0])
+    print('log_diam_c[0,0] -', log_diam_c[0,0])
+    print('log_len_c[0] -', log_len_c[0])
+    print('bole_ht_c[0] -', bole_ht_c[0])
+    print('num_logs -', num_logs)
+    print('num_logs_prim -', num_logs_prim)
+    print('num_logs_sec -', num_logs_sec)
+    print('cubic_total_flag -', cubic_total_flag)
+    print('bdft_prim_flag -', bdft_prim_flag)
+    print('cubic_prim_flag -', cubic_prim_flag)
+    print('cord_prim_flag -', cord_prim_flag)
+    print('sec_vol_flag -', sec_vol_flag)
+    print('con_spp_c -', con_spp_c)
+    print('prod_code_c -', prod_code_c)
+    print('ht_1st_limb -', ht_1st_limb)
+    print('live_c -', live_c)
+    print('basal_area -', basal_area)
+    print('site_index -', site_index)
+    print('cruise_type_c -', cruise_type_c)
+    print('error_flag -', error_flag)
+    print('debug -', debug)
+    print('user_merch_flag -', user_merch_flag)
+    print('merch_rule -', merch_rule)
+    print('fl -', fl)
+    print('vl -', vl)
+    print('hl -', hl)
+    print('csl -', csl)
+    print('pl -', pl)
+    print('ll -', ll)
+    print('ctl -', ctl)
 
     if error_flag!=0:
-        print 'Error Code {}: {}'.format(error_flag,error_codes[error_flag])
+        print('Error Code {}: {}'.format(error_flag,error_codes[error_flag]))
     
-#     print log_len_c
-#     print log_diam_c
+#     print(log_len_c)
+#     print(log_diam_c)
     return dict(zip(vol_lbl,volume_c))
 
 # def get_merch_ht(spp, dbh, dib, total_ht=None, stump_ht=1.0, vol_eq=None, *args, **kargs):
@@ -755,7 +755,7 @@ cdef class VolumeCalculator:
                 )
      
 #         if error_flag!=0:
-#             print 'Error Code {}: {}'.format(error_flag,error_codes[error_flag])
+#             print('Error Code {}: {}'.format(error_flag,error_codes[error_flag]))
         #TODO: raise an exception for critical error flags
         return error_flag
          
@@ -799,4 +799,4 @@ cdef class VolumeCalculator:
 # if __name__=='_main__':
 #     volcalc = VolumeCalculator(volume_eq='F01FW3W202')
 #     volcalc.calc(dbh_ob=20, total_ht=150.0)
-#     print volcalc.volume
+#     print(volcalc.volume)
