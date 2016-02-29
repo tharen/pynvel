@@ -38,8 +38,8 @@ spp_codes = {
     , 'AS': (746, 'quaking aspen', 'Populus tremuloides')
     , 'CW': (747, 'black cottonwood', 'Populus trichocarpa')
     , 'WO': (815, 'Oregon white oak / California black oak', 'Quercus garryana')
-    , 'WJ': (064, 'western juniper', 'Juniperus occidentalis')
-    , 'LL': (072, 'subalpine larch', 'Larix lyallii')
+    , 'WJ': (64, 'western juniper', 'Juniperus occidentalis')
+    , 'LL': (72, 'subalpine larch', 'Larix lyallii')
     , 'WB': (101, 'whitebark pine', 'Pinus albicaulis')
     , 'KP': (103, 'knobcone pine', 'Pinus attenuata')
     , 'PY': (231, 'Pacific yew', 'Taxus brevifolia')
@@ -53,7 +53,7 @@ spp_codes = {
     }
 
 fia_spp = {v[0]:k for k, v in spp_codes.items()}
-print fia_spp[202]
+# print(fia_spp[202])
 
 volumeCodes = {
         1:'Total Cubic Volume from ground to tip'

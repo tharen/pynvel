@@ -36,13 +36,11 @@ import os
 import ctypes
 import numpy as np
 
-from nvelcommon import *
-
-import pynvel
+from .nvelcommon import *
 
 # This assumes the NVEL vollib.dll file is in the same folder as this script
 loc = os.path.split(__file__)[0]
-libname = 'vollib.dll'
+libname = 'libvollib64.dll'
 try:
     _nvel = ctypes.windll.LoadLibrary(os.path.join(loc, libname))
 except:
@@ -253,10 +251,10 @@ def _VOLLIBC2(
     # Upper case variable names coincide with the NVEL subroutine arguments
     REGN = ctypes.c_int(region)
 #     FORST = fchar('%-3s' % forest, 3)
-    FORST = ctypes.create_string_buffer('%-2s' % forest, 2)
+    FORST = ctypes.create_string_buffer(str.encode('{:<2d}'.format(forest)), 2)
 
 #     VOLEQ = fchar('%-11s' % vol_eq, 11)
-    VOLEQ = ctypes.create_string_buffer('%-10s' % vol_eq, 10)
+    VOLEQ = ctypes.create_string_buffer(str.encode('{:<10s}'.format(vol_eq)), 10)
 
     MTOPP = ctypes.c_float(top_dib_1)
     MTOPS = ctypes.c_float(top_dib_2)
@@ -266,7 +264,7 @@ def _VOLLIBC2(
     DRCOB = ctypes.c_float(dob_root_col)
 
 #     HTTYPE = fchar('%s' % ht_type, 1)
-    HTTYPE = ctypes.c_char_p('%s' % ht_type)
+    HTTYPE = ctypes.c_char_p(str.encode('{}'.format(ht_type)))
 
     HTTOT = ctypes.c_float(tot_ht)
     HTLOG = ctypes.c_int(int(log_len))
@@ -330,20 +328,20 @@ def _VOLLIBC2(
     prod2Flag = ctypes.c_int(1)
 
 #     CONSPEC = fchar('%-5s' % con_spp.upper(), 5)
-    CONSPEC = ctypes.c_char_p('%-4s' % con_spp.upper())
+    CONSPEC = ctypes.c_char_p(str.encode('%-4s' % con_spp.upper()))
 
 #     PROD = fchar('00%s' % product, 3)
-    PROD = ctypes.c_char_p('00%s' % product)
+    PROD = ctypes.c_char_p(str.encode('00%s' % product))
 
     HTTFLL = ctypes.c_int(ht_live_limb)
 
 #     LIVE = fchar('%-2s' % live_stat.upper(), 2)
-    LIVE = ctypes.c_char_p('%-2s' % live_stat.upper())
+    LIVE = ctypes.c_char_p(str.encode('%-2s' % live_stat.upper()))
 
     BA = ctypes.c_int(baa)
     SI = ctypes.c_int(site_idx)
     # mCTYPE = fchar('%-2s' % cruise_type, 2)
-    mCTYPE = ctypes.c_char_p('%-2s' % cruise_type)
+    mCTYPE = ctypes.c_char_p(str.encode('%-2s' % cruise_type))
     ERRFLAG = ctypes.c_int(0)
 
     # added user merch rules 1/23/12 following modifications provided by
@@ -451,7 +449,7 @@ def _VOLLIBC2(
     result['NOLOGP'] = NOLOGP.value
     result['NOLOGS'] = NOLOGS.value
     result['ERRFLAG'] = ERRFLAG.value
-    result['VOLEQ'] = VOLEQ.str
+    result['VOLEQ'] = VOLEQ
 
     return result
 
@@ -740,7 +738,7 @@ def buck_logs(merch_ht, log_len=40.0, trim=1.0
         bh += len_logs[i] + trim
         bole_hts[i] = bh
 
-    print bole_hts
+    print(bole_hts)
     return (len_logs, bole_hts)
 
 def get_merch_ht(spp, dbh, dib, total_ht=None, stump_ht=1.0, vol_eq=None, *args, **kargs):
@@ -761,7 +759,7 @@ def get_merch_ht(spp, dbh, dib, total_ht=None, stump_ht=1.0, vol_eq=None, *args,
 
     return result['HTPRD1']
 
-def get_total_vol(dbh, tot_ht=None, spp=None, vol_eq=None, *args, **kargs):
+def get_total_vol(spp, dbh, tot_ht=None, vol_eq=None, *args, **kargs):
     """
     Return a dict of total cubic, and merch volumes for a tree
     """
@@ -842,7 +840,7 @@ def get_volume(dbh, tot_ht=None, spp=None, vol_eq=None, *args, **kargs):
 #             })
 #     logs = numpy.recarray((nl,), dtype=logs_dtype)
     logs = [{}, ] * nl
-    for l in xrange(nl):
+    for l in range(nl):
         log = {}
         log['length'] = max(0.0, result['LOGLEN'][l])
         # BOLHT and LOGDIA begin with the large end of the the butt log
@@ -923,7 +921,7 @@ def test2():
             , btr=0
             , dbtbh=0
             , minbfd=8.0
-            , cor="Y")
+            , cor=b"Y")
 
     print('spp: %s, dbh: %.1f, ht: %.1f, min dib: %.1f' % (spp, dbh, ht, min_top_dib))
     merch_ht = get_merch_ht(spp, dbh, min_top_dib, ht
@@ -940,7 +938,7 @@ def test2():
     print('Total Volume:')
     print('%d\' logs:' % merch_rule.maxlen)
     print('total cuft: %.1f, gross cuft: %.1f, gross bdft: %.1f, intl. 1/4 bdft: %.1f' %
-            (vol['tot_cuft'], vol['merch_cuft'], vol['merch_bdft'], vol['int4_bdft']))
+            (vol['total_cuft'], vol['merch_cuft'], vol['merch_bdft'], vol['int4_bdft']))
 
     # predetermine the lengths of the first logs, if specified then cruise_type must be 'V'
     # if bole length exceeds the sum of predefined log lengths, then it appears
@@ -964,9 +962,9 @@ def test2():
     keys = ('length', 'bole_height', 'scale_diam', 'large_dib', 'small_dib', 'merch_bdft', 'merch_cuft', 'int4_bdft')
     fmt = '    {:d}: ' + ','.join('{{{}:12.1f}}'.format(k) for k in keys)
 
-    print '       ' + ','.join('{:>12s}'.format(k) for k in keys)
+    print('       ' + ','.join('{:>12s}'.format(k) for k in keys))
     for l, log in enumerate(logs):
-        print fmt.format(l, **log)
+        print(fmt.format(l, **log))
 
 def test3():
     import numexpr
@@ -990,8 +988,8 @@ def test3():
 
     trees = [(d, nwoa_ht_range(d)[1]) for d in xrange(1, 121)]
     trees = pd.DataFrame.from_records(trees, columns=('dbh', 'total_ht'))
-    print trees.head()
-    print get_volume(18, 120, 'DF')
+    print(trees.head())
+    print(get_volume(18, 120, 'DF'))
 
     def gv(x, spp):
         attrs = ['merch_ht', 'merch_bdft', 'total_cuft', 'merch_cuft']
@@ -999,13 +997,13 @@ def test3():
         return pd.Series({v:vol.get(v) for v in attrs})
 
 #     vols = trees.apply(gv, axis=1, args=['DF', ])
-#     print vols.head()
+#     print(vols.head())
 #     for k in vols.keys():
 #         trees[k] = vols[k]
 #
-#     print trees.head(10)
-# #     print trees.tail(10)
-#     print trees.ix[9:19]
+#     print(trees.head(10))
+# #     print(trees.tail(10))
+#     print(trees.ix[9:19])
 #     trees.to_clipboard(index=False)
 
 if __name__ == '__main__':

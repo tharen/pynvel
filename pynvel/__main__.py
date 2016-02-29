@@ -49,15 +49,17 @@ def main():
     else:
         tot_ht = args.height
 
+    # TODO: Implement user assigned log lengths, cruise type='V'
     volcalc = pynvel.VolumeCalculator(
             volume_eq=vol_eq
             , merch_rule=mrule
             , cruise_type='C'
             )
+
     volcalc.calc(
             dbh_ob=args.dbh
             , total_ht=tot_ht
-            , form_class=args.fclass
+            , form_class=args.form_class
 #             , log_len=np.array([40, 30, 20, 10])
             )
 
@@ -66,7 +68,7 @@ def main():
     print('Volume Report')
     print('-------------')
     print('Species: {species}, DBH: {dbh}, Ht: {height}'.format(**vars(args)))
-    print('Equation: {}, Form: {}'.format(vol_eq, args.fclass))
+    print('Equation: {}, Form: {}'.format(vol_eq, args.form_class))
     print('CuFt Tot.:   {:>8.2f}'.format(r['cuft_total']))
     print('CuFt Merch.: {:>8.2f}'.format(r['cuft_gross_prim']))
     print('BdFt Merch.: {:>8.2f}'.format(r['bdft_gross_prim']))
@@ -115,7 +117,7 @@ def handle_args():
             , help='Tree total height in feet.')
 
     parser.add_argument(
-            '-f', '--fclass', metavar='', type=float, default=80
+            '-f', '--form_class', metavar='', type=float, default=80
             , help='Girard Form Class.')
 
     parser.add_argument(
