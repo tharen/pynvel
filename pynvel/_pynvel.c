@@ -8,12 +8,16 @@
             "C:\\workspace\\pyforestsim\\pyforestsim\\pynvel\\conda_py34_x64\\lib\\site-packages\\numpy\\core\\include\\numpy\\ufuncobject.h"
         ],
         "extra_compile_args": [
+            "-g",
             "-static",
-            "-Wno-format"
+            "-Wno-format",
+            "-DMS_WIN64"
         ],
         "extra_link_args": [
+            "-g",
             "-static",
-            "-Wno-format"
+            "-Wno-format",
+            "-DMS_WIN64"
         ],
         "include_dirs": [
             "C:\\workspace\\pyforestsim\\pyforestsim\\pynvel\\conda_py34_x64\\lib\\site-packages\\numpy\\core\\include"
@@ -921,8 +925,8 @@ struct __pyx_opt_args_6pynvel_7_pynvel_init_merchrule {
  *     return v
  * 
  * cpdef char* get_equation(             # <<<<<<<<<<<<<<
- *         int species, char* fvs_variant='', int region=0, char* forest=''
- *         , char* district='01', char* product='01', bint fia=False):
+ *         int species, char* fvs_variant=b'', int region=0, char* forest=b''
+ *         , char* district=b'01', char* product=b'01', bint fia=False):
  */
 struct __pyx_opt_args_6pynvel_7_pynvel_get_equation {
   int __pyx_n;
@@ -939,7 +943,7 @@ struct __pyx_opt_args_6pynvel_7_pynvel_get_equation {
  * 
  *     cpdef int calc(self             # <<<<<<<<<<<<<<
  *             , float dbh_ob=0.0, float drc_ob=0.0, float total_ht=0.0, int ht_log=0
- *             , char* ht_type='F', float ht_prim=0.0, float ht_sec=0.0
+ *             , char* ht_type=b'F', float ht_prim=0.0, float ht_sec=0.0
  */
 struct __pyx_opt_args_6pynvel_7_pynvel_16VolumeCalculator_calc {
   int __pyx_n;
@@ -2352,7 +2356,7 @@ static char __pyx_k_No_value_specified_for_struct_at_11[] = "No value specified 
 static char __pyx_k_No_value_specified_for_struct_at_12[] = "No value specified for struct attribute 'dbtbh'";
 static char __pyx_k_No_value_specified_for_struct_at_13[] = "No value specified for struct attribute 'minbfd'";
 static char __pyx_k_No_value_specified_for_struct_at_14[] = "No value specified for struct attribute 'cor'";
-static PyObject *__pyx_kp_s_;
+static PyObject *__pyx_kp_b_;
 static PyObject *__pyx_kp_s_02d;
 static PyObject *__pyx_kp_s_4s;
 static PyObject *__pyx_n_s_AF;
@@ -2391,7 +2395,7 @@ static PyObject *__pyx_n_s_B00BEHW998;
 static PyObject *__pyx_n_s_BM;
 static PyObject *__pyx_kp_s_Betula_papyrifera_var_commutata;
 static PyObject *__pyx_kp_s_Buffer_view_does_not_expose_stri;
-static PyObject *__pyx_n_s_C;
+static PyObject *__pyx_n_b_C;
 static PyObject *__pyx_n_s_CH;
 static PyObject *__pyx_n_s_CW;
 static PyObject *__pyx_n_s_CX;
@@ -2415,6 +2419,7 @@ static PyObject *__pyx_n_s_Ellipsis;
 static PyObject *__pyx_kp_s_Empty_shape_tuple_for_cython_arr;
 static PyObject *__pyx_kp_s_Engelmann_spruce;
 static PyObject *__pyx_kp_s_Error_Code;
+static PyObject *__pyx_n_b_F;
 static PyObject *__pyx_n_s_F;
 static PyObject *__pyx_n_s_F00FW2W263;
 static PyObject *__pyx_n_s_F00FW3W202;
@@ -2449,7 +2454,7 @@ static PyObject *__pyx_kp_s_Jeffrey_pine;
 static PyObject *__pyx_kp_s_Juniperus_occidentalis;
 static PyObject *__pyx_n_s_KP;
 static PyObject *__pyx_n_s_KeyError;
-static PyObject *__pyx_n_s_L;
+static PyObject *__pyx_n_b_L;
 static PyObject *__pyx_n_s_LL;
 static PyObject *__pyx_n_s_LP;
 static PyObject *__pyx_kp_s_Larix_lyallii;
@@ -3923,7 +3928,7 @@ static __pyx_t_6pynvel_7_vollib_merchrules_ __pyx_f_6pynvel_7_pynvel_init_merchr
  *     #        compatible character variable as a parameter.
  *     cdef char cor_
  *     if cor == 'Y':             # <<<<<<<<<<<<<<
- *         cor_ = 'Y'
+ *         cor_ = b'Y'
  *     else:
  */
   __pyx_t_1 = (__Pyx_PyString_Equals(__pyx_v_cor, __pyx_n_s_Y, Py_EQ)); if (unlikely(__pyx_t_1 < 0)) {__pyx_filename = __pyx_f[1]; __pyx_lineno = 62; __pyx_clineno = __LINE__; goto __pyx_L1_error;}
@@ -3933,9 +3938,9 @@ static __pyx_t_6pynvel_7_vollib_merchrules_ __pyx_f_6pynvel_7_pynvel_init_merchr
     /* "pynvel\_pynvel.pyx":63
  *     cdef char cor_
  *     if cor == 'Y':
- *         cor_ = 'Y'             # <<<<<<<<<<<<<<
+ *         cor_ = b'Y'             # <<<<<<<<<<<<<<
  *     else:
- *         cor_ = 'N'
+ *         cor_ = b'N'
  */
     __pyx_v_cor_ = 'Y';
 
@@ -3943,16 +3948,16 @@ static __pyx_t_6pynvel_7_vollib_merchrules_ __pyx_f_6pynvel_7_pynvel_init_merchr
  *     #        compatible character variable as a parameter.
  *     cdef char cor_
  *     if cor == 'Y':             # <<<<<<<<<<<<<<
- *         cor_ = 'Y'
+ *         cor_ = b'Y'
  *     else:
  */
     goto __pyx_L3;
   }
 
   /* "pynvel\_pynvel.pyx":65
- *         cor_ = 'Y'
+ *         cor_ = b'Y'
  *     else:
- *         cor_ = 'N'             # <<<<<<<<<<<<<<
+ *         cor_ = b'N'             # <<<<<<<<<<<<<<
  * 
  *     cdef merchrules_ mr = merchrules_(
  */
@@ -4398,8 +4403,8 @@ static PyObject *__pyx_pf_6pynvel_7_pynvel_12vollib_version(CYTHON_UNUSED PyObje
  *     return v
  * 
  * cpdef char* get_equation(             # <<<<<<<<<<<<<<
- *         int species, char* fvs_variant='', int region=0, char* forest=''
- *         , char* district='01', char* product='01', bint fia=False):
+ *         int species, char* fvs_variant=b'', int region=0, char* forest=b''
+ *         , char* district=b'01', char* product=b'01', bint fia=False):
  */
 
 static PyObject *__pyx_pw_6pynvel_7_pynvel_15get_equation(PyObject *__pyx_self, PyObject *__pyx_args, PyObject *__pyx_kwds); /*proto*/
@@ -4412,8 +4417,8 @@ static char *__pyx_f_6pynvel_7_pynvel_get_equation(int __pyx_v_species, CYTHON_U
 
   /* "pynvel\_pynvel.pyx":84
  * cpdef char* get_equation(
- *         int species, char* fvs_variant='', int region=0, char* forest=''
- *         , char* district='01', char* product='01', bint fia=False):             # <<<<<<<<<<<<<<
+ *         int species, char* fvs_variant=b'', int region=0, char* forest=b''
+ *         , char* district=b'01', char* product=b'01', bint fia=False):             # <<<<<<<<<<<<<<
  *     """
  *     Return the default volume equation for a species.
  */
@@ -4453,7 +4458,7 @@ static char *__pyx_f_6pynvel_7_pynvel_get_equation(int __pyx_v_species, CYTHON_U
   /* "pynvel\_pynvel.pyx":103
  *     """
  * 
- *     cdef char* vol_eq = ''             # <<<<<<<<<<<<<<
+ *     cdef char* vol_eq = b''             # <<<<<<<<<<<<<<
  *     cdef int err_flag = 0
  * 
  */
@@ -4461,7 +4466,7 @@ static char *__pyx_f_6pynvel_7_pynvel_get_equation(int __pyx_v_species, CYTHON_U
 
   /* "pynvel\_pynvel.pyx":104
  * 
- *     cdef char* vol_eq = ''
+ *     cdef char* vol_eq = b''
  *     cdef int err_flag = 0             # <<<<<<<<<<<<<<
  * 
  *     if not fia:
@@ -4535,8 +4540,8 @@ static char *__pyx_f_6pynvel_7_pynvel_get_equation(int __pyx_v_species, CYTHON_U
  *     return v
  * 
  * cpdef char* get_equation(             # <<<<<<<<<<<<<<
- *         int species, char* fvs_variant='', int region=0, char* forest=''
- *         , char* district='01', char* product='01', bint fia=False):
+ *         int species, char* fvs_variant=b'', int region=0, char* forest=b''
+ *         , char* district=b'01', char* product=b'01', bint fia=False):
  */
 
   /* function exit code */
@@ -4667,8 +4672,8 @@ static PyObject *__pyx_pw_6pynvel_7_pynvel_15get_equation(PyObject *__pyx_self, 
 
       /* "pynvel\_pynvel.pyx":84
  * cpdef char* get_equation(
- *         int species, char* fvs_variant='', int region=0, char* forest=''
- *         , char* district='01', char* product='01', bint fia=False):             # <<<<<<<<<<<<<<
+ *         int species, char* fvs_variant=b'', int region=0, char* forest=b''
+ *         , char* district=b'01', char* product=b'01', bint fia=False):             # <<<<<<<<<<<<<<
  *     """
  *     Return the default volume equation for a species.
  */
@@ -4689,8 +4694,8 @@ static PyObject *__pyx_pw_6pynvel_7_pynvel_15get_equation(PyObject *__pyx_self, 
  *     return v
  * 
  * cpdef char* get_equation(             # <<<<<<<<<<<<<<
- *         int species, char* fvs_variant='', int region=0, char* forest=''
- *         , char* district='01', char* product='01', bint fia=False):
+ *         int species, char* fvs_variant=b'', int region=0, char* forest=b''
+ *         , char* district=b'01', char* product=b'01', bint fia=False):
  */
 
   /* function exit code */
@@ -4738,7 +4743,7 @@ static PyObject *__pyx_pf_6pynvel_7_pynvel_14get_equation(CYTHON_UNUSED PyObject
  * ctypedef np.float32_t DTYPE_float32_t
  * 
  * def get_volume(             # <<<<<<<<<<<<<<
- *         int region=0, forest=0, volume_eq='', float min_top_prim=5.0
+ *         int region=0, forest=0, volume_eq=b'', float min_top_prim=5.0
  *         , float min_top_sec=2.0, float stump_ht=1.0, float dbh_ob=0.0, float drc_ob=0.0
  */
 
@@ -4798,13 +4803,13 @@ static PyObject *__pyx_pw_6pynvel_7_pynvel_17get_volume(PyObject *__pyx_self, Py
     static PyObject **__pyx_pyargnames[] = {&__pyx_n_s_region,&__pyx_n_s_forest,&__pyx_n_s_volume_eq,&__pyx_n_s_min_top_prim,&__pyx_n_s_min_top_sec,&__pyx_n_s_stump_ht,&__pyx_n_s_dbh_ob,&__pyx_n_s_drc_ob,&__pyx_n_s_ht_type,&__pyx_n_s_total_ht,&__pyx_n_s_ht_log,&__pyx_n_s_ht_prim,&__pyx_n_s_ht_sec,&__pyx_n_s_upper_ht1,&__pyx_n_s_upper_ht2,&__pyx_n_s_upper_diam1,&__pyx_n_s_upper_diam2,&__pyx_n_s_ht_ref,&__pyx_n_s_avg_z1,&__pyx_n_s_avg_z2,&__pyx_n_s_form_class,&__pyx_n_s_bark_thick,&__pyx_n_s_bark_ratio,&__pyx_n_s_log_len,&__pyx_n_s_num_logs,&__pyx_n_s_num_logs_prim,&__pyx_n_s_num_logs_sec,&__pyx_n_s_cubic_total_flag,&__pyx_n_s_bdft_prim_flag,&__pyx_n_s_cubic_prim_flag,&__pyx_n_s_cord_prim_flag,&__pyx_n_s_sec_vol_flag,&__pyx_n_s_con_spp,&__pyx_n_s_prod_code,&__pyx_n_s_ht_1st_limb,&__pyx_n_s_live,&__pyx_n_s_basal_area,&__pyx_n_s_site_index,&__pyx_n_s_cruise_type,&__pyx_n_s_debug,&__pyx_n_s_merch_rule,0};
     PyObject* values[41] = {0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0};
     values[1] = ((PyObject *)__pyx_int_0);
-    values[2] = ((PyObject *)__pyx_kp_s_);
-    values[8] = ((PyObject *)__pyx_n_s_F);
+    values[2] = ((PyObject *)__pyx_kp_b_);
+    values[8] = ((PyObject *)__pyx_n_b_F);
     values[23] = __pyx_k__2;
-    values[32] = ((PyObject *)__pyx_kp_s_);
+    values[32] = ((PyObject *)__pyx_kp_b_);
     values[33] = ((PyObject *)__pyx_int_1);
-    values[35] = ((PyObject *)__pyx_n_s_L);
-    values[38] = ((PyObject *)__pyx_n_s_C);
+    values[35] = ((PyObject *)__pyx_n_b_L);
+    values[38] = ((PyObject *)__pyx_n_b_C);
     if (unlikely(__pyx_kwds)) {
       Py_ssize_t kw_args;
       const Py_ssize_t pos_args = PyTuple_GET_SIZE(__pyx_args);
@@ -5983,7 +5988,7 @@ static PyObject *__pyx_pf_6pynvel_7_pynvel_16get_volume(CYTHON_UNUSED PyObject *
  * 
  *     if num_logs>0:             # <<<<<<<<<<<<<<
  *         log_len_c[:num_logs] = log_len[:num_logs]
- *         cruise_type_c='V'
+ *         cruise_type_c=b'V'
  */
   __pyx_t_12 = ((__pyx_v_num_logs > 0) != 0);
   if (__pyx_t_12) {
@@ -5992,7 +5997,7 @@ static PyObject *__pyx_pf_6pynvel_7_pynvel_16get_volume(CYTHON_UNUSED PyObject *
  * 
  *     if num_logs>0:
  *         log_len_c[:num_logs] = log_len[:num_logs]             # <<<<<<<<<<<<<<
- *         cruise_type_c='V'
+ *         cruise_type_c=b'V'
  * 
  */
     __pyx_t_2 = __Pyx_PyObject_GetSlice(__pyx_v_log_len, 0, __pyx_v_num_logs, NULL, NULL, NULL, 0, 1, 1); if (unlikely(!__pyx_t_2)) {__pyx_filename = __pyx_f[1]; __pyx_lineno = 228; __pyx_clineno = __LINE__; goto __pyx_L1_error;}
@@ -6003,7 +6008,7 @@ static PyObject *__pyx_pf_6pynvel_7_pynvel_16get_volume(CYTHON_UNUSED PyObject *
     /* "pynvel\_pynvel.pyx":229
  *     if num_logs>0:
  *         log_len_c[:num_logs] = log_len[:num_logs]
- *         cruise_type_c='V'             # <<<<<<<<<<<<<<
+ *         cruise_type_c=b'V'             # <<<<<<<<<<<<<<
  * 
  *     vollibc2_(
  */
@@ -6014,7 +6019,7 @@ static PyObject *__pyx_pf_6pynvel_7_pynvel_16get_volume(CYTHON_UNUSED PyObject *
  * 
  *     if num_logs>0:             # <<<<<<<<<<<<<<
  *         log_len_c[:num_logs] = log_len[:num_logs]
- *         cruise_type_c='V'
+ *         cruise_type_c=b'V'
  */
   }
 
@@ -6119,7 +6124,7 @@ static PyObject *__pyx_pf_6pynvel_7_pynvel_16get_volume(CYTHON_UNUSED PyObject *
   }
 
   /* "pynvel\_pynvel.pyx":231
- *         cruise_type_c='V'
+ *         cruise_type_c=b'V'
  * 
  *     vollibc2_(             # <<<<<<<<<<<<<<
  *             &region
@@ -7478,7 +7483,7 @@ static PyObject *__pyx_pf_6pynvel_7_pynvel_16get_volume(CYTHON_UNUSED PyObject *
  * ctypedef np.float32_t DTYPE_float32_t
  * 
  * def get_volume(             # <<<<<<<<<<<<<<
- *         int region=0, forest=0, volume_eq='', float min_top_prim=5.0
+ *         int region=0, forest=0, volume_eq=b'', float min_top_prim=5.0
  *         , float min_top_sec=2.0, float stump_ht=1.0, float dbh_ob=0.0, float drc_ob=0.0
  */
 
@@ -10452,7 +10457,7 @@ static PyObject *__pyx_pf_6pynvel_7_pynvel_16VolumeCalculator_10error_flag___get
  * 
  *     cpdef int calc(self             # <<<<<<<<<<<<<<
  *             , float dbh_ob=0.0, float drc_ob=0.0, float total_ht=0.0, int ht_log=0
- *             , char* ht_type='F', float ht_prim=0.0, float ht_sec=0.0
+ *             , char* ht_type=b'F', float ht_prim=0.0, float ht_sec=0.0
  */
 
 static PyObject *__pyx_pw_6pynvel_7_pynvel_16VolumeCalculator_1calc(PyObject *__pyx_v_self, PyObject *__pyx_args, PyObject *__pyx_kwds); /*proto*/
@@ -11520,7 +11525,7 @@ __PYX_XDEC_MEMVIEW(&__pyx_t_27, 1);
  * 
  *     cpdef int calc(self             # <<<<<<<<<<<<<<
  *             , float dbh_ob=0.0, float drc_ob=0.0, float total_ht=0.0, int ht_log=0
- *             , char* ht_type='F', float ht_prim=0.0, float ht_sec=0.0
+ *             , char* ht_type=b'F', float ht_prim=0.0, float ht_sec=0.0
  */
 
   /* function exit code */
@@ -12172,7 +12177,7 @@ static int __pyx_pf_6pynvel_7_pynvel_16VolumeCalculator_2__cinit__(struct __pyx_
  *         self.log_len_wk = np.zeros((20, ), dtype=np.float32, order='F')
  *         self.bole_ht_wk = np.zeros((21, ), dtype=np.float32, order='F')             # <<<<<<<<<<<<<<
  * 
- *     def __init__(self, int region=6, char* forest='12', char* volume_eq=''
+ *     def __init__(self, int region=6, char* forest=b'12', char* volume_eq=b''
  */
   __pyx_t_1 = __Pyx_GetModuleGlobalName(__pyx_n_s_np); if (unlikely(!__pyx_t_1)) {__pyx_filename = __pyx_f[1]; __pyx_lineno = 704; __pyx_clineno = __LINE__; goto __pyx_L1_error;}
   __Pyx_GOTREF(__pyx_t_1);
@@ -12229,7 +12234,7 @@ static int __pyx_pf_6pynvel_7_pynvel_16VolumeCalculator_2__cinit__(struct __pyx_
 /* "pynvel\_pynvel.pyx":706
  *         self.bole_ht_wk = np.zeros((21, ), dtype=np.float32, order='F')
  * 
- *     def __init__(self, int region=6, char* forest='12', char* volume_eq=''             # <<<<<<<<<<<<<<
+ *     def __init__(self, int region=6, char* forest=b'12', char* volume_eq=b''             # <<<<<<<<<<<<<<
  *             , float min_top_prim=5.0, float min_top_sec=2.0, float stump_ht=1.0
  *             , int cubic_total_flag=1, int bdft_prim_flag=1, int cubic_prim_flag=1
  */
@@ -12658,7 +12663,7 @@ static int __pyx_pf_6pynvel_7_pynvel_16VolumeCalculator_4__init__(struct __pyx_o
   /* "pynvel\_pynvel.pyx":706
  *         self.bole_ht_wk = np.zeros((21, ), dtype=np.float32, order='F')
  * 
- *     def __init__(self, int region=6, char* forest='12', char* volume_eq=''             # <<<<<<<<<<<<<<
+ *     def __init__(self, int region=6, char* forest=b'12', char* volume_eq=b''             # <<<<<<<<<<<<<<
  *             , float min_top_prim=5.0, float min_top_sec=2.0, float stump_ht=1.0
  *             , int cubic_total_flag=1, int bdft_prim_flag=1, int cubic_prim_flag=1
  */
@@ -30027,7 +30032,7 @@ static struct PyModuleDef __pyx_moduledef = {
 #endif
 
 static __Pyx_StringTabEntry __pyx_string_tab[] = {
-  {&__pyx_kp_s_, __pyx_k_, sizeof(__pyx_k_), 0, 0, 1, 0},
+  {&__pyx_kp_b_, __pyx_k_, sizeof(__pyx_k_), 0, 0, 0, 0},
   {&__pyx_kp_s_02d, __pyx_k_02d, sizeof(__pyx_k_02d), 0, 0, 1, 0},
   {&__pyx_kp_s_4s, __pyx_k_4s, sizeof(__pyx_k_4s), 0, 0, 1, 0},
   {&__pyx_n_s_AF, __pyx_k_AF, sizeof(__pyx_k_AF), 0, 0, 1, 1},
@@ -30066,7 +30071,7 @@ static __Pyx_StringTabEntry __pyx_string_tab[] = {
   {&__pyx_n_s_BM, __pyx_k_BM, sizeof(__pyx_k_BM), 0, 0, 1, 1},
   {&__pyx_kp_s_Betula_papyrifera_var_commutata, __pyx_k_Betula_papyrifera_var_commutata, sizeof(__pyx_k_Betula_papyrifera_var_commutata), 0, 0, 1, 0},
   {&__pyx_kp_s_Buffer_view_does_not_expose_stri, __pyx_k_Buffer_view_does_not_expose_stri, sizeof(__pyx_k_Buffer_view_does_not_expose_stri), 0, 0, 1, 0},
-  {&__pyx_n_s_C, __pyx_k_C, sizeof(__pyx_k_C), 0, 0, 1, 1},
+  {&__pyx_n_b_C, __pyx_k_C, sizeof(__pyx_k_C), 0, 0, 0, 1},
   {&__pyx_n_s_CH, __pyx_k_CH, sizeof(__pyx_k_CH), 0, 0, 1, 1},
   {&__pyx_n_s_CW, __pyx_k_CW, sizeof(__pyx_k_CW), 0, 0, 1, 1},
   {&__pyx_n_s_CX, __pyx_k_CX, sizeof(__pyx_k_CX), 0, 0, 1, 1},
@@ -30090,6 +30095,7 @@ static __Pyx_StringTabEntry __pyx_string_tab[] = {
   {&__pyx_kp_s_Empty_shape_tuple_for_cython_arr, __pyx_k_Empty_shape_tuple_for_cython_arr, sizeof(__pyx_k_Empty_shape_tuple_for_cython_arr), 0, 0, 1, 0},
   {&__pyx_kp_s_Engelmann_spruce, __pyx_k_Engelmann_spruce, sizeof(__pyx_k_Engelmann_spruce), 0, 0, 1, 0},
   {&__pyx_kp_s_Error_Code, __pyx_k_Error_Code, sizeof(__pyx_k_Error_Code), 0, 0, 1, 0},
+  {&__pyx_n_b_F, __pyx_k_F, sizeof(__pyx_k_F), 0, 0, 0, 1},
   {&__pyx_n_s_F, __pyx_k_F, sizeof(__pyx_k_F), 0, 0, 1, 1},
   {&__pyx_n_s_F00FW2W263, __pyx_k_F00FW2W263, sizeof(__pyx_k_F00FW2W263), 0, 0, 1, 1},
   {&__pyx_n_s_F00FW3W202, __pyx_k_F00FW3W202, sizeof(__pyx_k_F00FW3W202), 0, 0, 1, 1},
@@ -30124,7 +30130,7 @@ static __Pyx_StringTabEntry __pyx_string_tab[] = {
   {&__pyx_kp_s_Juniperus_occidentalis, __pyx_k_Juniperus_occidentalis, sizeof(__pyx_k_Juniperus_occidentalis), 0, 0, 1, 0},
   {&__pyx_n_s_KP, __pyx_k_KP, sizeof(__pyx_k_KP), 0, 0, 1, 1},
   {&__pyx_n_s_KeyError, __pyx_k_KeyError, sizeof(__pyx_k_KeyError), 0, 0, 1, 1},
-  {&__pyx_n_s_L, __pyx_k_L, sizeof(__pyx_k_L), 0, 0, 1, 1},
+  {&__pyx_n_b_L, __pyx_k_L, sizeof(__pyx_k_L), 0, 0, 0, 1},
   {&__pyx_n_s_LL, __pyx_k_LL, sizeof(__pyx_k_LL), 0, 0, 1, 1},
   {&__pyx_n_s_LP, __pyx_k_LP, sizeof(__pyx_k_LP), 0, 0, 1, 1},
   {&__pyx_kp_s_Larix_lyallii, __pyx_k_Larix_lyallii, sizeof(__pyx_k_Larix_lyallii), 0, 0, 1, 0},
@@ -30640,7 +30646,7 @@ static int __Pyx_InitCachedConstants(void) {
  *         self.log_len_wk = np.zeros((20, ), dtype=np.float32, order='F')
  *         self.bole_ht_wk = np.zeros((21, ), dtype=np.float32, order='F')             # <<<<<<<<<<<<<<
  * 
- *     def __init__(self, int region=6, char* forest='12', char* volume_eq=''
+ *     def __init__(self, int region=6, char* forest=b'12', char* volume_eq=b''
  */
   __pyx_tuple__16 = PyTuple_Pack(1, __pyx_int_21); if (unlikely(!__pyx_tuple__16)) {__pyx_filename = __pyx_f[1]; __pyx_lineno = 704; __pyx_clineno = __LINE__; goto __pyx_L1_error;}
   __Pyx_GOTREF(__pyx_tuple__16);
@@ -31619,7 +31625,7 @@ static int __Pyx_InitCachedConstants(void) {
  * ctypedef np.float32_t DTYPE_float32_t
  * 
  * def get_volume(             # <<<<<<<<<<<<<<
- *         int region=0, forest=0, volume_eq='', float min_top_prim=5.0
+ *         int region=0, forest=0, volume_eq=b'', float min_top_prim=5.0
  *         , float min_top_sec=2.0, float stump_ht=1.0, float dbh_ob=0.0, float drc_ob=0.0
  */
   __pyx_tuple__111 = PyTuple_Pack(68, __pyx_n_s_region, __pyx_n_s_forest, __pyx_n_s_volume_eq, __pyx_n_s_min_top_prim, __pyx_n_s_min_top_sec, __pyx_n_s_stump_ht, __pyx_n_s_dbh_ob, __pyx_n_s_drc_ob, __pyx_n_s_ht_type, __pyx_n_s_total_ht, __pyx_n_s_ht_log, __pyx_n_s_ht_prim, __pyx_n_s_ht_sec, __pyx_n_s_upper_ht1, __pyx_n_s_upper_ht2, __pyx_n_s_upper_diam1, __pyx_n_s_upper_diam2, __pyx_n_s_ht_ref, __pyx_n_s_avg_z1, __pyx_n_s_avg_z2, __pyx_n_s_form_class, __pyx_n_s_bark_thick, __pyx_n_s_bark_ratio, __pyx_n_s_log_len, __pyx_n_s_num_logs, __pyx_n_s_num_logs_prim, __pyx_n_s_num_logs_sec, __pyx_n_s_cubic_total_flag, __pyx_n_s_bdft_prim_flag, __pyx_n_s_cubic_prim_flag, __pyx_n_s_cord_prim_flag, __pyx_n_s_sec_vol_flag, __pyx_n_s_con_spp, __pyx_n_s_prod_code, __pyx_n_s_ht_1st_limb, __pyx_n_s_live, __pyx_n_s_basal_area, __pyx_n_s_site_index, __pyx_n_s_cruise_type, __pyx_n_s_debug, __pyx_n_s_merch_rule, __pyx_n_s_forest_c_2, __pyx_n_s_fl_2, __pyx_n_s_volume_eq_c_2, __pyx_n_s_vl_2, __pyx_n_s_ht_type_c_2, __pyx_n_s_hl_2, __pyx_n_s_i3_2, __pyx_n_s_i7_2, __pyx_n_s_i15_2, __pyx_n_s_i20_2, __pyx_n_s_i21_2, __pyx_n_s_volume_c, __pyx_n_s_log_vol_c, __pyx_n_s_log_diam_c, __pyx_n_s_log_len_c, __pyx_n_s_bole_ht_c, __pyx_n_s_con_spp_c_2, __pyx_n_s_csl_2, __pyx_n_s_prod_code_c_2, __pyx_n_s_pl_2, __pyx_n_s_ht_1st_limb_c, __pyx_n_s_live_c_2, __pyx_n_s_ll_2, __pyx_n_s_cruise_type_c_2, __pyx_n_s_ctl_2, __pyx_n_s_user_merch_flag_2, __pyx_n_s_error_flag_2); if (unlikely(!__pyx_tuple__111)) {__pyx_filename = __pyx_f[1]; __pyx_lineno = 121; __pyx_clineno = __LINE__; goto __pyx_L1_error;}
@@ -31629,7 +31635,7 @@ static int __Pyx_InitCachedConstants(void) {
 
   /* "pynvel\_pynvel.pyx":568
  *             , int ht_ref=0, float avg_z1=0.0, float avg_z2=0.0, int form_class=0
- *             , float bark_thick=0.0, float bark_ratio=0.0, int ht_1st_limb=0, char* live='L'
+ *             , float bark_thick=0.0, float bark_ratio=0.0, int ht_1st_limb=0, char* live=b'L'
  *             , np.ndarray log_len=np.zeros((20,),np.float32)             # <<<<<<<<<<<<<<
  * #             , int num_logs=0
  *             ):
@@ -32731,8 +32737,8 @@ PyMODINIT_FUNC PyInit__pynvel(void)
   __pyx_t_4 = 0;
 
   /* "pynvel\_pynvel.pyx":133
- *         , int ht_1st_limb=0, live='L', int basal_area=0, int site_index=0
- *         , cruise_type='C', int debug=0
+ *         , int ht_1st_limb=0, live=b'L', int basal_area=0, int site_index=0
+ *         , cruise_type=b'C', int debug=0
  *         , merchrules_ merch_rule=init_merchrule()):             # <<<<<<<<<<<<<<
  *     """
  *     Calculate total tree and log volumes for a single tree.
@@ -32743,7 +32749,7 @@ PyMODINIT_FUNC PyInit__pynvel(void)
  * ctypedef np.float32_t DTYPE_float32_t
  * 
  * def get_volume(             # <<<<<<<<<<<<<<
- *         int region=0, forest=0, volume_eq='', float min_top_prim=5.0
+ *         int region=0, forest=0, volume_eq=b'', float min_top_prim=5.0
  *         , float min_top_sec=2.0, float stump_ht=1.0, float dbh_ob=0.0, float drc_ob=0.0
  */
   __pyx_t_4 = PyCFunction_NewEx(&__pyx_mdef_6pynvel_7_pynvel_17get_volume, NULL, __pyx_n_s_pynvel__pynvel); if (unlikely(!__pyx_t_4)) {__pyx_filename = __pyx_f[1]; __pyx_lineno = 121; __pyx_clineno = __LINE__; goto __pyx_L1_error;}
@@ -32753,7 +32759,7 @@ PyMODINIT_FUNC PyInit__pynvel(void)
 
   /* "pynvel\_pynvel.pyx":568
  *             , int ht_ref=0, float avg_z1=0.0, float avg_z2=0.0, int form_class=0
- *             , float bark_thick=0.0, float bark_ratio=0.0, int ht_1st_limb=0, char* live='L'
+ *             , float bark_thick=0.0, float bark_ratio=0.0, int ht_1st_limb=0, char* live=b'L'
  *             , np.ndarray log_len=np.zeros((20,),np.float32)             # <<<<<<<<<<<<<<
  * #             , int num_logs=0
  *             ):
@@ -32805,14 +32811,14 @@ PyMODINIT_FUNC PyInit__pynvel(void)
  * 
  *     cpdef int calc(self             # <<<<<<<<<<<<<<
  *             , float dbh_ob=0.0, float drc_ob=0.0, float total_ht=0.0, int ht_log=0
- *             , char* ht_type='F', float ht_prim=0.0, float ht_sec=0.0
+ *             , char* ht_type=b'F', float ht_prim=0.0, float ht_sec=0.0
  */
   __pyx_t_1 = __Pyx_GetModuleGlobalName(__pyx_n_s_np); if (unlikely(!__pyx_t_1)) {__pyx_filename = __pyx_f[1]; __pyx_lineno = 568; __pyx_clineno = __LINE__; goto __pyx_L1_error;}
   __Pyx_GOTREF(__pyx_t_1);
 
   /* "pynvel\_pynvel.pyx":568
  *             , int ht_ref=0, float avg_z1=0.0, float avg_z2=0.0, int form_class=0
- *             , float bark_thick=0.0, float bark_ratio=0.0, int ht_1st_limb=0, char* live='L'
+ *             , float bark_thick=0.0, float bark_ratio=0.0, int ht_1st_limb=0, char* live=b'L'
  *             , np.ndarray log_len=np.zeros((20,),np.float32)             # <<<<<<<<<<<<<<
  * #             , int num_logs=0
  *             ):

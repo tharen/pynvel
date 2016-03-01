@@ -8,11 +8,11 @@ import argparse
 import pynvel
 
 # TODO: Read/write config file for defaults
-variant = 'PN'
+variant = b'PN'
 region = 6  # PNW
-forest = '12'  # Siuslaw
-district = '01'  # Unknown
-product = '01'  # Sawtimber tree
+forest = b'12'  # Siuslaw
+district = b'01'  # Unknown
+product = b'01'  # Sawtimber tree
 # mrule = pynvel.init_merchrule(
 #         evod=1, opt=23, maxlen=40, minlen=12
 #         , cor='Y')
@@ -35,14 +35,17 @@ def main():
     # Convert the species code
     try:
         spp_code = int(args.species)
+        spp_abbv = pynvel.fia_spp[spp_code]
     except:
         spp_code = pynvel.get_spp_code(args.species)
+        spp_abbv = args.species
 
     # Get a default eqution if none provided
     if not args.equation:
-        vol_eq = pynvel.get_equation(spp_code, variant,
-                region, forest, district
-                , product
+        vol_eq = pynvel.get_equation(spp_code,
+                variant, region,
+                forest, district, product
+
                 )
 
     elif args.equation.lower() == 'fia':
@@ -51,7 +54,7 @@ def main():
                 , fia=True)
 
     else:
-        vol_eq = args.equation
+        vol_eq = args.equation.encode()
 
     # TODO: Implement height curves
     if not args.height:
@@ -65,7 +68,7 @@ def main():
     volcalc = pynvel.VolumeCalculator(
             volume_eq=vol_eq
             , merch_rule=mrule
-            , cruise_type='C'
+            , cruise_type=b'C'
             )
 
     volcalc.calc(
@@ -79,12 +82,12 @@ def main():
 
     print('Volume Report')
     print('-------------')
-    print('Species: {species}, DBH: {dbh}, Ht: {height}'.format(**vars(args)))
-    print('Equation: {}, Form: {}'.format(vol_eq, args.form_class))
-    print('DBH:         {:>8.2f}'.format(volcalc.dbh_ob))
-    print('')
-    print('Total Ht:    {:>8.2f}'.format(volcalc.total_height))
-    print('Merch Ht:    {:>8.2f}'.format(volcalc.merch_height))
+    print('Species: {}({}), '.format(spp_abbv, spp_code))
+    print('Equation: {}'.format(vol_eq))
+    print('DBH:         {:>8.1f}'.format(volcalc.dbh_ob))
+    print('Form:        {:>8.1f}'.format(args.form_class))
+    print('Total Ht:    {:>8.0f}'.format(volcalc.total_height))
+    print('Merch Ht:    {:>8.0f}'.format(volcalc.merch_height))
     print('CuFt Tot:    {:>8.2f}'.format(r['cuft_total']))
     print('CuFt Merch:  {:>8.2f}'.format(r['cuft_gross_prim']))
     print('BdFt Merch:  {:>8.2f}'.format(r['bdft_gross_prim']))
@@ -97,7 +100,7 @@ def main():
     print('----------')
     if volcalc.num_logs > 0:
         logs = volcalc.logs
-        keys = logs[0].as_dict().keys()[1:-1]
+        keys = list(logs[0].as_dict().keys())[1:-1]
         fmt = ' '.join(['{{:<{:d}.1f}}'.format(len(k)) for k in keys])
         print('log ' + ' '.join(keys))
         for l, log in enumerate(logs):

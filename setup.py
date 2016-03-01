@@ -24,27 +24,40 @@ shutil.copyfile('./readme.rst', 'pynvel/readme.rst')
 shutil.copyfile('./readme.rst', 'pynvel/docs/readme.rst')
 
 static = True
+debug = False
 _is_64bit = (getattr(sys, 'maxsize', None) or getattr(sys, 'maxint')) > 2 ** 32
 
 lib_dirs = ['./pynvel', ]
 if _is_64bit:
+    print('**Link to vollib64')
     vollib = 'vollib64'
+    # MinGW-w64 does not include this definition
+    link_args = ['-DMS_WIN64', ]
+    compile_args = ['-DMS_WIN64', ]
 else:
     vollib = 'vollib'
+    link_args = []
+    compile_args = []
 
 inc_dirs = [numpy.get_include()]
 
 if static:
     vollib = vollib + '_static'
     libs = [vollib, ]
+    # Link to gfortran and quadmath since vollibxx_static does not include
+    #   the necessary references
     libs.extend(['gfortran', 'quadmath'])
-    link_args = ['-static', '-static-libgcc', '-static-libstdc++', '-Wno-format']
-    compile_args = ['-static', '-Wno-format']
+    link_args.extend(['-static', '-Wno-format'])
+    compile_args.extend(['-static', '-Wno-format'])
 
 else:
     libs = [vollib, ]
     link_args = []
     compile_args = []
+
+if debug:
+    link_args = ['-g', ] + link_args
+    compile_args = ['-g', ] + compile_args
 
 extensions = [
         Extension(

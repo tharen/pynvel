@@ -60,9 +60,9 @@ cpdef merchrules_ init_merchrule(
     #        compatible character variable as a parameter.
     cdef char cor_
     if cor == 'Y':
-        cor_ = 'Y'
+        cor_ = b'Y'
     else:
-        cor_ = 'N'
+        cor_ = b'N'
         
     cdef merchrules_ mr = merchrules_(
             evod=evod, opt=opt, maxlen=maxlen, minlen=minlen, minlent=minlent
@@ -80,8 +80,8 @@ def vollib_version():
     return v
 
 cpdef char* get_equation(
-        int species, char* fvs_variant='', int region=0, char* forest=''
-        , char* district='01', char* product='01', bint fia=False):
+        int species, char* fvs_variant=b'', int region=0, char* forest=b''
+        , char* district=b'01', char* product=b'01', bint fia=False):
     """
     Return the default volume equation for a species.
     
@@ -100,7 +100,7 @@ cpdef char* get_equation(
     :param fia: If True, return the default FIA equation. (default=False)
     """
 
-    cdef char* vol_eq = ''
+    cdef char* vol_eq = b''
     cdef int err_flag = 0
     
     if not fia:
@@ -119,17 +119,17 @@ DTYPE_float32 = np.float32
 ctypedef np.float32_t DTYPE_float32_t
 
 def get_volume(
-        int region=0, forest=0, volume_eq='', float min_top_prim=5.0
+        int region=0, forest=0, volume_eq=b'', float min_top_prim=5.0
         , float min_top_sec=2.0, float stump_ht=1.0, float dbh_ob=0.0, float drc_ob=0.0
-        , ht_type='F', float total_ht=0.0, int ht_log=0, float ht_prim=0.0, float ht_sec=0.0
+        , ht_type=b'F', float total_ht=0.0, int ht_log=0, float ht_prim=0.0, float ht_sec=0.0
         , float upper_ht1=0.0, float upper_ht2=0.0, float upper_diam1=0.0, float upper_diam2=0.0
         , int ht_ref=0, float avg_z1=0.0, float avg_z2=0.0, int form_class=0
         , float bark_thick=0.0, float bark_ratio=0.0, log_len=[]
         , int num_logs=0, float num_logs_prim=0.0, float num_logs_sec=0.0
         , int cubic_total_flag=1, int bdft_prim_flag=1, int cubic_prim_flag=1
-        , int cord_prim_flag=1, int sec_vol_flag=1, con_spp='', prod_code=1
-        , int ht_1st_limb=0, live='L', int basal_area=0, int site_index=0
-        , cruise_type='C', int debug=0
+        , int cord_prim_flag=1, int sec_vol_flag=1, con_spp=b'', prod_code=1
+        , int ht_1st_limb=0, live=b'L', int basal_area=0, int site_index=0
+        , cruise_type=b'C', int debug=0
         , merchrules_ merch_rule=init_merchrule()):
     """
     Calculate total tree and log volumes for a single tree.
@@ -226,7 +226,7 @@ def get_volume(
     
     if num_logs>0:
         log_len_c[:num_logs] = log_len[:num_logs]
-        cruise_type_c='V'
+        cruise_type_c=b'V'
     
     vollibc2_(
             &region
@@ -561,10 +561,10 @@ cdef class VolumeCalculator:
         
     cpdef int calc(self
             , float dbh_ob=0.0, float drc_ob=0.0, float total_ht=0.0, int ht_log=0
-            , char* ht_type='F', float ht_prim=0.0, float ht_sec=0.0
+            , char* ht_type=b'F', float ht_prim=0.0, float ht_sec=0.0
             , float upper_ht1=0.0, float upper_ht2=0.0, float upper_diam1=0.0, float upper_diam2=0.0
             , int ht_ref=0, float avg_z1=0.0, float avg_z2=0.0, int form_class=0
-            , float bark_thick=0.0, float bark_ratio=0.0, int ht_1st_limb=0, char* live='L'
+            , float bark_thick=0.0, float bark_ratio=0.0, int ht_1st_limb=0, char* live=b'L'
             , np.ndarray log_len=np.zeros((20,),np.float32)
 #             , int num_logs=0
             ):
@@ -703,13 +703,13 @@ cdef class VolumeCalculator:
         self.log_len_wk = np.zeros((20, ), dtype=np.float32, order='F')
         self.bole_ht_wk = np.zeros((21, ), dtype=np.float32, order='F')
 
-    def __init__(self, int region=6, char* forest='12', char* volume_eq=''
+    def __init__(self, int region=6, char* forest=b'12', char* volume_eq=b''
             , float min_top_prim=5.0, float min_top_sec=2.0, float stump_ht=1.0
             , int cubic_total_flag=1, int bdft_prim_flag=1, int cubic_prim_flag=1
             , int cord_prim_flag=1, int sec_vol_flag=1
-            , char* con_spp='', char* prod_code='01'
+            , char* con_spp=b'', char* prod_code=b'01'
             , int basal_area=0, int site_index=0
-            , char* cruise_type='C', *args, **kargs
+            , char* cruise_type=b'C', *args, **kargs
             ):
          
         self.region = region
