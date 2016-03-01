@@ -38,7 +38,7 @@ if static:
     vollib = vollib + '_static'
     libs = [vollib, ]
     libs.extend(['gfortran', 'quadmath'])
-    link_args = ['-static', '-Wno-format']
+    link_args = ['-static', '-static-libgcc', '-static-libstdc++', '-Wno-format']
     compile_args = ['-static', '-Wno-format']
 
 else:
@@ -76,7 +76,7 @@ setup(
     , setup_requires=['cython', 'numpy>=1.9', ]
     , tests_require=['nose2', ]
     , install_requires=['numpy>=1.9', ]
-    , ext_modules=cythonize(extensions,)
+    , ext_modules=cythonize(extensions, gdb_debug=True,)
     , packages=['pynvel', ]
     , include_package_data=True  # package the files listed in MANIFEST.in
     # , data_files=[('arcgis',glob('arcgis/*.pyt')),]

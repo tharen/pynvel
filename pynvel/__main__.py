@@ -26,8 +26,11 @@ mrule_dict = {
 mrule = pynvel.init_merchrule(**mrule_dict)
 
 def main():
+    """
+    Report the volume and log attributes of a single tree.
+    """
     args = handle_args()
-    print(args)
+#     print(args)
 
     # Convert the species code
     try:
@@ -78,12 +81,31 @@ def main():
     print('-------------')
     print('Species: {species}, DBH: {dbh}, Ht: {height}'.format(**vars(args)))
     print('Equation: {}, Form: {}'.format(vol_eq, args.form_class))
-    print('CuFt Tot.:   {:>8.2f}'.format(r['cuft_total']))
-    print('CuFt Merch.: {:>8.2f}'.format(r['cuft_gross_prim']))
-    print('BdFt Merch.: {:>8.2f}'.format(r['bdft_gross_prim']))
+    print('DBH:         {:>8.2f}'.format(volcalc.dbh_ob))
+    print('')
+    print('Total Ht:    {:>8.2f}'.format(volcalc.total_height))
+    print('Merch Ht:    {:>8.2f}'.format(volcalc.merch_height))
+    print('CuFt Tot:    {:>8.2f}'.format(r['cuft_total']))
+    print('CuFt Merch:  {:>8.2f}'.format(r['cuft_gross_prim']))
+    print('BdFt Merch:  {:>8.2f}'.format(r['bdft_gross_prim']))
     print('CuFt Top:    {:>8.2f}'.format(r['cuft_gross_sec']))
     print('CuFt Stump:  {:>8.2f}'.format(r['cuft_stump']))
     print('CuFt Tip:    {:>8.2f}'.format(r['cuft_tip']))
+    print('')
+
+    print('Log Detail')
+    print('----------')
+    if volcalc.num_logs > 0:
+        logs = volcalc.logs
+        keys = logs[0].as_dict().keys()[1:-1]
+        fmt = ' '.join(['{{:<{:d}.1f}}'.format(len(k)) for k in keys])
+        print('log ' + ' '.join(keys))
+        for l, log in enumerate(logs):
+            print('{:<3d} '.format(l + 1) + fmt.format(*[getattr(log, k) for k in keys]))
+
+    else:
+        print('Volume equation {} does not report log detail.'.format(vol_eq))
+#     print(volcalc.logs)
 
 def install_arcgis():
     # TODO: Install ArcGIS tbx and pyt

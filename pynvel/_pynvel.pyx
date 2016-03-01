@@ -1,3 +1,5 @@
+#cythonx: embedsignature=True
+
 import numpy as np
 from collections import OrderedDict
 cimport numpy as np
@@ -375,8 +377,8 @@ def get_volume(
 #     return result['HTPRD1']
 
 cdef class Log:
-    cdef public int pos
-    cdef public float bole_ht
+    cdef public int position
+    cdef public float bole_height
     cdef public float length
     cdef public float large_dib
     cdef public float large_dob
@@ -392,8 +394,8 @@ cdef class Log:
             , float large_dib, float large_dob
             , float small_dib, float small_dob, float scale_diam
             , float cuft_gross, float bdft_gross, float intl_gross):
-        self.pos = pos
-        self.bole_ht = bole_ht
+        self.position = pos
+        self.bole_height = bole_ht
         self.length = length
         self.large_dib = large_dib
         self.large_dob = large_dob
@@ -407,10 +409,10 @@ cdef class Log:
     def __getitem__(self,item):
         return getattr(self,item)
     
-    def __repr__(self):
+    def as_dict(self):
         d = OrderedDict()
-        d['position'] = self.pos
-        d['bole_height'] = self.bole_ht
+        d['position'] = self.position
+        d['bole_height'] = self.bole_height
         d['length'] = self.length
         d['large_dib'] = self.large_dib
         d['large_dob'] = self.large_dob
@@ -419,7 +421,11 @@ cdef class Log:
         d['scale_diam'] = self.scale_diam
         d['cuft_gross'] = self.cuft_gross
         d['bdft_gross'] = self.bdft_gross
-        d['intl_gross'] = self.intl_gross        
+        d['intl_gross'] = self.intl_gross
+        return d
+    
+    def __repr__(self):
+        d = self.as_dict()
         return str(d)
     
 #     def __str__(self):
@@ -435,7 +441,7 @@ cdef class VolumeCalculator:
     cdef public float dbh_ob
     cdef public float drc_ob
     cdef char* ht_type
-    cdef public float total_ht
+    cdef float total_ht
     cdef int ht_log
     cdef float ht_prim
     cdef float ht_sec
@@ -473,25 +479,24 @@ cdef class VolumeCalculator:
     cdef public np.float32_t[:] log_len_wk
     cdef public np.float32_t[:] bole_ht_wk
     
+    property total_height:
+        """Return the total height of the tree."""
+        def __get__(self):
+            return self.total_ht
+        
     property merch_height:
-        """
-        Return the height to the top of the primary product.
-        """
+        """Return the height to the top of the primary product."""
         def __get__(self):
             return self.ht_prim
         
     property volume:
-        """
-        Return a dict of calculated tree volume.
-        """
+        """Return a dict of calculated tree volume."""
         def __get__(self):
             # zip vol_lbl from nvelcommon.pxi with the volume array
             return dict(zip(vol_lbl, self.volume_wk))
     
     property log_vol:
-        """
-        Return a list log segment volumes.
-        """
+        """Return a list log segment volumes."""
         def __get__(self):
             # zip log_vol_lbl from nvelcommon.pxi with the log volume array
             #return [dict(zip(log_vol_lbl, v)) for v in self.log_vol_wk[:self.num_logs]]
@@ -506,9 +511,7 @@ cdef class VolumeCalculator:
             return vols
     
     property log_diam:
-        """
-        Return a list predicted log diameters.
-        """
+        """Return a list a estimated log diameters."""
         def __get__(self):
             
             cdef int i
@@ -530,9 +533,7 @@ cdef class VolumeCalculator:
             return diams
     
     property logs:
-        """
-        Return an array of log objects.
-        """
+        """Return an array of log objects."""
         def __get__(self):
             cdef int i
             # TODO: Make logs a C array of Log objects
@@ -546,17 +547,15 @@ cdef class VolumeCalculator:
                 bole = self.bole_ht_wk[i]
                 
                 logs.append(Log(i,bole,len
-                        ,large[2],large[1]
-                        ,small[2],small[1],small[0]
+                        ,large[1],large[2]
+                        ,small[1],small[2],small[0]
                         ,vol[3],vol[0],vol[6]
                         ))
             
             return logs
     
     property error_flag:
-        """
-        Return the decoded volume calculation error code.
-        """
+        """Return the volume calculation error code."""
         def __get__(self):
             return error_codes[self.error_flag]
         
@@ -732,7 +731,3 @@ cdef class VolumeCalculator:
         self.site_index = site_index
         self.cruise_type = cruise_type
  
-# if __name__=='_main__':
-#     volcalc = VolumeCalculator(volume_eq='F01FW3W202')
-#     volcalc.calc(dbh_ob=20, total_ht=150.0)
-#     print(volcalc.volume)

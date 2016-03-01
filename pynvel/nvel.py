@@ -36,7 +36,7 @@ import os
 import ctypes
 import numpy as np
 
-from .nvelcommon import *
+from nvelcommon import *
 
 # This assumes the NVEL vollib.dll file is in the same folder as this script
 loc = os.path.split(__file__)[0]
