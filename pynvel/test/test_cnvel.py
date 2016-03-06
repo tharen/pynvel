@@ -1,4 +1,6 @@
 '''
+Basic tests of the Cython wrappers for NVEL subroutines
+
 Created on Jun 25, 2015
 
 @author: THAREN
@@ -17,14 +19,14 @@ import pynvel
 
 print('Version:'.format(pynvel.version()))
 
-variant = ''
+variant = b''
 region = 6
-forest = '12'
-district = '01'
-species = 202
-product = '01'
+forest = b'12'
+district = b'01'
+species = b'DF'
+product = b'01'
 
-print(pynvel.fia_spp[202])
+species = pynvel.get_spp_code(species)
 
 print(pynvel.get_equation(species, variant, region, forest, district, product))
 print(pynvel.get_equation(species, variant, region, forest, district, fia=True))
@@ -37,7 +39,7 @@ mrule = pynvel.init_merchrule(
 print('**', mrule)
 
 r = pynvel.get_volume(
-        region=6, forest=12, volume_eq='F01FW3W202'
+        region=6, forest='12', volume_eq='F01FW3W202'
         , dbh_ob=20.0, total_ht=150
         , cruise_type='C'
         , form_class=80
@@ -74,7 +76,7 @@ print('CuFt Tip:   ', r['cuft_tip'])
 #     print(l)
 
 for l in volcalc.logs:
-    print(l.pos, l.bole_ht, l.length, l.large_dib, l.small_dib,)
+    print(l.position, l.bole_height, l.length, l.large_dib, l.small_dib,)
     print(l.scale_diam, l.cuft_gross, l.bdft_gross)
 
 # print(volcalc.volume)
@@ -94,13 +96,13 @@ df = pd.DataFrame({'dbh_ob':dbh, 'total_ht':ht, 'form_class':fc})
 def volsum(row):
     volcalc.calc(**row)
     vol = volcalc.volume
-    cols = ['dbh', 'total_ht', 'form_class', 'volume_eq', 'cuft_tot', 'bdft_gross', 'cuft_gross']
+    cols = ['dbh', 'total_height', 'form_class', 'volume_eq', 'cuft_total', 'bdft_gross', 'cuft_gross']
     return pd.Series({
             'cuft_total':vol['cuft_total']
             , 'bdft_gross':vol['bdft_gross_prim']
             , 'cuft_gross':vol['cuft_gross_prim']
             , 'dbh':volcalc.dbh_ob
-            , 'total_ht':volcalc.total_ht
+            , 'total_height':volcalc.total_height
             , 'form_class':volcalc.form_class
             , 'volume_eq':volcalc.volume_eq
             }, index=cols)
