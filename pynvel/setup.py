@@ -25,11 +25,11 @@ long_desc = open('./readme.rst').read().strip()
 shutil.copyfile('./readme.rst', 'pynvel/readme.rst')
 shutil.copyfile('./readme.rst', 'pynvel/docs/readme.rst')
 
-# FIXME: I think this can be handled in MANIFEST.in
-# TODO: This should be called after docs are generated
-shutil.rmtree('./pynvel/docs/html', ignore_errors=True)
-time.sleep(0.05)  # Windows takes a bit to catch up on the delete
-shutil.copytree('./pynvel/docs/_build/html', './pynvel/docs/html')
+# # FIXME: I think this can be handled in MANIFEST.in
+# # TODO: This should be called after docs are generated
+# shutil.rmtree('./pynvel/docs/html', ignore_errors=True)
+# time.sleep(0.05)  # Windows takes a bit to catch up on the delete
+# shutil.copytree('./pynvel/docs/_build/html', './pynvel/docs/html')
 
 static = True
 debug = False

@@ -4,6 +4,16 @@ build64/*
 msysbuild/*
 release64/*
 
+conda_py*
+_build/
+
+*.bak
+*.o
+*.dll
+*.a
+*.zip
+*.exe
+
 # Byte-compiled / optimized / DLL files
 __pycache__/
 *.py[cod]
@@ -15,6 +25,7 @@ __pycache__/
 .Python
 env/
 build/
+cython_debug/
 develop-eggs/
 dist/
 downloads/

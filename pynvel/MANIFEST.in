@@ -7,7 +7,4 @@ include pynvel/examples/*.py
 include pynvel/examples/*.csv
 include pynvel/arcgis/*.pyt
 include pynvel/arcgis/*.tbx
-recursive-include pynvel/docs/html *
-exclude pynvel/docs/*.doc
-exclude pynvel/docs/*.*
-include pynvel/docs/readme.rst
+include pynvel/docs/_build/html/*.*
