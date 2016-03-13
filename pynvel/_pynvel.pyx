@@ -1,11 +1,18 @@
-#cythonx: embedsignature=True
+#cython: c_string_type=str, c_string_encoding=ascii
+#xcython: embedsignature=True
+
+from collections import OrderedDict
 
 import numpy as np
-from collections import OrderedDict
 cimport numpy as np
+cimport cython
+from cython.view cimport array as cvarray
 
 from _vollib cimport *
 include 'nvelcommon.pxi'
+
+FLOAT_DTYPE = np.float32
+ctypedef np.float32_t FLOAT32_DTYPE_t
 
 cpdef merchrules_ init_merchrule(
         int evod=1, int opt=23, float maxlen=40.0, float minlen=12.0
@@ -15,54 +22,63 @@ cpdef merchrules_ init_merchrule(
         ):
     """
     Return a structure defining log merchandizing rules.
+
+    Notes:
+        Refer to vollib/segmnt.f for variable definitions 
+        Type MERCHRULES is implemented in mrules_mod.f 
     
-    Args
-    ----
-    :param evod: Even/Odd 1: Odd number of segments allowed; 2: Even segments only
-            11-14: Segmentation options allow odd lengths by definition.
-    :param opt: Specified segmentation option codes are as follows:
-            11 = 16 ft log scale (fsh 2409.11)
-            12 = 20 ft log scale (fsh 2409.11)
-            13 = 32 ft log scale
-            14 = 40 ft log scale
-            21 = Nominal log length (NLL), if top less than half
-                 of NLL it is combined with next lowest log and
-                 segmented acording to rules for NLL max length.
-                 if segment is half or more of NLL then segment
-                 stands on its' own.
-            22 = Nominal log length, top is placed with next lowest
-                 log and segmented acording to rules for NLL max
-                 length.
-            23 = Nominal log length, top segment stands on its' own.
-            24 = Nominal log length, top segment less than 1/4 of
-                 NLL then segment is droped, if segment is
-                 1/4 to 3/4 then segment is = 1/2 of NLL,
-                 if segment is greater than 3/4 of NLL then
-                 segment is = NLL.
-    :param maxlen: Maximum segment length
-    :param minlen: Minimum segment length
-    :param minlent: Minimum segment length, secondary product
-    :param merchl: Minimum tree merch length
-    :param mtopp: Minimum top diameter, primary product
-    :param mtops: Minimum top diameter, secondary product
-    :param stump: Stump height
-    :param trim: Segment trim length
-    :param btr: Bark thickness ratio (breast height)
-    :param dbtbh: Double bark thickness (breast height)
-    :param minbfd: Minimum merch. tree diameter
-    :param cor: Make corrections to Scribner factor volumes (Y/N)
+    Args:
+        evod (int): Log segmentation rule.
+        
+            + 1: Odd number of segments allowed
+            + 2: Even segments only
+        
+        opt (int): Specified segmentation option codes are as follows.
+            **Note:** opt=[11-14] implies evod=1.
+        
+            + 11: 16 ft log scale (fsh 2409.11)
+            + 12: 20 ft log scale (fsh 2409.11)
+            + 13: 32 ft log scale
+            + 14: 40 ft log scale
+            + 21: Nominal log length (NLL), if top less than half
+              of NLL it is combined with next lowest log and
+              segmented acording to rules for NLL max length.
+              if segment is half or more of NLL then segment
+              stands on its' own.
+            + 22: Nominal log length, top is placed with next lowest
+              log and segmented acording to rules for NLL max
+              length.
+            + 23: Nominal log length, top segment stands on its' own.
+            + 24: Nominal log length, top segment less than 1/4 of
+              NLL then segment is droped, if segment is
+              1/4 to 3/4 then segment is = 1/2 of NLL,
+              if segment is greater than 3/4 of NLL then
+              segment is = NLL.
+        
+        maxlen (float): Maximum segment length
+        minlen (float): Minimum segment length
+        minlent (float): Minimum segment length, secondary product
+        merchl (float): Minimum tree merch length
+        mtopp (float): Minimum top diameter, primary product
+        mtops (float): Minimum top diameter, secondary product
+        stump (float): Stump height
+        trim (float): Segment trim length
+        btr (float): Bark thickness ratio (breast height)
+        dbtbh (float): Double bark thickness (breast height)
+        minbfd (float): Minimum merch. tree diameter
+        cor (str): Make corrections to Scribner factor volumes (Y/N)
     
-    Refs:
-    segmnt.f  
+    Returns:
+        struct: A struct representing the defined merchandizing rules.
     """
     
     # FIXME: This is a hack because I couldn't figure out how to initialize a
     #        compatible character variable as a parameter.
     cdef char cor_
     if cor == 'Y':
-        cor_ = b'Y'
+        cor_ = 'Y'
     else:
-        cor_ = b'N'
+        cor_ = 'N'
         
     cdef merchrules_ mr = merchrules_(
             evod=evod, opt=opt, maxlen=maxlen, minlen=minlen, minlent=minlent
@@ -79,28 +95,35 @@ def vollib_version():
      
     return v
 
+# FIXME: Handle basic strings instead of unicode so Python 2 & 3 don't collide
+#        http://docs.cython.org/src/tutorial/strings.html
 cpdef char* get_equation(
-        int species, char* fvs_variant=b'', int region=0, char* forest=b''
-        , char* district=b'01', char* product=b'01', bint fia=False):
+        int species, char * fvs_variant='', int region=0, char * forest=''
+        , char * district='01', char * product='01', bint fia=False):
     """
-    Return the default volume equation for a species.
+    Return the default volume equation ID for a species in geographic location.
     
     If fvs_variant is not provided the region and forest codes are used to
-    lookup a default. See "volume_equation_table.doc", section 9, for region 
-    and forest codes.
+    lookup a default.
     
-    Args
-    ----
-    :param fvs_variant: FVS variant abbreviation, eg. PN for Pacific Northcoast
-    :param region: USFS region number, eg. 6 for PNW.
-    :param forest: USFS forest number, 
-    :param district: USFS district number. (default='01')
-    :param species: FIA species number
-    :param product: Product type code
-    :param fia: If True, return the default FIA equation. (default=False)
+    See Volume_Equation_Table.doc :download:`download 
+    <./Volume_Equation_Table.doc>`, section 9, for region and forest codes.
+    
+    Args:
+        fvs_variant (str): FVS variant abbreviation, eg. PN for the 
+            Pacific Northcoast variant
+        region (int): USFS region number, eg. 6 for PNW.
+        forest (str): USFS forest number, e.g. '04'. 
+        district (str): USFS district number, (default='01').
+        species (int): FIA species number.
+        product (str): Product type code, '01': saw timber; '02': pulp
+        fia (bool): If True, return the default FIA equation. (default=False)
+    
+    Returns:
+        str: Default volume equation ID.
     """
 
-    cdef char* vol_eq = b''
+    cdef char* vol_eq = ''
     cdef int err_flag = 0
     
     if not fia:
@@ -118,265 +141,10 @@ cpdef char* get_equation(
 DTYPE_float32 = np.float32
 ctypedef np.float32_t DTYPE_float32_t
 
-def get_volume(
-        int region=0, forest=0, volume_eq=b'', float min_top_prim=5.0
-        , float min_top_sec=2.0, float stump_ht=1.0, float dbh_ob=0.0, float drc_ob=0.0
-        , ht_type=b'F', float total_ht=0.0, int ht_log=0, float ht_prim=0.0, float ht_sec=0.0
-        , float upper_ht1=0.0, float upper_ht2=0.0, float upper_diam1=0.0, float upper_diam2=0.0
-        , int ht_ref=0, float avg_z1=0.0, float avg_z2=0.0, int form_class=0
-        , float bark_thick=0.0, float bark_ratio=0.0, log_len=[]
-        , int num_logs=0, float num_logs_prim=0.0, float num_logs_sec=0.0
-        , int cubic_total_flag=1, int bdft_prim_flag=1, int cubic_prim_flag=1
-        , int cord_prim_flag=1, int sec_vol_flag=1, con_spp=b'', prod_code=1
-        , int ht_1st_limb=0, live=b'L', int basal_area=0, int site_index=0
-        , cruise_type=b'C', int debug=0
-        , merchrules_ merch_rule=init_merchrule()):
-    """
-    Calculate total tree and log volumes for a single tree.
-    
-    Arguments
-    ---------
-    :param region: USFS region number
-    :param forest: USFS forest number
-    :param volume_eq: Volume equation Identifier
-    :param min_top_prim: rimary product minimum top diameter
-    :param min_top_sec: Secondary product minimum top diameter
-    :param stump_ht: Stump height
-    :param dbh_ob: Diameter at breast height
-    :param drc_ob: Diameter at root collar
-    :param ht_type: Height measurement type (F)eet; (L)ogs
-    :param total_ht: Total tree height
-    :param ht_log: Length of logs if ht_type=='L'
-    :param ht_prim: Height to top of primary product
-    :param ht_sec: Height to top of secondary product
-    :param upper_ht1: Reference height for 1st upper stem diameter
-    :param upper_ht2: Reference height for 2nd upper stem diameter
-    :param upper_diam1: First upper stem diameter
-    :param upper_diam2: Second upper stem diameter
-    :param ht_ref: Height reference
-    :param avg_z1: Flewellings average Z factor (1st)
-    :param avg_z2: Flewellings average Z factor (2nd)
-    :param form_class: Girard's form class
-    :param bark_thick: Double bark thickness
-    :param bark_ratio: Bark thickness ratio
-    :param log_len: Individual log lengths
-    :param num_logs: Number of logs
-    :param num_logs_prim: Number of logs primary product
-    :param num_logs_sec: Number of logs secondary product
-    :param cubic_total_flag: Tota cubic foot calculation flag
-    :param bdft_prim_flag: Board foot calculation flag
-    :param cubic_prim_flag: Primary product cubic foot calculation flag
-    :param cord_prim_flag: Secondary product cubic foot calculation flag
-    :param sec_vol_flag: Secondary volume calculation flag
-    :param con_spp: Contract species
-    :param prod_code: Product code 1-Sawtimber; 2-Pulpwood; 3-Roundwood 
-    :param live: Tree status (L)ive;(D)ead
-    :param basal_area: Basal area per acre
-    :param site_index: Site index
-    :param cruise_type: Volume calculation method:
-            (C)ruise method requires all necessary fields.
-            (F)VS method will impute missing heights and form_class.
-            (V)ariable method requires num_logs and log_len.
-    :param debug: Debug flag
-    :param merch_rule: Merchandization rule (object). If None then defaults 
-            will be used for the region and forest.
-    """
-    
-    forest = '{:>02d}'.format(forest)
-    cdef char* forest_c = forest
-    cdef int fl = 2
-    cdef char* volume_eq_c = volume_eq
-    cdef int vl = 10     
-    cdef char* ht_type_c = 'F'
-    cdef int hl = 1
-    
-    # Array size variables
-    cdef int i3 = 3
-    cdef int i7 = 7
-    cdef int i15 = 15
-    cdef int i20 = 20
-    cdef int i21 = 21
-    # NOTE:vollib.vollibcs is a wrapper that handles reshaping the arrays and variables between C and Fortran
-    # TODO: Call vollib.volinit and volinit2 directly to avoid unecessary variable manipulation
-    cdef np.ndarray[DTYPE_float32_t, ndim=1, mode='c'] volume_c = np.zeros((i15,), dtype=DTYPE_float32)
-#     cdef np.ndarray[np.float32_t, ndim=1, mode='c'] volume_c = np.zeros((i15, ), dtype=np.float32)
-    cdef np.ndarray[np.float32_t, ndim=2, mode='c'] log_vol_c = np.zeros((i7, i20), dtype=np.float32)
-    cdef np.ndarray[np.float32_t, ndim=2, mode='c'] log_diam_c = np.zeros((i21, i3), dtype=np.float32)
-    cdef np.ndarray[np.float32_t, ndim=1, mode='c'] log_len_c = np.zeros((i20, ), dtype=np.float32)
-    cdef np.ndarray[np.float32_t, ndim=1, mode='c'] bole_ht_c = np.zeros((i21, ), dtype=np.float32)
-    
-    con_spp = '{:>4s}'.format(con_spp)
-    cdef char* con_spp_c = con_spp
-    cdef int csl = 4
-    
-    prod_code = '{:>02d}'.format(prod_code)
-    cdef char* prod_code_c = prod_code
-    cdef int pl = 2
-     
-    cdef int ht_1st_limb_c = ht_1st_limb
-     
-    cdef char* live_c = live 
-    cdef int ll = 1
-    
-    cdef char* cruise_type_c = cruise_type
-    cdef int ctl = 1
-    
-    cdef int user_merch_flag = 2    
-    cdef int error_flag = 0
-    
-    if num_logs>0:
-        log_len_c[:num_logs] = log_len[:num_logs]
-        cruise_type_c=b'V'
-    
-    vollibc2_(
-            &region
-            , forest_c
-            , volume_eq_c
-            , &min_top_prim
-            , &min_top_sec
-            , &stump_ht
-            , &dbh_ob
-            , &drc_ob
-            , ht_type_c
-            , &total_ht
-            , &ht_log
-            , &ht_prim
-            , &ht_sec
-            , &upper_ht1
-            , &upper_ht2
-            , &upper_diam1
-            , &upper_diam2
-            , &ht_ref
-            , &avg_z1
-            , &avg_z2
-            , &form_class
-            , &bark_thick
-            , &bark_ratio
-            , &i3
-            , &i7
-            , &i15
-            , &i20
-            , &i21
-            , &volume_c[0]
-            , &log_vol_c[0,0]
-            , &log_diam_c[0,0]
-            , &log_len_c[0]
-            , &bole_ht_c[0]
-            , &num_logs
-            , &num_logs_prim
-            , &num_logs_sec
-            , &cubic_total_flag
-            , &bdft_prim_flag
-            , &cubic_prim_flag
-            , &cord_prim_flag
-            , &sec_vol_flag
-            , con_spp_c
-            , prod_code_c
-            , &ht_1st_limb
-            , live_c
-            , &basal_area
-            , &site_index
-            , cruise_type_c
-            , &error_flag
-            , &debug
-            , &user_merch_flag
-            , &merch_rule
-            , fl
-            , vl
-            , hl
-            , csl
-            , pl
-            , ll
-            , ctl
-            )
-    
-    if debug:
-        print('region -', region)
-        print('forest_c -', forest_c)
-        print('volume_eq_c -', volume_eq_c)
-        print('min_top_prim -', min_top_prim)
-        print('min_top_sec -', min_top_sec)
-        print('stump_ht -', stump_ht)
-        print('dbh_ob -', dbh_ob)
-        print('drc_ob -', drc_ob)
-        print('ht_type_c -', ht_type_c)
-        print('total_ht -', total_ht)
-        print('ht_log -', ht_log)
-        print('ht_prim -', ht_prim)
-        print('ht_sec -', ht_sec)
-        print('upper_ht1 -', upper_ht1)
-        print('upper_ht2 -', upper_ht2)
-        print('upper_diam1 -', upper_diam1)
-        print('upper_diam2 -', upper_diam2)
-        print('ht_ref -', ht_ref)
-        print('avg_z1 -', avg_z1)
-        print('avg_z2 -', avg_z2)
-        print('form_class -', form_class)
-        print('bark_thick -', bark_thick)
-        print('bark_ratio -', bark_ratio)
-        print('i3 -', i3)
-        print('i7 -', i7)
-        print('i15 -', i15)
-        print('i20 -', i20)
-        print('i21 -', i21)
-        print('volume_c[0] -', volume_c[0:5])
-        print('log_vol_c[0,0] -', log_vol_c[0,0])
-        print('log_diam_c[0,0] -', log_diam_c[0,0])
-        print('log_len_c[0] -', log_len_c[0])
-        print('bole_ht_c[0] -', bole_ht_c[0])
-        print('num_logs -', num_logs)
-        print('num_logs_prim -', num_logs_prim)
-        print('num_logs_sec -', num_logs_sec)
-        print('cubic_total_flag -', cubic_total_flag)
-        print('bdft_prim_flag -', bdft_prim_flag)
-        print('cubic_prim_flag -', cubic_prim_flag)
-        print('cord_prim_flag -', cord_prim_flag)
-        print('sec_vol_flag -', sec_vol_flag)
-        print('con_spp_c -', con_spp_c)
-        print('prod_code_c -', prod_code_c)
-        print('ht_1st_limb -', ht_1st_limb)
-        print('live_c -', live_c)
-        print('basal_area -', basal_area)
-        print('site_index -', site_index)
-        print('cruise_type_c -', cruise_type_c)
-        print('error_flag -', error_flag)
-        print('debug -', debug)
-        print('user_merch_flag -', user_merch_flag)
-        print('merch_rule -', merch_rule)
-        print('fl -', fl)
-        print('vl -', vl)
-        print('hl -', hl)
-        print('csl -', csl)
-        print('pl -', pl)
-        print('ll -', ll)
-        print('ctl -', ctl)
-
-    if error_flag!=0:
-        print('Error Code {}: {}'.format(error_flag,error_codes[error_flag]))
-    
-#     print(log_len_c)
-#     print(log_diam_c)
-    return dict(zip(vol_lbl,volume_c))
-
-# def get_merch_ht(spp, dbh, dib, total_ht=None, stump_ht=1.0, vol_eq=None, *args, **kargs):
-#     """
-#     Call NVEL and get back the estimated height to the minimum DIB
-#     """
-#     # get default profile vol_eq for spp
-#     if not vol_eq:
-#         vol_eq = get_volume_eq(spp)
-# 
-#     result = _VOLLIBC2(dbh=dbh
-#         , tot_ht=total_ht
-#         , vol_eq=vol_eq
-#         , top_dib_1=dib
-#         , stump_ht=stump_ht
-#         , *args, **kargs
-#         )
-# 
-#     return result['HTPRD1']
-
 cdef class Log:
+    """
+    Represents a single merchandized log segment.
+    """
     cdef public int position
     cdef public float bole_height
     cdef public float length
@@ -410,6 +178,7 @@ cdef class Log:
         return getattr(self,item)
     
     def as_dict(self):
+        """Return the log segment attributes as a dictionary."""
         d = OrderedDict()
         d['position'] = self.position
         d['bole_height'] = self.bole_height
@@ -432,6 +201,18 @@ cdef class Log:
 #         return self.__repr__()
     
 cdef class VolumeCalculator:
+    """
+    Initialize volume calculation for a single species.
+    
+    Attributes:
+        volume_eq (str): NVEL volume equation identifier
+        dbh_ob (float): Diameter at breast height, outside bark
+        drc_ob (float): Diameter at root collar, outside bark
+        form_class (int): Girard form class, e.g. DIB at 17.3'/DBH
+        num_logs (int): Number of logs estimated for the tree
+        num_logs_prim (float): Number of primary product logs
+        num_logs_sec (float): Number of secondary product logs
+    """
     cdef int region
     cdef char* forest
     cdef public char* volume_eq
@@ -456,15 +237,15 @@ cdef class VolumeCalculator:
     cdef float bark_thick
     cdef float bark_ratio
     cdef public int num_logs
-    cdef float num_logs_prim
-    cdef float num_logs_sec
+    cdef public float num_logs_prim
+    cdef public float num_logs_sec
     cdef int cubic_total_flag
     cdef int bdft_prim_flag
     cdef int cubic_prim_flag
     cdef int cord_prim_flag
     cdef int sec_vol_flag
     cdef char* con_spp
-    cdef public char* prod_code
+    cdef char* prod_code
     cdef int ht_1st_limb
     cdef char* live
     cdef int basal_area
@@ -473,11 +254,11 @@ cdef class VolumeCalculator:
     cdef int error_flag
     cdef merchrules_ merch_rule
     
-    cdef public np.float32_t[:] volume_wk
-    cdef public np.float32_t[:,:] log_vol_wk
-    cdef public np.float32_t[:,:] log_diam_wk
-    cdef public np.float32_t[:] log_len_wk
-    cdef public np.float32_t[:] bole_ht_wk
+    cdef np.float32_t[:] volume_wk
+    cdef np.float32_t[:,:] log_vol_wk
+    cdef np.float32_t[:,:] log_diam_wk
+    cdef np.float32_t[:] log_len_wk
+    cdef np.float32_t[:] bole_ht_wk
     
     property total_height:
         """Return the total height of the tree."""
@@ -488,9 +269,14 @@ cdef class VolumeCalculator:
         """Return the height to the top of the primary product."""
         def __get__(self):
             return self.ht_prim
+    
+    property form_height:
+        """Return the reference height used in bole form estimation."""
+        def __get__(self):
+            return self.ht_ref
         
     property volume:
-        """Return a dict of calculated tree volume."""
+        """Return a dict of tree volumes."""
         def __get__(self):
             # zip vol_lbl from nvelcommon.pxi with the volume array
             return dict(zip(vol_lbl, self.volume_wk))
@@ -521,8 +307,7 @@ cdef class VolumeCalculator:
                 l = np.array(self.log_diam_wk[i])
                 s = np.array(self.log_diam_wk[i+1])
                 
-                d = {
-                        'large_ob':l[2]
+                d = {   'large_ob':l[2]
                         ,'small_ob':s[2]
                         ,'large_ib':l[1]
                         ,'small_ib':s[1]
@@ -533,7 +318,7 @@ cdef class VolumeCalculator:
             return diams
     
     property logs:
-        """Return an array of log objects."""
+        """Return a list of log objects."""
         def __get__(self):
             cdef int i
             # TODO: Make logs a C array of Log objects
@@ -558,17 +343,79 @@ cdef class VolumeCalculator:
         """Return the volume calculation error code."""
         def __get__(self):
             return error_codes[self.error_flag]
+    
+    @cython.boundscheck(False)
+    def calc_array(self,
+            np.ndarray[np.float64_t, ndim=1] dbh,
+            np.ndarray[np.float64_t, ndim=1] total_ht):
+        """
+        Return an array of volume attributes for an array of trees.
         
+        Args:
+            dbh (float64): Array of tree DBHs
+            total_ht (float64): Array of tree heights
+        
+        Returns:
+            float64: Array of tree volumes
+        """
+        
+        #TODO: need to type the I/O arrays or use Cython views
+        # http://docs.cython.org/src/tutorial/numpy.html
+        # http://stackoverflow.com/questions/22118772/correct-way-to-return-numpy-friendly-arrays-using-typed-memoryviews-in-cython
+        cdef size_t i
+        cdef size_t n = dbh.shape[0]
+        cdef np.ndarray[np.float64_t, ndim=2] v = \
+                np.zeros((n,3), dtype=np.float64)
+        
+        for i in range(n):
+            self.calc(dbh_ob=dbh[i],total_ht=total_ht[i])
+            v[i,0] = self.volume_wk[0] # Total CuFt
+            v[i,1] = self.volume_wk[3] # Merch CuFt
+            v[i,2] = self.volume_wk[1] # Scribner BdFt
+            
+        return v
+
     cpdef int calc(self
             , float dbh_ob=0.0, float drc_ob=0.0, float total_ht=0.0, int ht_log=0
-            , char* ht_type=b'F', float ht_prim=0.0, float ht_sec=0.0
+            , char* ht_type='F', float ht_prim=0.0, float ht_sec=0.0
             , float upper_ht1=0.0, float upper_ht2=0.0, float upper_diam1=0.0, float upper_diam2=0.0
             , int ht_ref=0, float avg_z1=0.0, float avg_z2=0.0, int form_class=0
-            , float bark_thick=0.0, float bark_ratio=0.0, int ht_1st_limb=0, char* live=b'L'
+            , float bark_thick=0.0, float bark_ratio=0.0, int ht_1st_limb=0, char* live='L'
             , np.ndarray log_len=np.zeros((20,),np.float32)
 #             , int num_logs=0
             ):
-         
+        """
+        Estimate the volume of a tree.
+        
+        Tree volume will be estimated using the volume equation, merch. rules, 
+        etc. defined by the attributes of the current instance of 
+        VolumeCalculator.
+        
+        Args:
+            dbh_ob (float):
+            drc_ob (float):
+            total_ht (float):
+            
+            ht_type (str):
+            ht_log (int):
+            ht_prim (float):
+            ht_sec (float):
+            
+            upper_ht1 (float):
+            upper_ht2 (float):
+            upper_diam1 (float):
+            upper_diam2 (float):
+            ht_ref (int):
+            avg_z1 (float):
+            avg_z2 (float):
+            form_class (int):
+            
+            bark_thick (float):
+            bark_ratio (float):
+            ht_1st_limb (int):
+            live (str): 
+            
+        """ 
         self.dbh_ob = dbh_ob
         self.drc_ob = drc_ob
         self.total_ht = total_ht
@@ -703,15 +550,41 @@ cdef class VolumeCalculator:
         self.log_len_wk = np.zeros((20, ), dtype=np.float32, order='F')
         self.bole_ht_wk = np.zeros((21, ), dtype=np.float32, order='F')
 
-    def __init__(self, int region=6, char* forest=b'12', char* volume_eq=b''
+    def __init__(self, int region=6, char* forest='12', char* volume_eq=''
             , float min_top_prim=5.0, float min_top_sec=2.0, float stump_ht=1.0
             , int cubic_total_flag=1, int bdft_prim_flag=1, int cubic_prim_flag=1
             , int cord_prim_flag=1, int sec_vol_flag=1
-            , char* con_spp=b'', char* prod_code=b'01'
+            , char* con_spp='', char* prod_code='01'
             , int basal_area=0, int site_index=0
-            , char* cruise_type=b'C', *args, **kargs
+            , char* cruise_type='C', *args, **kargs
             ):
-         
+        """
+        Initialize common volume calculation attributes.
+        
+        Args:
+            region (int): USFS region number
+            forest (str): USFS forest number, e.g. '04'
+            volume_eq (str): Volume equation Identifier
+            min_top_prim (float): Primary product minimum top diameter
+            min_top_sec (float): Secondary product minimum top diameter
+            stump_ht (float): Stump height
+            cubic_total_flag (int): Tota cubic foot calculation flag
+            bdft_prim_flag (int): Board foot calculation flag
+            cubic_prim_flag (int): Primary product cubic foot calculation flag
+            cord_prim_flag (int): Secondary product cubic foot calculation flag
+            sec_vol_flag (int): Secondary volume calculation flag
+            con_spp (str): Contract species
+            prod_code (int): Product code- 1: Sawtimber; 2: Pulpwood; 3: Roundwood 
+            basal_area (int): Basal area per acre
+            site_index (int): Site index
+            cruise_type (str): Volume calculation method
+                
+                + (C)ruise method requires all necessary fields.
+                + (F)VS method will impute missing heights and form_class.
+                + (V)ariable method requires num_logs and log_len.
+            
+            merch_rule (merchrules_) User defined merchandizing rules.
+        """
         self.region = region
         self.forest = forest
         self.volume_eq = volume_eq

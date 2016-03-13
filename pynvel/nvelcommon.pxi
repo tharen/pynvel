@@ -55,9 +55,14 @@ spp_codes = {
 fia_spp = {v[0]:k for k, v in spp_codes.items() if not k in ('OT','CX','HX')}
 
 def get_spp_code(spp):
-    """Return an FIA species number given a species abbreviation.
+    """
+    Return an FIA species number given a species abbreviation.
     
-    :param spp: Two character species abbreviation.
+    Args:
+        spp (str): Two character species abbreviation.
+    
+    Returns:
+        int: FIA species number
     """
     if isinstance(spp, str):
         try:

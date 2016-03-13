@@ -8,8 +8,6 @@ import argparse
 
 import pynvel
 
-def warn(x): print(x)
-
 def main():
     """
     Report the volume and log attributes of a single tree.
@@ -46,15 +44,6 @@ def main():
 
     else:
         vol_eq = args.equation.upper()
-
-    # FIXME: Lengths specified in default equations conflict with maxlen mrule
-    #        This should be reported to FMSC
-    if 'BEH' in vol_eq:
-        ml = float(vol_eq[1:3])
-        if ml != 0.0:
-            warn('Overiding user log length with the equation default: '
-                    '{:.1f}->{:.1f}'.format(mrule['maxlen'], ml))
-            mrule['maxlen'] = ml
 
     # TODO: Implement height curves
     if not args.height:

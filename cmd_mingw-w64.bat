@@ -13,7 +13,8 @@ set PATH=C:\Ruby22-x64\bin;%PATH%
 set PATH=C:\progs\Git\bin;C:\progs\Git\usr\bin;%PATH%
 set path=%path%;C:\Miniconda3\Scripts
 
-call activate conda_py34_x64
+REM call activate %~dp0\conda_py27_x64
+call activate %~dp0\conda_py34_x64
 
 start c:\progs\console2\console.exe ^
 		-d %proj_root% ^

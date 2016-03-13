@@ -10,6 +10,8 @@ build/*
 cython_debug/*
 conda_py*
 
+*/_build/*
+
 *.dll
 *.a
 *.zip

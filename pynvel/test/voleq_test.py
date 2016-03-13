@@ -1,8 +1,14 @@
-'''
+"""
+Test volume calculation against an independent version of NVEL.
+
+Reference:
+    http://www.fs.fed.us/fmsc/measure/volume/tablegenerator/index.php
+
 Created on Mar 4, 2016
 
-@author: THAREN
-'''
+@author: Tod Haren
+"""
+
 import unittest
 
 import numpy as np
@@ -13,6 +19,9 @@ import pynvel
 class Test(unittest.TestCase):
 
     def setUp(self):
+        """
+        Test setup, load datasets
+        """
 
         # TODO: Test multiple equations using nose-parameterized
         self.vol_eq = 'F01FW2W202'
