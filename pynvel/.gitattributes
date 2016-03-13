@@ -1,0 +1,9 @@
+# Set the default behavior, in case people don't have core.autocrlf set.
+* text=auto
+*.bat eol=crlf
+
+*.docx binary
+*.doc binary
+*.mdb binary
+*.db binary
+*.sqlite binary
