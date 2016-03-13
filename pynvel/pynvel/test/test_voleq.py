@@ -9,6 +9,7 @@ Created on Mar 4, 2016
 @author: Tod Haren
 """
 
+import os
 import unittest
 
 import numpy as np
@@ -25,10 +26,11 @@ class Test(unittest.TestCase):
 
         # TODO: Test multiple equations using nose-parameterized
         self.vol_eq = 'F01FW2W202'
-
-        test_bdft = pd.read_csv('data/{}_bdft.txt'.format(self.vol_eq))
+        
+        d,f = os.path.split(__file__)
+        test_bdft = pd.read_csv('{}/data/{}_bdft.txt'.format(d,self.vol_eq))
         test_bdft.columns = ['dbh_ob', 'total_ht', 'bdft_gross']
-        test_cuft = pd.read_csv('data/{}_cuft.txt'.format(self.vol_eq))
+        test_cuft = pd.read_csv('{}/data/{}_cuft.txt'.format(d,self.vol_eq))
         test_cuft.columns = ['dbh_ob', 'total_ht', 'cuft_gross']
 
         self.test_data = test_bdft.merge(test_cuft, on=['dbh_ob', 'total_ht'])

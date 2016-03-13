@@ -38,19 +38,19 @@ mrule = pynvel.init_merchrule(
 
 print('**', mrule)
 
-r = pynvel.get_volume(
-        region=6, forest='12', volume_eq='F01FW3W202'
-        , dbh_ob=20.0, total_ht=150
-        , cruise_type='C'
-        , form_class=80
-#         , ht_ref=33
-#         , upper_ht1=17.5, upper_diam1=18.0 * .80
-#         , num_logs=3, log_len=[40, 40, 20]
-        , merch_rule=mrule
-#         , debug=1
-#         , cubic_total_flag=1
-#         , bdft_prim_flag=1
-        )
+# r = pynvel.get_volume(
+        # region=6, forest='12', volume_eq='F01FW3W202'
+        # , dbh_ob=20.0, total_ht=150
+        # , cruise_type='C'
+        # , form_class=80
+# #         , ht_ref=33
+# #         , upper_ht1=17.5, upper_diam1=18.0 * .80
+# #         , num_logs=3, log_len=[40, 40, 20]
+        # , merch_rule=mrule
+# #         , debug=1
+# #         , cubic_total_flag=1
+# #         , bdft_prim_flag=1
+        # )
 
 volcalc = pynvel.VolumeCalculator(
         volume_eq='F01FW3W202'
