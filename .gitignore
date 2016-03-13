@@ -1,3 +1,6 @@
+_pynvel.c
+mingw-gcc.specs
+
 debug/*
 release/*
 build64/*
