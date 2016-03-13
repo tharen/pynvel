@@ -1,5 +1,8 @@
 debug/*
 release/*
+build64/*
+msysbuild/*
+release64/*
 
 # Byte-compiled / optimized / DLL files
 __pycache__/

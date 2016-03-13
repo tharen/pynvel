@@ -3,6 +3,12 @@ cmake_minimum_required (VERSION 2.8.8 FATAL_ERROR)
 enable_language(Fortran)
 project(VOLLIB Fortran)
 
+# Define default configuration variables
+set(TARGET_32BIT Yes CACHE BOOL "Set to yes if target architecture is 32 bit.")
+set(TARGET_NATIVE Yes CACHE BOOL "Build targeting the host architecture.")
+
+message(STATUS "Target is 32 bit: ${TARGET_32BIT}")
+
 set(src_root "${CMAKE_CURRENT_LIST_DIR}/vollib")
 include_directories(BEFORE ${src_root})
 
@@ -11,20 +17,41 @@ file(STRINGS "${src_root}/../sources.txt" vollib_sources)
 # Localize the paths
 string(REPLACE "vollib/" "${src_root}/" vollib_sources "${vollib_sources}")
 
-set(arch_flags "-m32")
+if (TARGET_32BIT)
+    set(arch_flags "-m32")
+    set(vollib vollib)
+else ()
+    set(arch_flags "-m64")
+    set(vollib vollib64)
+endif ()
+
+if (TARGET_NATIVE)
+    message(STATUS "Targeting host native architecture.")
+    set(arch_flags "-march=native")
+endif ()
+
 set(CMAKE_C_FLAGS "${arch_flags} ${CMAKE_C_FLAGS}")
 set(CMAKE_CXX_FLAGS "${arch_flags} ${CMAKE_CXX_FLAGS}")
 set(CMAKE_Fortran_FLAGS "${arch_flags} ${CMAKE_Fortran_FLAGS}")
-set(CMAKE_SHARED_LINKER_FLAGS "${arch_flags} ${CMAKE_SHARED_LINKER_FLAGS}")
-set(CMAKE_SHARED_LINKER_FLAGS_RELEASE "${CMAKE_SHARED_LINKER_FLAGS} -s -Wl,--subsystem,windows")
+set(CMAKE_SHARED_LINKER_FLAGS "${arch_flags} -static ${CMAKE_SHARED_LINKER_FLAGS}")
+set(CMAKE_SHARED_LINKER_FLAGS_RELEASE "-static ${CMAKE_SHARED_LINKER_FLAGS} -s -Wl,--subsystem,windows")
 
-add_library(vollib SHARED ${vollib_sources})
-set_target_properties(vollib PROPERTIES
+# Compile sources into objects
+add_library(${vollib}_objs OBJECT ${vollib_sources})
+
+# Create a static library
+add_library(${vollib}_static STATIC $<TARGET_OBJECTS:${vollib}_objs>)
+#set_target_properties(${vollib}_static PROPERTIES
+#    LINKER_LANGUAGE Fortran
+#    )
+
+# Link a shared library
+add_library(${vollib} SHARED $<TARGET_OBJECTS:${vollib}_objs>)
+set_target_properties(${vollib} PROPERTIES
     LINKER_LANGUAGE Fortran
-    PREFIX ""
-    IMPORT_PREFIX ""
-    LINK_FLAGS "-static"
     )
 
 # TODO: Use standard CMake variables to handle the install destination
-install(TARGETS vollib DESTINATION C:/workspace/pyforestsim/pyforestsim/pynvel)
+# install(TARGETS ${vollib} DESTINATION C:/workspace/pyforestsim/pyforestsim/pynvel)
+install(TARGETS ${vollib}_static DESTINATION .)
+install(TARGETS ${vollib} DESTINATION .)
