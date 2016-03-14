@@ -4,12 +4,13 @@ enable_language(Fortran)
 project(VOLLIB Fortran)
 
 # Define default configuration variables
-set(TARGET_32BIT Yes CACHE BOOL "Set to yes if target architecture is 32 bit.")
+set(TARGET_32BIT No CACHE BOOL "Set to yes if target architecture is 32 bit.")
 set(TARGET_NATIVE Yes CACHE BOOL "Build targeting the host architecture.")
 
 message(STATUS "Target is 32 bit: ${TARGET_32BIT}")
 
 set(src_root "${CMAKE_CURRENT_LIST_DIR}/vollib")
+
 include_directories(BEFORE ${src_root})
 
 # Read the source file names as a list
@@ -33,17 +34,25 @@ endif ()
 set(CMAKE_C_FLAGS "${arch_flags} ${CMAKE_C_FLAGS}")
 set(CMAKE_CXX_FLAGS "${arch_flags} ${CMAKE_CXX_FLAGS}")
 set(CMAKE_Fortran_FLAGS "${arch_flags} ${CMAKE_Fortran_FLAGS}")
-set(CMAKE_SHARED_LINKER_FLAGS "${arch_flags} -static ${CMAKE_SHARED_LINKER_FLAGS}")
-set(CMAKE_SHARED_LINKER_FLAGS_RELEASE "-static ${CMAKE_SHARED_LINKER_FLAGS} -s -Wl,--subsystem,windows")
+set(CMAKE_SHARED_LINKER_FLAGS "${arch_flags} ${CMAKE_SHARED_LINKER_FLAGS}")
+
+if (NOT CMAKE_SYSTEM_NAME STREQUAL "Windows")
+    set(CMAKE_C_FLAGS "-fPIC ${CMAKE_C_FLAGS}")
+    set(CMAKE_CXX_FLAGS "-fPIC ${CMAKE_CXX_FLAGS}")
+    set(CMAKE_Fortran_FLAGS "-fPIC ${CMAKE_Fortran_FLAGS}")
+    set(CMAKE_SHARED_LINKER_FLAGS "-fPIC ${CMAKE_SHARED_LINKER_FLAGS}")
+endif ()
+
+if (CMAKE_SYSTEM_NAME STREQUAL "Windows")
+    # TODO: Add STATIC_LINK option
+    set(CMAKE_SHARED_LINKER_FLAGS "-static ${CMAKE_SHARED_LINKER_FLAGS} -s -Wl,--subsystem,windows")
+endif ()
 
 # Compile sources into objects
 add_library(${vollib}_objs OBJECT ${vollib_sources})
 
 # Create a static library
 add_library(${vollib}_static STATIC $<TARGET_OBJECTS:${vollib}_objs>)
-#set_target_properties(${vollib}_static PROPERTIES
-#    LINKER_LANGUAGE Fortran
-#    )
 
 # Link a shared library
 add_library(${vollib} SHARED $<TARGET_OBJECTS:${vollib}_objs>)
@@ -51,7 +60,14 @@ set_target_properties(${vollib} PROPERTIES
     LINKER_LANGUAGE Fortran
     )
 
-# TODO: Use standard CMake variables to handle the install destination
-# install(TARGETS ${vollib} DESTINATION C:/workspace/pyforestsim/pyforestsim/pynvel)
-install(TARGETS ${vollib}_static DESTINATION .)
-install(TARGETS ${vollib} DESTINATION .)
+# Set the install location for library files
+if (CMAKE_SYSTEM_NAME STREQUAL "Windows")
+    # Assume install location is flat
+    set(dest ".")
+else ()
+    # Assume install location is nested
+    set(dest "lib")
+endif ()
+
+install(TARGETS ${vollib}_static DESTINATION ${dest})
+install(TARGETS ${vollib} DESTINATION ${dest})
