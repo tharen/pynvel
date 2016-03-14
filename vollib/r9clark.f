@@ -369,7 +369,7 @@ C  merchantability rules for the specified species and product.
       USE CLKCOEF_MOD
       
       implicit none
-      INCLUDE 'R9COEFF.INC'
+      INCLUDE 'r9coeff.inc'
       
       integer   errFlg,spp,sppGrp,geog,iProd,k,sppIdx
       real      dbhOb,topDib,topHt,sawHt,maxLen,minLen
