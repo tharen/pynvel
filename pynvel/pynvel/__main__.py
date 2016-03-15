@@ -187,6 +187,9 @@ def handle_args():
             '--treelist', dest='treelist', metavar='', default=''
             , help='Calculate volume for a treelist in a csv file.')
 
+    parser.add_argument('--run-tests', action='store_true', default=False
+            , help='Run test scripts and exit.')
+
     args = parser.parse_args()
 
     if args.version:
@@ -209,6 +212,13 @@ def handle_args():
         calc_table(args)
         sys.exit(0)
 
+    if args.run_tests:
+        import subprocess
+        os.chdir(os.path.join(os.path.dirname(__file__), 'test'))
+        subprocess.call('nose2')
+        sys.exit()
+    
+    # No special flags present, run main.
     if not args.species or not args.dbh:
         print('ERROR: Incorrect number of arguments. Species and DBH are ')
         print('       required for single tree usage.')
