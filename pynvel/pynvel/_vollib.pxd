@@ -8,7 +8,9 @@ cimport numpy as np
 cdef extern from *:
     # vernum.f
     void vernum_(int *v)
-    
+
+    void scrib_(float *dia, float *len, char* cor, float *vol, int cl)
+
 #     # getvoleq.f
 #     void getvoleq_(int *region, char* forest, char* district
 #             , int *species, char* product, char* vol_eq, int *err_flag

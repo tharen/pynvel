@@ -199,7 +199,20 @@ cdef class Log:
     
 #     def __str__(self):
 #         return self.__repr__()
-    
+
+cpdef float scribner_volume(float diam, float length, bint cor=True):
+    cdef char*  _cor
+    cdef float vol
+
+    if cor:
+        _cor='Y'
+    else:
+        _cor='N'
+
+    scrib_(&diam,&length,_cor,&vol,1)
+
+    return vol
+  
 cdef class VolumeCalculator:
     """
     Initialize volume calculation for a single species.
