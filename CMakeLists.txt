@@ -4,10 +4,17 @@ enable_language(Fortran)
 project(VOLLIB Fortran)
 
 # Define default configuration variables
-set(TARGET_32BIT No CACHE BOOL "Set to yes if target architecture is 32 bit.")
-set(TARGET_NATIVE Yes CACHE BOOL "Build targeting the host architecture.")
+option(TARGET_32BIT "Set to yes if target architecture is 32 bit." No)
+option(NATIVE_ARCH "Build targeting the host architecture." No)
 
-message(STATUS "Target is 32 bit: ${TARGET_32BIT}")
+if (NOT CMAKE_BUILD_TYPE)
+    set(CMAKE_BUILD_TYPE "Release")
+endif ()
+
+message(STATUS "Target native architecture: ${NATIVE_ARCH}")
+message(STATUS "Target 32 bit architecture: ${TARGET_32BIT}")
+message(STATUS "Build type: ${CMAKE_BUILD_TYPE}")
+message(STATUS "Install prefix: ${CMAKE_INSTALL_PREFIX}")
 
 set(src_root "${CMAKE_CURRENT_LIST_DIR}/vollib")
 
