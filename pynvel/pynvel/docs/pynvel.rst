@@ -11,7 +11,8 @@ trees and access to automation features.
 .. code-block:: bash
 
     $pynvel -h
-    usage: pynvel-script.py [-h] [-s] [-d] [-t] [-f] [-e] [-v] [--install_arcgis]
+    usage: pynvel-script.py [-h] [-s] [-d] [-t] [-f] [-e] [-v] [--config]
+                            [--install_arcgis] [--treelist] [--run-tests]
                             [species] [dbh] [height] [equation]
 
     Python Wrappers for the National Volume Estimator Library.
@@ -33,6 +34,8 @@ trees and access to automation features.
       -e , --equation     NVEL volume equation identifier.
       -v, --version       Report the installed version of PyNVEL and exit.
       --install_arcgis    Install the ArcGIS toolboxes in the user profile.
+      --treelist          Calculate volume for a treelist in a csv file.
+      --run-tests         Run test scripts and exit.
 
 Individual Tree Volume
 ^^^^^^^^^^^^^^^^^^^^^^
