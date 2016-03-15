@@ -9,6 +9,7 @@ release64/*
 
 conda_py*
 _build/
+pynvel/pynvel/docs/html
 
 *.bak
 *.o
@@ -75,4 +76,3 @@ docs/_build/
 
 # PyBuilder
 target/
-

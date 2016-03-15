@@ -5,8 +5,8 @@ if not exist ..\CMakeLists.txt (
     exit /b
     )
     
-echo cmake -G "MinGW Makefiles" .. -DCMAKE_BUILD_TYPE=Release -DCMAKE_INSTALL_PREFIX=%~dp0\pynvel\pynvel -DTARGET_32BIT=No -DTARGET_NATIVE=Yes
-cmake -G "MinGW Makefiles" .. -DCMAKE_BUILD_TYPE=Release -DCMAKE_INSTALL_PREFIX=%~dp0\pynvel\pynvel -DTARGET_32BIT=No -DTARGET_NATIVE=Yes
+echo cmake -G "MinGW Makefiles" .. -DCMAKE_INSTALL_PREFIX=%~dp0\pynvel\pynvel -DNATIVE_ARCH=Yes
+cmake -G "MinGW Makefiles" .. -DCMAKE_INSTALL_PREFIX=%~dp0\pynvel\pynvel -DNATIVE_ARCH=Yes
 
 echo.
 echo To build: cmake --build . --target install -- -j4

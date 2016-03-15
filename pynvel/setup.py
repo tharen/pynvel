@@ -25,12 +25,15 @@ long_desc = open('./readme.rst').read().strip()
 shutil.copyfile('./readme.rst', 'pynvel/readme.rst')
 shutil.copyfile('./readme.rst', 'pynvel/docs/readme.rst')
 
-# FIXME: I think this can be handled in MANIFEST.in
-# TODO: This should be called after docs are generated
-shutil.rmtree('./pynvel/docs/html', ignore_errors=True)
-time.sleep(0.05)  # Windows takes a bit to catch up on the delete
-shutil.copytree('./pynvel/docs/_build/html', './pynvel/docs/html')
-
+try:
+    # FIXME: I think this can be handled in MANIFEST.in
+    # TODO: This should be called after docs are generated
+    shutil.rmtree('./pynvel/docs/html', ignore_errors=True)
+    time.sleep(0.05)  # Windows takes a bit to catch up on the delete
+    shutil.copytree('./pynvel/docs/_build/html', './pynvel/docs/html')
+except:
+    pass
+    
 static = False
 if '--static' in sys.argv:
     static = True
@@ -44,7 +47,7 @@ if '--debug' in sys.argv:
 _is_windows = sys.platform=='win32'
 _is_64bit = (getattr(sys, 'maxsize', None) or getattr(sys, 'maxint')) > 2 ** 32
 
-lib_dirs = ['./lib','./pynvel/lib']
+lib_dirs = ['./lib','./pynvel/lib','./pynvel']
 inc_dirs = [numpy.get_include()]
 
 if _is_64bit:
