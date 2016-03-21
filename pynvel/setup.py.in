@@ -116,6 +116,8 @@ if _is_64bit and _is_windows:
         link_args.extend(['-specs={}'.format(spec_file), ])
         compile_args.extend(['-specs={}'.format(spec_file), ])
 
+#sources = [os.path.abspath(os.path.join('..',s.strip())) for s in open('../sources.txt').readlines()]
+
 extensions = [
         Extension(
                 'pynvel._pynvel'
