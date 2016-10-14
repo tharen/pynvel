@@ -63,6 +63,57 @@ C_______________________________________________________________________
       REAL		   LOGDIA(I21,I3),LOGLEN(I20),BOLHT(I21)
  !********************************************************************
 
+!        write(*,*) 'REGN -- ', REGN
+!        write(*,*) 'FORST -- ', FORST
+!        write(*,*) 'VOLEQ -- ', VOLEQ
+!        write(*,*) 'MTOPP -- ', MTOPP
+!        write(*,*) 'MTOPS -- ', MTOPS
+!        write(*,*) 'STUMP -- ', STUMP
+!        write(*,*) 'DBHOB -- ', DBHOB
+!        write(*,*) 'DRCOB -- ', DRCOB
+!        write(*,*) 'HTTYPE -- ', HTTYPE
+!        write(*,*) 'HTTOT -- ', HTTOT
+!        write(*,*) 'HTLOG -- ', HTLOG
+!        write(*,*) 'HT1PRD -- ', HT1PRD
+!        write(*,*) 'HT2PRD -- ', HT2PRD
+!        write(*,*) 'UPSHT1 -- ', UPSHT1
+!        write(*,*) 'UPSHT2 -- ', UPSHT2
+!        write(*,*) 'UPSD1 -- ', UPSD1
+!        write(*,*) 'UPSD2 -- ', UPSD2
+!        write(*,*) 'HTREF -- ', HTREF
+!        write(*,*) 'AVGZ1 -- ', AVGZ1
+!        write(*,*) 'AVGZ2 -- ', AVGZ2
+!        write(*,*) 'FCLASS -- ', FCLASS
+!        write(*,*) 'DBTBH -- ', DBTBH
+!        write(*,*) 'BTR -- ', BTR
+!        write(*,*) 'I3 -- ', I3
+!        write(*,*) 'I7 -- ', I7
+!        write(*,*) 'I15 -- ', I15
+!        write(*,*) 'I20 -- ', I20
+!        write(*,*) 'I21 -- ', I21
+!        write(*,*) 'VOL -- ', VOL
+!        write(*,*) 'LOGVOL -- ', LOGVOL
+!        write(*,*) 'LOGDIA -- ', LOGDIA
+!        write(*,*) 'LOGLEN -- ', LOGLEN
+!        write(*,*) 'BOLHT -- ', BOLHT
+!        write(*,*) 'TLOGS -- ', TLOGS
+!        write(*,*) 'NOLOGP -- ', NOLOGP
+!        write(*,*) 'NOLOGS -- ', NOLOGS
+!        write(*,*) 'CUTFLG -- ', CUTFLG
+!        write(*,*) 'BFPFLG -- ', BFPFLG
+!        write(*,*) 'CUPFLG -- ', CUPFLG
+!        write(*,*) 'CDPFLG -- ', CDPFLG
+!        write(*,*) 'SPFLG -- ', SPFLG
+!        write(*,*) 'CONSPEC -- ', CONSPEC
+!        write(*,*) 'PROD -- ', PROD
+!        write(*,*) 'HTTFLL -- ', HTTFLL
+!        write(*,*) 'LIVE -- ', LIVE
+!        write(*,*) 'BA -- ', BA
+!        write(*,*) 'SI -- ', SI
+!        write(*,*) 'CTYPE -- ', CTYPE
+!        write(*,*) 'ERRFLAG -- ', ERRFLAG
+!        write(*,*) 'MERRULES -- ', MERRULES
+
       IF (DEBUG%MODEL) THEN
          WRITE  (LUDBG, 2) ' -->Enter VOLINIT2'
     2    FORMAT (A)   

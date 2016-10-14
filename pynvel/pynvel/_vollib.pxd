@@ -8,7 +8,9 @@ cimport numpy as np
 cdef extern from *:
     # vernum.f
     void vernum_(int *v)
-
+    
+#    void foo_(char* s, int sl)
+    
     void scrib_(float *dia, float *len, char* cor, float *vol, int cl)
 
 #     # getvoleq.f
@@ -21,10 +23,13 @@ cdef extern from *:
     
     # Return the default equation for a species
     # voleqdef.f
-    void voleqdef_(char* var, int *region, char* forest, char* district
-            , int *species, char* product, char* vol_eq, int *err_flag
+#    void voleqdef_(char* var, int *region, char* forest, char* district
+#            , int *species, char* product, char* vol_eq, int *err_flag
+#            , int vl, int fl, int dl, int pl, int el)
+    void voleqdef_(char* var, int* region, char* forest, char* district
+            , int* species, char* product, char* vol_eq, int* err_flag
             , int vl, int fl, int dl, int pl, int el)
-    
+
     # Return the FIA default equation for a species
     # voleqdef.f
     void fiavoleqdef_(char* var, int *region, char* forest, char* district

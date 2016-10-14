@@ -18,6 +18,9 @@ from Cython.Build import cythonize
 import numpy
 # import numpy.distutils.misc_util
 
+# TODO: Add Spinx build step as a custom routine
+#       http://stackoverflow.com/questions/1710839/custom-distutils-commands/1712544#1712544
+
 version = '0.1'
 
 description = open('./readme.rst').readlines()[3].strip()
@@ -33,7 +36,7 @@ try:
     shutil.copytree('./pynvel/docs/_build/html', './pynvel/docs/html')
 except:
     pass
-    
+
 static = False
 if '--static' in sys.argv:
     static = True
@@ -69,7 +72,7 @@ else:
 if static:
     # For static linking pass the MinGW archive as an object file
     # TODO: Find the static library dynamically
-    vollib = './pynvel/lib/lib' + vollib + '_static.a'
+    vollib = './pynvel/lib' + vollib + '_static.a'
     extra_objects = [vollib, ]
     # Link to gfortran and quadmath since vollibxx_static does not include
     #   the necessary references
@@ -116,6 +119,7 @@ if _is_64bit and _is_windows:
         link_args.extend(['-specs={}'.format(spec_file), ])
         compile_args.extend(['-specs={}'.format(spec_file), ])
 
+# TODO: Need to include libvollib only when linking dynamically rather than always through MANIFEST.in.
 extensions = [
         Extension(
                 'pynvel._pynvel'
@@ -143,6 +147,7 @@ setup(
     , install_requires=['numpy>=1.9', ]
     , ext_modules=cythonize(extensions, gdb_debug=debug,)
     , packages=['pynvel', ]
+    , package_data={'pynvel':['test/*.txt', 'test/data/*',]}
     , include_package_data=True  # package the files listed in MANIFEST.in
     # , data_files=[('arcgis',glob('arcgis/*.pyt')),]
     # , package_data={'pynvel':glob('arcgis/*.pyt')}
