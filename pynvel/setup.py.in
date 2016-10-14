@@ -21,7 +21,7 @@ import numpy
 # TODO: Add Spinx build step as a custom routine
 #       http://stackoverflow.com/questions/1710839/custom-distutils-commands/1712544#1712544
 
-version = '0.1'
+version = '${PACKAGE_VERSION}'
 
 description = open('./readme.rst').readlines()[3].strip()
 long_desc = open('./readme.rst').read().strip()

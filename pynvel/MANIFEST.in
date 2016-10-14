@@ -5,6 +5,7 @@ include pynvel/*_static.a
 include pynvel/*.cfg
 include pynvel/readme.*
 include pynvel/test/*.py
+include pynvel/test/data/*
 include pynvel/examples/*.py
 include pynvel/examples/*.csv
 include pynvel/arcgis/*.pyt

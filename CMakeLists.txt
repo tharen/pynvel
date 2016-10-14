@@ -3,6 +3,8 @@ cmake_minimum_required (VERSION 2.8.8 FATAL_ERROR)
 enable_language(Fortran)
 project(VOLLIB Fortran)
 
+set(PACKAGE_VERSION "0.0.3")
+
 # Define default configuration variables
 option(TARGET_32BIT "Set to yes if target architecture is 32 bit." No)
 option(NATIVE_ARCH "Build targeting the host architecture." No)
@@ -75,6 +77,41 @@ else ()
     # Assume install location is nested
     set(dest "lib")
 endif ()
+
+find_program(PYTHON "python")
+
+if (PYTHON)
+
+    set(SETUP_PY_IN "${CMAKE_CURRENT_SOURCE_DIR}/pynvel/setup.py.in")
+    set(INIT_PY_IN "${CMAKE_CURRENT_SOURCE_DIR}/pynvel/pynvel/__init__.py.in")
+    set(SETUP_PY "${CMAKE_CURRENT_SOURCE_DIR}/pynvel/setup.py")
+    set(INIT_PY "${CMAKE_CURRENT_SOURCE_DIR}/pynvel/pynvel/__init__.py")
+    set(DEP "${CMAKE_CURRENT_SOURCE_DIR}/pynvel/pynvel/__init__.py")
+    set(OUTPUT "${CMAKE_CURRENT_SOURCE_DIR}/build/timestamp")
+
+    configure_file(${SETUP_PY_IN} ${SETUP_PY})
+    configure_file(${INIT_PY_IN} ${INIT_PY})
+
+    add_custom_command(
+            OUTPUT ${OUTPUT}
+            COMMAND ${PYTHON} ${SETUP_PY} build_ext --inplace #bdist_wheel sdist
+            COMMAND ${CMAKE_COMMAND} -E touch ${OUTPUT}
+            DEPENDS ${DEPS}
+            WORKING_DIRECTORY "${CMAKE_CURRENT_SOURCE_DIR}/pynvel"
+            )
+
+    add_custom_target(target ALL DEPENDS ${OUTPUT})
+    
+    # Create the wheel and source packages
+    add_custom_target(wheel
+            COMMAND ${PYTHON} ${SETUP_PY} bdist_wheel sdist
+            WORKING_DIRECTORY "${CMAKE_CURRENT_SOURCE_DIR}/pynvel"
+            )
+    
+    # Install the library in the local Python environment
+    install(CODE "execute_process(COMMAND pip install --no-deps -e . WORKING_DIRECTORY ${CMAKE_CURRENT_SOURCE_DIR}/pynvel)")
+
+endif()
 
 install(TARGETS ${vollib}_static DESTINATION ${dest})
 install(TARGETS ${vollib} DESTINATION ${dest})
