@@ -11,7 +11,7 @@ set PATH=%PATH%;C:\Windows\System32;C:\Windows
 set PATH=C:\progs\cmake\bin;%PATH%
 set PATH=C:\Ruby22-x64\bin;%PATH%
 REM set PATH=C:\progs\Git\bin;C:\progs\Git\usr\bin;%PATH%
-set path=%path%;C:\Miniconda3\Scripts
+set path=%path%;C:\Miniconda3;C:\Miniconda3\Scripts
 
 REM call activate conda_py34_x64
 

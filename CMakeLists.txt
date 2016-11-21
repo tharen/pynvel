@@ -3,7 +3,7 @@ cmake_minimum_required (VERSION 2.8.8 FATAL_ERROR)
 enable_language(Fortran)
 project(VOLLIB Fortran)
 
-set(PACKAGE_VERSION "0.0.3")
+set(PACKAGE_VERSION "0.0.4")
 
 # Define default configuration variables
 option(TARGET_32BIT "Set to yes if target architecture is 32 bit." No)
@@ -81,16 +81,21 @@ endif ()
 find_program(PYTHON "python")
 
 if (PYTHON)
-
+    # Configure the __init__.py module file and setup.py build script
     set(SETUP_PY_IN "${CMAKE_CURRENT_SOURCE_DIR}/pynvel/setup.py.in")
     set(INIT_PY_IN "${CMAKE_CURRENT_SOURCE_DIR}/pynvel/pynvel/__init__.py.in")
     set(SETUP_PY "${CMAKE_CURRENT_SOURCE_DIR}/pynvel/setup.py")
     set(INIT_PY "${CMAKE_CURRENT_SOURCE_DIR}/pynvel/pynvel/__init__.py")
-    set(DEP "${CMAKE_CURRENT_SOURCE_DIR}/pynvel/pynvel/__init__.py")
-    set(OUTPUT "${CMAKE_CURRENT_SOURCE_DIR}/build/timestamp")
 
     configure_file(${SETUP_PY_IN} ${SETUP_PY})
     configure_file(${INIT_PY_IN} ${INIT_PY})
+
+endif ()
+
+# if (PYTHON)
+if (0)
+    
+    set(OUTPUT "${CMAKE_CURRENT_SOURCE_DIR}/build/timestamp")
 
     add_custom_command(
             OUTPUT ${OUTPUT}

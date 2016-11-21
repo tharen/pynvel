@@ -213,6 +213,7 @@ def handle_args():
         sys.exit(0)
 
     if args.run_tests:
+        print('Run pynvel tests')
         import subprocess
         os.chdir(os.path.join(os.path.dirname(__file__), 'test'))
         subprocess.call('nose2')

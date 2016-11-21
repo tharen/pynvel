@@ -1,0 +1,26 @@
+activate conda_py34_amd64
+mkdir build
+cd build
+..\config.bat
+
+# Currently the Python dependencies are not working correctly and CMake
+#  will try to build the Python extension before the vollib libraries.
+#  Until fixed simply make the following edits CMakelist.txt
+#  in the second Python block before executing the build.
+#    # if (PYTHON)
+#    if (0)
+
+cmake --build . --target install
+
+# now manually execute the Python extension build
+cd ..\pynvel
+python setup.py build_ext --inplace
+pip install -e .
+
+# Tests currently require nose2 for automated execution
+#  Nose2 may not be on conda
+#  >pip install nose2
+pynvel --run-tests
+
+# if all goes well then package
+python setup.py bdist_wheel sdist bdist_msi
