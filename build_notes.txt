@@ -29,6 +29,9 @@ cd ..\pynvel
 python gen_libpython.py
 
 python setup.py build_ext --inplace
+# Errors of multiple definitions of atonexit, etc following the above may 
+#  be due to libmsvcr100.a which appears to be include with some conda packages
+#  it can be deleted since it is (should be) included with mingw w64.
 
 # Install locally in development mode
 pip install -e .
