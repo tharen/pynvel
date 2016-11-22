@@ -1,3 +1,6 @@
+# NOTE: Cython>0.23.4 appears to breaks string handling.
+#           The build will complete but runtime crashes occur with no traceback.
+#
 # Run cmd_mingw-w64.bat to set the environment variables and launch a console
 
 # Edit pynvel\environment.yml name and optionally the prefix attributes
