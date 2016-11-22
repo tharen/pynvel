@@ -1,4 +1,9 @@
-activate conda_py34_amd64
+# Run cmd_mingw-w64.bat to set the environment variables and launch a console
+
+# Edit pynvel\environment.yml name and optionally the prefix attributes
+conda env create -f pynvel\environment.yml
+activate pynvel
+
 mkdir build
 cd build
 ..\config.bat
@@ -10,11 +15,19 @@ cd build
 #    # if (PYTHON)
 #    if (0)
 
-cmake --build . --target install
+cmake --build . --target install -- -j4
 
 # now manually execute the Python extension build
 cd ..\pynvel
+
+# libpython (mingw python libraries) does not always ship with Python
+#  and needs to be created. If it's missing you'll generally see a long list of
+#  of "undefined reference" errors during the build_ext step below.
+python gen_libpython.py
+
 python setup.py build_ext --inplace
+
+# Install locally in development mode
 pip install -e .
 
 # Tests currently require nose2 for automated execution
