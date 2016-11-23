@@ -97,14 +97,8 @@ if (PYTHON)
 
     configure_file(${SETUP_PY_IN} ${SETUP_PY})
     configure_file(${INIT_PY_IN} ${INIT_PY})
-
-# endif ()
-
-# # if (PYTHON)
-# if (0)
     
     set(OUTPUT "${CMAKE_CURRENT_SOURCE_DIR}/build/timestamp")
-
     add_custom_command(
             OUTPUT ${OUTPUT}
             COMMAND ${PYTHON} ${SETUP_PY} build_ext --static --inplace --force
@@ -121,6 +115,11 @@ if (PYTHON)
             WORKING_DIRECTORY "${CMAKE_CURRENT_SOURCE_DIR}"
             )
     
+    add_custom_target(clean_all
+            COMMAND ${PYTHON} ${SETUP_PY} clean --all
+            WORKING_DIRECTORY "${CMAKE_CURRENT_SOURCE_DIR}"
+            )
+            
     # Install the library in the local Python environment
     install(CODE "execute_process(COMMAND pip install --no-deps -e . WORKING_DIRECTORY ${CMAKE_CURRENT_SOURCE_DIR})")
 
@@ -128,3 +127,10 @@ endif()
 
 # install(TARGETS ${vollib}_static DESTINATION ${dest})
 # install(TARGETS ${vollib} DESTINATION ${dest})
+
+set_directory_properties(PROPERTIES ADDITIONAL_MAKE_CLEAN_FILES
+        "${CMAKE_CURRENT_SOURCE_DIR}/mingw-gcc.specs \
+        ;${CMAKE_CURRENT_SOURCE_DIR}/setup.py \
+        ;${CMAKE_CURRENT_SOURCE_DIR}/pynvel/__init__.py"
+        )
+        
