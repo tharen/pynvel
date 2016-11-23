@@ -5,9 +5,16 @@ if not exist ..\CMakeLists.txt (
     exit /b
     )
     
-echo cmake -G "MinGW Makefiles" .. -DCMAKE_INSTALL_PREFIX=%~dp0\pynvel\pynvel -DNATIVE_ARCH=Yes
-cmake -G "MinGW Makefiles" .. -DCMAKE_INSTALL_PREFIX=%~dp0\pynvel\pynvel -DNATIVE_ARCH=Yes
+REM echo cmake -G "MinGW Makefiles" .. -DCMAKE_INSTALL_PREFIX=%~dp0\pynvel\pynvel -DNATIVE_ARCH=Yes
+REM cmake -G "MinGW Makefiles" .. -DCMAKE_INSTALL_PREFIX=%~dp0\pynvel\pynvel -DNATIVE_ARCH=Yes
+
+REM echo.
+REM echo To build: cmake --build . --target install -- -j4
+REM echo.
+
+echo cmake -G "MinGW Makefiles" .. -DNATIVE_ARCH=Yes
+cmake -G "MinGW Makefiles" .. -DNATIVE_ARCH=Yes
 
 echo.
-echo To build: cmake --build . --target install -- -j4
+echo To build: cmake --build . -- -j4
 echo.
