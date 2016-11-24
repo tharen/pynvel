@@ -63,57 +63,6 @@ C_______________________________________________________________________
       REAL		   LOGDIA(I21,I3),LOGLEN(I20),BOLHT(I21)
  !********************************************************************
 
-!        write(*,*) 'REGN -- ', REGN
-!        write(*,*) 'FORST -- ', FORST
-!        write(*,*) 'VOLEQ -- ', VOLEQ
-!        write(*,*) 'MTOPP -- ', MTOPP
-!        write(*,*) 'MTOPS -- ', MTOPS
-!        write(*,*) 'STUMP -- ', STUMP
-!        write(*,*) 'DBHOB -- ', DBHOB
-!        write(*,*) 'DRCOB -- ', DRCOB
-!        write(*,*) 'HTTYPE -- ', HTTYPE
-!        write(*,*) 'HTTOT -- ', HTTOT
-!        write(*,*) 'HTLOG -- ', HTLOG
-!        write(*,*) 'HT1PRD -- ', HT1PRD
-!        write(*,*) 'HT2PRD -- ', HT2PRD
-!        write(*,*) 'UPSHT1 -- ', UPSHT1
-!        write(*,*) 'UPSHT2 -- ', UPSHT2
-!        write(*,*) 'UPSD1 -- ', UPSD1
-!        write(*,*) 'UPSD2 -- ', UPSD2
-!        write(*,*) 'HTREF -- ', HTREF
-!        write(*,*) 'AVGZ1 -- ', AVGZ1
-!        write(*,*) 'AVGZ2 -- ', AVGZ2
-!        write(*,*) 'FCLASS -- ', FCLASS
-!        write(*,*) 'DBTBH -- ', DBTBH
-!        write(*,*) 'BTR -- ', BTR
-!        write(*,*) 'I3 -- ', I3
-!        write(*,*) 'I7 -- ', I7
-!        write(*,*) 'I15 -- ', I15
-!        write(*,*) 'I20 -- ', I20
-!        write(*,*) 'I21 -- ', I21
-!        write(*,*) 'VOL -- ', VOL
-!        write(*,*) 'LOGVOL -- ', LOGVOL
-!        write(*,*) 'LOGDIA -- ', LOGDIA
-!        write(*,*) 'LOGLEN -- ', LOGLEN
-!        write(*,*) 'BOLHT -- ', BOLHT
-!        write(*,*) 'TLOGS -- ', TLOGS
-!        write(*,*) 'NOLOGP -- ', NOLOGP
-!        write(*,*) 'NOLOGS -- ', NOLOGS
-!        write(*,*) 'CUTFLG -- ', CUTFLG
-!        write(*,*) 'BFPFLG -- ', BFPFLG
-!        write(*,*) 'CUPFLG -- ', CUPFLG
-!        write(*,*) 'CDPFLG -- ', CDPFLG
-!        write(*,*) 'SPFLG -- ', SPFLG
-!        write(*,*) 'CONSPEC -- ', CONSPEC
-!        write(*,*) 'PROD -- ', PROD
-!        write(*,*) 'HTTFLL -- ', HTTFLL
-!        write(*,*) 'LIVE -- ', LIVE
-!        write(*,*) 'BA -- ', BA
-!        write(*,*) 'SI -- ', SI
-!        write(*,*) 'CTYPE -- ', CTYPE
-!        write(*,*) 'ERRFLAG -- ', ERRFLAG
-!        write(*,*) 'MERRULES -- ', MERRULES
-
       IF (DEBUG%MODEL) THEN
          WRITE  (LUDBG, 2) ' -->Enter VOLINIT2'
     2    FORMAT (A)   
@@ -259,9 +208,33 @@ C ADDED ON 07/30/2014 ROUND LOGS BASED ON JEFF PENMAN LOG RULES
 !********************
 !    REGION 8 MODEL  * 
 !********************
-      
+        IF(MDL.EQ.'CLK' .OR. MDL.EQ.'clk') THEN
+C ADDED TO TEST R8 CLARK PROFILE FOR LOG BOARDFOOT VOLUME   
+          MRULEMOD = 'Y'
+          NEWCOR = MERRULES%COR
+          NEWEVOD = MERRULES%EVOD
+          NEWOPT = MERRULES%OPT
+          NEWMAXLEN = MERRULES%MAXLEN
+          NEWMINLEN = MERRULES%MINLEN
+          NEWMERCHL = MERRULES%MERCHL
+          NEWMINLENT = MERRULES%MINLENT
+          NEWMTOPP = MERRULES%MTOPP
+          NEWMTOPS = MERRULES%MTOPS
+          NEWSTUMP = MERRULES%STUMP
+          NEWTRIM = MERRULES%TRIM
+          NEWBTR = MERRULES%BTR
+          NEWDBTBH = MERRULES%DBTBH
+          NEWMINBFD = MERRULES%MINBFD
+     
+          CALL R8CLARK(VOLEQ,FORST,STUMP,MTOPP,MTOPS,DBHOB,HT1PRD,
+     +             HT2PRD,HTTOT, LOGDIA,BOLHT,LOGLEN,LOGVOL,VOL,CUTFLG,
+     +                  BFPFLG,CUPFLG, CDPFLG,SPFLG,PROD,ERRFLAG,CTYPE,
+     +                  UPSHT1,TLOGS,NOLOGP,NOLOGS)
+        ELSE        
+        
           CALL R8VOL (VOLEQ,DBHOB,HTTOT,UPSHT1,HT1PRD,MTOPP,PROD,VOL,
      +                FORST,SI,BA,CTYPE,BFPFLG,CUPFLG,SPFLG,ERRFLAG)
+        ENDIF
 
       ELSEIF (VOLEQ(1:1).EQ.'9' .AND. 
      +       (MDL.EQ.'CLK' .OR. MDL.EQ.'clk')) THEN
@@ -272,7 +245,7 @@ C ADDED ON 07/30/2014 ROUND LOGS BASED ON JEFF PENMAN LOG RULES
           CALL R9CLARK (VOLEQ,STUMP,MTOPP,MTOPS,DBHOB,HT1PRD,HT2PRD,
      +                  HTTOT, LOGDIA,BOLHT,LOGLEN,LOGVOL,VOL,CUTFLG,
      +                  BFPFLG,CUPFLG, CDPFLG,SPFLG,PROD,ERRFLAG,CTYPE,
-     +                  UPSHT1)
+     +                  UPSHT1,TLOGS,NOLOGP,NOLOGS)
           
           IF(IFORST.EQ.4 .OR. IFORST.EQ.5 .OR. IFORST.EQ.8 .OR. 
      +       IFORST.EQ.11 .OR. IFORST.EQ.12 .OR. IFORST.EQ.14 .OR. 

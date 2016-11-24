@@ -62,8 +62,11 @@
 C  variables for stump dia and vol
       INTEGER SPN
       REAL STUMPDIB, STUMPDOB, VOLIB, VOLOB    
-      REAL DIB,DOB,HTUP
-
+      REAL DIB,DOB,HTUP  
+      
+c  test biomass calc variable
+      REAL WF(3), BMS(8)
+      INTEGER SPCD, FOREST      
  !********************************************************************
 
 !=====================================================================
@@ -274,10 +277,17 @@ C ADDED ON 07/30/2014 ROUND LOGS BASED ON JEFF PENMAN LOG RULES
 !********************
 !    REGION 8 MODEL  * 
 !********************
-      
+        IF(MDL.EQ.'CLK' .OR. MDL.EQ.'clk') THEN
+C ADDED TO TEST R8 CLARK PROFILE FOR LOG BOARDFOOT VOLUME        
+          CALL R8CLARK(VOLEQ,FORST,STUMP,MTOPP,MTOPS,DBHOB,HT1PRD,
+     +             HT2PRD,HTTOT, LOGDIA,BOLHT,LOGLEN,LOGVOL,VOL,CUTFLG,
+     +             BFPFLG,CUPFLG, CDPFLG,SPFLG,PROD,ERRFLAG,CTYPE,
+     +             UPSHT1,TLOGS,NOLOGP,NOLOGS)
+        ELSE        
+        
           CALL R8VOL (VOLEQ,DBHOB,HTTOT,UPSHT1,HT1PRD,MTOPP,PROD,VOL,
      +                FORST,SI,BA,CTYPE,BFPFLG,CUPFLG,SPFLG,ERRFLAG)
-
+        ENDIF
       ELSEIF (VOLEQ(1:1).EQ.'9' .AND. 
      +       (MDL.EQ.'CLK' .OR. MDL.EQ.'clk')) THEN
 !********************
@@ -286,9 +296,9 @@ C ADDED ON 07/30/2014 ROUND LOGS BASED ON JEFF PENMAN LOG RULES
 
 !... need to add NOLOGP,NOLOGS,TLOGS to this call for log volumes      
           CALL R9CLARK (VOLEQ,STUMP,MTOPP,MTOPS,DBHOB,HT1PRD,HT2PRD,
-     +                  HTTOT, LOGDIA,BOLHT,LOGLEN,LOGVOL,VOL,CUTFLG,
-     +                  BFPFLG,CUPFLG, CDPFLG,SPFLG,PROD,ERRFLAG,CTYPE,
-     +                  UPSHT1)
+     +                HTTOT, LOGDIA,BOLHT,LOGLEN,LOGVOL,VOL,CUTFLG,
+     +                BFPFLG,CUPFLG, CDPFLG,SPFLG,PROD,ERRFLAG,CTYPE,
+     +                UPSHT1,TLOGS,NOLOGP,NOLOGS)
           
           IF(IFORST.EQ.4 .OR. IFORST.EQ.5 .OR. IFORST.EQ.8 .OR. 
      +       IFORST.EQ.11 .OR. IFORST.EQ.12 .OR. IFORST.EQ.14 .OR. 
@@ -402,6 +412,14 @@ c now calc tip volume
         VOL(15) = VOL(1)-VOL(4)-VOL(7)-VOL(14)
         IF(VOL(15).LT.0.0) VOL(15) = 0.0
       ENDIF
+
+C Test biomass calc
+C      READ (VOLEQ(8:10),'(i3)') SPCD
+C      WF(1)=0
+C      WF(2)=0
+C      WF(3)=0
+C      REAd(FORST,'(i2)') FOREST
+C      CALL CRZBIOMASS(REGN,FORST,SPCD,DBHOB,HTTOT,VOL,WF,BMS,ERRFLAG)
                   
       IF (DEBUG%MODEL) THEN
         WRITE  (LUDBG, 100)'FORST VOLEQ     MTOPP HTTOT HT1PRD DBHOB 

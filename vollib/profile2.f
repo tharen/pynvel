@@ -307,7 +307,7 @@ c                call the total cubic routines
         ELSE        
         CALL TCUBIC (VOLEQ,FORST,JSP,NEXTRA,SETOPT,DBHOB,HTTOT,DBTBH,
      >           MTOPP,HEX,DEX,ZEX,RHFW,RFLW,TAPCOE,F,FMOD,PINV_Z,TOP6,
-     >           TCVOL,slope,errflag)
+     >           TCVOL,slope,errflag,VOL,MTOPS)
         VOL(1) = NINT(TCVOL * 10.0) * 1E-1       
 	  if(drcob.le.0 .and. ctype.eq.'F')then
 	      drcob = dex(2)

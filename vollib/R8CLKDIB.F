@@ -12,7 +12,7 @@ C      *** LOCAL VARIABLES ***
       INTEGER PTR,FIRST,LAST,HALF,GSPEC,CHECK,DONEFLAG,LASTFLAG
       INTEGER DIBCNT,TOTCNT,FOURCNT,NINECNT
       INCLUDE 'R8CLKCOEF.INC'
-      INCLUDE 'R8dib.inc'
+      INCLUDE 'R8DIB.INC'
 
 
 
@@ -292,10 +292,12 @@ C-------------------------------------------------------------------------------
       TYPE(CLKCOEF):: COEFFS
       CHARACTER*10 VOLEQ
       CHARACTER*2 FORST
+      CHARACTER*1 CTYPE
       INTEGER ERRFLAG, EQN, IS, IB, IT, IM
       REAL DBHOB, HTTOT, HTUP, DIB, DIB17, DBHIB, TOPHT, HIGHHT,UPSHT1
-      REAL R,C,E,P,B,A,Q, A17, B17, DX, AD, BD
+      REAL R,C,E,P,B,A,Q, A17, B17, DX, AD, BD, VOLTMP(15)
       INTEGER SI, BA
+      REAL HTONE, HTTWO, MTOPP
 
 c      INCLUDE 'R8CLKCOEF.INC'
 c      INCLUDE 'R8DIB.INC'
@@ -348,9 +350,16 @@ C--     Total height provided (eqn 1)
        ELSE
 C--    HEIGHT TO 4, 7 OR 9 TOP DOB
          IF(UPSHT1.LT.0.1)THEN
-           SI = 0
-           BA = 0
-           CALL R8_MHTS(FORST,VOLEQ,DBHOB,HTTOT,SI,BA,UPSHT1,ERRFLAG)
+c           SI = 0
+c           BA = 0
+c           CALL R8_MHTS(FORST,VOLEQ,DBHOB,HTTOT,SI,BA,UPSHT1,ERRFLAG)
+C CALL R8VOL2 TO GET THE UPSHT1. THIS WILL BE SAME AS FVS
+           HTONE = 0
+           HTTWO = 0
+           CTYPE = 'F'
+           CALL R8VOL2(VOLEQ,VOLTMP,DBHOB,HTONE,HTTWO,MTOPP,HTTOT,CTYPE,
+     >                  ERRFLAG)
+           UPSHT1 = HTTWO
          ENDIF
          TOPHT = UPSHT1
          DIB17=DBHOB*(A17+B17*(17.3/TOPHT)**2)
