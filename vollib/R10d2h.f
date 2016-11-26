@@ -58,10 +58,10 @@ c  A00DVEW094
              VOL(4) = -0.21849 + 0.00189*D2H
           ENDIF
 
-	    IF(BFPFLG.EQ. 1 .AND. DBHOB .GT. 6.0)THEN
-	      VOL(2) = 0.000136 * (D2H**1.40338)
-C XINTT from equation 6 (PNW-RN-495)	      
-	      VOL(10) = 0.00078*(D2H**1.26485)
+        IF(BFPFLG.EQ. 1 .AND. DBHOB .GT. 6.0)THEN
+          VOL(2) = 0.000136 * (D2H**1.40338)
+C XINTT from equation 6 (PNW-RN-495)          
+          VOL(10) = 0.00078*(D2H**1.26485)
           ENDIF
         ELSE
 C A01DVEW094        
@@ -75,9 +75,9 @@ C Equations for Subdivision 2 and Unit 4 (NOR-5)
              VOL(4) = -2.0555+(0.2982*DBHOB)+(0.00181*D2H)
           ENDIF
 
-	    IF(BFPFLG.EQ. 1 .AND. DBHOB .GT. 6.0)THEN
-	      VOL(2) = 98.7701+(0.02022*D2H) - 0.77651*DBHOB**2 - 1.63023*HTTOT
-	      VOL(10) = -67.1116+(0.013663011*D2H) + (3344.33/(DBHOB**2))
+        IF(BFPFLG.EQ. 1 .AND. DBHOB .GT. 6.0)THEN
+          VOL(2) = 98.7701+(0.02022*D2H) - 0.77651*DBHOB**2 - 1.63023*HTTOT
+          VOL(10) = -67.1116+(0.013663011*D2H) + (3344.33/(DBHOB**2))
           ENDIF
         ENDIF  
       ELSEIF(voleq(8:10) .eq. '375' .or.
@@ -93,9 +93,9 @@ C A00DVEW375
              VOL(4) = -0.7126+(0.00211*D2H)
           ENDIF
 
-	    IF(BFPFLG.EQ. 1 .AND. DBHOB .GT. 6.0)THEN
-	      VOL(2) = 0.000081*(D2H**1.48459)
-	      VOL(10) = 0.00043*(D2H**1.34294)
+        IF(BFPFLG.EQ. 1 .AND. DBHOB .GT. 6.0)THEN
+          VOL(2) = 0.000081*(D2H**1.48459)
+          VOL(10) = 0.00043*(D2H**1.34294)
           ENDIF
 C A01DVEW375
         ELSE
@@ -107,9 +107,9 @@ C A01DVEW375
              VOL(4) = -1.02411+(0.0022034075*D2H)
           ENDIF
 
-	    IF(BFPFLG.EQ. 1 .AND. DBHOB .GT. 6.0)THEN
-	      VOL(2) = -27.163+(0.00995*D2H)
-	      VOL(10) = -29.8848+(0.011913048*D2H)
+        IF(BFPFLG.EQ. 1 .AND. DBHOB .GT. 6.0)THEN
+          VOL(2) = -27.163+(0.00995*D2H)
+          VOL(10) = -29.8848+(0.011913048*D2H)
           ENDIF
         ENDIF
       ELSEIF(voleq(8:10) .eq. '747') THEN     
@@ -123,9 +123,9 @@ C A00DVEW747
              VOL(4) = -1.39764+(0.00188*D2H)
           ENDIF
 
-	    IF(BFPFLG.EQ. 1 .AND. DBHOB .GT. 6.0)THEN
-	      VOL(2) = -28.0674+(0.00937*D2H)
-	      VOL(10) = -17.4877+(0.01119*D2H)
+        IF(BFPFLG.EQ. 1 .AND. DBHOB .GT. 6.0)THEN
+          VOL(2) = -28.0674+(0.00937*D2H)
+          VOL(10) = -17.4877+(0.01119*D2H)
           ENDIF
 C A01DVEW747
         ELSE
@@ -137,9 +137,9 @@ C A01DVEW747
              VOL(4) = -0.8722+(0.001811522*D2H)
           ENDIF
 
-	    IF(BFPFLG.EQ. 1 .AND. DBHOB .GT. 6.0)THEN
-	      VOL(2) = -46.7415+(0.00956*D2H)
-	      VOL(10) = -49.1199+(0.010941441*D2H)
+        IF(BFPFLG.EQ. 1 .AND. DBHOB .GT. 6.0)THEN
+          VOL(2) = -46.7415+(0.00956*D2H)
+          VOL(10) = -49.1199+(0.010941441*D2H)
           ENDIF
         ENDIF
       ELSEIF((voleq(8:10) .eq. '108') .or. 
@@ -221,9 +221,9 @@ c      Volume, board feet International 1/4", to 8" top
          VOL(4) = CVSL
        ENDIF
 
-	 IF(BFPFLG.EQ. 1)THEN
-	   VOL(2) = SCFT
-	   VOL(10) = XINTT
+       IF(BFPFLG .EQ. 1)THEN
+         VOL(2) = SCFT
+         VOL(10) = XINTT
        ENDIF           
            
       ENDIF
