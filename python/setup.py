@@ -145,8 +145,8 @@ setup(
     , url='TBA'
     , author="Tod Haren"
     , author_email="tod.haren@gmail.com"
-    , setup_requires=['cython', 'numpy>=1.9', ]
-    , tests_require=['nose2', 'pandas', 'numpy']
+    , setup_requires=['cython', 'numpy>=1.9', 'pytest-runner']
+    , tests_require=['pytest', 'pandas', 'numpy']
     , install_requires=['numpy>=1.9', ]
     , ext_modules=cythonize(extensions, gdb_debug=debug,)
     , packages=['pynvel', ]

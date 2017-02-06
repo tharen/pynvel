@@ -21,12 +21,17 @@ cd build
 cmake --build . --target install -- -j4
 
 # now manually execute the Python extension build
-cd ..\pynvel
+cd ..\python
 
 # libpython (mingw python libraries) does not always ship with Python
 #  and needs to be created. If it's missing you'll generally see a long list of
-#  of "undefined reference" errors during the build_ext step below.
+#  of "undefined reference" errors pointing to __imp_... Python routines
+#  during the build_ext step below.
 python gen_libpython.py
+
+# Other causes of "undefined reference" errors pointing coming from 
+# libgfortran seem to be related to rogue libraries in the Conda packaging
+# These can be overcome by re-initiating a new Conda environment.
 
 python setup.py build_ext --inplace
 # Errors of multiple definitions of atonexit, etc following the above may 
