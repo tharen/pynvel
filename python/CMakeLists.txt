@@ -19,6 +19,7 @@ if (PYTHON)
             COMMAND ${CMAKE_COMMAND} -E touch ${OUTPUT}
             DEPENDS ${DEPS} ${vollib}
             WORKING_DIRECTORY "${CMAKE_CURRENT_SOURCE_DIR}"
+            COMMENT "Build the Python extension."
             )
 
     add_custom_target(target ALL DEPENDS ${OUTPUT})

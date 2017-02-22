@@ -122,6 +122,8 @@ if _is_64bit and _is_windows:
         link_args.extend(['-specs={}'.format(spec_file), ])
         compile_args.extend(['-specs={}'.format(spec_file), ])
 
+link_args.append('-Wl,--allow-multiple-definition')
+
 # TODO: Need to include libvollib only when linking dynamically rather than always through MANIFEST.in.
 extensions = [
         Extension(
@@ -145,8 +147,8 @@ setup(
     , url='TBA'
     , author="Tod Haren"
     , author_email="tod.haren@gmail.com"
-    , setup_requires=['cython', 'numpy>=1.9', ]
-    , tests_require=['nose2', 'pandas', 'numpy']
+    , setup_requires=['cython', 'numpy>=1.9']
+    , tests_require=['pytest', 'pandas', 'numpy', 'pytest-runner']
     , install_requires=['numpy>=1.9', ]
     , ext_modules=cythonize(extensions, gdb_debug=debug,)
     , packages=['pynvel', ]
@@ -159,7 +161,6 @@ setup(
             'pynvel=pynvel.__main__:main'
             ]
         }
-    , test_suite='nose2.collector.collector'
     )
 
 # Build Command

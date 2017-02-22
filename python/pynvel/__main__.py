@@ -71,7 +71,7 @@ def main():
             , cruise_type=b'C'
             )
 
-    volcalc.calc(
+    error = volcalc.calc(
             dbh_ob=args.dbh
             , total_ht=tot_ht
             , form_class=args.form_class
@@ -79,6 +79,7 @@ def main():
             )
 
     print_report(volcalc, spp_abbv, spp_code, vol_eq, args.form_class)
+#     print(error)
 
 def print_report(volcalc, spp_abbv, spp_code, vol_eq, form_class):
     """Print a basic volume report to stdout."""
@@ -113,6 +114,8 @@ def print_report(volcalc, spp_abbv, spp_code, vol_eq, form_class):
 
     else:
         print('Volume equation {} does not report log detail.'.format(vol_eq))
+
+    print('\nERROR: {}'.format(volcalc.error_flag))
 #     print(volcalc.logs)
 
 def install_arcgis(args):
@@ -218,7 +221,7 @@ def handle_args():
         os.chdir(os.path.join(os.path.dirname(__file__), 'test'))
         subprocess.call('pytest')
         sys.exit()
-    
+
     # No special flags present, run main.
     if not args.species or not args.dbh:
         print('ERROR: Incorrect number of arguments. Species and DBH are ')

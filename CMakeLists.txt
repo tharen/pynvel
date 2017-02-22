@@ -3,8 +3,8 @@
 
 cmake_minimum_required (VERSION 2.8.8 FATAL_ERROR)
 
-enable_language(Fortran)
-project(NVEL Fortran)
+enable_language(Fortran C)
+project(NVEL Fortran C)
 
 set(PACKAGE_VERSION "0.0.4")
 
@@ -12,6 +12,8 @@ set(PACKAGE_VERSION "0.0.4")
 set(CMAKE_LIBRARY_OUTPUT_DIRECTORY ${CMAKE_CURRENT_SOURCE_DIR}/python/pynvel)
 set(CMAKE_ARCHIVE_OUTPUT_DIRECTORY ${CMAKE_CURRENT_SOURCE_DIR}/python/pynvel)
 set(CMAKE_RUNTIME_OUTPUT_DIRECTORY ${CMAKE_CURRENT_SOURCE_DIR}/python/pynvel)
+
+set(CMAKE_INSTALL_PREFIX ${CMAKE_CURRENT_SOURCE_DIR}/dist)
 
 # Define default configuration variables
 option(TARGET_32BIT "Set to yes if target architecture is 32 bit." No)

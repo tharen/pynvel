@@ -48,7 +48,7 @@ if '--debug' in sys.argv:
     debug = True
     sys.argv.remove('--debug')
 
-_is_windows = sys.platform=='win32'
+_is_windows = sys.platform == 'win32'
 _is_64bit = (getattr(sys, 'maxsize', None) or getattr(sys, 'maxint')) > 2 ** 32
 
 lib_dirs = [
@@ -95,8 +95,8 @@ if debug:
 
 # If static linking on non Windows, use -fPIC
 if not _is_windows and static:
-    compile_args.extend(['-fPIC',])
-    link_args.extend(['-fPIC',])
+    compile_args.extend(['-fPIC', ])
+    link_args.extend(['-fPIC', ])
 
 # Use a custom GCC specs file to force linking with the appropriate libmsvcr*.a
 #  Ref: http://www.mingw.org/wiki/HOWTO_Use_the_GCC_specs_file
@@ -122,6 +122,8 @@ if _is_64bit and _is_windows:
         link_args.extend(['-specs={}'.format(spec_file), ])
         compile_args.extend(['-specs={}'.format(spec_file), ])
 
+link_args.append('-Wl,--allow-multiple-definition')
+
 # TODO: Need to include libvollib only when linking dynamically rather than always through MANIFEST.in.
 extensions = [
         Extension(
@@ -145,12 +147,12 @@ setup(
     , url='TBA'
     , author="Tod Haren"
     , author_email="tod.haren@gmail.com"
-    , setup_requires=['cython', 'numpy>=1.9', 'pytest-runner']
-    , tests_require=['pytest', 'pandas', 'numpy']
+    , setup_requires=['cython', 'numpy>=1.9']
+    , tests_require=['pytest', 'pandas', 'numpy', 'pytest-runner']
     , install_requires=['numpy>=1.9', ]
     , ext_modules=cythonize(extensions, gdb_debug=debug,)
     , packages=['pynvel', ]
-    , package_data={'pynvel':['test/*.txt', 'test/data/*',]}
+    , package_data={'pynvel':['test/*.txt', 'test/data/*', ]}
     , include_package_data=True  # package the files listed in MANIFEST.in
     # , data_files=[('arcgis',glob('arcgis/*.pyt')),]
     # , package_data={'pynvel':glob('arcgis/*.pyt')}
@@ -159,7 +161,6 @@ setup(
             'pynvel=pynvel.__main__:main'
             ]
         }
-    , test_suite='nose2.collector.collector'
     )
 
 # Build Command

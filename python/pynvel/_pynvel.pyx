@@ -274,7 +274,7 @@ cdef class VolumeCalculator:
     cdef int basal_area
     cdef int site_index
     cdef char* cruise_type
-    cdef int error_flag
+    cdef int _error_flag
     cdef merchrules_ merch_rule
 
     cdef np.float32_t[:] volume_wk
@@ -365,7 +365,7 @@ cdef class VolumeCalculator:
     property error_flag:
         """Return the volume calculation error code."""
         def __get__(self):
-            return error_codes[self.error_flag]
+            return error_codes[self._error_flag]
 
     @cython.boundscheck(False)
     @cython.wraparound(False)
@@ -396,10 +396,16 @@ cdef class VolumeCalculator:
             form_class = np.zeros((n,), dtype=np.float64)
 
         for i in range(n):
-            self.calc(dbh_ob=dbh[i],total_ht=total_ht[i],form_class=form_class[i])
-            v[i,0] = self.volume_wk[0] # Total CuFt
-            v[i,1] = self.volume_wk[3] # Merch CuFt
-            v[i,2] = self.volume_wk[1] # Scribner BdFt
+            err = self.calc(dbh_ob=dbh[i],total_ht=total_ht[i],form_class=form_class[i])
+            if err!=0:
+                v[i,0] = 0
+                v[i,1] = 0
+                v[i,2] = 0
+
+            else:
+                v[i,0] = self.volume_wk[0] # Total CuFt
+                v[i,1] = self.volume_wk[3] # Merch CuFt
+                v[i,2] = self.volume_wk[1] # Scribner BdFt
 
         return v
 
@@ -444,6 +450,10 @@ cdef class VolumeCalculator:
             live (str):
 
         """
+        
+        cdef float check_vol
+        cdef float cone_vol
+        
         self.dbh_ob = dbh_ob
         self.drc_ob = drc_ob
         self.total_ht = total_ht
@@ -563,10 +573,37 @@ cdef class VolumeCalculator:
                 , fl, vl, hl, csl
                 , pl, ll, ctl
                 )
-
+        
+        # Some equation and tree combinations will overflow/underflow
+        # This is a blunt check to make sure the total volume is reasonable
+        cone_vol = (3.14159 * (dbh_ob*0.9*0.5)**2.0 * total_ht) / 3.0
+         
+        for i in range(15):
+            if self.volume_wk[i]<0.0:
+                self.volume_wk[i] = 0.0
+        
+        if dbh_ob<1.0:
+            for i in range(15):
+                self.volume_wk[i] = 0.0
+            
+            self.volume_wk[0] = cone_vol
+            
+        if self.volume_wk[14]>cone_vol*2:
+            self.volume_wk[14] = 0.0
+             
+        check_vol = (
+                self.volume_wk[3] + self.volume_wk[6]
+                + self.volume_wk[13] + self.volume_wk[14])
+         
+        if self.volume_wk[0]>check_vol*2:
+            self.volume_wk[0] = check_vol
+            
+        # TODO: raise an error or recalculate with a default equation
+            
 #         if error_flag!=0:
 #             print('Error Code {}: {}'.format(error_flag,error_codes[error_flag]))
         #TODO: raise an exception for critical error flags
+        self._error_flag = error_flag
         return error_flag
 
     def __cinit__(self, merchrules_ merch_rule=init_merchrule(), *args, **kargs):
