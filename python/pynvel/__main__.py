@@ -120,7 +120,6 @@ def print_report(volcalc, spp_abbv, spp_code, vol_eq, form_class):
             pass
         
     print('')
-    # print(volcalc.log_vol)
 
     print('Log Detail')
     print('----------')
@@ -136,14 +135,12 @@ def print_report(volcalc, spp_abbv, spp_code, vol_eq, form_class):
             )
         print('Log Prod ' + ' '.join(['{:<7s}'.format(f) for f in flds]))
         for l, log in enumerate(logs):
-            # print('{:<3d} '.format(l + 1) + fmt.format(*[getattr(log, k) for k in keys]))
             print(fmt.format(**log.as_dict()))
 
     else:
         print('Volume equation {} does not report log detail.'.format(vol_eq))
 
     print('\nERROR: {}'.format(volcalc.error_flag))
-#     print(volcalc.logs)
 
 def install_arcgis(args):
     # TODO: Install ArcGIS tbx and pyt

@@ -22,6 +22,7 @@ import numpy
 #       http://stackoverflow.com/questions/1710839/custom-distutils-commands/1712544#1712544
 
 # API version
+# TODO: Use bumpversion
 version = '${PACKAGE_VERSION}'
 
 description = open('./readme.rst').readlines()[3].strip()
