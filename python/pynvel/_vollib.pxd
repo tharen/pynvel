@@ -84,6 +84,7 @@ cdef extern from *:
             , char* ctypei
             , int *errflag
             , merchrules_ *merrules
+            , int *idist
             , int forsti_len, int voleqi_len, int httypei_len, int conspeci_len
             , int prodi_len, int livei_len, int ctypei_len
             )

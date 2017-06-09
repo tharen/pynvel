@@ -623,6 +623,7 @@ cdef class Cython_VolumeCalculator:
         self.num_logs_sec = 0.0
 
         cdef int error_flag = 0
+        cdef int idist = 0
 
         cdef int fl = 2
         cdef int vl = 10
@@ -715,6 +716,7 @@ cdef class Cython_VolumeCalculator:
                 , self.cruise_type
                 , &error_flag
                 , &self.merch_rule
+                , &idist
 
                 # Lengths of char* arguments
                 # TODO: This is the gfortran way, but perhaps not Intel, etc.

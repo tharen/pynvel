@@ -33,6 +33,7 @@ cdef extern from *:
             , char* ctypei
             , int *errflag
             , merchrules_ *merrules
+            , int *idist
             , int forsti_len, int voleqi_len, int httypei_len, int conspeci_len
             , int prodi_len, int livei_len, int ctypei_len
             )
@@ -181,6 +182,7 @@ def calc_volume():
     cdef char* ctypei = ctypei_
     cdef int errflag = 0
     mrule = init_merchrule()
+    cdef int idist
     cdef merchrules_ = mrule
     cdef int forsti_len = 2
     cdef int voleqi_len = 10
@@ -241,7 +243,7 @@ def calc_volume():
             ,ctypei
             ,&errflag
             ,&mrule
-            
+            ,&idist
             ,forsti_len
             ,voleqi_len
             ,httypei_len
