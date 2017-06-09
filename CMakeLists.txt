@@ -34,5 +34,5 @@ else ()
     set(vollib vollib64)
 endif ()
 
-add_subdirectory(vollib)
+add_subdirectory(VolumeLibrary)
 add_subdirectory(python)

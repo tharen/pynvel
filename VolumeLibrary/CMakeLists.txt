@@ -34,6 +34,12 @@ if (CMAKE_SYSTEM_NAME STREQUAL "Windows")
     set(CMAKE_SHARED_LINKER_FLAGS "-static ${CMAKE_SHARED_LINKER_FLAGS} -s -Wl,--subsystem,windows")
 endif ()
 
+# CMAKE_BUILD_TYPE = Debug
+set(debug_flags "-g3 -mfpmath=sse -msse")
+set(CMAKE_Fortran_FLAGS_DEBUG "${debug_flags} -fbacktrace -ffpe-trap=invalid,zero,overflow,underflow")
+set(CMAKE_CXX_FLAGS_DEBUG "${debug_flags}")
+set(CMAKE_C_FLAGS_DEBUG "${debug_flags}")
+
 # Compile sources into objects
 add_library(${vollib}_objs OBJECT ${vollib_sources})
 
