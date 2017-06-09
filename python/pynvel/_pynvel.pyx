@@ -8,11 +8,16 @@ cimport numpy as np
 cimport cython
 from cython.view cimport array as cvarray
 
+from libc.math cimport sqrt
+
 from _vollib cimport *
 include 'nvelcommon.pxi'
 
-FLOAT_DTYPE = np.float32
-ctypedef np.float32_t FLOAT32_DTYPE_t
+# Compiler directives
+DEF _NUM_PROD=10
+
+# Assign module variables to compiler directives
+num_products=_NUM_PROD
 
 cpdef merchrules_ init_merchrule(
         int evod=1, int opt=23, float maxlen=40.0, float minlen=12.0
@@ -148,9 +153,6 @@ cpdef char* get_equation(
 
     return vol_eq[:10]
     
-DTYPE_float32 = np.float32
-ctypedef np.float32_t DTYPE_float32_t
-
 cdef class Log:
     """
     Represents a single merchandized log segment.
@@ -166,12 +168,14 @@ cdef class Log:
     cdef public float cuft_gross
     cdef public float bdft_gross
     cdef public float intl_gross
+    cdef public int prod_class
 
     def __cinit__(self
             , int pos, float bole_ht, float length
             , float large_dib, float large_dob
             , float small_dib, float small_dob, float scale_diam
-            , float cuft_gross, float bdft_gross, float intl_gross):
+            , float cuft_gross, float bdft_gross, float intl_gross
+            , int prod_class=0):
         self.position = pos
         self.bole_height = bole_ht
         self.length = length
@@ -183,6 +187,7 @@ cdef class Log:
         self.cuft_gross = cuft_gross
         self.bdft_gross = bdft_gross
         self.intl_gross = intl_gross
+        self.prod_class = prod_class
 
     def __getitem__(self,item):
         return getattr(self,item)
@@ -201,6 +206,8 @@ cdef class Log:
         d['cuft_gross'] = self.cuft_gross
         d['bdft_gross'] = self.bdft_gross
         d['intl_gross'] = self.intl_gross
+        d['prod_class'] = self.prod_class
+
         return d
 
     def __repr__(self):
@@ -223,7 +230,7 @@ cpdef float scribner_volume(float diam, float length, bint cor=True):
 
     return vol
 
-cdef class VolumeCalculator:
+cdef class Cython_VolumeCalculator:
     """
     Initialize volume calculation for a single species.
 
@@ -275,14 +282,103 @@ cdef class VolumeCalculator:
     cdef int site_index
     cdef char* cruise_type
     cdef int _error_flag
-    cdef merchrules_ merch_rule
+    cdef public merchrules_ merch_rule
+    cdef list sorts
 
     cdef np.float32_t[:] volume_wk
     cdef np.float32_t[:,:] log_vol_wk
     cdef np.float32_t[:,:] log_diam_wk
     cdef np.float32_t[:] log_len_wk
     cdef np.float32_t[:] bole_ht_wk
+    
+    cdef np.int_t[:] log_prod_wk
+    cdef public np.float32_t[:,:] log_prod_lims
+    
+    cdef float log_prod_cuft[_NUM_PROD]
+    cdef float log_prod_bdft[_NUM_PROD]
+    cdef float log_prod_len[_NUM_PROD]
+    cdef float log_prod_diam[_NUM_PROD]
+    cdef long log_prod_count[_NUM_PROD]
 
+    def __cinit__(self
+            , merchrules_ merch_rule=init_merchrule()
+            , np.ndarray log_prod_lims=np.zeros((5,2), dtype=np.float32)
+            , *args, **kargs):
+        
+        self.merch_rule = merch_rule
+        self.log_prod_lims = log_prod_lims
+        
+        self.volume_wk = np.zeros((15, ), dtype=np.float32, order='F')
+        self.log_vol_wk = np.zeros((7, 20), dtype=np.float32, order='F')
+        self.log_diam_wk = np.zeros((21, 3), dtype=np.float32, order='F')
+        self.log_len_wk = np.zeros((20, ), dtype=np.float32, order='F')
+        self.bole_ht_wk = np.zeros((21, ), dtype=np.float32, order='F')
+        
+        self.log_prod_wk = np.zeros((20, ), dtype=np.int)
+        
+        self.log_prod_cuft[:] = [0.0,]*_NUM_PROD
+        self.log_prod_bdft[:] = [0.0,]*_NUM_PROD
+        self.log_prod_len[:] = [0.0,]*_NUM_PROD
+        self.log_prod_diam[:] = [0.0,]*_NUM_PROD
+        self.log_prod_count[:] = [0,]*_NUM_PROD
+        
+
+    def __init__(self, int region=6, char* forest='12', char* volume_eq=''
+            , float min_top_prim=5.0, float min_top_sec=2.0, float stump_ht=1.0
+            , int cubic_total_flag=1, int bdft_prim_flag=1, int cubic_prim_flag=1
+            , int cord_prim_flag=1, int sec_vol_flag=1
+            , char* con_spp='', char* prod_code='01'
+            , int basal_area=0, int site_index=0
+            , char* cruise_type='C'
+            , *args, **kargs
+            ):
+        """
+        Initialize common volume calculation attributes.
+
+        Args:
+            region (int): USFS region number
+            forest (str): USFS forest number, e.g. '04'
+            volume_eq (str): Volume equation Identifier
+            min_top_prim (float): Primary product minimum top diameter
+            min_top_sec (float): Secondary product minimum top diameter
+            stump_ht (float): Stump height
+            cubic_total_flag (int): Tota cubic foot calculation flag
+            bdft_prim_flag (int): Board foot calculation flag
+            cubic_prim_flag (int): Primary product cubic foot calculation flag
+            cord_prim_flag (int): Secondary product cubic foot calculation flag
+            sec_vol_flag (int): Secondary volume calculation flag
+            con_spp (str): Contract species
+            prod_code (int): Product code- 1: Sawtimber; 2: Pulpwood; 3: Roundwood
+            basal_area (int): Basal area per acre
+            site_index (int): Site index
+            cruise_type (str): Volume calculation method
+
+                + (C)ruise method requires all necessary fields.
+                + (F)VS method will impute missing heights and form_class.
+                + (V)ariable method requires num_logs and log_len.
+
+            merch_rule (merchrules_): User defined merchandizing rules.
+            log_prod_lims (ndarray): Array of log product class limits, e.g. [(min_diam, min_len),]
+        """
+        self.region = region
+        self.forest = forest
+        self.volume_eq = volume_eq
+        self.min_top_prim = min_top_prim
+        self.min_top_sec = min_top_sec
+        self.stump_ht = stump_ht
+
+        self.cubic_total_flag = cubic_total_flag
+        self.bdft_prim_flag = bdft_prim_flag
+        self.cubic_prim_flag = cubic_prim_flag
+        self.cord_prim_flag = cord_prim_flag
+        self.sec_vol_flag = sec_vol_flag
+
+        self.con_spp = con_spp
+        self.prod_code = prod_code
+        self.basal_area = basal_area
+        self.site_index = site_index
+        self.cruise_type = cruise_type
+        
     property total_height:
         """Return the total height of the tree."""
         def __get__(self):
@@ -303,9 +399,30 @@ cdef class VolumeCalculator:
         def __get__(self):
             # zip vol_lbl from nvelcommon.pxi with the volume array
             return dict(zip(vol_lbl, self.volume_wk))
-
+    
+    property products:
+        """Return a dict of log product summaries."""
+        def __get__(self):
+            cdef int i
+            d = OrderedDict()
+            for i in range(_NUM_PROD):
+                # print(i)
+                if self.log_prod_cuft[i]<=0.0:
+                    # print('skip')
+                    continue
+                
+                l = 'prod_{}'.format(i+1)
+                d[l] = {}
+                d[l]['cuft'] = self.log_prod_cuft[i]
+                d[l]['bdft'] = self.log_prod_bdft[i]
+                d[l]['length'] = self.log_prod_len[i]
+                d[l]['count'] = self.log_prod_count[i]
+                d[l]['diameter'] = self.log_prod_diam[i]
+            
+            return d
+            
     property log_vol:
-        """Return a list log segment volumes."""
+        """Return a list of log segment volumes."""
         def __get__(self):
             # zip log_vol_lbl from nvelcommon.pxi with the log volume array
             #return [dict(zip(log_vol_lbl, v)) for v in self.log_vol_wk[:self.num_logs]]
@@ -353,11 +470,12 @@ cdef class VolumeCalculator:
                 vol = np.array(self.log_vol_wk[:,i-1])
                 len = self.log_len_wk[i-1]
                 bole = self.bole_ht_wk[i]
-
+                prod = self.log_prod_wk[i-1]
+                
                 logs.append(Log(i,bole,len
                         ,large[1],large[2]
                         ,small[1],small[2],small[0]
-                        ,vol[3],vol[0],vol[6]
+                        ,vol[3],vol[0],vol[6],prod
                         ))
 
             return logs
@@ -367,6 +485,14 @@ cdef class VolumeCalculator:
         def __get__(self):
             return error_codes[self._error_flag]
 
+    cdef int classify_log_product(self, float diam, float len):
+        """Determine the product class of a log based on diameter and length."""
+        cdef int i
+        for i in range(_NUM_PROD):
+            if ((diam >= self.log_prod_lims[i][0]) 
+                    and (len >= self.log_prod_lims[i][1])):
+                return i+1
+            
     @cython.boundscheck(False)
     @cython.wraparound(False)
     def calc_array(self,
@@ -379,9 +505,10 @@ cdef class VolumeCalculator:
         Args:
             dbh (float64): Array of tree DBHs
             total_ht (float64): Array of tree heights
+            form_class (float64): Array of form class values
 
         Returns:
-            float64: Array of tree volumes
+            float64: Array of tree volume attributes
         """
 
         #TODO: need to type the I/O arrays or use Cython views
@@ -390,7 +517,10 @@ cdef class VolumeCalculator:
         cdef size_t i
         cdef size_t n = dbh.shape[0]
         cdef np.ndarray[np.float64_t, ndim=2] v = \
-                np.zeros((n,3), dtype=np.float64)
+                np.zeros((n,6), dtype=np.float64)
+        
+        cdef np.ndarray[np.float64_t, ndim=2] logs = \
+                np.zeros((n,6), dtype=np.float64)
 
         if form_class is None:
             form_class = np.zeros((n,), dtype=np.float64)
@@ -398,25 +528,31 @@ cdef class VolumeCalculator:
         for i in range(n):
             err = self.calc(dbh_ob=dbh[i],total_ht=total_ht[i],form_class=form_class[i])
             if err!=0:
-                v[i,0] = 0
-                v[i,1] = 0
-                v[i,2] = 0
+                v[i,0] = 0.0
+                v[i,1] = 0.0
+                v[i,2] = 0.0
+                v[i,3] = 0.0
+                v[i,4] = 0.0
+                v[i,5] = 0.0
 
             else:
                 v[i,0] = self.volume_wk[0] # Total CuFt
                 v[i,1] = self.volume_wk[3] # Merch CuFt
                 v[i,2] = self.volume_wk[1] # Scribner BdFt
+                v[i,3] = self.merch_height # Merch Height
+                v[i,4] = float(self.num_logs) # Num Logs
+                v[i,5] = float(err) # Error Flag
 
         return v
 
+    @cython.cdivision(True)
     cpdef int calc(self
             , float dbh_ob=0.0, float drc_ob=0.0, float total_ht=0.0, int ht_log=0
             , char* ht_type='F', float ht_prim=0.0, float ht_sec=0.0
             , float upper_ht1=0.0, float upper_ht2=0.0, float upper_diam1=0.0, float upper_diam2=0.0
             , int ht_ref=0, float avg_z1=0.0, float avg_z2=0.0, int form_class=0
             , float bark_thick=0.0, float bark_ratio=0.0, int ht_1st_limb=0, char* live='L'
-            , np.ndarray log_len=np.zeros((20,),np.float32)
-#             , int num_logs=0
+            , np.ndarray log_len=np.zeros((20,),dtype=np.float32)
             ):
         """
         Estimate the volume of a tree.
@@ -495,13 +631,22 @@ cdef class VolumeCalculator:
         cdef int pl = 2
         cdef int ll = 1
         cdef int ctl = 1
-
+        
+        cdef int p
+        
         # Ensure the result arrays are zero'd
         self.volume_wk[:] = 0.0
         self.log_vol_wk[:,:] = 0.0
         self.log_len_wk[:] = 0.0
         self.log_diam_wk[:,:] = 0.0
         self.bole_ht_wk[:] = 0.0
+        
+        # Zero the log product tallys
+        self.log_prod_cuft[:] = [0.0,]*_NUM_PROD
+        self.log_prod_bdft[:] = [0.0,]*_NUM_PROD
+        self.log_prod_len[:] = [0.0,]*_NUM_PROD
+        self.log_prod_diam[:] = [0.0,]*_NUM_PROD
+        self.log_prod_count[:] = [0,]*_NUM_PROD
 
         # Populate log_len_wk if log lengths are provided
         self.num_logs = 0
@@ -515,7 +660,10 @@ cdef class VolumeCalculator:
 
             else:
                 raise AttributeError('cruise_type==\'V\', but log_len is empty')
-
+        
+        # Zero the log product class
+        self.log_prod_wk[:] = 0
+        
         volinit2_(
                 &self.region
                 , self.forest
@@ -576,7 +724,8 @@ cdef class VolumeCalculator:
         
         # Some equation and tree combinations will overflow/underflow
         # This is a blunt check to make sure the total volume is reasonable
-        cone_vol = (3.14159 * (dbh_ob*0.9*0.5)**2.0 * total_ht) / 3.0
+        cone_vol = ((dbh_ob*0.92)**2.0 * 0.005454154 * total_ht) / 3.0
+        cyl_vol = ((dbh_ob*0.92)**2.0 * 0.005454154 * total_ht)
          
         for i in range(15):
             if self.volume_wk[i]<0.0:
@@ -590,6 +739,7 @@ cdef class VolumeCalculator:
             
         if self.volume_wk[14]>cone_vol*2:
             self.volume_wk[14] = 0.0
+            # TODO: Log this as an error or raise a warning/exception
              
         check_vol = (
                 self.volume_wk[3] + self.volume_wk[6]
@@ -597,6 +747,24 @@ cdef class VolumeCalculator:
          
         if self.volume_wk[0]>check_vol*2:
             self.volume_wk[0] = check_vol
+        
+        # Classify the log product as populate the product tallys
+        for i in range(self.num_logs):
+            p = self.classify_log_product(
+                    self.log_diam_wk[i+1,0]
+                    ,self.log_len_wk[i]
+                    )
+            self.log_prod_wk[i] = p
+            self.log_prod_cuft[p] += self.log_vol_wk[3,i]
+            self.log_prod_bdft[p] += self.log_vol_wk[0,i]
+            self.log_prod_len[p] += self.log_len_wk[i]
+            # Sum the squared diameters to get a quadratic mean
+            self.log_prod_diam[p] += self.log_diam_wk[i+1,1]**2.0
+            self.log_prod_count[p] += 1
+        
+        # Compute quadratic mean log diameter
+        for i in range(_NUM_PROD):
+            self.log_prod_diam[i] = sqrt(self.log_prod_diam[i]/self.log_prod_count[i])
             
         # TODO: raise an error or recalculate with a default equation
             
@@ -605,66 +773,3 @@ cdef class VolumeCalculator:
         #TODO: raise an exception for critical error flags
         self._error_flag = error_flag
         return error_flag
-
-    def __cinit__(self, merchrules_ merch_rule=init_merchrule(), *args, **kargs):
-        self.merch_rule = merch_rule
-
-        self.volume_wk = np.zeros((15, ), dtype=np.float32, order='F')
-        self.log_vol_wk = np.zeros((7, 20), dtype=np.float32, order='F')
-        self.log_diam_wk = np.zeros((21, 3), dtype=np.float32, order='F')
-        self.log_len_wk = np.zeros((20, ), dtype=np.float32, order='F')
-        self.bole_ht_wk = np.zeros((21, ), dtype=np.float32, order='F')
-
-    def __init__(self, int region=6, char* forest='12', char* volume_eq=''
-            , float min_top_prim=5.0, float min_top_sec=2.0, float stump_ht=1.0
-            , int cubic_total_flag=1, int bdft_prim_flag=1, int cubic_prim_flag=1
-            , int cord_prim_flag=1, int sec_vol_flag=1
-            , char* con_spp='', char* prod_code='01'
-            , int basal_area=0, int site_index=0
-            , char* cruise_type='C', *args, **kargs
-            ):
-        """
-        Initialize common volume calculation attributes.
-
-        Args:
-            region (int): USFS region number
-            forest (str): USFS forest number, e.g. '04'
-            volume_eq (str): Volume equation Identifier
-            min_top_prim (float): Primary product minimum top diameter
-            min_top_sec (float): Secondary product minimum top diameter
-            stump_ht (float): Stump height
-            cubic_total_flag (int): Tota cubic foot calculation flag
-            bdft_prim_flag (int): Board foot calculation flag
-            cubic_prim_flag (int): Primary product cubic foot calculation flag
-            cord_prim_flag (int): Secondary product cubic foot calculation flag
-            sec_vol_flag (int): Secondary volume calculation flag
-            con_spp (str): Contract species
-            prod_code (int): Product code- 1: Sawtimber; 2: Pulpwood; 3: Roundwood
-            basal_area (int): Basal area per acre
-            site_index (int): Site index
-            cruise_type (str): Volume calculation method
-
-                + (C)ruise method requires all necessary fields.
-                + (F)VS method will impute missing heights and form_class.
-                + (V)ariable method requires num_logs and log_len.
-
-            merch_rule (merchrules_) User defined merchandizing rules.
-        """
-        self.region = region
-        self.forest = forest
-        self.volume_eq = volume_eq
-        self.min_top_prim = min_top_prim
-        self.min_top_sec = min_top_sec
-        self.stump_ht = stump_ht
-
-        self.cubic_total_flag = cubic_total_flag
-        self.bdft_prim_flag = bdft_prim_flag
-        self.cubic_prim_flag = cubic_prim_flag
-        self.cord_prim_flag = cord_prim_flag
-        self.sec_vol_flag = sec_vol_flag
-
-        self.con_spp = con_spp
-        self.prod_code = prod_code
-        self.basal_area = basal_area
-        self.site_index = site_index
-        self.cruise_type = cruise_type

@@ -103,6 +103,10 @@ class Test(unittest.TestCase):
 
         self.assertLessEqual(self.test_data['bdft_diff'].sum(), 1)
         self.assertLessEqual(self.test_data['cuft_diff'].sum(), 1)
+        
+        assert np.all(vol[:,3] < self.test_data['total_ht']) # merch ht. < total ht
+        assert np.all(vol[:,4] > 0) # Num logs > 0
+        assert np.all(vol[:,5] == 0) # No NVEL errors
 
 #         test_data.to_csv('data/{}_test.csv'.format(vol_eq), ',')
 

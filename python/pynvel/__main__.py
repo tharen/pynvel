@@ -5,6 +5,7 @@ PyNVEL command line application
 import os
 import sys
 import argparse
+import json
 
 import pynvel
 
@@ -70,7 +71,7 @@ def main():
             , merch_rule=mrule
             , cruise_type=b'C'
             )
-
+    
     error = volcalc.calc(
             dbh_ob=args.dbh
             , total_ht=tot_ht
@@ -100,17 +101,43 @@ def print_report(volcalc, spp_abbv, spp_code, vol_eq, form_class):
     print('CuFt Top:    {:>8.1f}'.format(r['cuft_gross_sec']))
     print('CuFt Stump:  {:>8.1f}'.format(r['cuft_stump']))
     print('CuFt Tip:    {:>8.1f}'.format(r['cuft_tip']))
+    
+    prod = volcalc.products
     print('')
+    print('Product Summary')
+    print('---------------')
+    print('Prod Logs CuFt   BdFt    Len   Diam')
+    for i in range(pynvel.num_products):
+        try:
+            p = prod['prod_{}'.format(i+1)]
+            s = (
+                '{:<4d} {count:<4d} {cuft:<6.1f} {bdft:<7.1f} '
+                '{length:<5.1f} {diameter:<6.1f} '
+                ).format(i, **p)
+            print(s)
+            
+        except:
+            pass
+        
+    print('')
+    # print(volcalc.log_vol)
 
     print('Log Detail')
     print('----------')
     if volcalc.num_logs > 0:
         logs = volcalc.logs
-        keys = list(logs[0].as_dict().keys())[1:-1]
-        fmt = ' '.join(['{{:<{:d}.1f}}'.format(len(k)) for k in keys])
-        print('log ' + ' '.join(keys))
+        flds = ['Bole','Len','L DOB','L DIB','S DOB','S DIB','Scale'
+                ,'CuFt','BdFt','Int 1/4']
+        fmt = (
+            '{position:<3d} {prod_class:<4d} {bole_height:<7.1f} {length:<7.1f} '
+            '{large_dib:<7.1f} {large_dib:<7.1f} '
+            '{small_dob:<7.1f} {small_dib:<7.1f} {scale_diam:<7.1f} '
+            '{cuft_gross:<7.1f} {bdft_gross:<7.1f} {intl_gross:<7.1f}'
+            )
+        print('Log Prod ' + ' '.join(['{:<7s}'.format(f) for f in flds]))
         for l, log in enumerate(logs):
-            print('{:<3d} '.format(l + 1) + fmt.format(*[getattr(log, k) for k in keys]))
+            # print('{:<3d} '.format(l + 1) + fmt.format(*[getattr(log, k) for k in keys]))
+            print(fmt.format(**log.as_dict()))
 
     else:
         print('Volume equation {} does not report log detail.'.format(vol_eq))
@@ -200,11 +227,8 @@ def handle_args():
         sys.exit(0)
 
     if args.config:
-        fp = pynvel.config_path
-        print('PyNVEL configuration file:')
-        print('{}'.format(fp))
-        with (open(fp)) as _cfg:
-            print(_cfg.read())
+        # Pretty print the configuration contents
+        print(json.dumps(pynvel.get_config(), indent=4, sort_keys=True))
         sys.exit(0)
 
     if args.install_arcgis:
