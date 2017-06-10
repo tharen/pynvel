@@ -1,13 +1,13 @@
 from ctypes import *
 
-mydll = windll.LoadLibrary("vollib.dll")
+mydll = windll.LoadLibrary("C:\workspace\pynvel\python\pynvel\libvollib64.dll")
 
 
 #*****************************************************************
 #-------test the VERNUM routine----------------------------------#
 version = c_int()
 
-mydll.VERNUM(byref(version))
+mydll.vernum_(byref(version))
 
 print('version = ', version.value)
 #*****************************************************************
@@ -25,23 +25,13 @@ class fchar(Structure):
 # call getvoleq
 regn = c_int(6)
 
-forst = fchar()
-forst.str = "11 "
-forst.len = 3
-
-dist = fchar()
-dist.str = "01 "
-dist.len = 3
+forst = c_char_p(b"11")
+dist = c_char_p(b"01")
 
 spec = c_int(202)
 
-prod = fchar()
-prod.str = "01 "
-prod.len = 3
-
-voleq = fchar()
-voleq.str = "           "
-voleq.len = 11
+prod = c_char_p(b"01")
+voleq = c_char_p(b"          ")
 
 errflag = c_int()
 
@@ -63,16 +53,17 @@ class Mrule(Structure):
         ('cor', c_char),
 		 ]
 
-myMrule = Mrule(2, 23, 40, 8, 8, 8, 5, 2, 1.0, 1.0, 0, 0, 8.0, "N")
+myMrule = Mrule(2, 23, 40, 8, 8, 8, 5, 2, 1.0, 1.0, 0, 0, 8.0, b"N")
 # Reset the value to what you need
 myMrule.maxlen = 40
 print ('User defined LOG Lenth = ', myMrule.maxlen)
 
 
-mydll.GETVOLEQ(byref(regn), forst, dist, byref(spec), prod, voleq, byref(errflag))
+mydll.getvoleq_(byref(regn), forst, dist, byref(spec), prod, voleq, byref(errflag)
+        ,2,2,2,10)
 
 
-print('after GETVOLEQ voleq = ', voleq.str)
+print('after GETVOLEQ voleq = ', voleq.value)
 # print('regn = ', regn)
 # print('forst = ', forst.str)
 # print('forst = ', forst.str)
@@ -85,12 +76,10 @@ print('after GETVOLEQ voleq = ', voleq.str)
 MTOPP = c_float(0)
 MTOPS = c_float(0)
 STUMP = c_float(0)
-DBHOB = c_float(8.0)
+DBHOB = c_float(18.0)
 DRCOB = c_float(0)
-HTTYPE = fchar()
-HTTYPE.str = "F"
-HTTYPE.len = 2
-HTTOT = c_float(23.0)
+HTTYPE = c_char_p(b"F")
+HTTOT = c_float(123.0)
 HTLOG = c_int()
 HT1PRD = c_float(0)
 HT2PRD = c_float(0)
@@ -133,21 +122,13 @@ CDPFLG = c_int(1)
 CUSFLG = c_int(1)
 CDSFLG = c_int(1)
 SPFLG = c_int(1)
-PROD = fchar()
-PROD.str = "002"
-PROD.len = 3
-CONSPEC = fchar()
-CONSPEC.str = "     "
-CONSPEC.len = 5
+PROD = c_char_p(b"02")
+CONSPEC = c_char_p(b"   ")
 HTTFLL = c_int(0)
-LIVE = fchar()
-LIVE.str = "L "
-LIVE.len = 2
+LIVE = c_char_p(b"L")
 BA = c_int(0)
 SI = c_int(0)
-mCTYPE = fchar()
-mCTYPE.str = "F "
-mCTYPE.len = 2
+mCTYPE = c_char_p(b"F")
 ERRFLAG = c_int(0)
 
 # voleq.str = "632BEHW202 "
@@ -163,14 +144,22 @@ else:
   print ('Using DEFAULT merch rule for volume calculation')
 strlen = c_int(256)
 charlen = c_int(1)
-print('(Input for DLL) voleq = ', voleq.str)
+print('(Input for DLL) voleq = ', voleq.value)
 
-mydll.VOLLIBC2(byref(regn), forst, voleq, byref(MTOPP), byref(MTOPS), byref(STUMP), byref(DBHOB),
-byref(DRCOB), HTTYPE, byref(HTTOT), byref(HTLOG), byref(HT1PRD), byref(HT2PRD), byref(UPSHT1), byref(UPSHT2), byref(UPSD1),
-byref(UPSD2), HTREF, byref(AVGZ1), byref(AVGZ2), byref(FCLASS), byref(DBTBH), byref(BTR), byref(I3), byref(I7), byref(I15), byref(I20), byref(I21),
-byref(VOL), byref(LOGVOL), byref(LOGDIA), byref(LOGLEN), byref(BOLHT), byref(TLOGS), byref(NOLOGP), byref(NOLOGS), byref(CUTFLG),
-byref(BFPFLG), byref(CUPFLG), byref(CDPFLG), byref(SPFLG), CONSPEC, PROD, byref(HTTFLL), LIVE,
-byref(BA) , byref(SI), mCTYPE, byref(ERRFLAG), byref(INDEB), byref(PMTFLG), byref(myMrule))
+mydll.vollibc2_(
+        byref(regn), forst, voleq, byref(MTOPP), byref(MTOPS), byref(STUMP),
+        byref(DBHOB),byref(DRCOB), HTTYPE, byref(HTTOT), byref(HTLOG), 
+        byref(HT1PRD), byref(HT2PRD), byref(UPSHT1), byref(UPSHT2), 
+        byref(UPSD1), byref(UPSD2), HTREF, byref(AVGZ1), byref(AVGZ2), 
+        byref(FCLASS), byref(DBTBH), byref(BTR), byref(I3), byref(I7), 
+        byref(I15), byref(I20), byref(I21), byref(VOL), byref(LOGVOL), 
+        byref(LOGDIA), byref(LOGLEN), byref(BOLHT), byref(TLOGS), 
+        byref(NOLOGP), byref(NOLOGS), byref(CUTFLG), byref(BFPFLG), 
+        byref(CUPFLG), byref(CDPFLG), byref(SPFLG), CONSPEC, PROD, 
+        byref(HTTFLL), LIVE, byref(BA) , byref(SI), mCTYPE, byref(ERRFLAG), 
+        byref(INDEB), byref(PMTFLG), byref(myMrule),
+        2,10,1,2,2,1,1
+    )
 
 # mydll.VOLUMELIBRARY(byref(regn), forst,voleq, byref(MTOPP), byref(MTOPS), byref(STUMP),byref(DBHOB),
 # byref(DRCOB), HTTYPE, byref(HTTOT), byref(HTLOG), byref(HT1PRD), byref(HT2PRD), byref(UPSHT1), byref(UPSHT2), byref(UPSD1),
@@ -178,7 +167,7 @@ byref(BA) , byref(SI), mCTYPE, byref(ERRFLAG), byref(INDEB), byref(PMTFLG), byre
 # byref(VOL), byref(LOGVOL), byref(LOGDIA), byref(LOGLEN), byref(BOLHT), byref(TLOGS), byref(NOLOGP), byref(NOLOGS), byref(CUTFLG),
 # byref(BFPFLG), byref(CUPFLG), byref(CDPFLG), byref(SPFLG), CONSPEC,PROD, byref(HTTFLL),LIVE,
 # byref(BA) , byref(SI),mCTYPE, byref(ERRFLAG))
-if ERRFLAG.value <> 0:
+if ERRFLAG.value != 0:
   print ('errflag = ', errflag.value)
 
 # arrays are column major in fortran and row major in c/python ALSO, arrays are zero subscripted in c/python
@@ -186,13 +175,13 @@ if ERRFLAG.value <> 0:
 # So, LOGVOL(4,1) in fortran becomes LOGVOL[0][3] in python and so forth
 
 for index, item in enumerate(VOL):
-	print'vol[', index + 1, '] = ', item
+	print('vol[', index + 1, '] = ', item)
 
-print '\nht2prd = ', HT2PRD.value
+print('\nht2prd = ', HT2PRD.value)
 
-print 'nologp = ', NOLOGP.value
-print 'nologs = ', NOLOGS.value
-print 'tlogs  = ', TLOGS.value
+print('nologp = ', NOLOGP.value)
+print('nologs = ', NOLOGS.value)
+print('tlogs  = ', TLOGS.value)
 
 # print('logvol 2 = ', LOGVOL[0][3])
 # for y in VOL:

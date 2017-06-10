@@ -13,8 +13,8 @@ from libc.math cimport sqrt
 from _vollib cimport *
 include 'nvelcommon.pxi'
 
-# Compiler directives
-DEF _NUM_PROD=10
+#--- Compiler directives
+DEF _NUM_PROD=10 # Number of possible log product types
 
 # Assign module variables to compiler directives
 num_products=_NUM_PROD

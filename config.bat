@@ -13,7 +13,7 @@ REM echo To build: cmake --build . --target install -- -j4
 REM echo.
 
 echo cmake -G "MinGW Makefiles" .. -DNATIVE_ARCH=Yes
-cmake -G "MinGW Makefiles" .. -DNATIVE_ARCH=Yes
+cmake -G "MinGW Makefiles" .. -DNATIVE_ARCH=Yes -DCMAKE_BUILD_TYPE=Release
 
 echo.
 echo To build: cmake --build . -- -j4

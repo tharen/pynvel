@@ -39,7 +39,7 @@ class Test(unittest.TestCase):
         self.test_data['cuft_test'] = 0.0
 
         # Default region 6 merchandizing; mrules.f:142
-        self.mr = pynvel.init_merchrule(evod=2, opt=23,
+        self.mrule = pynvel.init_merchrule(evod=2, opt=23,
                 maxlen=16.0, minlen=2.0, minlent=2.0, merchl=8.0,
                 mtopp=5, mtops=2, trim=0.5, stump=0.0,
                 cor='N', minbfd=1)
@@ -56,7 +56,7 @@ class Test(unittest.TestCase):
 
         vc = pynvel.VolumeCalculator(
                 region=6, forest='12',
-                volume_eq=self.vol_eq, merch_rule=self.mr)
+                volume_eq=self.vol_eq, merch_rule=self.mrule)
 
         for i, row in self.test_data.iterrows():
             r = vc.calc(dbh_ob=row['dbh_ob'], total_ht=row['total_ht'])
@@ -68,6 +68,7 @@ class Test(unittest.TestCase):
             self.test_data.loc[i, 'bdft_test'] = vc.volume['bdft_gross_prim']
             self.test_data.loc[i, 'cuft_test'] = vc.volume['cuft_total']
 
+        print(self.test_data)
         self.test_data['bdft_diff'] = self.test_data['bdft_gross'] - self.test_data['bdft_test']
         self.test_data['cuft_diff'] = self.test_data['cuft_gross'] - self.test_data['cuft_test']
 
@@ -88,7 +89,7 @@ class Test(unittest.TestCase):
 
         vc = pynvel.VolumeCalculator(
                 region=6, forest='12',
-                volume_eq=self.vol_eq, merch_rule=self.mr)
+                volume_eq=self.vol_eq, merch_rule=self.mrule)
 
         # Calculate volume using the fast Loop
         vol = vc.calc_array(

@@ -86,8 +86,8 @@ def print_report(volcalc, spp_abbv, spp_code, vol_eq, form_class):
     """Print a basic volume report to stdout."""
     r = volcalc.volume
 
-    print('Volume Report')
-    print('-------------')
+    print('Volume Report (Version: {})'.format(pynvel.version.vollib))
+    print('---------------------------------------')
     print('Species: {}({})'.format(spp_abbv, spp_code))
     print('Equation: {}'.format(vol_eq))
     print('DBH:         {:>8.1f}'.format(volcalc.dbh_ob))

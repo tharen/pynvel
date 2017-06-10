@@ -9,23 +9,10 @@ cdef extern from *:
     # vernum.f
     void vernum_(int *v)
     
-#    void foo_(char* s, int sl)
-    
     void scrib_(float *dia, float *len, char* cor, float *vol, int cl)
 
-#     # getvoleq.f
-#     void getvoleq_(int *region, char* forest, char* district
-#             , int *species, char* product, char* vol_eq, int *err_flag
-#             , int fl, int dl, int pl, int vl)
-#     void getfiavoleq_(int *region, char* forest, char* district
-#             , int *species, char* vol_eq, int *err_flag
-#             , int fl, int dl, int vl)
-    
     # Return the default equation for a species
     # voleqdef.f
-#    void voleqdef_(char* var, int *region, char* forest, char* district
-#            , int *species, char* product, char* vol_eq, int *err_flag
-#            , int vl, int fl, int dl, int pl, int el)
     void voleqdef_(char* var, int* region, char* forest, char* district
             , int* species, char* product, char* vol_eq, int* err_flag
             , int vl, int fl, int dl, int pl, int el)
@@ -89,6 +76,7 @@ cdef extern from *:
             , int prodi_len, int livei_len, int ctypei_len
             )
 
+# A struct to represent the merchrules defined type
 cdef extern:
     ctypedef struct merchrules_:
         int evod
