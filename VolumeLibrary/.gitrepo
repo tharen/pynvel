@@ -7,5 +7,5 @@
 	remote = https://github.com/tharen/VolumeLibrary
 	branch = master
 	commit = 8a86018dfe086068ebea80d3227c447dd14bfc10
-	parent = 573e04b260a85f905909bad4a51b3545d7590a8f
+	parent = 37d1632ddc56caed0cc0ea3beac47499ecfcdf3a
 	cmdver = 0.3.1
