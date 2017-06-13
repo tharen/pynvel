@@ -124,6 +124,9 @@ def vernum():
     return v
 
 def calc_volume():
+    """
+    Demonstrate calling volinit2
+    """
     cdef int regn = 6
     forsti_ = '12'
     cdef char* forsti = forsti_

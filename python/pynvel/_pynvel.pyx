@@ -324,7 +324,6 @@ cdef class Cython_VolumeCalculator:
         
 
     def __init__(self, int region=6, char* forest='12', char* volume_eq=''
-            , float min_top_prim=5.0, float min_top_sec=2.0, float stump_ht=1.0
             , int cubic_total_flag=1, int bdft_prim_flag=1, int cubic_prim_flag=1
             , int cord_prim_flag=1, int sec_vol_flag=1
             , char* con_spp='', char* prod_code='01'
@@ -339,10 +338,7 @@ cdef class Cython_VolumeCalculator:
             region (int): USFS region number
             forest (str): USFS forest number, e.g. '04'
             volume_eq (str): Volume equation Identifier
-            min_top_prim (float): Primary product minimum top diameter
-            min_top_sec (float): Secondary product minimum top diameter
-            stump_ht (float): Stump height
-            cubic_total_flag (int): Tota cubic foot calculation flag
+            cubic_total_flag (int): Total cubic foot calculation flag
             bdft_prim_flag (int): Board foot calculation flag
             cubic_prim_flag (int): Primary product cubic foot calculation flag
             cord_prim_flag (int): Secondary product cubic foot calculation flag
@@ -363,9 +359,6 @@ cdef class Cython_VolumeCalculator:
         self.region = region
         self.forest = forest
         self.volume_eq = volume_eq
-        self.min_top_prim = min_top_prim
-        self.min_top_sec = min_top_sec
-        self.stump_ht = stump_ht
 
         self.cubic_total_flag = cubic_total_flag
         self.bdft_prim_flag = bdft_prim_flag
@@ -612,6 +605,13 @@ cdef class Cython_VolumeCalculator:
         self.bark_ratio = bark_ratio
         self.ht_1st_limb = ht_1st_limb
         self.live = live
+        
+        # TODO: Should these merchandizing parameters be variable or static.
+        #   If greater than zero they override the user values merch rule
+        #   values in Mrules.f. I suspect this will change in the future.
+        self.min_top_prim = self.merch_rule.mtopp
+        self.min_top_sec = self.merch_rule.mtops
+        self.stump_ht = self.merch_rule.stump
 
         cdef int i3=3
         cdef int i7=7

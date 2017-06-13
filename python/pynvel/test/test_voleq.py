@@ -56,8 +56,9 @@ class Test(unittest.TestCase):
 
         vc = pynvel.VolumeCalculator(
                 region=6, forest='12',
-                volume_eq=self.vol_eq, merch_rule=self.mrule)
-
+                volume_eq=self.vol_eq, merch_rule=self.mrule
+                )
+        
         for i, row in self.test_data.iterrows():
             r = vc.calc(dbh_ob=row['dbh_ob'], total_ht=row['total_ht'])
 
@@ -67,8 +68,8 @@ class Test(unittest.TestCase):
 
             self.test_data.loc[i, 'bdft_test'] = vc.volume['bdft_gross_prim']
             self.test_data.loc[i, 'cuft_test'] = vc.volume['cuft_total']
-
-        print(self.test_data)
+            
+        # print(self.test_data)
         self.test_data['bdft_diff'] = self.test_data['bdft_gross'] - self.test_data['bdft_test']
         self.test_data['cuft_diff'] = self.test_data['cuft_gross'] - self.test_data['cuft_test']
 
@@ -90,12 +91,17 @@ class Test(unittest.TestCase):
         vc = pynvel.VolumeCalculator(
                 region=6, forest='12',
                 volume_eq=self.vol_eq, merch_rule=self.mrule)
-
+        
+        self.assertAlmostEqual(vc.merch_rule['stump'], self.mrule['stump'])
+        
         # Calculate volume using the fast Loop
         vol = vc.calc_array(
                 self.test_data['dbh_ob'].values,
                 self.test_data['total_ht'].values)
 
+        # Ensure VolumeLibrary has not modified the merch rule attributes
+        assert vc.merch_rule == self.mrule
+        
         self.test_data['cuft_test'] = vol[:, 0]
         self.test_data['bdft_test'] = vol[:, 2]
 
