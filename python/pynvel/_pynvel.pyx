@@ -344,7 +344,7 @@ cdef class Cython_VolumeCalculator:
             cord_prim_flag (int): Secondary product cubic foot calculation flag
             sec_vol_flag (int): Secondary volume calculation flag
             con_spp (str): Contract species
-            prod_code (int): Product code- 1: Sawtimber; 2: Pulpwood; 3: Roundwood
+            prod_code (str): Product code- '01': Sawtimber; '02': Pulpwood; '03': Roundwood
             basal_area (int): Basal area per acre
             site_index (int): Site index
             cruise_type (str): Volume calculation method
