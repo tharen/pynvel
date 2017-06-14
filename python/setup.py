@@ -23,7 +23,7 @@ import numpy
 
 # API version
 # TODO: Use bumpversion
-version = '0.0.5'
+version = '0.0.6.dev0'
 
 description = open('./readme.rst').readlines()[3].strip()
 long_desc = open('./readme.rst').read().strip()

@@ -71,7 +71,7 @@ cpdef merchrules_ init_merchrule(
         btr (float): Bark thickness ratio (breast height)
         dbtbh (float): Double bark thickness (breast height)
         minbfd (float): Minimum merch. tree diameter
-        cor (str): Make corrections to Scribner factor volumes (Y/N)
+        cor (str): Use table Scribner values (Y) or factor volumes (N)
 
     Returns:
         struct: A struct representing the defined merchandizing rules.
