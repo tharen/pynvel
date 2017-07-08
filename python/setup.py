@@ -23,7 +23,7 @@ import numpy
 
 # API version
 # TODO: Use bumpversion
-version = '0.0.6.dev0'
+version = '0.0.6.dev5'
 
 description = open('./readme.rst').readlines()[3].strip()
 long_desc = open('./readme.rst').read().strip()
@@ -54,8 +54,8 @@ _is_64bit = (getattr(sys, 'maxsize', None) or getattr(sys, 'maxint')) > 2 ** 32
 
 lib_dirs = [
         './pynvel'
-        , 'C:/workspace/pynvel/python/pynvel'
-        , 'C:/workspace/pynvel/python/pynvel'
+        , 'C:/workspace/forest_modeling/pynvel/python/pynvel'
+        , 'C:/workspace/forest_modeling/pynvel/python/pynvel'
         ]
 inc_dirs = [numpy.get_include()]
 
@@ -76,7 +76,7 @@ else:
 if static:
     # For static linking pass the MinGW archive as an object file
     # TODO: Find the static library dynamically
-    vollib = 'C:/workspace/pynvel/python/pynvel/lib' + vollib + '_static.a'
+    vollib = 'C:/workspace/forest_modeling/pynvel/python/pynvel/lib' + vollib + '_static.a'
     extra_objects = [vollib, ]
     # Link to gfortran and quadmath since vollibxx_static does not include
     #   the necessary references

@@ -70,8 +70,9 @@ def main():
             volume_eq=vol_eq.encode()
             , merch_rule=mrule
             , cruise_type=b'C'
+            , calc_products=True
             )
-    
+
     error = volcalc.calc(
             dbh_ob=args.dbh
             , total_ht=tot_ht
@@ -101,32 +102,38 @@ def print_report(volcalc, spp_abbv, spp_code, vol_eq, form_class):
     print('CuFt Top:    {:>8.1f}'.format(r['cuft_gross_sec']))
     print('CuFt Stump:  {:>8.1f}'.format(r['cuft_stump']))
     print('CuFt Tip:    {:>8.1f}'.format(r['cuft_tip']))
-    
+
     prod = volcalc.products
     print('')
-    print('Product Summary')
-    print('---------------')
-    print('Prod Logs CuFt   BdFt    Len   Diam')
-    for i in range(pynvel.num_products):
-        try:
-            p = prod['prod_{}'.format(i+1)]
-            s = (
-                '{:<4d} {count:<4d} {cuft:<6.1f} {bdft:<7.1f} '
-                '{length:<5.1f} {diameter:<6.1f} '
-                ).format(i, **p)
-            print(s)
-            
-        except:
-            pass
-        
-    print('')
+    if not prod == {}:
+        print('Product Summary')
+        print('---------------')
+        print('Prod Logs CuFt   BdFt    Len   Diam')
+        for i in range(volcalc.num_products):
+            try:
+                p = prod['prod_{}'.format(i + 1)]
+                s = (
+                    '{:<4d} {count:<4d} {cuft:<6.1f} {bdft:<7.1f} '
+                    '{length:<5.1f} {diameter:<6.1f} '
+                    ).format(i, **p)
+                print(s)
 
-    print('Log Detail')
-    print('----------')
+            except:
+                pass
+
+        print('')
+
+    else:
+        print('* No products')
+
+
+
     if volcalc.num_logs > 0:
+        print('Log Detail')
+        print('----------')
         logs = volcalc.logs
-        flds = ['Bole','Len','L DOB','L DIB','S DOB','S DIB','Scale'
-                ,'CuFt','BdFt','Int 1/4']
+        flds = ['Bole', 'Len', 'L DOB', 'L DIB', 'S DOB', 'S DIB', 'Scale'
+                , 'CuFt', 'BdFt', 'Int 1/4']
         fmt = (
             '{position:<3d} {prod_class:<4d} {bole_height:<7.1f} {length:<7.1f} '
             '{large_dib:<7.1f} {large_dib:<7.1f} '
@@ -138,9 +145,9 @@ def print_report(volcalc, spp_abbv, spp_code, vol_eq, form_class):
             print(fmt.format(**log.as_dict()))
 
     else:
-        print('Volume equation {} does not report log detail.'.format(vol_eq))
+        print('* No log detail'.format(vol_eq))
 
-    print('\nERROR: {}'.format(volcalc.error_flag))
+    print('\nERROR: {}'.format(volcalc.error_message))
 
 def install_arcgis(args):
     # TODO: Install ArcGIS tbx and pyt
