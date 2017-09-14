@@ -49,7 +49,7 @@ if '--debug' in sys.argv:
     debug = True
     sys.argv.remove('--debug')
 
-_is_windows = sys.platform=='win32'
+_is_windows = sys.platform == 'win32'
 _is_64bit = (getattr(sys, 'maxsize', None) or getattr(sys, 'maxint')) > 2 ** 32
 
 lib_dirs = [
@@ -96,8 +96,8 @@ if debug:
 
 # If static linking on non Windows, use -fPIC
 if not _is_windows and static:
-    compile_args.extend(['-fPIC',])
-    link_args.extend(['-fPIC',])
+    compile_args.extend(['-fPIC', ])
+    link_args.extend(['-fPIC', ])
 
 # Use a custom GCC specs file to force linking with the appropriate libmsvcr*.a
 #  Ref: http://www.mingw.org/wiki/HOWTO_Use_the_GCC_specs_file
@@ -153,13 +153,13 @@ setup(
     , install_requires=['numpy>=1.9', ]
     , ext_modules=cythonize(extensions, gdb_debug=debug,)
     , packages=['pynvel', ]
-    , package_data={'pynvel':['test/*.txt', 'test/data/*',]}
+    , package_data={'pynvel':['test/*.txt', 'test/data/*', ]}
     , include_package_data=True  # package the files listed in MANIFEST.in
     # , data_files=[('arcgis',glob('arcgis/*.pyt')),]
     # , package_data={'pynvel':glob('arcgis/*.pyt')}
     , entry_points={
             'console_scripts': [
-            'pynvel=pynvel.__main__:main'
+            'pynvel=pynvel.__main__:cli'
             ]
         }
     )

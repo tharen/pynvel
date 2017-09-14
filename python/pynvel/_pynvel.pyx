@@ -155,7 +155,33 @@ cpdef char* get_equation(
                 ,2,2,2,10)
 
     return vol_eq[:10]
+
+cpdef float calc_height(
+            int region=0, char * forest='', char * volume_eq=''
+            , float dbh_ob=0.0, float total_ht=0.0, float ht_prim=0.0, float ht_sec=0.0
+            , float upper_ht1=0.0, float upper_ht2=0.0, float upper_diam1=0.0, float upper_diam2=0.0
+            , float avg_z1=0.0, float avg_z2=0.0, int ht_ref=0, float bark_thick=0.0, float bark_ratio=0.0
+            , int form_class=0, float stem_dib=0.0):
+    """
+    Return the bole height to a given diameter inside bark
+    """
     
+    cdef float stem_height = 0.0
+    cdef int err_flag = 0
+    
+    ht2topd_(
+            &region, forest, volume_eq
+            , &dbh_ob, &total_ht, &ht_prim, &ht_sec
+            , &upper_ht1, &upper_ht2, &upper_diam1, &upper_diam2
+            , &avg_z1, &avg_z2, &ht_ref, &bark_thick, &bark_ratio
+            , &form_class, &stem_dib, &stem_height, &err_flag)
+    
+    if not err_flag==0:
+        err_msg = error_codes[err_flag]
+        raise ValueError('ht2topd returned error {}: {}'.format(err_flag,err_msg))
+    
+    return stem_height
+
 cdef class Log:
     """
     Represents a single merchandized log segment.

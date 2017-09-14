@@ -4,84 +4,13 @@ PyNVEL command line application
 
 import os
 import sys
-import argparse
 import json
+
+import click
 
 import pynvel
 
 def warn(x): print(x)
-
-def main():
-    """
-    Report the volume and log attributes of a single tree.
-    """
-# FIXME: Handle basic strings instead of unicode so Python 2 & 3 don't collide
-#        http://docs.cython.org/src/tutorial/strings.html
-# TODO: Add option to export in json format
-# TODO: Add option to iterate through a file, database table, etc.
-
-    cfg = pynvel.get_config()
-    args = handle_args()
-    mrule = pynvel.init_merchrule(**cfg['merch_rule'])
-
-    # Convert the species code
-    try:
-        spp_code = int(args.species)
-        spp_abbv = pynvel.fia_spp[spp_code]
-    except:
-        spp_code = pynvel.get_spp_code(args.species.upper())
-        spp_abbv = args.species.upper()
-
-    # Get a default eqution if none provided
-    if not args.equation:
-        vol_eq = pynvel.get_equation(spp_code,
-                cfg['variant'].encode(), cfg['region'],
-                cfg['forest'].encode(), cfg['district'].encode(),
-                cfg['product'].encode()
-                )
-
-    elif args.equation.lower() == 'fia':
-        vol_eq = pynvel.get_equation(spp_code, cfg['variant'].encode(),
-                cfg['region'], cfg['forest'].encode(), cfg['district'].encode()
-                , fia=True)
-
-    else:
-        vol_eq = args.equation.upper()
-
-    # FIXME: Lengths specified in default equations conflict with maxlen mrule
-    #        This should be reported to FMSC
-    if 'BEH' in vol_eq:
-        ml = float(vol_eq[1:3])
-        if ml != 0.0:
-            warn('Overiding user log length with the equation default: '
-                    '{:.1f}->{:.1f}'.format(mrule['maxlen'], ml))
-            mrule['maxlen'] = ml
-
-    # TODO: Implement height curves
-    if not args.height:
-        raise NotImplementedError('Height estimation is not implemented.')
-        tot_ht = 0.0
-
-    else:
-        tot_ht = args.height
-
-    # TODO: Implement user assigned log lengths, cruise type='V'
-    volcalc = pynvel.VolumeCalculator(
-            volume_eq=vol_eq.encode()
-            , merch_rule=mrule
-            , cruise_type=b'C'
-            , calc_products=True
-            )
-
-    error = volcalc.calc(
-            dbh_ob=args.dbh
-            , total_ht=tot_ht
-            , form_class=args.form_class
-#             , log_len=np.array([40, 30, 20, 10])
-            )
-
-    print_report(volcalc, spp_abbv, spp_code, vol_eq, args.form_class)
-#     print(error)
 
 def print_report(volcalc, spp_abbv, spp_code, vol_eq, form_class):
     """Print a basic volume report to stdout."""
@@ -149,115 +78,205 @@ def print_report(volcalc, spp_abbv, spp_code, vol_eq, form_class):
 
     print('\nERROR: {}'.format(volcalc.error_message))
 
+# Shared options
+# Ref: https://github.com/pallets/click/issues/108#issuecomment-194465429
+
+_shared_options = [
+    click.option('-s', '--species', default='', type=str
+            , help='Tree species, common abbv. or FIA number, e.g. DF or 202')
+    , click.option('-d', '--dbh', required=True, type=float
+            , help='Tree diameter at breast height (DBH) in inches.')
+    , click.option('-t', '--height', default=None, type=float
+            , help='Tree total height in feet from ground to tip.')
+    , click.option('-e', '--equation', type=str, default=None
+            , help=(
+                    'NVEL volume equation identifier. If not provided the '
+                    'default for the species and location will '
+                    'be used. Pass "FIA" to use the FIA default equation.')
+            )
+    , click.option('-f', '--form_class', type=int, default=80
+            , help='Girard Form Class.')
+    ]
+
+def shared_options(func):
+    for option in reversed(_shared_options):
+        func = option(func)
+    return func
+
+@click.group(context_settings={'help_option_names':['-h', '--help']}
+        , epilog=(
+                'Global configuration variables can be set by editing '
+                'pynvel.cfg within the installed package folder.')
+        )
+@click.version_option(message=str(pynvel.version()))
+def cli():
+    'PyNVEL command line interface.'
+    pass
+
+@click.command()
+@click.pass_context
+@shared_options
+def volume(ctx, species='', dbh=None, height=None, equation=None, form_class=80):
+    """
+    Report the volume and log attributes of a single tree.
+    """
+# FIXME: Handle basic strings instead of unicode so Python 2 & 3 don't collide
+#        http://docs.cython.org/src/tutorial/strings.html
+# TODO: Add option to export in json format
+# TODO: Add option to iterate through a file, database table, etc.
+
+    if not species or not equation or not dbh:
+        print('Missing required parameters.')
+        print(ctx.get_help())
+        return False
+
+    cfg = pynvel.get_config()
+    mrule = pynvel.init_merchrule(**cfg['merch_rule'])
+
+    # Convert the species code
+    try:
+        spp_code = int(species)
+        spp_abbv = pynvel.fia_spp[spp_code]
+    except:
+        spp_code = pynvel.get_spp_code(species.upper())
+        spp_abbv = species.upper()
+
+    # Get a default eqution if none provided
+    if not equation:
+        vol_eq = pynvel.get_equation(spp_code,
+                cfg['variant'].encode(), cfg['region'],
+                cfg['forest'].encode(), cfg['district'].encode(),
+                cfg['product'].encode()
+                )
+
+    elif equation.upper() == 'FIA':
+        vol_eq = pynvel.get_equation(spp_code, cfg['variant'].encode(),
+                cfg['region'], cfg['forest'].encode(), cfg['district'].encode()
+                , fia=True)
+
+    else:
+        vol_eq = equation.upper()
+
+    # FIXME: Lengths specified in default equations conflict with maxlen mrule
+    #        This should be reported to FMSC
+    if 'BEH' in vol_eq:
+        ml = float(vol_eq[1:3])
+        if ml != 0.0:
+            warn('Overiding user log length with the equation default: '
+                    '{:.1f}->{:.1f}'.format(mrule['maxlen'], ml))
+            mrule['maxlen'] = ml
+
+    # TODO: Implement height curves
+    if not height:
+        raise NotImplementedError('Height estimation is not implemented.')
+        tot_ht = 0.0
+
+    else:
+        tot_ht = height
+
+    # TODO: Implement user assigned log lengths, cruise type='V'
+    volcalc = pynvel.VolumeCalculator(
+            volume_eq=vol_eq.encode()
+            , merch_rule=mrule
+            , cruise_type=b'C'
+            , calc_products=True
+            )
+
+    error = volcalc.calc(
+            dbh_ob=dbh
+            , total_ht=tot_ht
+            , form_class=form_class
+#             , log_len=np.array([40, 30, 20, 10])
+            )
+
+    print_report(volcalc, spp_abbv, spp_code, vol_eq, form_class)
+#     print(error)
+
+@click.command(name='stem-ht')
+@click.option('-u', '--stem-dib', required=True, type=float, help='Upper stem diameter.')
+@click.pass_context
+@shared_options
+def stem_height(ctx, species='', dbh=None, height=None, equation=None, form_class=80, stem_dib=0.0):
+    """
+    Calculate the height to specified upper stem diameter (inside bark).
+    """
+
+    if not (species or equation) or not dbh:
+        print('Missing required parameters.')
+        print(ctx.get_help())
+        return False
+
+    # TODO: Implement height curves
+    if not height:
+        # raise NotImplementedError('Height estimation is not implemented.')
+        raise click.BadParameter('Height estimation is not implemented.')
+
+    cfg = pynvel.get_config()
+
+    # Convert the species code
+    try:
+        spp_code = int(species)
+        spp_abbv = pynvel.fia_spp[spp_code]
+    except:
+        spp_code = pynvel.get_spp_code(species.upper())
+        spp_abbv = species.upper()
+
+    # Get a default eqution if none provided
+    if not equation:
+        vol_eq = pynvel.get_equation(spp_code,
+                cfg['variant'].encode(), cfg['region'],
+                cfg['forest'].encode(), cfg['district'].encode(),
+                cfg['product'].encode()
+                )
+
+    elif equation.upper() == 'FIA':
+        vol_eq = pynvel.get_equation(spp_code, cfg['variant'].encode(),
+                cfg['region'], cfg['forest'].encode(), cfg['district'].encode()
+                , fia=True)
+
+    else:
+        vol_eq = equation.upper()
+
+    stem_ht = pynvel.calc_height(volume_eq=vol_eq.encode(), dbh_ob=dbh, total_ht=height, stem_dib=stem_dib)
+
+    rel_ht = (stem_ht - 4.5) / (height - 4.5) * 100
+
+    msg = 'Stem height to {:.1f}" = {:.2f} ({:.1f}%)'.format(stem_dib, stem_ht, rel_ht)
+    print(msg)
+
+@click.command(name='test')
+def run_tests():
+    print('Run pynvel tests')
+    import subprocess
+    os.chdir(os.path.join(os.path.dirname(__file__), 'test'))
+    subprocess.call('pytest')
+    sys.exit()
+
+@click.command(name='config')
+def print_config():
+    'Print the contents of the configuration file and exit.'
+    print(json.dumps(pynvel.get_config(), indent=4, sort_keys=True))
+    sys.exit(0)
+
+@click.command(name='treelist')
+@click.option('-l', '--treelist', help='CSV file of trees')
+def calc_table(treelist=None):
+    'Calculate volume for a treelist in a csv file.'
+    print('Calculate table not implemented.')
+    sys.exit(0)
+
+@click.command(name='install_arcgis')
 def install_arcgis(args):
+    'Install the ArcGIS toolboxes in the user profile.'
     # TODO: Install ArcGIS tbx and pyt
     print('Install ArcGIS is not implemented.')
 
-def calc_table(args):
-    print(args.treelist)
-    print('Calculate table not implemented.')
-
-def handle_args():
-    parser = argparse.ArgumentParser(
-            description=('PyNVEL command line interface.'),
-            epilog=(
-                    'Global configuration variables can be set by editing '
-                    'pynvel.cfg within the installed package folder.'))
-
-    # Positional arguments for basic variables (optional usage)
-    parser.add_argument(
-            'species', metavar='species', type=str, nargs='?'
-            , help=('Tree species, common abbv. or '
-                    'FIA number, e.g. DF or 202'))
-
-    parser.add_argument(
-            'dbh', metavar='dbh', type=float, nargs='?'
-            , help='Tree diameter at breast height (DBH) in inches.')
-
-    parser.add_argument(
-            'height', metavar='height', type=float, nargs='?'
-            , help='Tree total height in feet from ground to tip.')
-
-    parser.add_argument(
-            'equation', metavar='equation', type=str, nargs='?', default=''
-            , help=('NVEL volume equation identifier. If not provided the '
-                    'default for the species and location will '
-                    'be used. Pass "FIA" to use the FIA default equation.'))
-
-    # Named arguments
-    parser.add_argument(
-            '-s', '--species', type=str, metavar=''
-            , help=('Tree species code or FIA number.'))
-
-    parser.add_argument(
-            '-d', '--dbh', metavar='', type=float
-            , help='Tree DBH in inches.')
-
-    parser.add_argument(
-            '-t', '--height', metavar='', type=float
-            , help='Tree total height in feet.')
-
-    parser.add_argument(
-            '-f', '--form_class', metavar='', type=float, default=80
-            , help='Girard Form Class.')
-
-    parser.add_argument(
-            '-e', '--equation', metavar='', type=str, default=''
-            , help='NVEL volume equation identifier.')
-
-    parser.add_argument(
-            '-v', '--version', dest='version', action='store_true'
-            , help='Print the installed version of PyNVEL and exit.')
-
-    parser.add_argument(
-            '--config', dest='config', action='store_true'
-            , help='Print the contents of the configuration file and exit.')
-
-    parser.add_argument(
-            '--install_arcgis', dest='install_arcgis', action='store_true'
-            , help='Install the ArcGIS toolboxes in the user profile.')
-
-    parser.add_argument(
-            '--treelist', dest='treelist', metavar='', default=''
-            , help='Calculate volume for a treelist in a csv file.')
-
-    parser.add_argument('--run-tests', action='store_true', default=False
-            , help='Run test scripts and exit.')
-
-    args = parser.parse_args()
-
-    if args.version:
-        print(pynvel.version())
-        sys.exit(0)
-
-    if args.config:
-        # Pretty print the configuration contents
-        print(json.dumps(pynvel.get_config(), indent=4, sort_keys=True))
-        sys.exit(0)
-
-    if args.install_arcgis:
-        install_arcgis(args)
-        sys.exit(0)
-
-    if args.treelist:
-        calc_table(args)
-        sys.exit(0)
-
-    if args.run_tests:
-        print('Run pynvel tests')
-        import subprocess
-        os.chdir(os.path.join(os.path.dirname(__file__), 'test'))
-        subprocess.call('pytest')
-        sys.exit()
-
-    # No special flags present, run main.
-    if not args.species or not args.dbh:
-        print('ERROR: Incorrect number of arguments. Species and DBH are ')
-        print('       required for single tree usage.')
-        parser.print_help()
-        sys.exit(1)
-
-    return args
+cli.add_command(volume)
+cli.add_command(stem_height)
+cli.add_command(run_tests)
+cli.add_command(print_config)
+cli.add_command(calc_table)
+cli.add_command(install_arcgis)
 
 if __name__ == '__main__':
-    main()
+    cli()
