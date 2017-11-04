@@ -293,8 +293,8 @@ cdef class Cython_VolumeCalculator:
     cdef float avg_z1
     cdef float avg_z2
     cdef public int form_class
-    cdef float bark_thick
-    cdef float bark_ratio
+    cdef public float bark_thick
+    cdef public float bark_ratio
     cdef public int num_logs
     cdef public float num_logs_prim
     cdef public float num_logs_sec
