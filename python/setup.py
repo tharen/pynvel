@@ -76,7 +76,7 @@ else:
 if static:
     # For static linking pass the MinGW archive as an object file
     # TODO: Find the static library dynamically
-    vollib = 'C:/workspace/forest_modeling/pynvel/python/pynvel/lib' + vollib + '_static.a'
+    vollib = './pynvel/lib' + vollib + '_static.a'
     extra_objects = [vollib, ]
     # Link to gfortran and quadmath since vollibxx_static does not include
     #   the necessary references
@@ -93,6 +93,10 @@ else:
 if debug:
     link_args = ['-g', ] + link_args
     compile_args = ['-g', ] + compile_args
+
+else:
+    link_args = ['-O2', '-Wl,--strip-all'] + link_args
+    compile_args = ['-O2', ] + compile_args
 
 # If static linking on non Windows, use -fPIC
 if not _is_windows and static:

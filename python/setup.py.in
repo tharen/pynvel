@@ -94,6 +94,10 @@ if debug:
     link_args = ['-g', ] + link_args
     compile_args = ['-g', ] + compile_args
 
+else:
+    link_args = ['-O2', '-Wl,--strip-all'] + link_args
+    compile_args = ['-O2', ] + compile_args
+
 # If static linking on non Windows, use -fPIC
 if not _is_windows and static:
     compile_args.extend(['-fPIC',])
