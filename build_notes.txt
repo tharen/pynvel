@@ -1,8 +1,3 @@
-# NOTE: Cython>0.23.4 appears to breaks string handling.
-#           The build will complete but runtime crashes occur with no traceback.
-#
-# DELETE ME: Run cmd_mingw-w64.bat to set the environment variables and launch a console
-#
 # The environment variables are initialized during conda environment activation
 # The batch script is located here, C:\Miniconda3\envs\pynvel\etc\conda\activate.d
 # 
@@ -15,17 +10,12 @@ mkdir build
 cd build
 ..\config.bat
 
-# Currently the Python dependencies are not working correctly and CMake
-#  will try to build the Python extension before the vollib libraries.
-#  Until fixed simply make the following edits CMakelist.txt
-#  in the second Python block before executing the build.
-#    # if (PYTHON)
-#    if (0)
+cmake --build . -- -j4
+# This will build the nvel libraries and move them to the python\pynvel 
+# folder. The Python extension will also be compiled.
 
-cmake --build . --target install -- -j4
-
-# now manually execute the Python extension build
-cd ..\python
+# Python and numpy/distutils do not have proper support for MinGW compilers.
+# The subfolder python\numpy_fix contains patched files with a working hack.
 
 # libpython (mingw python libraries) does not always ship with Python
 #  and needs to be created. If it's missing you'll generally see a long list of
@@ -37,7 +27,8 @@ python gen_libpython.py
 # libgfortran seem to be related to rogue libraries in the Conda packaging
 # These can be overcome by re-initiating a new Conda environment.
 
-python setup.py build_ext --inplace
+python setup.py build_ext --inplace --static
+
 # Errors of multiple definitions of atonexit, etc following the above may 
 #  be due to libmsvcr100.a which appears to be include with some conda packages
 #  it can be deleted since it is (should be) included with mingw w64.
@@ -45,10 +36,9 @@ python setup.py build_ext --inplace
 # Install locally in development mode
 pip install -e .
 
-# Tests currently require nose2 for automated execution
-#  Nose2 may not be on conda
-#  >pip install nose2
-pynvel --run-tests
+# Tests can be run using pytest
+pytest pynvel\test
+pynvel run-tests
 
 # if all goes well then package
 python setup.py bdist_wheel sdist bdist_msi

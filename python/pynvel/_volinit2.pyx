@@ -128,16 +128,16 @@ def calc_volume():
     Demonstrate calling volinit2
     """
     cdef int regn = 6
-    forsti_ = '12'
+    forsti_ = <unicode>'12'
     cdef char* forsti = forsti_
-    voleqi_ = 'F01FW2W202'
+    voleqi_ = <unicode>'F01FW2W202'
     cdef char* voleqi = voleqi_
     cdef float mtopp = 6.0
     cdef float mtops = 2.0
     cdef float stump = 1.0
     cdef float dbhob = 18.0
     cdef float drcob = 0.0
-    httypei_ = 'F'
+    httypei_ = <unicode>'F'
     cdef char* httypei = httypei_
     cdef float httot = 120.0
     cdef int htlog = 0
@@ -172,16 +172,16 @@ def calc_volume():
     cdef int cupflg = 1
     cdef int cdpflg = 1
     cdef int spflg = 1
-    conspeci_ = '    '
+    conspeci_ = <unicode>'    '
     cdef char* conspeci = conspeci_
-    prodi_ = '01'
+    prodi_ = <unicode>'01'
     cdef char* prodi = prodi_
     cdef int httfll = 0
-    livei_ = 'L'
+    livei_ = <unicode>'L'
     cdef char* livei = livei_
     cdef int ba = 0
     cdef int si = 0
-    ctypei_ = 'C'
+    ctypei_ = <unicode>'C'
     cdef char* ctypei = ctypei_
     cdef int errflag = 0
     mrule = init_merchrule()
@@ -263,5 +263,15 @@ def calc_volume():
     print upsht2
     print upsd1
     print upsd2
+
+    print('Error:', errflag)
+    print('Num Logs:', nologs)
+    print('Tot CuFt:', vol[0])
+    print('Net BdFt:', vol[1])
+    print('Net CuFt:', vol[3])
+    print('Top CuFt:', vol[6])
+    print('Stump CuFt:', vol[13])
+    print('Tip CuFt:', vol[14])
+    print(vol[14]+vol[13]+vol[6]+vol[3])
     
     return vol

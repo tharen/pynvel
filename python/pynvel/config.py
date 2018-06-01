@@ -42,8 +42,21 @@ default_config = """{
 		[5.0, 12.0],
 		[2.0, 12.0],
 		[0.0, 0.0]
-	]
-
+	],
+    
+    "default_species": "DF",
+    "default_equations": {
+        "SS": "632TRFW098",
+        "LP": "632TRFW108",
+        "PP": "632TRFW122",
+        "DF": "632TRFW202",
+        "RC": "632TRFW242",
+        "WH": "632TRFW263",
+        "RA": "616TRFW351",
+        "OH": "616TRFW998",
+        "OC": "632TRFW202",
+        "OT": "632TRFW202"
+    }
 }"""
 
 def get_config():

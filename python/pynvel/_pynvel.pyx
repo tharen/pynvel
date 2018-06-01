@@ -1,4 +1,4 @@
-#cython: c_string_type=str, c_string_encoding=ascii
+# cython: c_string_type=str, c_string_encoding=ascii
 #xcython: embedsignature=True
 
 from collections import OrderedDict
@@ -26,7 +26,8 @@ cpdef merchrules_ init_merchrule(
         int evod=1, int opt=23, float maxlen=40.0, float minlen=12.0
         , float minlent=12.0, float merchl=12.0, float mtopp=5.0
         , float mtops=2.0, float stump=1.0, float trim=1.0
-        , float btr=0.0, float dbtbh=0.0, float minbfd=8.0, str cor='Y'
+        , float btr=0.0, float dbtbh=0.0, float minbfd=8.0
+        , str cor='Y'
         ):
     """
     Return a structure defining log merchandizing rules.
@@ -105,9 +106,11 @@ def vollib_version():
 
 # FIXME: Handle basic strings instead of unicode so Python 2 & 3 don't collide
 #        http://docs.cython.org/src/tutorial/strings.html
+#        Not sure if <unicode> string coersion is portable
 cpdef char* get_equation(
-        int species, char * fvs_variant='', int region=0, char * forest=''
-        , char * district='01', char * product='01', bint fia=False):
+        int species, char * fvs_variant=<unicode>'PN', int region=0
+        , char * forest=<unicode>'01', char * district=<unicode>'01'
+        , char * product=<unicode>'01', bint fia=False):
     """
     Return the default equation ID for a species in a geographic location.
 
@@ -130,40 +133,55 @@ cpdef char* get_equation(
     Returns:
         str: Default volume equation ID.
     """
-
-    cdef char* vol_eq = ''
+    eq = <unicode>'          '
+    cdef char* vol_eq = eq
     cdef int err_flag = 0
     
     # FIXME: This may be unnecessary
-    vartmp = fvs_variant.encode('UTF-8')
-    cdef char* _fvs_variant = vartmp
-    fortmp = forest.encode('UTF-8')
+    vartmp = <unicode>fvs_variant
+    cdef char* fvs_variant_ = vartmp
+    fortmp = <unicode>forest
     cdef char* forest_ = fortmp
-    distmp = district.encode('UTF-8')
+    distmp = <unicode>district
     cdef char* district_ = distmp
-    prodtmp = product.encode('UTF-8')
+    prodtmp = <unicode>product
     cdef char* product_ = prodtmp
     
     if not fia:
-        voleqdef_(_fvs_variant, &region, forest_, district_
+        voleqdef_(fvs_variant_, &region, forest_, district_
                 , &species, product_, vol_eq, &err_flag
                 ,2,2,2,2,10)
 
     else:
-        fiavoleqdef_(fvs_variant, &region, forest, district
+        fiavoleqdef_(fvs_variant_, &region, forest_, district_
                 , &species, vol_eq, &err_flag
                 ,2,2,2,10)
-
+    
     return vol_eq[:10]
 
 cpdef float calc_height(
-            int region=0, char * forest='', char * volume_eq=''
+            int region=0, char * forest=<unicode>'01', char * volume_eq=<unicode>' '*10
             , float dbh_ob=0.0, float total_ht=0.0, float ht_prim=0.0, float ht_sec=0.0
             , float upper_ht1=0.0, float upper_ht2=0.0, float upper_diam1=0.0, float upper_diam2=0.0
             , float avg_z1=0.0, float avg_z2=0.0, int ht_ref=0, float bark_thick=0.0, float bark_ratio=0.0
             , int form_class=0, float stem_dib=0.0):
     """
-    Return the bole height to a given diameter inside bark
+    Return the bole height to a given diameter inside bark for profile models.
+    
+    Notes:
+        Refer to vollib/ht2opd.f.
+    
+    Args:
+        region (int): USFS region identifier.
+        forest (str): USFS forest code.
+        volume_eq (str): Volume equation identifier.
+        dbh_ob (float): DBH outside bark (inches).
+        total_ht (float): Total tree height (feet).
+        
+        stem_dib (float): Stem inside bark diameter to estimate height for (inches).
+    
+    Returns:
+        Height above ground to the target stem DIB.
     """
     
     cdef float stem_height = 0.0
@@ -247,6 +265,14 @@ cdef class Log:
 #         return self.__repr__()
 
 cpdef float scribner_volume(float diam, float length, bint cor=True):
+    """
+    Return Scribner board foot volume computed using factors.
+    
+    Args:
+        diam: Log scale diameter (in).
+        length: Log scale length (feet).
+        cor: Return volume as Scribner decimal C if True.    
+    """
     cdef char*  _cor
     cdef float vol
 
@@ -261,7 +287,7 @@ cpdef float scribner_volume(float diam, float length, bint cor=True):
 
 cdef class Cython_VolumeCalculator:
     """
-    Initialize volume calculation for a single species.
+    Initialize volume calculation for a volume equation.
 
     Attributes:
         volume_eq (str): NVEL volume equation identifier
@@ -366,16 +392,16 @@ cdef class Cython_VolumeCalculator:
     def __init__(self
             
             # NVEL parameters
-            , int region=6, char* forest='12', char* volume_eq=''
+            , int region=6, char* forest=<unicode>'12', char* volume_eq=<unicode>' '*10
             , int cubic_total_flag=1, int bdft_prim_flag=1, int cubic_prim_flag=1
             , int cord_prim_flag=1, int sec_vol_flag=1
-            , char* con_spp='', char* prod_code='01'
+            , char* con_spp=<unicode>' ', char* prod_code=<unicode>'01'
             , int basal_area=0, int site_index=0
-            , char* cruise_type='C'
+            , char* cruise_type=<unicode>'C'
             
             # PyNVEL arguments
             , bint calc_products=False
-            , *args, **kargs
+            , *args, **kwargs
             ):
         """
         Initialize common volume calculation attributes.
@@ -402,6 +428,8 @@ cdef class Cython_VolumeCalculator:
             calc_products (bool): If True log product classes will be summarized. 
             merch_rule (merchrules_): User defined merchandizing rules.
             log_prod_lims (ndarray): Array of log product class limits, e.g. [(min_diam, min_len),]
+            *args: Arbitrary positional arguments.
+            **kwargs: Arbitrary keyword arguments.
         """
         self.region = region
         self.forest = forest
@@ -630,10 +658,12 @@ cdef class Cython_VolumeCalculator:
     @cython.cdivision(True)
     cpdef int calc(self
             , float dbh_ob=0.0, float drc_ob=0.0, float total_ht=0.0, int ht_log=0
-            , char* ht_type='F', float ht_prim=0.0, float ht_sec=0.0
-            , float upper_ht1=0.0, float upper_ht2=0.0, float upper_diam1=0.0, float upper_diam2=0.0
+            , char* ht_type=<unicode>'F', float ht_prim=0.0, float ht_sec=0.0
+            , float upper_ht1=0.0, float upper_ht2=0.0
+            , float upper_diam1=0.0, float upper_diam2=0.0
             , int ht_ref=0, float avg_z1=0.0, float avg_z2=0.0, int form_class=0
-            , float bark_thick=0.0, float bark_ratio=0.0, int ht_1st_limb=0, char* live='L'
+            , float bark_thick=0.0, float bark_ratio=0.0, int ht_1st_limb=0
+            , char* live=<unicode>'L'
             , np.ndarray log_len=np.zeros((_MAX_LOGS,),dtype=np.float32)
             ):
         """
@@ -741,7 +771,7 @@ cdef class Cython_VolumeCalculator:
         # Populate log_len_wk if log lengths are provided
         self.num_logs = 0
         cdef int i
-        if self.cruise_type==b'V':
+        if self.cruise_type==<bytes>'V':
             if log_len.any():
                 for i in xrange(log_len.shape[0]):
                     if log_len[i]<=0.0: break

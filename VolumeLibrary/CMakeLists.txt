@@ -12,7 +12,7 @@ else ()
     set(arch_flags "-m64")
 endif ()
 
-if (TARGET_NATIVE)
+if (NATIVE_ARCH)
     message(STATUS "Targeting host native architecture.")
     set(arch_flags "-march=native")
 endif ()

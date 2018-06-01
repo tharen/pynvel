@@ -105,7 +105,7 @@ mrule.cor = b'N'
 
 # Get the default equation
 nvel.voleqdef_(variant, byref(region), forest, district, byref(species)
-        , product, voleq, byref(error_flag),variant,2,2,2,2,10)
+        , product, voleq, byref(error_flag),2,2,2,2,10)
 
 voleq = c_char_p(b'F02FW2W202')
 print(voleq.value)

@@ -23,7 +23,7 @@ import numpy
 
 # API version
 # TODO: Use bumpversion
-version = '0.0.6.dev5'
+version = '0.0.6'
 
 description = open('./readme.rst').readlines()[3].strip()
 long_desc = open('./readme.rst').read().strip()
@@ -49,7 +49,7 @@ if '--debug' in sys.argv:
     debug = True
     sys.argv.remove('--debug')
 
-_is_windows = sys.platform == 'win32'
+_is_windows = sys.platform=='win32'
 _is_64bit = (getattr(sys, 'maxsize', None) or getattr(sys, 'maxint')) > 2 ** 32
 
 lib_dirs = [
@@ -96,9 +96,24 @@ if debug:
 
 # If static linking on non Windows, use -fPIC
 if not _is_windows and static:
-    compile_args.extend(['-fPIC', ])
-    link_args.extend(['-fPIC', ])
+    compile_args.extend(['-fPIC',])
+    link_args.extend(['-fPIC',])
 
+if ((os.name == 'nt') and (sys.version_info[:2] >= (3, 5))
+        # and (numpy.version.version <= '1.13')
+        ):
+    # Monkey patch numpy for MinGW until version 1.13 is mainstream
+    #   NOTE: This has not been fixed as of numpy 1.13.3
+    # This fixes building extensions with Python 3.5+ resulting in
+    #       the error message `ValueError: Unknown MS Compiler version 1900
+    # numpy_fix uses the patch referenced here:
+    #       https://github.com/numpy/numpy/pull/8355
+    root = os.path.split(__file__)[0]
+    sys.path.insert(0, os.path.join(root, 'numpy_fix'))
+    import misc_util, mingw32ccompiler
+    sys.modules['numpy.distutils.mingw32ccompiler'] = mingw32ccompiler
+    sys.modules['numpy.distutils.misc_util'] = misc_util
+    
 # Use a custom GCC specs file to force linking with the appropriate libmsvcr*.a
 #  Ref: http://www.mingw.org/wiki/HOWTO_Use_the_GCC_specs_file
 #       https://wiki.python.org/moin/WindowsCompilers
@@ -151,9 +166,9 @@ setup(
     , setup_requires=['cython', 'numpy>=1.9']
     , tests_require=['pytest', 'pandas', 'numpy', 'pytest-runner']
     , install_requires=['numpy>=1.9', ]
-    , ext_modules=cythonize(extensions, gdb_debug=debug,)
+    , ext_modules=cythonize(extensions, gdb_debug=debug, annotate=True)
     , packages=['pynvel', ]
-    , package_data={'pynvel':['test/*.txt', 'test/data/*', ]}
+    , package_data={'pynvel':['test/*.txt', 'test/data/*',]}
     , include_package_data=True  # package the files listed in MANIFEST.in
     # , data_files=[('arcgis',glob('arcgis/*.pyt')),]
     # , package_data={'pynvel':glob('arcgis/*.pyt')}

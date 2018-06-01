@@ -2,6 +2,8 @@ find_program(PYTHON "python")
 
 # set(DEPS '${CMAKE_CURRENT_SOURCE_DIR}/../vollib/timestamp')
 if (PYTHON)
+    message(STATUS "Python interpreter: ${PYTHON}")
+    
     # Configure the __init__.py module file and setup.py build script
     set(SETUP_PY_IN "${CMAKE_CURRENT_SOURCE_DIR}/setup.py.in")
     set(INIT_PY_IN "${CMAKE_CURRENT_SOURCE_DIR}/pynvel/__init__.py.in")
