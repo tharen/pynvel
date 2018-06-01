@@ -1,1 +1,0 @@
-ifort /iface:nomixed_str_len_arg /exe:vollib /dll /MT /libs=dll /libs:static /threads  /object:C:\development\VolumeLibrary\out\ *.f

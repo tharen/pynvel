@@ -1,6 +1,0 @@
-      MODULE VOLINPUT_MOD
-      IMPLICIT  NONE
-
-        INTEGER      FORMCLASS
-      
-      END MODULE VOLINPUT_MOD
