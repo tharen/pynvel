@@ -85,6 +85,10 @@ cdef extern from *:
             , float *avgz1, float *avgz2, int *htref, float *dbtbh, float *btr
             , int *fclass, float *stemdib, float *stemht, int *errflag)
     
+    # Compute biomass using the Jenkins component ratio methods
+    # jenkins.f
+    void jenkins(int *spec, float *dbhob, float *bioms)
+    
 # A struct to represent the merchrules defined type
 cdef extern:
     ctypedef struct merchrules_:
