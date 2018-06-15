@@ -1,1 +1,0 @@
-ifort /DLL /object:C:\development\VolLibLocal\out\ *.f
