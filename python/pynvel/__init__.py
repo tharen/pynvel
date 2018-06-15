@@ -1,3 +1,9 @@
+"""
+PyNVEL - A Python interface for the National Volume Estimator Library (NVEL).
+"""
+
+# NOTE: This file contains automated build-time configuration values.
+#       The configuration step runs during the CMake configuration.
 
 import os
 import sys
@@ -10,7 +16,7 @@ def warn(x):
 # warn = lambda x: print(x)
 
 __author__ = 'Tod Haren, tod.haren@gm....com'
-__version__ = '0.0.7.dev0'
+__version__ = '0.0.7'
 
 try:
     from ._pynvel import *
@@ -136,3 +142,4 @@ class VolumeCalculator(Cython_VolumeCalculator):
         if log_prod_lims is None:
             log_prod_lims = np.array(config['log_products'], dtype=np.float32)
         self.log_prod_lims = log_prod_lims
+        

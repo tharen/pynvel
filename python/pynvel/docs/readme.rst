@@ -1,7 +1,7 @@
 PyNVEL
 ======
 
-Python wrappers for the National Volume Estimator library.
+A Python package for using the National Volume Estimator library.
 
 The National Volume Estimator Library (NVEL) provides a common interface 
 to a suite of tree volume estimation routines. NVEL is maintained by the 

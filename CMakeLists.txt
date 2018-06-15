@@ -6,7 +6,9 @@ cmake_minimum_required (VERSION 2.8.8 FATAL_ERROR)
 enable_language(Fortran C)
 project(NVEL Fortran C)
 
-set(PACKAGE_VERSION "0.0.7.dev0")
+# read the pyNVEL version number from a file
+file(STRINGS "VERSION" PACKAGE_VERSION REGEX "[0-9]+\\.[0-9]+\\.[0-9]+")
+message(STATUS "Package version: ${PACKAGE_VERSION}")
 
 # Direct all library output to the pynvel folder
 set(CMAKE_LIBRARY_OUTPUT_DIRECTORY ${CMAKE_CURRENT_SOURCE_DIR}/python/pynvel)

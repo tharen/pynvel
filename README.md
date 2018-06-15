@@ -1,7 +1,8 @@
 # PyNVEL
 
-Python wrappers and utilities for [National Volume Estimator Library.][1]
+A Python package for the National Volume Estimator library.
 
+[National Volume Estimator Library][1]
 [NVEL source code][2]
 
 [1]: http://www.fs.fed.us/fmsc/measure/volume/nvel/
@@ -9,11 +10,11 @@ Python wrappers and utilities for [National Volume Estimator Library.][1]
 
 
 Requirements
-------------
+------------    
 
 MinGW w64 compiler
 
 To Build
 --------
 
-See build_notes.txt
+See [build_notes.txt]
