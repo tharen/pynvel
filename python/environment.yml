@@ -9,3 +9,7 @@ dependencies:
   - python=3.6
   - setuptools
   - numpy>=1.11.3
+  - xlrd
+  - xlwt
+  - pytest
+  
