@@ -2,7 +2,7 @@
 
 A Python package for the National Volume Estimator library.
 
-[National Volume Estimator Library][1]
+[National Volume Estimator Library][1]  
 [NVEL source code][2]
 
 [1]: http://www.fs.fed.us/fmsc/measure/volume/nvel/
@@ -31,12 +31,12 @@ that the `conda-forge` channel is prioritized in the environment.yml file.
     
 ### Install Additional Requirements
 
-* [CMake][https://cmake.org/]
-* [MinGW-w64][https://sourceforge.net/projects/mingw-w64/files/Toolchains%20targetting%20Win64/Personal%20Builds/mingw-builds/]
+* [CMake](https://cmake.org/)
+* [MinGW-w64](https://sourceforge.net/projects/mingw-w64/files/Toolchains%20targetting%20Win64/Personal%20Builds/mingw-builds/)
 
   MinGW32 or other MinGW providers will likely work, but have not been tested
   with recent revisions.
 
 ### To Build
 
-See [build_notes.txt]
+See [build_notes.txt](./build_notes.txt)
