@@ -1,6 +1,8 @@
 _pynvel.c
 mingw-gcc.specs
 
+.pytest_cache
+
 debug/*
 release/*
 build64/*

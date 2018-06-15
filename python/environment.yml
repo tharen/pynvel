@@ -1,11 +1,11 @@
-name: py36
+name: pynvel
 channels:
   - conda-forge
   - defaults
 dependencies:
-  - click
-  - cython
-  - pandas
+  - click>=6.7
+  - cython>=0.28.2
+  - pandas>=0.22.0
   - python=3.6
   - setuptools
-  - numpy
+  - numpy>=1.11.3
