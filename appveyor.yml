@@ -39,11 +39,10 @@ build_script:
     - set PATH=%PATH:C:\Program Files\Git\usr\bin=%
     - set PATH=%PATH:C:\Program Files\Git\bin=%
     - set PATH=C:\Program Files\Git\cmd;%PATH%
-    - cmake -G "MinGW Makefiles" .. -DCMAKE_BULD_TYPE=Release
+    - cmake -G "MinGW Makefiles" .. -DCMAKE_BULD_TYPE=Release -DNATIVE_ARCH=Yes
     - cmake --build .
 
 test_script:
-    - conda install -q pytest
     - cd %APPVEYOR_BUILD_FOLDER%\python
     - pip install -e .
     - pynvel run-tests
