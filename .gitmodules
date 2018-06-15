@@ -1,0 +1,3 @@
+[submodule "VolumeLibrary"]
+	path = VolumeLibrary
+	url = https://github.com/tharen/VolumeLibrary.git
