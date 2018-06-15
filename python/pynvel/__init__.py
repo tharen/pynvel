@@ -16,7 +16,7 @@ def warn(x):
 # warn = lambda x: print(x)
 
 __author__ = 'Tod Haren, tod.haren@gm....com'
-__version__ = '0.0.7'
+__version__ = '0.0.8'
 
 try:
     from ._pynvel import *

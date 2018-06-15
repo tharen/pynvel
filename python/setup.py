@@ -1,9 +1,8 @@
 """
 Setuptools configuration to build the NVEL cython module.
-
-NOTE: This file contains automated build-time configuration values.
-    The configuration step runs during the CMake configuration.
 """
+# NOTE: This file contains automated build-time configuration values.
+#     The configuration step runs during the CMake configuration.
 
 import os
 import sys
@@ -21,7 +20,7 @@ import numpy
 #       http://stackoverflow.com/questions/1710839/custom-distutils-commands/1712544#1712544
 
 # API version
-version = '0.0.7'
+version = '0.0.8'
 
 description = open('./readme.rst').readlines()[3].strip()
 long_desc = open('./readme.rst').read().strip()
