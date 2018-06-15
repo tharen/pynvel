@@ -36,6 +36,9 @@ build_script:
     - cd %APPVEYOR_BUILD_FOLDER%
     - mkdir build
     - cd build
+    - set PATH=%PATH:C:\Program Files\Git\usr\bin=%
+    - set PATH=%PATH:C:\Program Files\Git\bin=%
+    - set PATH=C:\Program Files\Git\cmd;%PATH%
     - cmake -G "MinGW Makefiles" ..
     - cmake --build .
 
