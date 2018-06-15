@@ -264,10 +264,6 @@ def stem_height(ctx, species='', dbh=None, height=None, equation=None, form_clas
 def run_tests():
     print('Run pynvel tests')
     
-    # import os
-    # print(os.environ['PYTHONPATH'])
-    import encodings
-    
     import subprocess
     os.chdir(os.path.join(os.path.dirname(__file__), 'test'))
     subprocess.call('pytest')
@@ -279,25 +275,25 @@ def print_config():
     print(json.dumps(pynvel.get_config(), indent=4, sort_keys=True))
     sys.exit(0)
 
-@click.command(name='treelist')
-@click.option('-l', '--treelist', help='CSV file of trees')
-def calc_table(treelist=None):
-    'Calculate volume for a treelist in a csv file.'
-    print('Calculate table not implemented.')
-    sys.exit(0)
+# @click.command(name='treelist')
+# @click.option('-l', '--treelist', help='CSV file of trees')
+# def calc_table(treelist=None):
+    # 'Calculate volume for a treelist in a csv file.'
+    # print('Calculate table not implemented.')
+    # sys.exit(0)
 
-@click.command(name='install_arcgis')
-def install_arcgis(args):
-    'Install the ArcGIS toolboxes in the user profile.'
-    # TODO: Install ArcGIS tbx and pyt
-    print('Install ArcGIS is not implemented.')
+# @click.command(name='install_arcgis')
+# def install_arcgis(args):
+    # 'Install the ArcGIS toolboxes in the user profile.'
+    # # TODO: Install ArcGIS tbx and pyt
+    # print('Install ArcGIS is not implemented.')
 
 cli.add_command(volume)
 cli.add_command(stem_height)
 cli.add_command(run_tests)
 cli.add_command(print_config)
-cli.add_command(calc_table)
-cli.add_command(install_arcgis)
+#cli.add_command(calc_table)
+#cli.add_command(install_arcgis)
 
 if __name__ == '__main__':
     cli()
