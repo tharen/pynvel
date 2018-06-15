@@ -15,6 +15,8 @@ estimation reports and to test various equation and configuration combinations.
 [1]: http://www.fs.fed.us/fmsc/measure/volume/nvel/
 [2]: https://github.com/FMSC-Measurements/VolumeLibrary
 
+[![Build status](https://ci.appveyor.com/api/projects/status/1td0a2tqkcdvhi7l?svg=true)](https://ci.appveyor.com/project/tharen/pynvel)
+
 ## Getting Started
 
 ### Clone the repository
