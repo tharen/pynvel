@@ -212,7 +212,8 @@ def volume(ctx, species='', dbh=None, height=None, equation=None, form_class=80)
 @click.option('-u', '--stem-dib', required=True, type=float, help='Upper stem diameter.')
 @click.pass_context
 @shared_options
-def stem_height(ctx, species='', dbh=None, height=None, equation=None, form_class=80, stem_dib=0.0):
+def stem_height(ctx, species='', dbh=None, height=None, equation=None
+        , form_class=80, stem_dib=0.0):
     """
     Calculate the height to specified upper stem diameter (inside bark).
     """
@@ -253,7 +254,9 @@ def stem_height(ctx, species='', dbh=None, height=None, equation=None, form_clas
     else:
         vol_eq = equation.upper()
 
-    stem_ht = pynvel.calc_height(volume_eq=vol_eq.encode(), dbh_ob=dbh, total_ht=height, stem_dib=stem_dib)
+    stem_ht = pynvel.calc_height(volume_eq=vol_eq.encode()
+            , dbh_ob=dbh, total_ht=height, form_class=form_class
+            , stem_dib=stem_dib)
 
     rel_ht = (stem_ht - 4.5) / (height - 4.5) * 100
 
