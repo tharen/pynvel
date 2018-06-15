@@ -1,0 +1,45 @@
+environment:
+  global:
+      MINGW_PATH: C:\mingw-w64\x86_64-7.2.0-posix-seh-rt_v5-rev1\mingw64
+      
+  matrix:
+    
+    # - MINICONDA: "C:\\Miniconda-x64"
+      # PYTHON_VERSION: "2.7"
+      # PYTHON_ARCH: "64"
+      
+    # - MINICONDA: "C:\\Miniconda3-x64"
+      # PYTHON_VERSION: "3.4"
+      # PYTHON_ARCH: "64"
+    
+    # - MINICONDA: "C:\\Miniconda35-x64"
+      # PYTHON_VERSION: "3.5"
+      # PYTHON_ARCH: "64"
+
+    - MINICONDA: "C:\\Miniconda36-x64"
+      PYTHON_VERSION: "3.6"
+      PYTHON_ARCH: "64"
+
+install:
+    - set PATH=%MINGW_PATH%\bin;%PATH%
+    - conda config --set always_yes yes --set changeps1 no
+    - conda update -q conda
+    # Edit the environment.yml file for the target Python version
+    - call sed -i -E 's/(python=)(.*)/\1'%PYTHON_VERSION%'/' ./environment.yml
+    - conda env create -q -n pynvel -f environment.yml
+    - call activate pynvel
+    - git submodule update --init --remote
+    
+build_script:
+    - cd %APPVEYOR_BUILD_FOLDER%
+    - mkdir build
+    - cd build
+    - cmake -G "MinGW Makefiles" ..
+    - cmake --build .
+
+test_script:
+    - conda install -q pytest
+    - cd %APPVEYOR_BUILD_FOLDER%\python
+    - pip install -e .
+    - pynvel run-tests
+    
