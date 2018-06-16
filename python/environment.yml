@@ -3,12 +3,12 @@ channels:
   - conda-forge
   - defaults
 dependencies:
-  - click>=6.7
-  - cython>=0.28.2
-  - pandas>=0.22.0
+  - click
+  - cython>=0.27.3
+  - pandas>=0.20
   - python=3.6
   - setuptools
-  - numpy>=1.11.3
+  - numpy>=1.11
   - xlrd
   - xlwt
   - pytest
