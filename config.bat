@@ -5,7 +5,7 @@ if not exist ..\CMakeLists.txt (
     exit /b
     )
     
-cmake -G "MinGW Makefiles" .. -DNATIVE_ARCH=Yes -DCMAKE_BUILD_TYPE=Release
+cmake .. -G "MinGW Makefiles" -DNATIVE_ARCH=Yes -DCMAKE_BUILD_TYPE=Release
 
 echo.
 echo To build: cmake --build . -- -j4
