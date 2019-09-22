@@ -117,6 +117,16 @@ class version:
 
 config = get_config()
 
+def set_config(cfg_path):
+    """
+    Load a custom config file
+    """
+    global config_path
+    global config
+
+    config_path = cfg_path
+    config = get_config()
+
 class VolumeCalculator(Cython_VolumeCalculator):
     """
     Subclass the Cython VolumeCalculator cdef class.

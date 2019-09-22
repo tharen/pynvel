@@ -625,6 +625,7 @@ cdef class Cython_VolumeCalculator:
         if form_class is None:
             form_class = np.zeros((n,), dtype=np.float64)
 
+        # Compute volume attributes for each tree
         for i in range(n):
             err = self.calc(dbh_ob=dbh[i],total_ht=total_ht[i],form_class=form_class[i])
             if err!=0:
