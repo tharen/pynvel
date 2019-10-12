@@ -4,11 +4,11 @@ channels:
   - defaults
 dependencies:
   - click
-  - cython>=0.27.3
-  - pandas>=0.20
+  - cython
+  - pandas
   - python=3.6
   - setuptools
-  - numpy>=1.11
+  - numpy
   - xlrd
   - xlwt
   - pytest
