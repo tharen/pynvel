@@ -1,0 +1,41 @@
+language: python
+
+python:
+  - "2.7"
+  - "3.6"
+  - "3.7"
+  
+install:
+  - sudo apt-get update
+  # We do this conditionally because it saves us some downloading if the
+  # version is the same.
+  - if [[ "$TRAVIS_PYTHON_VERSION" == "2.7" ]]; then
+      wget https://repo.continuum.io/miniconda/Miniconda2-latest-Linux-x86_64.sh -O miniconda.sh;
+    else
+      wget https://repo.continuum.io/miniconda/Miniconda3-latest-Linux-x86_64.sh -O miniconda.sh;
+    fi
+  - bash miniconda.sh -b -p $HOME/miniconda
+  - source "$HOME/miniconda/etc/profile.d/conda.sh"
+  - hash -r
+  - conda config --set always_yes yes --set changeps1 no
+  - conda config --add channel conda-forge
+  - conda update -q conda
+  # Useful for debugging any issues with conda
+  - conda info -a
+
+  # Replace dep1 dep2 ... with your dependencies
+  - conda create -q -n pynvel python=$TRAVIS_PYTHON_VERSION numpy pandas xlrd xlwt cython click pytest pytest-runner
+  - conda install binutils-meta c-compiler compilers cxx-compiler fortran-compiler make cmake
+  - conda activate pynvel
+  - mkdir build
+  - pushd build
+  - cmake -G"Unix Makefiles" ..
+  - cmake --build . --target install -- -j2
+  - popd
+  
+script:
+  - pushd python
+  - pip install -e .
+  - pynvel run-tests
+  - popd
+  
