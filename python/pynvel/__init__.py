@@ -143,7 +143,7 @@ class VolumeCalculator(Cython_VolumeCalculator):
         merch_rule:
         log_prod_lims:
         """
-        super(VolumeCalculator).__init__(*args, **kargs)
+        super(VolumeCalculator, self).__init__(*args, **kargs)
         
         if merch_rule is None:
             merch_rule = init_merchrule(**config['merch_rule'])
