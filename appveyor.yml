@@ -30,12 +30,12 @@ install:
     
 build_script:
     - cd %APPVEYOR_BUILD_FOLDER%
+    - copy /Y python\win-setup.cfg python\setup.cfg
     - mkdir build
     - cd build
     - set PATH=%PATH:C:\Program Files\Git\usr\bin=%
     - set PATH=%PATH:C:\Program Files\Git\bin=%
     - set PATH=C:\Program Files\Git\cmd;%PATH%
-    - copy /Y python\win-setup.cfg python\setup.cfg
     - cmake -G "MinGW Makefiles" .. -DCMAKE_BULD_TYPE=Release -DNATIVE_ARCH=Yes
     - cmake --build .
 
