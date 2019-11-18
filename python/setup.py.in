@@ -78,8 +78,13 @@ if static:
     # Link to gfortran and quadmath since vollibxx_static does not include
     #   the necessary references
     libs = ['gfortran', 'quadmath']
-    link_args.extend(['-Wno-format',])
-    compile_args.extend(['-Wno-format',])
+    if _is_windows:
+        link_args.extend(['-static','-Wno-format',])
+        compile_args.extend(['-static','-Wno-format',])
+
+    else:
+        link_args.extend(['-Wno-format',])
+        compile_args.extend(['-Wno-format',])
 
 else:
     libs = [vollib, ]
