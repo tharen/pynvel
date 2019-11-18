@@ -20,13 +20,14 @@ install:
   - conda config --set always_yes yes --set changeps1 no
   - conda config --add channels conda-forge
   - conda update -q conda
-  # Useful for debugging any issues with conda
-  - conda info -a
 
   # Replace dep1 dep2 ... with your dependencies
   - conda create -q -n pynvel python=$TRAVIS_PYTHON_VERSION numpy pandas xlrd xlwt cython click pytest pytest-runner
-  - conda install binutils-meta c-compiler compilers cxx-compiler fortran-compiler make cmake
   - conda activate pynvel
+  - conda install binutils-meta c-compiler compilers cxx-compiler fortran-compiler make cmake
+  # Useful for debugging any issues with conda
+  - conda info -a
+
   - mkdir build
   - pushd build
   - cmake -G"Unix Makefiles" ..
