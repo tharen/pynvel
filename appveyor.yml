@@ -35,6 +35,7 @@ build_script:
     - set PATH=%PATH:C:\Program Files\Git\usr\bin=%
     - set PATH=%PATH:C:\Program Files\Git\bin=%
     - set PATH=C:\Program Files\Git\cmd;%PATH%
+    - copy /Y python\win-setup.cfg python\setup.cfg
     - cmake -G "MinGW Makefiles" .. -DCMAKE_BULD_TYPE=Release -DNATIVE_ARCH=Yes
     - cmake --build .
 
