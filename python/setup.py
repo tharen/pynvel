@@ -22,6 +22,8 @@ import numpy
 # API version
 version = '0.0.8'
 
+mydir = os.path.dirname(__file__)
+
 description = open('./readme.rst').readlines()[3].strip()
 long_desc = open('./readme.rst').read().strip()
 shutil.copyfile('./readme.rst', 'pynvel/readme.rst')
@@ -51,8 +53,7 @@ _is_64bit = (getattr(sys, 'maxsize', None) or getattr(sys, 'maxint')) > 2 ** 32
 
 lib_dirs = [
         './pynvel'
-        , 'C:/workspace/forest_modeling/pynvel/python/pynvel'
-        , 'C:/workspace/forest_modeling/pynvel/python/pynvel'
+        , f'{mydir}/pynvel'
         ]
 inc_dirs = [numpy.get_include()]
 
@@ -73,13 +74,18 @@ else:
 if static:
     # For static linking pass the MinGW archive as an object file
     # TODO: Find the static library dynamically
-    vollib = 'C:/workspace/forest_modeling/pynvel/python/pynvel/lib' + vollib + '_static.a'
+    vollib = f'{mydir}/pynvel/lib/{vollib}_static.a'
     extra_objects = [vollib, ]
     # Link to gfortran and quadmath since vollibxx_static does not include
     #   the necessary references
     libs = ['gfortran', 'quadmath']
-    link_args.extend(['-static', '-Wno-format'])
-    compile_args.extend(['-static', '-Wno-format'])
+    if _is_windows:
+        link_args.extend(['-static','-Wno-format',])
+        compile_args.extend(['-static','-Wno-format',])
+
+    else:
+        link_args.extend(['-Wno-format',])
+        compile_args.extend(['-Wno-format',])
 
 else:
     libs = [vollib, ]
@@ -96,7 +102,7 @@ else:
     compile_args = ['-O2', ] + compile_args
 
 # If static linking on non Windows, use -fPIC
-if not _is_windows and static:
+if not _is_windows: # and static:
     compile_args.extend(['-fPIC',])
     link_args.extend(['-fPIC',])
 
