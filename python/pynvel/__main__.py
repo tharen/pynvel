@@ -183,7 +183,7 @@ def volume(ctx, species='', dbh=None, height=None, equation=None, form_class=80)
 
     # TODO: Implement height curves
     if not height:
-        raise NotImplementedError('Height estimation is not implemented.')
+        raise NotImplementedError('Total height estimation is not implemented.')
         tot_ht = 0.0
 
     else:
@@ -208,6 +208,61 @@ def volume(ctx, species='', dbh=None, height=None, equation=None, form_class=80)
     print_report(volcalc, spp_abbv, spp_code, vol_eq, form_class)
 #     print(error)
 
+@click.command(name='stem-dib')
+@click.option('-m', '--stem-ht', required=True, type=float, help='Bole height above ground.')
+@click.pass_context
+@shared_options
+def stem_diam(ctx, species='', dbh=None, height=None, equation=None
+        , form_class=80, stem_ht=0.0):
+    """
+    Calculate the diameter (inside bark) at a specified upper stem height.
+    """
+
+    if not (species or equation) or not dbh:
+        print('Missing required parameters.')
+        print(ctx.get_help())
+        return False
+
+    # TODO: Implement height curves
+    if not height:
+        # raise NotImplementedError('Total height estimation is not implemented.')
+        raise click.BadParameter('Total height estimation is not implemented.')
+
+    cfg = pynvel.get_config()
+
+    # Convert the species code
+    try:
+        spp_code = int(species)
+        spp_abbv = pynvel.fia_spp[spp_code]
+    except:
+        spp_code = pynvel.get_spp_code(species.upper())
+        spp_abbv = species.upper()
+
+    # Get a default eqution if none provided
+    if not equation:
+        vol_eq = pynvel.get_equation(spp_code,
+                cfg['variant'].encode(), cfg['region'],
+                cfg['forest'].encode(), cfg['district'].encode(),
+                cfg['product'].encode()
+                )
+
+    elif equation.upper() == 'FIA':
+        vol_eq = pynvel.get_equation(spp_code, cfg['variant'].encode(),
+                cfg['region'], cfg['forest'].encode(), cfg['district'].encode()
+                , fia=True)
+
+    else:
+        vol_eq = equation.upper()
+
+    stem_dib = pynvel.calc_dib(volume_eq=vol_eq.encode()
+            , dbh_ob=dbh, total_ht=height, form_class=form_class
+            , stem_ht=stem_ht)
+
+    rel_ht = (stem_ht - 4.5) / (height - 4.5) * 100
+
+    msg = 'Stem DIB at {:.1f}\' = {:.2f}'.format(stem_ht, stem_dib)
+    print(msg)
+    
 @click.command(name='stem-ht')
 @click.option('-u', '--stem-dib', required=True, type=float, help='Upper stem diameter.')
 @click.pass_context
@@ -225,8 +280,8 @@ def stem_height(ctx, species='', dbh=None, height=None, equation=None
 
     # TODO: Implement height curves
     if not height:
-        # raise NotImplementedError('Height estimation is not implemented.')
-        raise click.BadParameter('Height estimation is not implemented.')
+        # raise NotImplementedError('Total height estimation is not implemented.')
+        raise click.BadParameter('Total height estimation is not implemented.')
 
     cfg = pynvel.get_config()
 

@@ -89,7 +89,7 @@ n = 1000
 np.random.seed(1234)
 dbh = np.random.normal(24.0, 4.0, n)
 ht = dbh * 6.3
-fc = np.zeros(n, dtype=np.int)
+fc = np.zeros(n, dtype=int)
 fc[:] = 80
 df = pd.DataFrame({'dbh_ob':dbh, 'total_ht':ht, 'form_class':fc})
 

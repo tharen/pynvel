@@ -1,7 +1,7 @@
 # Hierarchical project as described here
 #  https://bloerg.net/2012/11/10/cmake-and-distutils.html
 
-cmake_minimum_required (VERSION 2.8.8 FATAL_ERROR)
+cmake_minimum_required (VERSION 3.12 FATAL_ERROR)
 
 enable_language(Fortran C)
 project(NVEL Fortran C)

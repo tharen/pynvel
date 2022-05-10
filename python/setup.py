@@ -14,15 +14,19 @@ from setuptools import setup
 from Cython.Distutils.extension import Extension
 from Cython.Build import cythonize
 import numpy
-# import numpy.distutils.misc_util
+
+# Get the path of the current python interpreter
+PREFIX = os.path.split(os.path.abspath(sys.executable))[0]
+
+# Monkey patch distutils for use with MinGW-w64 compilers
+from distutils import cygwinccompiler
+cygwinccompiler.get_msvcr = lambda:['vcruntime140']
 
 # TODO: Add Spinx build step as a custom routine
 #       http://stackoverflow.com/questions/1710839/custom-distutils-commands/1712544#1712544
 
 # API version
 version = '0.0.8'
-
-mydir = os.path.dirname(__file__)
 
 description = open('./readme.rst').readlines()[3].strip()
 long_desc = open('./readme.rst').read().strip()
@@ -53,7 +57,9 @@ _is_64bit = (getattr(sys, 'maxsize', None) or getattr(sys, 'maxint')) > 2 ** 32
 
 lib_dirs = [
         './pynvel'
-        , f'{mydir}/pynvel'
+        , 'C:/workspace/pysftools/pynvel/python/pynvel'
+        , 'C:/workspace/pysftools/pynvel/python/pynvel'
+        , f'{PREFIX}/Library/bin'
         ]
 inc_dirs = [numpy.get_include()]
 
@@ -74,7 +80,7 @@ else:
 if static:
     # For static linking pass the MinGW archive as an object file
     # TODO: Find the static library dynamically
-    vollib = f'{mydir}/pynvel/lib/{vollib}_static.a'
+    vollib = 'C:/workspace/pysftools/pynvel/python/pynvel/lib' + vollib + '_static.a'
     extra_objects = [vollib, ]
     # Link to gfortran and quadmath since vollibxx_static does not include
     #   the necessary references
@@ -106,44 +112,29 @@ if not _is_windows: # and static:
     compile_args.extend(['-fPIC',])
     link_args.extend(['-fPIC',])
 
-if ((os.name == 'nt') and (sys.version_info[:2] >= (3, 5))
-        # and (numpy.version.version <= '1.13')
-        ):
-    # Monkey patch numpy for MinGW until version 1.13 is mainstream
-    #   NOTE: This has not been fixed as of numpy 1.13.3
-    # This fixes building extensions with Python 3.5+ resulting in
-    #       the error message `ValueError: Unknown MS Compiler version 1900
-    # numpy_fix uses the patch referenced here:
-    #       https://github.com/numpy/numpy/pull/8355
-    root = os.path.split(__file__)[0]
-    sys.path.insert(0, os.path.join(root, 'numpy_fix'))
-    import misc_util, mingw32ccompiler
-    sys.modules['numpy.distutils.mingw32ccompiler'] = mingw32ccompiler
-    sys.modules['numpy.distutils.misc_util'] = misc_util
-    
-# Use a custom GCC specs file to force linking with the appropriate libmsvcr*.a
-#  Ref: http://www.mingw.org/wiki/HOWTO_Use_the_GCC_specs_file
-#       https://wiki.python.org/moin/WindowsCompilers
-# Populate the spec file template with MSVCR version info
-if _is_64bit and _is_windows:
-    spec_file = './mingw-gcc.specs'
-    v = sys.version_info[:2]
-    open(spec_file, 'w')
-    if v >= (3, 3) and v <= (3, 4):
-        d = {'msvcrt':'msvcr100', 'msvcrt_version':'0x1000', 'moldname':'moldname'}
-        with open(spec_file + '.in') as infile:
-            open(spec_file, 'w').write(infile.read().format(**d))
+# # Use a custom GCC specs file to force linking with the appropriate libmsvcr*.a
+# #  Ref: http://www.mingw.org/wiki/HOWTO_Use_the_GCC_specs_file
+# #       https://wiki.python.org/moin/WindowsCompilers
+# # Populate the spec file template with MSVCR version info
+# if _is_64bit and _is_windows:
+    # spec_file = './mingw-gcc.specs'
+    # v = sys.version_info[:2]
+    # open(spec_file, 'w')
+    # if v >= (3, 3) and v <= (3, 4):
+        # d = {'msvcrt':'msvcr100', 'msvcrt_version':'0x1000', 'moldname':'moldname'}
+        # with open(spec_file + '.in') as infile:
+            # open(spec_file, 'w').write(infile.read().format(**d))
 
-        link_args.extend(['-specs={}'.format(spec_file), ])
-        compile_args.extend(['-specs={}'.format(spec_file), ])
+        # link_args.extend(['-specs={}'.format(spec_file), ])
+        # compile_args.extend(['-specs={}'.format(spec_file), ])
 
-    elif v >= (2, 6) and v <= (3, 2):
-        d = {'msvcrt':'msvcr90', 'msvcrt_version':'0x0900', 'moldname':'moldname'}
-        with open(spec_file + '.in') as infile:
-            open(spec_file, 'w').write(infile.read().format(**d))
+    # elif v >= (2, 6) and v <= (3, 2):
+        # d = {'msvcrt':'msvcr90', 'msvcrt_version':'0x0900', 'moldname':'moldname'}
+        # with open(spec_file + '.in') as infile:
+            # open(spec_file, 'w').write(infile.read().format(**d))
 
-        link_args.extend(['-specs={}'.format(spec_file), ])
-        compile_args.extend(['-specs={}'.format(spec_file), ])
+        # link_args.extend(['-specs={}'.format(spec_file), ])
+        # compile_args.extend(['-specs={}'.format(spec_file), ])
 
 link_args.append('-Wl,--allow-multiple-definition')
 

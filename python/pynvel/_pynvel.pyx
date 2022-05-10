@@ -378,7 +378,7 @@ cdef class Cython_VolumeCalculator:
         self.log_len_wk = np.zeros((_MAX_LOGS, ), dtype=np.float32, order='F')
         self.bole_ht_wk = np.zeros((_MAX_LOGS+1, ), dtype=np.float32, order='F')
         
-        self.log_prod_wk = np.zeros((_MAX_LOGS, ), dtype=np.int)
+        self.log_prod_wk = np.zeros((_MAX_LOGS, ), dtype=np.int32)
         
         self.log_prod_cuft[:] = [0.0,]*_NUM_PROD
         self.log_prod_bdft[:] = [0.0,]*_NUM_PROD
