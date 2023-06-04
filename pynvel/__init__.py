@@ -7,16 +7,18 @@ PyNVEL - A Python interface for the National Volume Estimator Library (NVEL).
 
 import os
 import sys
-import json
 
+import toml
 import numpy as np
+
+from pynvel._version import __version__,__version_tuple__
+from pynvel.volume_height import calc_volume_height
 
 def warn(x):
     print(x)
 # warn = lambda x: print(x)
 
 __author__ = 'Tod Haren, tod.haren@gm....com'
-__version__ = '0.0.8'
 
 try:
     from ._pynvel import *
@@ -29,60 +31,58 @@ except:
 
 if getattr(sys, 'frozen', False):
     exe_folder = os.path.dirname(sys.executable)
-    config_path = os.path.join(exe_folder, 'pynvel.cfg')
+    config_path = os.path.join(exe_folder, 'pynvel.toml')
 else:
     pkg_path = os.path.dirname(os.path.abspath(__file__))
-    config_path = os.path.join(pkg_path, 'pynvel.cfg')
+    config_path = os.path.join(pkg_path, 'pynvel.toml')
 
 # print(__file__)
 # print(config_path)
 
-default_config = """{
-	"variant": "PN",
-	"region": 6,
-	"forest": "12",
-	"district": "01",
-	"product": "01",
+default_config = """
+[pynvel]
+  district = "01"
+  forest = "12"
+  product = "01"
+  region = 6
+  variant = "PN"
+  default_species = "DF"
 
-	"merch_rule": {
-		"evod": 1,
-		"opt": 23,
-		"maxlen": 40.0,
-		"minlen": 12.0,
-		"minlent": 12.0,
-		"mtopp": 5.0,
-		"mtops": 2.0,
-		"stump": 1.0,
-		"trim": 1.0,
-		"btr": 0.0,
-		"dbtbh": 0.0,
-		"minbfd": 8.0,
-		"cor": "Y"
-	},
+  log_products = [
+    [24.0,17.0],
+    [8.0,12.0],
+    [5.0,12.0],
+    [2.0,12.0],
+    [0.0,0.0],
+    ]
 
-	"log_products": [
-		[24.0, 17.0],
-		[8.0, 12.0],
-		[5.0, 12.0],
-		[2.0, 12.0],
-		[0.0, 0.0]
-	],
-    
-    "default_species": "DF",
-    "default_equations": {
-        "SS": "632TRFW098",
-        "LP": "632TRFW108",
-        "PP": "632TRFW122",
-        "DF": "632TRFW202",
-        "RC": "632TRFW242",
-        "WH": "632TRFW263",
-        "RA": "616TRFW351",
-        "OH": "616TRFW998",
-        "OC": "632TRFW202",
-        "OT": "632TRFW202"
-    }
+  [pynvel.merch_rule]
+    btr = 0.0
+    cor = "Y"
+    dbtbh = 0.0
+    evod = 1
+    maxlen = 32.0
+    minbfd = 8.0
+    minlen = 12.0
+    minlent = 12.0
+    mtopp = 5.0
+    mtops = 2.0
+    opt = 23
+    stump = 1.0
+    trim = 1.0
 
-}"""
+  [pynvel.equations]
+    SS = "632TRFW098"
+    LP = "632TRFW108"
+    PP = "632TRFW122"
+    DF = "632TRFW202"
+    RC = "632TRFW242"
+    WH = "632TRFW263"
+    RA = "616TRFW351"
+    OH = "616TRFW998"
+    OC = "632TRFW202"
+    OT = "632TRFW202"
+"""
 
 def get_config():
     """
@@ -90,15 +90,20 @@ def get_config():
     """
     # TODO: Create a user config in my documents or appdata, .pynvel/pynvel.cfg
     # TODO: Overlay the user config with the global config.
+    cfg = toml.loads(default_config)
+
     try:
-        cfg = json.load(open(config_path))
+        with open(config_path) as f:
+            _cfg = toml.load(f)
+
+        cfg.update(_cfg)
+
     except:
+        raise
         warn(('PyNVEL config does not exist. Writing defaults to {}.'
                 ).format(config_path))
-        cfg = json.loads(default_config)
         with open(config_path, 'w') as f:
-            f.write(json.dumps(cfg, indent=4, sort_keys=True))
-#         raise IOError('Could not load the config file.')
+            f.write(toml.dumps(cfg))
 
     return cfg
 
@@ -127,19 +132,18 @@ class VolumeCalculator(Cython_VolumeCalculator):
             , *args, **kargs):
         """
         Initialize the VolumeCalculator
-        
+
         Args
         ----
         merch_rule:
         log_prod_lims:
         """
         super(VolumeCalculator, self).__init__(*args, **kargs)
-        
+
         if merch_rule is None:
-            merch_rule = init_merchrule(**config['merch_rule'])
+            merch_rule = init_merchrule(**config.get('pynvel')['merch_rule'])
         self.merch_rule = merch_rule
-        
+
         if log_prod_lims is None:
-            log_prod_lims = np.array(config['log_products'], dtype=np.float32)
+            log_prod_lims = np.array(config.get('pynvel')['log_products'], dtype=np.float32)
         self.log_prod_lims = log_prod_lims
-        

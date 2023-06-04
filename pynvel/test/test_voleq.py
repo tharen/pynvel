@@ -3,7 +3,7 @@ Test volume calculation against an independent version of NVEL.
 
 Validation data come from the published NVEL Excel libraries. Defaults are
 used according to Excel library documentation and as indicated in Mrules.f:153
-    
+
     Excel Volume Functions:
     https://www.fs.fed.us/fmsc/measure/volume/nvel/
 
@@ -33,25 +33,26 @@ class Test(unittest.TestCase):
 
         # TODO: Test multiple equations using nose-parameterized
         self.vol_eq = 'F01FW2W202'
+        self.log_len = 16
 
         d, f = os.path.split(__file__)
-        self.test_data = pd.read_excel('{}/data/{}_validate.xlsx'.format(d, self.vol_eq))
+        self.test_data = pd.read_csv('{}/data/{}_{}ft.csv'.format(d, self.vol_eq, self.log_len))
 
         self.test_data['bdft_test'] = 0.0
         self.test_data['cuft_test'] = 0.0
 
         # Default region 6 merchandizing; mrules.f:153
         self.mrule = pynvel.init_merchrule(evod=2, opt=23,
-                maxlen=16.0, minlen=2.0, minlent=2.0, merchl=8.0,
-                mtopp=5, mtops=2, trim=0.5, stump=0.0,
-                cor='N', minbfd=8)
+                maxlen=self.log_len, minlen=2.0, minlent=2.0,
+                merchl=8.0, mtopp=5, mtops=2, trim=0.5, stump=0.0,
+                cor='Y', minbfd=8)
 
     def test_calc(self):
         """
         Test volume calculation against an independent version of NVEL.
-        
+
         Douglas-fir, Region 6, Siuslaw, 5" min top
-        
+
         """
 
         vc = pynvel.VolumeCalculator(
@@ -73,8 +74,8 @@ class Test(unittest.TestCase):
         self.test_data['bdft_diff'] = self.test_data['bdft_gross'] - self.test_data['bdft_test']
         self.test_data['cuft_diff'] = self.test_data['cuft_gross'] - self.test_data['cuft_test']
 
-        # d,f = os.path.split(__file__)
-        # self.test_data.to_csv('{}/data/{}_test.csv'.format(d,self.vol_eq), ',')
+        d,f = os.path.split(__file__)
+        self.test_data.to_csv('{}/data/{}_test.csv'.format(d,self.vol_eq), ',')
 
         self.assertLessEqual(self.test_data['bdft_diff'].sum(), 1)
         self.assertLessEqual(self.test_data['cuft_diff'].sum(), 1)
@@ -82,9 +83,9 @@ class Test(unittest.TestCase):
     def test_calc_fast(self):
         """
         Test volume calculation against an independent version of NVEL.
-        
+
         Douglas-fir, Region 6, Siuslaw, 5" min top
-        
+
         """
 
         # Ensure the correct data types are represented
@@ -120,9 +121,9 @@ class Test(unittest.TestCase):
     def test_calc_products(self):
         """
         Test the product classification.
-        
+
         Douglas-fir, Region 6, Siuslaw, 5" min top
-        
+
         """
 
         # Ensure the correct data types are represented

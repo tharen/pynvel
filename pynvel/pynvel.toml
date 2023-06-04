@@ -1,0 +1,42 @@
+[pynvel]
+  district = "01"
+  forest = "12"
+  product = "01"
+  region = 6
+  variant = "PN"
+  default_species = "DF"
+
+  log_products = [
+    [24.0,17.0],
+    [8.0,12.0],
+    [5.0,12.0],
+    [2.0,12.0],
+    [0.0,0.0],
+    ]
+
+  [pynvel.merch_rule]
+    btr = 0.0
+    cor = "Y"
+    dbtbh = 0.0
+    evod = 1
+    maxlen = 40.0
+    minbfd = 8.0
+    minlen = 12.0
+    minlent = 12.0
+    mtopp = 5.0
+    mtops = 2.0
+    opt = 23
+    stump = 1.0
+    trim = 1.0
+
+  [pynvel.equations]
+    SS = "632TRFW098"
+    LP = "632TRFW108"
+    PP = "632TRFW122"
+    DF = "632TRFW202"
+    RC = "632TRFW242"
+    WH = "632TRFW263"
+    RA = "616TRFW351"
+    OH = "616TRFW998"
+    OC = "632TRFW202"
+    OT = "632TRFW202"

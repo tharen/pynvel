@@ -27,7 +27,7 @@ cpdef merchrules_ init_merchrule(
         , float minlent=12.0, float merchl=12.0, float mtopp=5.0
         , float mtops=2.0, float stump=1.0, float trim=1.0
         , float btr=0.0, float dbtbh=0.0, float minbfd=8.0
-        , str cor='Y'
+        , char * cor=<unicode>'Y'
         ):
     """
     Return a structure defining log merchandizing rules.
@@ -75,24 +75,20 @@ cpdef merchrules_ init_merchrule(
         btr (float): Bark thickness ratio (breast height)
         dbtbh (float): Double bark thickness (breast height)
         minbfd (float): Minimum merch. tree diameter
-        cor (str): Use table Scribner values (Y) or factor volumes (N)
+        cor (unicode): Use table Scribner values (Y) or factor volumes (N)
 
     Returns:
         struct: A struct representing the defined merchandizing rules.
     """
 
-    # FIXME: This is a hack because I couldn't figure out how to initialize a
-    #        compatible character variable as a parameter.
-    cdef char cor_
-    if cor == 'Y':
-        cor_ = 'Y'
-    else:
-        cor_ = 'N'
-
     cdef merchrules_ mr = merchrules_(
-            evod=evod, opt=opt, maxlen=maxlen, minlen=minlen, minlent=minlent
-            , merchl=merchl, mtopp=mtopp, mtops=mtops, stump=stump
-            , trim=trim, btr=btr, dbtbh=dbtbh, minbfd=minbfd, cor=cor_
+            evod=evod, opt=opt,
+            maxlen=maxlen, minlen=minlen,
+            minlent=minlent, merchl=merchl,
+            mtopp=mtopp, mtops=mtops,
+            stump=stump, trim=trim,
+            btr=btr, dbtbh=dbtbh,
+            minbfd=minbfd, cor=cor
             )
 
     return mr
@@ -136,7 +132,7 @@ cpdef char* get_equation(
     eq = <unicode>'          '
     cdef char* vol_eq = eq
     cdef int err_flag = 0
-    
+
     # FIXME: This may be unnecessary
     vartmp = <unicode>fvs_variant
     cdef char* fvs_variant_ = vartmp
@@ -146,7 +142,7 @@ cpdef char* get_equation(
     cdef char* district_ = distmp
     prodtmp = <unicode>product
     cdef char* product_ = prodtmp
-    
+
     if not fia:
         voleqdef_(fvs_variant_, &region, forest_, district_
                 , &species, product_, vol_eq, &err_flag
@@ -156,7 +152,7 @@ cpdef char* get_equation(
         fiavoleqdef_(fvs_variant_, &region, forest_, district_
                 , &species, vol_eq, &err_flag
                 ,2,2,2,10)
-    
+
     return vol_eq[:10]
 
 cpdef float calc_height(
@@ -167,38 +163,88 @@ cpdef float calc_height(
             , int form_class=0, float stem_dib=0.0):
     """
     Return the bole height to a given diameter inside bark for profile models.
-    
+
     Notes:
         Refer to vollib/ht2opd.f.
-    
+
     Args:
         region (int): USFS region identifier.
         forest (str): USFS forest code.
         volume_eq (str): Volume equation identifier.
         dbh_ob (float): DBH outside bark (inches).
         total_ht (float): Total tree height (feet).
-        
+
         stem_dib (float): Stem inside bark diameter to estimate height for (inches).
-    
+
     Returns:
         Height above ground to the target stem DIB.
     """
-    
+
     cdef float stem_height = 0.0
     cdef int err_flag = 0
-    
+
     ht2topd_(
             &region, forest, volume_eq
             , &dbh_ob, &total_ht, &ht_prim, &ht_sec
             , &upper_ht1, &upper_ht2, &upper_diam1, &upper_diam2
             , &avg_z1, &avg_z2, &ht_ref, &bark_thick, &bark_ratio
             , &form_class, &stem_dib, &stem_height, &err_flag)
-    
+
     if not err_flag==0:
         err_msg = error_codes[err_flag]
         raise ValueError('ht2topd returned error {}: {}'.format(err_flag,err_msg))
-    
+
     return stem_height
+
+cpdef float calc_dib(
+            int region=0, char * forest=<unicode>'01', char * volume_eq=<unicode>' '*10
+            , float stump_ht=1.0, float drc_ob=0.0
+            , float dbh_ob=0.0, float total_ht=0.0
+            , float upper_ht1=0.0, float upper_ht2=0.0
+            , float upper_diam1=0.0, float upper_diam2=0.0
+            , int ht_ref=0, float avg_z1=0.0, float avg_z2=0.0
+            , int form_class=0
+            , float bark_thick=0.0, float bark_ratio=0.0
+            , float stem_ht=0.0):
+    """
+    Return the bole height to a given diameter inside bark for profile models.
+
+    Notes:
+        Refer to vollib/calcdia.f.
+
+    Args:
+        region (int): USFS region identifier.
+        forest (str): USFS forest code.
+        volume_eq (str): Volume equation identifier.
+        stump_ht (float):
+        drc_ob (float): Diameter at root collar, outside bark (inches).
+        dbh_ob (float): DBH outside bark (inches).
+        total_ht (float): Total tree height (feet).
+
+        stem_ht (float): Stem height to estimate DIB for.
+
+    Returns:
+        Diameter inside bark, diameter outside bark.
+    """
+
+    cdef float stem_dib = 0.0
+    cdef float stem_dob = 0.0
+    cdef int err_flag = 0
+
+    calcdia2_(
+            &region, forest, volume_eq, &stump_ht
+            , &dbh_ob, &drc_ob, &total_ht
+            , &upper_ht1, &upper_ht2, &upper_diam1, &upper_diam2
+            , &ht_ref
+            , &avg_z1, &avg_z2, &form_class, &bark_thick, &bark_ratio
+            , &stem_ht, &stem_dib, &stem_dob
+            , &err_flag)
+
+    if not err_flag==0:
+        err_msg = error_codes[err_flag]
+        raise ValueError('ht2topd returned error {}: {}'.format(err_flag,err_msg))
+
+    return stem_dib
 
 cdef class Log:
     """
@@ -267,11 +313,11 @@ cdef class Log:
 cpdef float scribner_volume(float diam, float length, bint cor=True):
     """
     Return Scribner board foot volume computed using factors.
-    
+
     Args:
         diam: Log scale diameter (in).
         length: Log scale length (feet).
-        cor: Return volume as Scribner decimal C if True.    
+        cor: Return volume as Scribner decimal C if True.
     """
     cdef char*  _cor
     cdef float vol
@@ -345,21 +391,21 @@ cdef class Cython_VolumeCalculator:
     cdef np.float32_t[:,:] log_diam_wk
     cdef np.float32_t[:] log_len_wk
     cdef np.float32_t[:] bole_ht_wk
-    
+
     cdef np.int_t[:] log_prod_wk
     cdef public np.float32_t[:,:] log_prod_lims
-    
+
     cdef public int num_products
     cdef float log_prod_cuft[_NUM_PROD]
     cdef float log_prod_bdft[_NUM_PROD]
     cdef float log_prod_len[_NUM_PROD]
     cdef float log_prod_diam[_NUM_PROD]
     cdef long log_prod_count[_NUM_PROD]
-    
+
     cdef public int num_trees
     cdef public np.int32_t[:,:] trees_volume
     cdef public np.float32_t[:,:] trees_product_cuft
-    cdef public np.float32_t[:,:] trees_product_bdft    
+    cdef public np.float32_t[:,:] trees_product_bdft
     cdef public np.float32_t[:,:] trees_product_diam
     cdef public np.float32_t[:,:] trees_product_len
     cdef public np.int32_t[:,:] trees_product_count
@@ -368,29 +414,32 @@ cdef class Cython_VolumeCalculator:
             , merchrules_ merch_rule=init_merchrule()
             , np.ndarray log_prod_lims=np.zeros((_NUM_PROD,2), dtype=np.float32)
             , *args, **kargs):
-        
+
         self.merch_rule = merch_rule
         self.log_prod_lims = log_prod_lims
-        
+
         self.volume_wk = np.zeros((_TREE_N_VOLS, ), dtype=np.float32, order='F')
         self.log_vol_wk = np.zeros((_LOG_N_VOLS, _MAX_LOGS), dtype=np.float32, order='F')
         self.log_diam_wk = np.zeros((_MAX_LOGS+1, _LOG_N_DIAMS), dtype=np.float32, order='F')
         self.log_len_wk = np.zeros((_MAX_LOGS, ), dtype=np.float32, order='F')
         self.bole_ht_wk = np.zeros((_MAX_LOGS+1, ), dtype=np.float32, order='F')
-        
+
         self.log_prod_wk = np.zeros((_MAX_LOGS, ), dtype=np.int32)
-        
+
         self.log_prod_cuft[:] = [0.0,]*_NUM_PROD
         self.log_prod_bdft[:] = [0.0,]*_NUM_PROD
         self.log_prod_len[:] = [0.0,]*_NUM_PROD
         self.log_prod_diam[:] = [0.0,]*_NUM_PROD
         self.log_prod_count[:] = [0,]*_NUM_PROD
-        
+
         self.num_trees = 0
-        self.num_products = self.log_prod_lims.shape[0]
+
+        ## TODO: Return to commented line after fixing "build_merch_table.py" to standardize the number of products
+        # self.num_products = self.log_prod_lims.shape[0]
+        self.num_products = 5
 
     def __init__(self
-            
+
             # NVEL parameters
             , int region=6, char* forest=<unicode>'12', char* volume_eq=<unicode>' '*10
             , int cubic_total_flag=1, int bdft_prim_flag=1, int cubic_prim_flag=1
@@ -398,7 +447,7 @@ cdef class Cython_VolumeCalculator:
             , char* con_spp=<unicode>' ', char* prod_code=<unicode>'01'
             , int basal_area=0, int site_index=0
             , char* cruise_type=<unicode>'C'
-            
+
             # PyNVEL arguments
             , bint calc_products=False
             , *args, **kwargs
@@ -424,8 +473,8 @@ cdef class Cython_VolumeCalculator:
                 + (C)ruise method requires all necessary fields.
                 + (F)VS method will impute missing heights and form_class.
                 + (V)ariable method requires num_logs and log_len.
-            
-            calc_products (bool): If True log product classes will be summarized. 
+
+            calc_products (bool): If True log product classes will be summarized.
             merch_rule (merchrules_): User defined merchandizing rules.
             log_prod_lims (ndarray): Array of log product class limits, e.g. [(min_diam, min_len),]
             *args: Arbitrary positional arguments.
@@ -446,11 +495,11 @@ cdef class Cython_VolumeCalculator:
         self.basal_area = basal_area
         self.site_index = site_index
         self.cruise_type = cruise_type
-        
+
         self.calc_products = calc_products
-        
+
         # Labels for the array returned by calc_array
-    
+
     property volume_labels:
         """List of labels for the array returned by calc_array"""
         def __get__(self):
@@ -458,7 +507,7 @@ cdef class Cython_VolumeCalculator:
                     'total_cuft','merch_cuft'
                     ,'merch_bdft','merch_ht'
                     ,'num_logs','err_flag']
-        
+
     property total_height:
         """Return the total height of the tree."""
         def __get__(self):
@@ -479,30 +528,66 @@ cdef class Cython_VolumeCalculator:
         def __get__(self):
             # zip vol_lbl from nvelcommon.pxi with the volume array
             return dict(zip(vol_lbl, self.volume_wk))
-    
-    property products:
-        """Return a dict of log product summaries."""
+
+    property products_flat:
+        """Returna a summary of product attributes for the current tree"""
         def __get__(self):
             cdef int i
-            
+
             if not self.calc_products:
                 return None
-            
+
             d = OrderedDict()
             for i in range(self.num_products):
-                if self.log_prod_cuft[i]<=0.0:
-                    continue
-                
-                l = 'prod_{}'.format(i+1)
-                d[l] = {}
-                d[l]['cuft'] = self.log_prod_cuft[i]
-                d[l]['bdft'] = self.log_prod_bdft[i]
-                d[l]['length'] = self.log_prod_len[i]
-                d[l]['count'] = self.log_prod_count[i]
-                d[l]['diameter'] = self.log_prod_diam[i]
-            
+                j = i+1
+
+                if self.log_prod_cuft[i]>0.0:
+                    d[f'prod{j}_cuft'] = self.log_prod_cuft[i]
+                    d[f'prod{j}_bdft'] = self.log_prod_bdft[i]
+                    d[f'prod{j}_len'] = self.log_prod_len[i]
+                    d[f'prod{j}_count'] = self.log_prod_count[i]
+                    d[f'prod{j}_diam'] = self.log_prod_diam[i]
+
+                else:
+                    # Ensure zero values if no cuft volume
+                    d[f'prod{j}_cuft'] = 0.0
+                    d[f'prod{j}_bdft'] = 0.0
+                    d[f'prod{j}_len'] = 0.0
+                    d[f'prod{j}_count'] = 0.0
+                    d[f'prod{j}_diam'] = 0.0
+
             return d
-            
+
+    property products:
+        """Return a dict of log product summaries"""
+        def __get__(self):
+            cdef int i
+
+            if not self.calc_products:
+                return None
+
+            d = OrderedDict()
+            for i in range(self.num_products):
+                l = 'prod{}'.format(i+1)
+                d[l] = {}
+
+                if self.log_prod_cuft[i]>0.0:
+                    d[l]['cuft'] = self.log_prod_cuft[i]
+                    d[l]['bdft'] = self.log_prod_bdft[i]
+                    d[l]['len'] = self.log_prod_len[i]
+                    d[l]['count'] = self.log_prod_count[i]
+                    d[l]['diam'] = self.log_prod_diam[i]
+
+                else:
+                    # Ensure zero values if no cuft volume
+                    d[l]['cuft'] = 0.0
+                    d[l]['bdft'] = 0.0
+                    d[l]['len'] = 0.0
+                    d[l]['count'] = 0.0
+                    d[l]['diam'] = 0.0
+
+            return d
+
     property log_vol:
         """Return a list of log segment volumes."""
         def __get__(self):
@@ -553,7 +638,7 @@ cdef class Cython_VolumeCalculator:
                 len = self.log_len_wk[i-1]
                 bole = self.bole_ht_wk[i]
                 prod = self.log_prod_wk[i-1]
-                
+
                 logs.append(Log(i,bole,len
                         ,large[1],large[2]
                         ,small[1],small[2],small[0]
@@ -566,12 +651,12 @@ cdef class Cython_VolumeCalculator:
         """Return the volume calculation error message."""
         def __get__(self):
             return error_codes[self._error_flag]
-    
+
     property error_flag:
         """Deprecated, use error_message or error_code."""
         def __get__(self):
             return self.error_message
-        
+
     property error_code:
         """Return the volume calculation error code."""
         def __get__(self):
@@ -581,10 +666,10 @@ cdef class Cython_VolumeCalculator:
         """Determine the product class of a log based on diameter and length."""
         cdef int i
         for i in range(self.num_products):
-            if ((diam >= self.log_prod_lims[i][0]) 
+            if ((diam >= self.log_prod_lims[i][0])
                     and (len >= self.log_prod_lims[i][1])):
                 return i
-            
+
     @cython.boundscheck(False)
     @cython.wraparound(False)
     def calc_array(self,
@@ -611,17 +696,17 @@ cdef class Cython_VolumeCalculator:
         cdef size_t n = dbh.shape[0]
 #         cdef np.ndarray[np.float64_t, ndim=2] v = \
 #                 np.zeros((n,6), dtype=np.float64)
-        
+
         # Tree volume array
         self.tree_volume = np.zeros((n,6), dtype=np.float64)
-        
+
         # Product class arrays
         self.trees_product_cuft = np.zeros((n,_NUM_PROD), dtype=np.float32)
         self.trees_product_bdft = np.zeros((n,_NUM_PROD), dtype=np.float32)
         self.trees_product_diam = np.zeros((n,_NUM_PROD), dtype=np.float32)
         self.trees_product_len = np.zeros((n,_NUM_PROD), dtype=np.float32)
         self.trees_product_count = np.zeros((n,_NUM_PROD), dtype=np.int32)
-                
+
         if form_class is None:
             form_class = np.zeros((n,), dtype=np.float64)
 
@@ -643,7 +728,7 @@ cdef class Cython_VolumeCalculator:
                 self.tree_volume[i,3] = self.merch_height # Merch Height
                 self.tree_volume[i,4] = float(self.num_logs) # Num Logs
                 self.tree_volume[i,5] = float(err) # Error Flag
-            
+
             if self.calc_products:
                 for j in range(self.num_products):
                     self.trees_product_cuft[i,j] = self.log_prod_cuft[j]
@@ -651,9 +736,9 @@ cdef class Cython_VolumeCalculator:
                     self.trees_product_diam[i,j] = self.log_prod_diam[j]
                     self.trees_product_len[i,j] = self.log_prod_len[j]
                     self.trees_product_count[i,j] = self.log_prod_count[j]
-        
+
         self.num_trees = n
-        
+
         return np.asarray(self.tree_volume)
 
     @cython.cdivision(True)
@@ -699,10 +784,10 @@ cdef class Cython_VolumeCalculator:
             live (str):
 
         """
-        
+
         cdef float check_vol
         cdef float cone_vol
-        
+
         self.dbh_ob = dbh_ob
         self.drc_ob = drc_ob
         self.total_ht = total_ht
@@ -725,7 +810,7 @@ cdef class Cython_VolumeCalculator:
         self.bark_ratio = bark_ratio
         self.ht_1st_limb = ht_1st_limb
         self.live = live
-        
+
         # TODO: Should these merchandizing parameters be variable or static.
         #   If greater than zero they override the user values merch rule
         #   values in Mrules.f. I suspect this will change in the future.
@@ -752,16 +837,16 @@ cdef class Cython_VolumeCalculator:
         cdef int pl = 2
         cdef int ll = 1
         cdef int ctl = 1
-        
+
         cdef int p
-        
+
         # Ensure the result arrays are zero'd
         self.volume_wk[:] = 0.0
         self.log_vol_wk[:,:] = 0.0
         self.log_len_wk[:] = 0.0
         self.log_diam_wk[:,:] = 0.0
         self.bole_ht_wk[:] = 0.0
-        
+
         # Zero the log product tallys
         self.log_prod_cuft[:] = [0.0,]*_NUM_PROD
         self.log_prod_bdft[:] = [0.0,]*_NUM_PROD
@@ -781,10 +866,10 @@ cdef class Cython_VolumeCalculator:
 
             else:
                 raise AttributeError('cruise_type==\'V\', but log_len is empty')
-        
+
         # Zero the log product class
         self.log_prod_wk[:] = 0
-        
+
         volinit2_(
                 &self.region
                 , self.forest
@@ -843,36 +928,37 @@ cdef class Cython_VolumeCalculator:
                 , fl, vl, hl, csl
                 , pl, ll, ctl
                 )
-        
+
         # Some equation and tree combinations will overflow/underflow
         # This is a blunt check to make sure the total volume is reasonable
         cone_vol = ((dbh_ob*0.92)**2.0 * 0.005454154 * total_ht) / 3.0
         cyl_vol = ((dbh_ob*0.92)**2.0 * 0.005454154 * total_ht)
-         
+
         for i in range(_TREE_N_VOLS):
             if self.volume_wk[i]<0.0:
                 self.volume_wk[i] = 0.0
-        
+
         if dbh_ob<1.0:
             for i in range(_TREE_N_VOLS):
                 self.volume_wk[i] = 0.0
-            
+
             self.volume_wk[0] = cone_vol
-            
+
         if self.volume_wk[14]>cone_vol*2:
             self.volume_wk[14] = 0.0
             # TODO: Log this as an error or raise a warning/exception
-             
+
         check_vol = (
                 self.volume_wk[3] + self.volume_wk[6]
                 + self.volume_wk[13] + self.volume_wk[14])
-         
+
         if self.volume_wk[0]>check_vol*2:
             self.volume_wk[0] = check_vol
-        
+
         if self.calc_products:
             self.log_prod_wk[:] = -1
-            self.num_products = self.log_prod_lims.shape[0]
+            #self.num_products = self.log_prod_lims.shape[0]
+            self.num_products = 5
             # Classify the log product and populate the product tallys
             for i in range(self.num_logs):
                 # Get the log product index number
@@ -887,13 +973,13 @@ cdef class Cython_VolumeCalculator:
                 # Sum the squared diameters to get a quadratic mean
                 self.log_prod_diam[p] += self.log_diam_wk[i+1,1]**2.0
                 self.log_prod_count[p] += 1
-            
+
             # Compute quadratic mean log diameter
             for i in range(self.num_products):
                 self.log_prod_diam[i] = sqrt(self.log_prod_diam[i]/self.log_prod_count[i])
-            
+
         # TODO: raise an error or recalculate with a default equation
-            
+
 #         if error_flag!=0:
 #             print('Error Code {}: {}'.format(error_flag,error_codes[error_flag]))
         #TODO: raise an exception for critical error flags

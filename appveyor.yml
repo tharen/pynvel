@@ -1,19 +1,23 @@
 environment:
   global:
       MINGW_PATH: C:\mingw-w64\x86_64-7.2.0-posix-seh-rt_v5-rev1\mingw64
-      
+
   matrix:
-    
+
     - MINICONDA: "C:\\Miniconda-x64"
       PYTHON_VERSION: "2.7"
       PYTHON_ARCH: "64"
-      
+
     - MINICONDA: "C:\\Miniconda36-x64"
       PYTHON_VERSION: "3.6"
       PYTHON_ARCH: "64"
 
     - MINICONDA: "C:\\Miniconda37-x64"
       PYTHON_VERSION: "3.7"
+      PYTHON_ARCH: "64"
+
+    - MINICONDA: "C:\\Miniconda38-x64"
+      PYTHON_VERSION: "3.8"
       PYTHON_ARCH: "64"
 
 install:
@@ -27,7 +31,7 @@ install:
     - conda env create -q -n pynvel -f ./python/environment.yml
     - call activate pynvel
     - git submodule update --init --remote
-    
+
 build_script:
     - cd %APPVEYOR_BUILD_FOLDER%
     - copy /Y python\win-setup.cfg python\setup.cfg
@@ -43,4 +47,3 @@ test_script:
     - cd %APPVEYOR_BUILD_FOLDER%\python
     - pip install -e .
     - pynvel run-tests
-    

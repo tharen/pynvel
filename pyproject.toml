@@ -1,0 +1,36 @@
+[build-system]
+# AVOID CHANGING REQUIRES: IT WILL BE UPDATED BY PYSCAFFOLD!
+requires = [
+  "setuptools>=45",
+  "setuptools_scm[toml]>=6.2",
+  "wheel",
+  "meson",
+  "meson-python>=0.13.0rc0",
+#  "ninja"
+  ]
+build-backend = "mesonpy"
+
+[project]
+name = "pynvel"
+description = "A Python wrapper package for the National Volume Estimator library."
+authors = [
+  {name="Tod Haren", email="tod.haren@gmail.com"},
+  ]
+license = {file="LICENSE.txt"}
+readme = {file="README.md", content-type="text/markdown"}
+keywords = ["Forest Modeling", "Tree Volume", "NVEL"]
+
+dynamic = ["version"]
+
+[project.urls]
+repository = "https://github.com/forest-modeling/PyNVEL"
+
+[project.scripts]
+pynvel = "pynvel.__main__:cli"
+
+[tool.setuptools_scm]
+# For smarter version schemes and other configuration options,
+# check out https://github.com/pypa/setuptools_scm
+version_scheme = "post-release"
+# version_scheme = "guess-next-dev"
+write_to = "pynvel/_version.py"

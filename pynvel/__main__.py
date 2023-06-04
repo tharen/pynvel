@@ -55,8 +55,6 @@ def print_report(volcalc, spp_abbv, spp_code, vol_eq, form_class):
     else:
         print('* No products')
 
-
-
     if volcalc.num_logs > 0:
         print('Log Detail')
         print('----------')
@@ -126,32 +124,33 @@ def volume(ctx, species='', dbh=None, height=None, equation=None, form_class=80)
 # TODO: Add option to iterate through a file, database table, etc.
 
     cfg = pynvel.get_config()
-    mrule = pynvel.init_merchrule(**cfg['merch_rule'])
-    
+    print(cfg)
+    mrule = pynvel.init_merchrule(**cfg.get('pynvel').get('merch_rule'))
+
     if not dbh:
         print('Missing DBH.')
         return False
-    
+
     w = False
     if not species:
         w = True
         species = cfg.get('default_species', 'OT')
-    
+
     if not equation:
         w = True
         equation = cfg['default_equations'].get(species, '632TRFW202')
-        
+
     else:
         w = False
-        
+
     if w:
         print('Default species equation will be used - {}: {}'.format(species, equation))
-        
+
     # Convert the species code
     try:
         spp_code = int(species)
         spp_abbv = pynvel.fia_spp[spp_code]
-        
+
     except:
         spp_code = pynvel.get_spp_code(species.upper())
         spp_abbv = species.upper()
@@ -197,7 +196,7 @@ def volume(ctx, species='', dbh=None, height=None, equation=None, form_class=80)
             , cruise_type=b'C'
             , calc_products=True
             )
-    
+
     error = volcalc.calc(
             dbh_ob=dbh
             , total_ht=tot_ht
@@ -262,7 +261,7 @@ def stem_diam(ctx, species='', dbh=None, height=None, equation=None
 
     msg = 'Stem DIB at {:.1f}\' = {:.2f}'.format(stem_ht, stem_dib)
     print(msg)
-    
+
 @click.command(name='stem-ht')
 @click.option('-u', '--stem-dib', required=True, type=float, help='Upper stem diameter.')
 @click.pass_context
@@ -321,7 +320,7 @@ def stem_height(ctx, species='', dbh=None, height=None, equation=None
 @click.command(name='run-tests')
 def run_tests():
     print('Run pynvel tests')
-    
+
     import subprocess
     os.chdir(os.path.join(os.path.dirname(__file__), 'test'))
     subprocess.call('pytest')
