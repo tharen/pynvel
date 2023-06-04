@@ -34,3 +34,9 @@ pynvel = "pynvel.__main__:cli"
 version_scheme = "post-release"
 # version_scheme = "guess-next-dev"
 write_to = "pynvel/_version.py"
+
+dependencies = [
+    "numpy",
+    "cython",
+    "click",
+]
