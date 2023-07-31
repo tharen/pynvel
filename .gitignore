@@ -86,3 +86,4 @@ CMakeCache.txt
 install_manifest.txt
 build*/
 *.7z
+/pynvel/_version.py
