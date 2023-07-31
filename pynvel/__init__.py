@@ -147,3 +147,8 @@ class VolumeCalculator(Cython_VolumeCalculator):
         if log_prod_lims is None:
             log_prod_lims = np.array(config.get('pynvel')['log_products'], dtype=np.float32)
         self.log_prod_lims = log_prod_lims
+
+        # ## TODO: Search VolumeLibrary for known equations
+        # if len(self.volume_eq.strip)<10
+        #     msg = 'Volume equation ID is not valid: "' + self.volume_eq.decode() + '"'
+        #     raise ValueError(msg)

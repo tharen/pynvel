@@ -4,20 +4,12 @@ environment:
 
   matrix:
 
-    - MINICONDA: "C:\\Miniconda-x64"
-      PYTHON_VERSION: "2.7"
-      PYTHON_ARCH: "64"
-
-    - MINICONDA: "C:\\Miniconda36-x64"
-      PYTHON_VERSION: "3.6"
-      PYTHON_ARCH: "64"
-
-    - MINICONDA: "C:\\Miniconda37-x64"
-      PYTHON_VERSION: "3.7"
-      PYTHON_ARCH: "64"
-
     - MINICONDA: "C:\\Miniconda38-x64"
       PYTHON_VERSION: "3.8"
+      PYTHON_ARCH: "64"
+
+    - MINICONDA: "C:\\Miniconda310-x64"
+      PYTHON_VERSION: "3.10"
       PYTHON_ARCH: "64"
 
 install:

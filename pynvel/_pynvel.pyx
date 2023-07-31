@@ -698,6 +698,18 @@ cdef class Cython_VolumeCalculator:
 #                 np.zeros((n,6), dtype=np.float64)
 
         # Tree volume array
+        ## TODO: Define datatype field names for tree volume and product arrays
+        ##       Afterwards indexing is like arr['<attr>'][i]
+        #dt = [
+        #    ('total_cuft','float64'),
+        #    ('merch_cuft','float64'),
+        #    ('merch_bdft','float64'),
+        #    ('merch_ht','float64'),
+        #    ('num_logs','float64'),
+        #    ('err_flag','float64'),
+        #    ]
+        # self.tree_volume = np.zeros((n,), dtype=dt)
+
         self.tree_volume = np.zeros((n,6), dtype=np.float64)
 
         # Product class arrays

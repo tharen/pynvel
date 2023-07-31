@@ -22,6 +22,12 @@ keywords = ["Forest Modeling", "Tree Volume", "NVEL"]
 
 dynamic = ["version"]
 
+dependencies = [
+  "numpy",
+  "cython",
+  "click",
+  ]
+
 [project.urls]
 repository = "https://github.com/forest-modeling/PyNVEL"
 
@@ -34,9 +40,3 @@ pynvel = "pynvel.__main__:cli"
 version_scheme = "post-release"
 # version_scheme = "guess-next-dev"
 write_to = "pynvel/_version.py"
-
-dependencies = [
-    "numpy",
-    "cython",
-    "click",
-]

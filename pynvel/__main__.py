@@ -124,7 +124,7 @@ def volume(ctx, species='', dbh=None, height=None, equation=None, form_class=80)
 # TODO: Add option to iterate through a file, database table, etc.
 
     cfg = pynvel.get_config()
-    print(cfg)
+    # print(cfg)
     mrule = pynvel.init_merchrule(**cfg.get('pynvel').get('merch_rule'))
 
     if not dbh:
