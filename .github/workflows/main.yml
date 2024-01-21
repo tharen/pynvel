@@ -12,9 +12,7 @@ jobs:
         with:
           micromamba-version: '1.5.6-0'
           environment-file: environment.yml
-          init-shell: >-
-            bash
-            cmd.exe
+          init-shell: bash
           cache-environment: true
           post-cleanup: 'all'
       - name: Import numpy in micromamba environment (bash)
