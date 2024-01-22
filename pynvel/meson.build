@@ -9,7 +9,6 @@ fs.copyfile('_vollib.pxd')
 python_sources = [
   '__init__.py',
   '__main__.py',
-  '_version.py',
   'volume_height.py',
   'behres.py',
   # 'config.py',
