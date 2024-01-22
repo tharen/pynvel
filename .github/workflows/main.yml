@@ -1,4 +1,4 @@
-name: Build with Python
+name: Build Python Packages
 
 on:
   push:
@@ -14,10 +14,10 @@ jobs:
       fail-fast: false
       matrix:
         python-version: ["3.10","3.11"]
-        os: [ubuntu-latest, windows-latest] #, macos-latest]
+        os: [ubuntu-22.04, windows-2022] #, macos-latest]
         toolchain:
           - {compiler: gcc, version: 13}
-          # - {compiler: gcc, version: 12}
+          - {compiler: gcc, version: 12}
 
     steps:
     - name: Checkout
