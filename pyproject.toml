@@ -1,6 +1,8 @@
 [build-system]
 # AVOID CHANGING REQUIRES: IT WILL BE UPDATED BY PYSCAFFOLD!
 requires = [
+  "numpy",
+  "cython",
   "setuptools>=45",
   "setuptools_scm[toml]>=6.2",
   "wheel",
@@ -12,13 +14,13 @@ build-backend = "mesonpy"
 
 [project]
 name = "pynvel"
-description = "A Python wrapper package for the National Volume Estimator library."
+description = "Python wrapper and extension package for the National Volume Estimator library."
 authors = [
   {name="Tod Haren", email="tod.haren@gmail.com"},
   ]
 license = {file="LICENSE.txt"}
 readme = {file="README.md", content-type="text/markdown"}
-keywords = ["Forest Modeling", "Tree Volume", "NVEL"]
+keywords = ["Forest Modeling", "Forest Biometrics", "Tree Volume", "NVEL"]
 
 dynamic = ["version"]
 
