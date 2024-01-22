@@ -3,12 +3,13 @@
 requires = [
   "numpy",
   "cython",
-  "setuptools>=45",
-  "setuptools_scm[toml]>=6.2",
+  "setuptools>=64",
+  "setuptools_scm[toml]>=8",
   "wheel",
   "meson",
-  "meson-python>=0.13.2",
-#  "ninja"
+  "meson-python>=0.15",
+  "ninja",
+  "patchelf ; platform_system != 'Windows'", ## Only linux???
   ]
 build-backend = "mesonpy"
 
@@ -36,9 +37,12 @@ repository = "https://github.com/forest-modeling/PyNVEL"
 [project.scripts]
 pynvel = "pynvel.__main__:cli"
 
+[tool.setuptools]
+packages = ["pynvel",]
+
 [tool.setuptools_scm]
 # For smarter version schemes and other configuration options,
 # check out https://github.com/pypa/setuptools_scm
 version_scheme = "post-release"
 # version_scheme = "guess-next-dev"
-write_to = "pynvel/_version.py"
+version_file = "pynvel/_version.py"
