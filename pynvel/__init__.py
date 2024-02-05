@@ -11,8 +11,31 @@ import sys
 import toml
 import numpy as np
 
-from pynvel._version import __version__,__version_tuple__
+# from pynvel._version import __version__,__version_tuple__
 from pynvel.volume_height import calc_volume_height
+
+# # Get the package version from setuptools_scm metadata
+# from pkg_resources import get_distribution, DistributionNotFound
+# try:
+    # __version__ = get_distribution(__name__).version
+# except DistributionNotFound:
+    # # package is not installed
+    # __version__ = '0.0.0'
+    
+if sys.version_info[:2] >= (3, 8):
+    # TODO: Import directly (no need for conditional) when `python_requires = >= 3.8`
+    from importlib.metadata import PackageNotFoundError, version  # pragma: no cover
+else:
+    from importlib_metadata import PackageNotFoundError, version  # pragma: no cover
+
+try:
+    # Change here if project is renamed and does not equal the package name
+    dist_name = "PyFVS"
+    __version__ = version(dist_name)
+except PackageNotFoundError:  # pragma: no cover
+    __version__ = "unknown"
+finally:
+    del version, PackageNotFoundError
 
 def warn(x):
     print(x)
@@ -114,10 +137,10 @@ class version:
     vollib = vollib_version()
 
     def __call__(self):
-        return {'api':self.api, 'vollib':self.vollib}
+        return {'pynvel':self.api, 'vollib':self.vollib}
 
     def __str__(self):
-        vs = str({'api':self.api, 'vollib':self.vollib})
+        vs = str({'pynvel':self.api, 'vollib':self.vollib})
         return vs
 
 config = get_config()

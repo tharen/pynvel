@@ -45,4 +45,3 @@ packages = ["pynvel",]
 # check out https://github.com/pypa/setuptools_scm
 version_scheme = "post-release"
 # version_scheme = "guess-next-dev"
-version_file = "pynvel/_version.py"
