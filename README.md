@@ -1,3 +1,5 @@
+# *** Development on PyNVEL has moved to [forest-modeling/pynvel](https://github.com/forest-modeling/pynvel). This fork will be archived ***
+
 # PyNVEL
 
 A Python package for the National Volume Estimator library.
